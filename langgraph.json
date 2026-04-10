@@ -1,0 +1,9 @@
+{
+  "dependencies": [
+    "."
+  ],
+  "graphs": {
+    "base_agent": "legal_agent.agent:graph"
+  },
+  "env": "./.env"
+}

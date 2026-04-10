@@ -1,0 +1,23 @@
+[project]
+name = "langgraph-base"
+version = "0.1.0"
+description = "Base project for a LangGraph application"
+readme = "README.md"
+authors = [
+    { name = "HungTc", email = "trcanhhung04@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "langchain>=1.2.15",
+    "langchain-openai>=1.1.12",
+    "langgraph>=1.1.6",
+    "langgraph-cli[inmem]>=0.4.21",
+    "python-dotenv>=1.2.2",
+]
+
+[project.scripts]
+langgraph-base = "legal_agent.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.9.27,<0.10.0"]
+build-backend = "uv_build"
