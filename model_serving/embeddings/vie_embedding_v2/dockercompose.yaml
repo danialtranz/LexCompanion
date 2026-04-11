@@ -1,0 +1,16 @@
+services:
+  vie-embedding-v2:
+    build:
+      context: .
+      dockerfile: dockerFile
+    ports:
+      - "6501:6501"
+    env_file:
+      - .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:6501/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 30s

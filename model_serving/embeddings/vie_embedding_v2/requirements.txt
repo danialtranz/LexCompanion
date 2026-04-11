@@ -1,0 +1,7 @@
+fastapi==0.115.12
+uvicorn[standard]==0.34.2
+pydantic==2.11.3
+python-dotenv==1.2.2
+PyJWT==2.10.1
+sentence-transformers==5.0.0
+torch==2.7.0

@@ -9,6 +9,17 @@ wheels/
 # Virtual environments
 .venv
 
-.env 
+# Secrets — never commit real keys (root + nested)
+.env
+.env.*
+!.env.example
+web/.env
+web/.env.*
+model_serving/**/.env
+model_serving/**/.env.*
 
 .langgraph_api
+instruction.md
+server.log
+api_creating_instruction.md
+esdata/
