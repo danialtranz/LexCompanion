@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from peewee import (
     BigIntegerField,
     BooleanField,
+    DateField,
     DateTimeField,
     FixedCharField,
     Model,
@@ -13,6 +14,7 @@ from peewee import (
     TextField,CharField,IntegerField,FloatField
 )
 from playhouse.migrate import PostgresqlMigrator, migrate
+from playhouse.postgres_ext import JSONField
 
 from api.utils.utils import current_timestamp
 load_dotenv(Path(__file__).resolve().parents[2] / ".env")
@@ -125,7 +127,8 @@ class File(BaseModel):
     tenant_id = CharField(max_length=36, null=False, help_text="tenant id", index=True)
     created_by = CharField(max_length=36, null=False, help_text="who created it", index=True)
     name = CharField(max_length=255, null=False, help_text="file name", index=True)
-    location = CharField(max_length=255, null=True, help_text="where dose it store example : minio ", index=True)
+    location = TextField(null=True, help_text="where dose it store example : minio or html content", index=True)
+    file_content = TextField(null=True, help_text="file content", index=False)
     size = IntegerField(default=0, index=True)
     type = CharField(max_length=36, null=False, help_text="file extension", index=True)
     source_type = CharField(max_length=128, null=False, default="", help_text="where dose this document come from", index=True)
@@ -156,6 +159,44 @@ class UserTenant(BaseModel):
     class Meta:
         db_table = "user_tenants"
 
+class LexDocumentChunk(BaseModel):
+    id = CharField(max_length=36, primary_key=True)
+    chunk_id = CharField( null=True, index=True)
+    # Identifier & metadata
+    doc_id = CharField(null=False, index=True)
+    version_id = IntegerField(null=True, index=True) 
+    doc_type = CharField( null=True, index=True)
+    law_number = CharField( null=True, index=True)
+    law_name = CharField( null=True, index=True)
+    issued_by = CharField( null=True, index=True)
+    signer = CharField( null=True)
+    status = CharField( null=True, index=True)
+
+    # Legal relations (store as JSON array string)
+    based_on = JSONField(null=True, help_text="JSON array string of based-on document ids") ### phải là 1 mảng  
+    implements = JSONField(null=True, help_text="JSON array string of implemented legal targets")### phải là 1 mảng 
+
+    doc_name = TextField(null=True)
+    content_md = TextField(null=True)
+
+    # Legal structure
+    chapter = IntegerField(null=True, index=True)
+    chapter_text = CharField( null=True, index=True)
+    article = IntegerField(null=True, index=True)
+    article_text = CharField( null=True, index=True)
+    clause = IntegerField(null=True, index=True)
+    clause_text = CharField( null=True, index=True)
+    point = IntegerField(null=True, index=True)
+    point_text = CharField( null=True, index=True)
+    # Time
+    effective_date = DateField(null=True, index=True)
+    expiry_date = DateField(null=True, index=True)
+    references = JSONField(null=True, help_text="JSON array of objects: {target_doc, target_article, target_clause, target_point , ref_type Vd Internal . External . }") ### phải là 1 mảng các json
+    # Amend relations (store as JSON array/object string)
+    amends = JSONField(null=True, help_text="JSON array string of amend objects") ### phải là 1 mảng các json
+
+    class Meta:
+        db_table = "lex_document_chunks"
 
 
 def _column_exists(table_name: str, column_name: str) -> bool:
@@ -234,7 +275,8 @@ def _build_migration_ops(migrator: PostgresqlMigrator):
             "tenant_id": lambda: CharField(max_length=36, null=False, index=True),
             "created_by": lambda: CharField(max_length=36, null=False, index=True),
             "name": lambda: CharField(max_length=255, null=False, index=True),
-            "location": lambda: CharField(max_length=255, null=True, index=True),
+            "location": lambda: TextField(null=True, index=True),
+            "file_content": lambda: TextField(null=True, index=False),
             "size": lambda: IntegerField(default=0, index=True),
             "type": lambda: CharField(max_length=36, null=False, index=True),
             "source_type": lambda: CharField(max_length=128, null=False, default="", index=True),
@@ -264,6 +306,38 @@ def _build_migration_ops(migrator: PostgresqlMigrator):
             "create_time": lambda: BigIntegerField(default=lambda: int(current_timestamp())),
             "update_time": lambda: BigIntegerField(default=lambda: int(current_timestamp())),
         },
+        LexDocumentChunk._meta.table_name: {
+            "id": lambda: CharField(max_length=36, primary_key=True),
+            "chunk_id": lambda: CharField( null=True, index=True),
+            "doc_id": lambda: CharField(null=False, index=True),
+            "version_id": lambda: IntegerField(null=True, index=True),
+            "doc_type": lambda: CharField( null=True, index=True),
+            "law_number": lambda: CharField( null=True, index=True),
+            "law_name": lambda: CharField( null=True, index=True),
+            "issued_by": lambda: CharField( null=True, index=True),
+            "signer": lambda: CharField( null=True),
+            "status": lambda: CharField( null=True, index=True),
+            "based_on": lambda: JSONField(null=True),
+            "implements": lambda: JSONField(null=True),
+            "doc_name": lambda: TextField(null=True),
+            "content_md": lambda: TextField(null=True),
+            "chapter": lambda: IntegerField(null=True, index=True),
+            "chapter_text": lambda: CharField( null=True, index=True),
+            "article": lambda: IntegerField(null=True, index=True),
+            "article_text": lambda: CharField( null=True, index=True),
+            "clause": lambda: IntegerField(null=True, index=True),
+            "clause_text": lambda: CharField( null=True, index=True),
+            "point": lambda: IntegerField(null=True, index=True),
+            "point_text": lambda: CharField( null=True, index=True),
+            "effective_date": lambda: DateField(null=True, index=True),
+            "expiry_date": lambda: DateField(null=True, index=True),
+            "references": lambda: JSONField(null=True),### phải là 1 mảng các json
+            "amends": lambda: JSONField(null=True), ### phải là 1 mảng các json 
+            "create_date": lambda: DateTimeField(default=datetime.utcnow),
+            "update_date": lambda: DateTimeField(default=datetime.utcnow),
+            "create_time": lambda: BigIntegerField(default=lambda: int(current_timestamp())),
+            "update_time": lambda: BigIntegerField(default=lambda: int(current_timestamp())),
+        },
     }
 
     ops = []
@@ -287,7 +361,7 @@ def run_migration() -> None:
         connection_opened_here = True
 
     try:
-        db.create_tables([Users, Knowledgebase, Document, File, Tenant, UserTenant], safe=True)
+        db.create_tables([Users, Knowledgebase, Document, File, Tenant, UserTenant, LexDocumentChunk], safe=True)
         migration_ops = _build_migration_ops(PostgresqlMigrator(db))
         if migration_ops:
             migrate(*migration_ops)

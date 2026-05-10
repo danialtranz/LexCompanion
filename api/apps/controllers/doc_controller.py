@@ -1,10 +1,19 @@
 import mimetypes
 import os
+import socket
+import tempfile
+import threading
+import time
+import urllib.request
+from ipaddress import ip_address, ip_network
 from pathlib import Path
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urlparse
 
+from bs4 import BeautifulSoup
 from fastapi import HTTPException, Request, UploadFile, status
 from fastapi.responses import Response
+from markdownify import markdownify as md
+from weasyprint import HTML
 
 from api.apps.services.doc_service import DocumentService
 from api.apps.services.file_service import FileService
@@ -20,6 +29,19 @@ logger = setup_logging()
 
 _DEFAULT_PRESIGN_SECONDS = 7 * 24 * 3600
 _LEX_TASK_STREAM = os.getenv("LEX_TASK_STREAM", "lex:tasks")
+CRAWL_MIN_INTERVAL_SECONDS = float(os.getenv("CRAWL_MIN_INTERVAL_SECONDS", "1.5"))
+_crawl_guard_lock = threading.Lock()
+_host_last_crawl_at: dict[str, float] = {}
+_PRIVATE_NETS = [
+    ip_network("10.0.0.0/8"),
+    ip_network("172.16.0.0/12"),
+    ip_network("192.168.0.0/16"),
+    ip_network("127.0.0.0/8"),
+    ip_network("169.254.0.0/16"),
+    ip_network("::1/128"),
+    ip_network("fc00::/7"),
+    ip_network("fe80::/10"),
+]
 
 
 def _public_content_url(request: Request | None, doc_id: str) -> str:
@@ -103,6 +125,250 @@ def _parse_file_meta(original_name: str | None) -> tuple[str, str, str]:
         ext = ext[:36]
     name = base[:255] if len(base) <= 255 else base[:252] + "..."
     return name, ext, suf[:36]
+
+
+def _is_public_host(hostname: str) -> bool:
+    host = (hostname or "").strip().strip(".").lower()
+    if not host:
+        return False
+    if host in {"localhost", "localhost.localdomain"}:
+        return False
+
+    try:
+        ip = ip_address(host)
+        return not (ip.is_private or ip.is_loopback or ip.is_link_local or ip.is_multicast)
+    except ValueError:
+        pass
+
+    try:
+        infos = socket.getaddrinfo(host, None)
+    except socket.gaierror:
+        return False
+
+    for info in infos:
+        try:
+            resolved = ip_address(info[4][0])
+        except Exception:
+            return False
+        if resolved.is_multicast:
+            return False
+        if any(resolved in net for net in _PRIVATE_NETS):
+            return False
+    return True
+
+
+def _validate_and_normalize_url(raw_url: str) -> tuple[str, str]:
+    url = (raw_url or "").strip()
+    if len(url) > 2048:
+        raise HTTPException(status_code=400, detail="URL is too long.")
+
+    parsed = urlparse(url)
+    if parsed.scheme not in {"http", "https"}:
+        raise HTTPException(status_code=400, detail="Only http/https URLs are supported.")
+    if not parsed.netloc:
+        raise HTTPException(status_code=400, detail="Invalid URL.")
+    if parsed.username or parsed.password:
+        raise HTTPException(
+            status_code=400, detail="URLs containing username/password are not supported."
+        )
+
+    hostname = parsed.hostname
+    if not hostname:
+        raise HTTPException(status_code=400, detail="Cannot parse hostname from URL.")
+    if not _is_public_host(hostname):
+        raise HTTPException(
+            status_code=400,
+            detail="Access to private/internal hosts is denied for security reasons.",
+        )
+    return url, hostname
+
+
+def _enforce_crawl_rate_limit(hostname: str) -> None:
+    now = time.time()
+    with _crawl_guard_lock:
+        last_time = _host_last_crawl_at.get(hostname, 0.0)
+        wait_seconds = CRAWL_MIN_INTERVAL_SECONDS - (now - last_time)
+        if wait_seconds > 0:
+            raise HTTPException(
+                status_code=429,
+                detail=f"Too many requests to this host. Retry after about {wait_seconds:.1f}s.",
+            )
+        _host_last_crawl_at[hostname] = now
+
+
+def _extract_content1_html(html: str) -> str:
+    soup = BeautifulSoup(html, "html.parser")
+    blocks = soup.select("div.content1")
+    if not blocks:
+        return ""
+    return "\n".join(str(block) for block in blocks)
+
+
+def _convert_html_to_markdown(filtered_html: str) -> str:
+    return md(filtered_html, heading_style="ATX").strip()
+
+
+def _html_to_pdf_bytes(filtered_html: str, base_url: str | None = None) -> bytes:
+    body_html = (filtered_html or "").strip()
+    if not body_html:
+        body_html = "<p>No content.</p>"
+
+    full_html = f"""
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @page {{ size: A4; margin: 20mm; }}
+      html, body {{
+        font-family: "DejaVu Sans", Arial, sans-serif;
+        font-size: 12pt;
+        line-height: 1.5;
+        color: #111827;
+      }}
+      img {{
+        max-width: 100%;
+        height: auto;
+      }}
+      table {{
+        border-collapse: collapse;
+        width: 100%;
+      }}
+      th, td {{
+        border: 1px solid #d1d5db;
+        padding: 6px;
+      }}
+    </style>
+  </head>
+  <body>
+    {body_html}
+  </body>
+</html>
+"""
+    return HTML(string=full_html, base_url=base_url).write_pdf()
+
+
+async def upload_document_via_url(
+    *,
+    user: Users,
+    kb_id: str | None,
+    url_scraping: str,
+    doc_name: str | None,
+    request: Request | None = None,
+) -> dict:
+    try:
+        logger.info(f"doc upload_via_url: user_id={user.id} kb_id_param={kb_id!r}")
+        kb, err = _resolve_kb(user, kb_id)
+        if err:
+            return err
+
+        normalized_url, hostname = _validate_and_normalize_url(url_scraping)
+        _enforce_crawl_rate_limit(hostname)
+
+        req = urllib.request.Request(
+            normalized_url,
+            headers={
+                "User-Agent": "Mozilla/5.0 (compatible; LegalAgentBot/1.0; +https://localhost)",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            },
+        )
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            html_bytes = resp.read()
+            html = html_bytes.decode("utf-8", errors="ignore")
+
+        filtered_html = _extract_content1_html(html)
+        if not filtered_html:
+            return {"code": 404, "msg": "Could not find content block div.content1", "data": None}
+
+        markdown_text = _convert_html_to_markdown(filtered_html)
+        if not markdown_text:
+            return {"code": 422, "msg": "Extracted HTML cannot be converted to markdown", "data": None}
+
+        display_name = ((doc_name or "").strip() or "url_upload")[:255]
+        file_id = get_uuid()
+        doc_id = get_uuid()
+        object_key = f"{kb.id}/{file_id}.pdf"
+
+        pdf_body = _html_to_pdf_bytes(filtered_html, base_url=normalized_url)
+        content_hash = content_hash_xxhash128_hex(pdf_body)
+        thumb_b64 = thumbnail_jpeg_base64(pdf_body, "pdf")
+
+        minio = LexCompanionMinio()
+        put_res = minio.put(kb.tenant_id, object_key, pdf_body)
+        if put_res is None:
+            logger.error(f"MinIO put failed for URL upload tenant={kb.tenant_id} key={object_key}")
+            return {"code": 502, "msg": "Failed to store generated PDF in object storage", "data": None}
+
+        presign_ttl = int(os.getenv("MINIO_PRESIGN_EXPIRES_SECONDS", str(_DEFAULT_PRESIGN_SECONDS)))
+        access_url = minio.get_presigned_url(kb.tenant_id, object_key, presign_ttl)
+
+        text_dir = Path(tempfile.gettempdir()) / "legalagent_url_upload_texts"
+        text_dir.mkdir(parents=True, exist_ok=True)
+        text_path = text_dir / f"{file_id}.txt"
+        text_path.write_text(markdown_text, encoding="utf-8")
+
+        file_row = FileService.save(
+            id=file_id,
+            tenant_id=kb.tenant_id,
+            created_by=user.id,
+            name=f"{display_name}.pdf",
+            location=object_key,
+            file_content=filtered_html,
+            size=len(pdf_body),
+            type="pdf",
+            source_type="url_scraping",
+        )
+
+        DocumentService.save(
+            id=doc_id,
+            thumbnail=thumb_b64,
+            kb_id=kb.id,
+            file_id=file_row.id,
+            source_type="url_scraping",
+            type="pdf",
+            created_by=user.id,
+            name=f"{display_name}.pdf",
+            location="",
+            size=len(pdf_body),
+            token_num=0,
+            chunk_num=0,
+            progress=0.0,
+            process_duration=0.0,
+            suffix=".pdf",
+            content_hash=content_hash,
+            run="0",
+            status="1",
+        )
+        logger.info(f"doc upload_via_url ok: doc_id={doc_id} file_id={file_id} kb_id={kb.id}")
+        return {
+            "code": 201,
+            "msg": "URL content uploaded",
+            "data": {
+                "document_id": doc_id,
+                "file_id": file_id,
+                "kb_id": kb.id,
+                "tenant_id": kb.tenant_id,
+                "name": f"{display_name}.pdf",
+                "size": len(pdf_body),
+                "type": "pdf",
+                "suffix": ".pdf",
+                "object_key": object_key,
+                "location": object_key[:255],
+                "access_url": access_url,
+                "content_url": _public_content_url(request, doc_id),
+                "text_file_path": str(text_path),
+                "source_url": normalized_url,
+                "content_hash": content_hash,
+                "has_thumbnail": thumb_b64 is not None,
+                "bucket_mode": "single" if MINIO_CONFIG.get("bucket") else "multi",
+                "etag": getattr(put_res, "etag", None),
+            },
+        }
+    except HTTPException as http_err:
+        return {"code": http_err.status_code, "msg": str(http_err.detail), "data": None}
+    except Exception as e:
+        logger.error(f"upload_document_via_url error: {e}")
+        return {"code": 500, "msg": str(e), "data": None}
 
 
 async def upload_document(

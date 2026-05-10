@@ -1,0 +1,1796 @@
+===== CHUNK 1 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_1_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 1, "article_text": "Phạm vi điều chỉnh", "clause": 1, "point": null, "content": "Luật này\nquy định về chuyển đổi số, bao gồm nguyên tắc, chính sách về chuyển đổi số; điều\nphối quốc gia về chuyển đổi số; biện pháp bảo đảm chuyển đổi số; Chính phủ số;\nkinh tế số, xã hội số; trách nhiệm của cơ quan, tổ chức, cá nhân trong chuyển đổi\nsố.", "full_path": "|  |  | > Chương I > Điều 1 > Khoản 1"}
+content: Luật này
+quy định về chuyển đổi số, bao gồm nguyên tắc, chính sách về chuyển đổi số; điều
+phối quốc gia về chuyển đổi số; biện pháp bảo đảm chuyển đổi số; Chính phủ số;
+kinh tế số, xã hội số; trách nhiệm của cơ quan, tổ chức, cá nhân trong chuyển đổi
+số.
+
+===== CHUNK 2 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_1_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 1, "article_text": "Phạm vi điều chỉnh", "clause": 2, "point": null, "content": "Các nội\ndung thuộc lĩnh vực dữ liệu, giao dịch điện tử, an ninh mạng, viễn thông, trí\ntuệ nhân tạo và các lĩnh vực chuyên ngành khác được thực hiện theo quy định của\npháp luật tương ứng và phải bảo đảm thống nhất với nguyên tắc, yêu cầu quy định\ntại Luật này.", "full_path": "|  |  | > Chương I > Điều 1 > Khoản 2"}
+content: Các nội
+dung thuộc lĩnh vực dữ liệu, giao dịch điện tử, an ninh mạng, viễn thông, trí
+tuệ nhân tạo và các lĩnh vực chuyên ngành khác được thực hiện theo quy định của
+pháp luật tương ứng và phải bảo đảm thống nhất với nguyên tắc, yêu cầu quy định
+tại Luật này.
+
+===== CHUNK 3 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_2_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 2, "article_text": "Đối tượng áp dụng", "clause": 1, "point": null, "content": "Luật này áp\ndụng đối với cơ quan, tổ chức, cá nhân trong nước và ngoài nước trực tiếp tham\ngia hoặc có liên quan đến chuyển đổi số tại Việt Nam.", "full_path": "|  |  | > Chương I > Điều 2 > Khoản 1"}
+content: Luật này áp
+dụng đối với cơ quan, tổ chức, cá nhân trong nước và ngoài nước trực tiếp tham
+gia hoặc có liên quan đến chuyển đổi số tại Việt Nam.
+
+===== CHUNK 4 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 1, "point": null, "content": "*Chuyển\nđổi số* là quá trình chuyển đổi phương thức hoạt động, quản trị và cung cấp\ndịch vụ dựa trên công nghệ số, dữ liệu số, hệ thống số, nền tảng số, quy trình\nsố nhằm tạo ra giá trị mới, hiệu quả và minh bạch.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 1"}
+content: *Chuyển
+đổi số* là quá trình chuyển đổi phương thức hoạt động, quản trị và cung cấp
+dịch vụ dựa trên công nghệ số, dữ liệu số, hệ thống số, nền tảng số, quy trình
+số nhằm tạo ra giá trị mới, hiệu quả và minh bạch.
+
+===== CHUNK 5 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 2, "point": null, "content": "*Hạ\ntầng số* là tập hợp các hệ thống kỹ thuật, kết nối, điện toán, lưu trữ và\ncác thành phần công nghệ số bảo đảm cho hoạt động trên môi trường số, bao gồm\ncơ sở hạ tầng viễn thông, hạ tầng trung tâm dữ liệu, điện toán đám mây và hạ tầng\ntruyền dẫn cho kết nối máy tới máy.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 2"}
+content: *Hạ
+tầng số* là tập hợp các hệ thống kỹ thuật, kết nối, điện toán, lưu trữ và
+các thành phần công nghệ số bảo đảm cho hoạt động trên môi trường số, bao gồm
+cơ sở hạ tầng viễn thông, hạ tầng trung tâm dữ liệu, điện toán đám mây và hạ tầng
+truyền dẫn cho kết nối máy tới máy.
+
+===== CHUNK 6 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 3, "point": null, "content": "*Hạ\ntầng số công cộng* bao gồm nền tảng số và dịch vụ số dùng chung do Nhà nước\nđầu tư, quản lý hoặc bảo đảm vận hành; được xây dựng theo nguyên tắc mở, tiêu\nchuẩn và khả năng tương thích cao nhằm phục vụ lợi ích công cộng; có khả năng kết\nnối, tích hợp và liên thông an toàn trong nước, khu vực và quốc tế.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 3"}
+content: *Hạ
+tầng số công cộng* bao gồm nền tảng số và dịch vụ số dùng chung do Nhà nước
+đầu tư, quản lý hoặc bảo đảm vận hành; được xây dựng theo nguyên tắc mở, tiêu
+chuẩn và khả năng tương thích cao nhằm phục vụ lợi ích công cộng; có khả năng kết
+nối, tích hợp và liên thông an toàn trong nước, khu vực và quốc tế.
+
+===== CHUNK 7 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 4, "point": null, "content": "*Hệ\nthống số* là sự phát triển của hệ thống thông tin, bao gồm các thành phần\ncông nghệ số, dữ liệu số, nền tảng số, phần mềm, phần cứng, thuật toán, mô hình\nxử lý và thiết bị kết nối được tổ chức để tạo lập, xử lý, lưu trữ, kết nối và vận\nhành dịch vụ số hoặc quy trình số; bao gồm cả trường hợp hoạt động điều hành\ntheo thời gian thực.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 4"}
+content: *Hệ
+thống số* là sự phát triển của hệ thống thông tin, bao gồm các thành phần
+công nghệ số, dữ liệu số, nền tảng số, phần mềm, phần cứng, thuật toán, mô hình
+xử lý và thiết bị kết nối được tổ chức để tạo lập, xử lý, lưu trữ, kết nối và vận
+hành dịch vụ số hoặc quy trình số; bao gồm cả trường hợp hoạt động điều hành
+theo thời gian thực.
+
+===== CHUNK 8 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_5", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 5, "point": null, "content": "*Nền\ntảng số* là hệ thống thông tin nhằm tạo môi trường số cho phép các bên thực\nhiện giao dịch hoặc cung cấp, sử dụng sản phẩm, dịch vụ hoặc sử dụng để phát\ntriển sản phẩm, dịch vụ.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 5"}
+content: *Nền
+tảng số* là hệ thống thông tin nhằm tạo môi trường số cho phép các bên thực
+hiện giao dịch hoặc cung cấp, sử dụng sản phẩm, dịch vụ hoặc sử dụng để phát
+triển sản phẩm, dịch vụ.
+
+===== CHUNK 9 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_6", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 6, "point": null, "content": "*Quy trình số*\nlà chuỗi hoạt động hoặc thao tác nghiệp vụ được thực hiện, xử lý và kiểm soát bằng\nphương tiện điện tử trên môi trường số.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 6"}
+content: *Quy trình số*
+là chuỗi hoạt động hoặc thao tác nghiệp vụ được thực hiện, xử lý và kiểm soát bằng
+phương tiện điện tử trên môi trường số.
+
+===== CHUNK 10 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_7", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 7, "point": null, "content": "*Môi trường\nsố* là không gian hoạt động, tương tác, giao dịch và cung cấp dịch vụ được\nhình thành và vận hành thông qua hạ tầng số, hạ tầng số công cộng, hệ thống số,\nnền tảng số và dữ liệu số.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 7"}
+content: *Môi trường
+số* là không gian hoạt động, tương tác, giao dịch và cung cấp dịch vụ được
+hình thành và vận hành thông qua hạ tầng số, hạ tầng số công cộng, hệ thống số,
+nền tảng số và dữ liệu số.
+
+===== CHUNK 11 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_8", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 8, "point": null, "content": "*Số\nhóa* là việc chuyển đổi thông tin, dữ liệu, tài liệu từ dạng vật lý hoặc\ntương tự sang dạng dữ liệu số.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 8"}
+content: *Số
+hóa* là việc chuyển đổi thông tin, dữ liệu, tài liệu từ dạng vật lý hoặc
+tương tự sang dạng dữ liệu số.
+
+===== CHUNK 12 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_9", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 9, "point": null, "content": "*Số\nhóa quy trình* là việc sử dụng công nghệ số, dữ liệu số để tự động hóa và tối\nưu hóa các quy trình hoạt động của cơ quan, tổ chức, cá nhân.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 9"}
+content: *Số
+hóa quy trình* là việc sử dụng công nghệ số, dữ liệu số để tự động hóa và tối
+ưu hóa các quy trình hoạt động của cơ quan, tổ chức, cá nhân.
+
+===== CHUNK 13 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_10", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 10, "point": null, "content": "*Chia sẻ\ndữ liệu số* là việc cung cấp, trao đổi hoặc cho phép truy cập dữ liệu số giữa\ncác cơ quan, tổ chức và cá nhân theo nguyên tắc, tiêu chuẩn và yêu cầu bảo đảm\nan toàn.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 10"}
+content: *Chia sẻ
+dữ liệu số* là việc cung cấp, trao đổi hoặc cho phép truy cập dữ liệu số giữa
+các cơ quan, tổ chức và cá nhân theo nguyên tắc, tiêu chuẩn và yêu cầu bảo đảm
+an toàn.
+
+===== CHUNK 14 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_11", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 11, "point": null, "content": "*Chính phủ\nsố* là mô hình để tổ chức và vận hành các hoạt động của cơ quan nhà nước\ntrên môi trường số, dựa trên dữ liệu số, hạ tầng số, hạ tầng số công cộng, hệ\nthống số và nền tảng số để ra quyết định kịp thời, điều hành hiệu quả, bảo đảm\nminh bạch và kết nối, liên thông với tổ chức, doanh nghiệp và người dân.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 11"}
+content: *Chính phủ
+số* là mô hình để tổ chức và vận hành các hoạt động của cơ quan nhà nước
+trên môi trường số, dựa trên dữ liệu số, hạ tầng số, hạ tầng số công cộng, hệ
+thống số và nền tảng số để ra quyết định kịp thời, điều hành hiệu quả, bảo đảm
+minh bạch và kết nối, liên thông với tổ chức, doanh nghiệp và người dân.
+
+===== CHUNK 15 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_12", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 12, "point": null, "content": "*Kinh tế\nsố* là hoạt động kinh tế dựa trên dữ liệu số, hạ tầng số, hạ tầng số công cộng,\nhệ thống số, nền tảng số và mô hình vận hành số.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 12"}
+content: *Kinh tế
+số* là hoạt động kinh tế dựa trên dữ liệu số, hạ tầng số, hạ tầng số công cộng,
+hệ thống số, nền tảng số và mô hình vận hành số.
+
+===== CHUNK 16 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_13", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 13, "point": null, "content": "*Xã hội\nsố* là xã hội trong đó cá nhân, tổ chức chủ yếu hoạt động, tương tác thông\nqua dịch vụ số, hệ thống số, nền tảng số và môi trường số.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 13"}
+content: *Xã hội
+số* là xã hội trong đó cá nhân, tổ chức chủ yếu hoạt động, tương tác thông
+qua dịch vụ số, hệ thống số, nền tảng số và môi trường số.
+
+===== CHUNK 17 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_14", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 14, "point": null, "content": "*Dịch\nvụ số* là dịch vụ được cung cấp trên môi trường số.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 14"}
+content: *Dịch
+vụ số* là dịch vụ được cung cấp trên môi trường số.
+
+===== CHUNK 18 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_15", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 15, "point": null, "content": "*Dịch\nvụ công trực tuyến* là dịch vụ hành chính công và các dịch vụ khác do cơ\nquan nhà nước cung cấp trên môi trường số, bao gồm dịch vụ công trực tuyến toàn\ntrình và dịch vụ công trực tuyến một phần.\n\n*Dịch vụ\ncông trực tuyến toàn trình* là dịch vụ công trực tuyến được thực hiện hoàn\ntoàn trên môi trường số, bao gồm nộp, tiếp nhận hồ sơ, xử lý, thanh toán (nếu\ncó) và trả kết quả.\n\n*Dịch vụ\ncông trực tuyến một phần* là dịch vụ công trực tuyến được thực hiện một hoặc\nmột số công đoạn trên môi trường số.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 15"}
+content: *Dịch
+vụ công trực tuyến* là dịch vụ hành chính công và các dịch vụ khác do cơ
+quan nhà nước cung cấp trên môi trường số, bao gồm dịch vụ công trực tuyến toàn
+trình và dịch vụ công trực tuyến một phần.
+
+*Dịch vụ
+công trực tuyến toàn trình* là dịch vụ công trực tuyến được thực hiện hoàn
+toàn trên môi trường số, bao gồm nộp, tiếp nhận hồ sơ, xử lý, thanh toán (nếu
+có) và trả kết quả.
+
+*Dịch vụ
+công trực tuyến một phần* là dịch vụ công trực tuyến được thực hiện một hoặc
+một số công đoạn trên môi trường số.
+
+===== CHUNK 19 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_16", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 16, "point": null, "content": "*Công dân số*\nlà cá nhân có khả năng truy cập, sử dụng, tham gia các hoạt động trên môi trường\nsố một cách an toàn, hiệu quả theo quy định của pháp luật.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 16"}
+content: *Công dân số*
+là cá nhân có khả năng truy cập, sử dụng, tham gia các hoạt động trên môi trường
+số một cách an toàn, hiệu quả theo quy định của pháp luật.
+
+===== CHUNK 20 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_17", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 17, "point": null, "content": "*Năng lực\nsố* là tập hợp kiến thức, kỹ năng sử dụng công nghệ số để tham gia an toàn,\nhiệu quả, có trách nhiệm vào các hoạt động trên môi trường số.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 17"}
+content: *Năng lực
+số* là tập hợp kiến thức, kỹ năng sử dụng công nghệ số để tham gia an toàn,
+hiệu quả, có trách nhiệm vào các hoạt động trên môi trường số.
+
+===== CHUNK 21 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_18", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 18, "point": null, "content": "*Nhân lực\nsố* là lực lượng lao động trong mọi ngành, lĩnh vực có năng lực số để tham\ngia hoạt động chuyển đổi số.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 18"}
+content: *Nhân lực
+số* là lực lượng lao động trong mọi ngành, lĩnh vực có năng lực số để tham
+gia hoạt động chuyển đổi số.
+
+===== CHUNK 22 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_19", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 19, "point": null, "content": "*Khoảng\ncách số* là sự chênh lệch giữa các nhóm đối tượng, tổ chức, cá nhân về năng\nlực số, điều kiện, khả năng tiếp cận, sử dụng và hưởng lợi từ hạ tầng số, hạ tầng\nsố công cộng, công nghệ số, nền tảng số, dữ liệu số.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 19"}
+content: *Khoảng
+cách số* là sự chênh lệch giữa các nhóm đối tượng, tổ chức, cá nhân về năng
+lực số, điều kiện, khả năng tiếp cận, sử dụng và hưởng lợi từ hạ tầng số, hạ tầng
+số công cộng, công nghệ số, nền tảng số, dữ liệu số.
+
+===== CHUNK 23 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_20", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 20, "point": null, "content": "*Công nghệ\nthông tin* là tập hợp các phương pháp khoa học, công nghệ và công cụ kỹ thuật\nhiện đại để sản xuất, truyền đưa, thu thập, xử lý, lưu trữ và trao đổi thông\ntin số. Công nghệ thông tin là bộ phận của công nghệ số theo quy định của Luật Công nghiệp công nghệ số.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 20"}
+content: *Công nghệ
+thông tin* là tập hợp các phương pháp khoa học, công nghệ và công cụ kỹ thuật
+hiện đại để sản xuất, truyền đưa, thu thập, xử lý, lưu trữ và trao đổi thông
+tin số. Công nghệ thông tin là bộ phận của công nghệ số theo quy định của Luật Công nghiệp công nghệ số.
+
+===== CHUNK 24 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_21", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 21, "point": null, "content": "*Thông tin\nsố* là thông tin được tạo lập bằng phương pháp dùng tín hiệu số.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 21"}
+content: *Thông tin
+số* là thông tin được tạo lập bằng phương pháp dùng tín hiệu số.
+
+===== CHUNK 25 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_22", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 22, "point": null, "content": "*Môi trường\nmạng* là môi trường trong đó thông tin được cung cấp, truyền đưa, thu thập,\nxử lý, lưu trữ và trao đổi thông qua cơ sở hạ tầng thông tin.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 22"}
+content: *Môi trường
+mạng* là môi trường trong đó thông tin được cung cấp, truyền đưa, thu thập,
+xử lý, lưu trữ và trao đổi thông qua cơ sở hạ tầng thông tin.
+
+===== CHUNK 26 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_23", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 23, "point": null, "content": "*Cơ sở\nhạ tầng thông tin* là hệ thống trang thiết bị phục vụ cho việc sản xuất,\ntruyền đưa, thu thập, xử lý, lưu trữ và trao đổi thông tin số, bao gồm mạng viễn\nthông, mạng Internet, mạng máy tính và cơ sở dữ liệu.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 23"}
+content: *Cơ sở
+hạ tầng thông tin* là hệ thống trang thiết bị phục vụ cho việc sản xuất,
+truyền đưa, thu thập, xử lý, lưu trữ và trao đổi thông tin số, bao gồm mạng viễn
+thông, mạng Internet, mạng máy tính và cơ sở dữ liệu.
+
+===== CHUNK 27 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_3_khoan_24", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 3, "article_text": "Giải thích từ ngữ", "clause": 24, "point": null, "content": "*Ứng\ndụng công nghệ thông tin* là việc sử dụng công nghệ thông tin vào các hoạt động\nthuộc lĩnh vực kinh tế - xã hội, đối ngoại, quốc phòng, an ninh và các hoạt động\nkhác nhằm nâng cao năng suất, chất lượng, hiệu quả của các hoạt động này. Ứng dụng\ncông nghệ thông tin là bộ phận của ứng dụng công nghệ số.", "full_path": "|  |  | > Chương I > Điều 3 > Khoản 24"}
+content: *Ứng
+dụng công nghệ thông tin* là việc sử dụng công nghệ thông tin vào các hoạt động
+thuộc lĩnh vực kinh tế - xã hội, đối ngoại, quốc phòng, an ninh và các hoạt động
+khác nhằm nâng cao năng suất, chất lượng, hiệu quả của các hoạt động này. Ứng dụng
+công nghệ thông tin là bộ phận của ứng dụng công nghệ số.
+
+===== CHUNK 28 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_4_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 4, "article_text": "Hoạt động chuyển đổi số", "clause": 1, "point": null, "content": "Xây dựng,\nban hành, tổ chức thực hiện chiến lược, chương trình, kế hoạch, kiến trúc, quy\nchế, yêu cầu kỹ thuật, tiêu chuẩn và quy chuẩn kỹ thuật về chuyển đổi số; quản\nlý, điều phối, thống kê, đo lường, giám sát, kiểm toán hoạt động chuyển đổi số;\nđánh giá mức độ chuyển đổi số, hiệu quả chuyển đổi số.", "full_path": "|  |  | > Chương I > Điều 4 > Khoản 1"}
+content: Xây dựng,
+ban hành, tổ chức thực hiện chiến lược, chương trình, kế hoạch, kiến trúc, quy
+chế, yêu cầu kỹ thuật, tiêu chuẩn và quy chuẩn kỹ thuật về chuyển đổi số; quản
+lý, điều phối, thống kê, đo lường, giám sát, kiểm toán hoạt động chuyển đổi số;
+đánh giá mức độ chuyển đổi số, hiệu quả chuyển đổi số.
+
+===== CHUNK 29 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_4_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 4, "article_text": "Hoạt động chuyển đổi số", "clause": 2, "point": null, "content": "Xây dựng,\nphát triển, nâng cấp, tích hợp, kết nối, quản lý, giám sát, vận hành, bảo trì,\nduy trì hạ tầng số, hạ tầng số công cộng, hệ thống số, nền tảng số, phần mềm\ndùng chung, phần mềm chuyên ngành, cơ sở dữ liệu.", "full_path": "|  |  | > Chương I > Điều 4 > Khoản 2"}
+content: Xây dựng,
+phát triển, nâng cấp, tích hợp, kết nối, quản lý, giám sát, vận hành, bảo trì,
+duy trì hạ tầng số, hạ tầng số công cộng, hệ thống số, nền tảng số, phần mềm
+dùng chung, phần mềm chuyên ngành, cơ sở dữ liệu.
+
+===== CHUNK 30 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_4_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 4, "article_text": "Hoạt động chuyển đổi số", "clause": 3, "point": null, "content": "Xây dựng,\nphát triển, bảo vệ, quản trị, xử lý, sử dụng dữ liệu; điều phối, kết nối, chia\nsẻ, mở, giám sát, đánh giá, khai thác, kiểm toán, xếp hạng dữ liệu và các hoạt\nđộng khác theo quy định của pháp luật về dữ liệu.", "full_path": "|  |  | > Chương I > Điều 4 > Khoản 3"}
+content: Xây dựng,
+phát triển, bảo vệ, quản trị, xử lý, sử dụng dữ liệu; điều phối, kết nối, chia
+sẻ, mở, giám sát, đánh giá, khai thác, kiểm toán, xếp hạng dữ liệu và các hoạt
+động khác theo quy định của pháp luật về dữ liệu.
+
+===== CHUNK 31 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_4_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 4, "article_text": "Hoạt động chuyển đổi số", "clause": 4, "point": null, "content": "Số hóa\nthông tin, dữ liệu, tài liệu; số hóa quy trình; đổi mới, tái cấu trúc quy\ntrình, mô hình tổ chức và phương thức hoạt động quản trị nội bộ, lãnh đạo, chỉ\nđạo, điều hành, thanh tra, kiểm tra, cung cấp dịch vụ; phát triển và cung cấp dịch\nvụ công trực tuyến, dịch vụ số, ứng dụng khác trong hoạt động quản lý nhà nước,\nsản xuất, kinh doanh và đời sống xã hội; xây dựng và phát triển bản sao số.", "full_path": "|  |  | > Chương I > Điều 4 > Khoản 4"}
+content: Số hóa
+thông tin, dữ liệu, tài liệu; số hóa quy trình; đổi mới, tái cấu trúc quy
+trình, mô hình tổ chức và phương thức hoạt động quản trị nội bộ, lãnh đạo, chỉ
+đạo, điều hành, thanh tra, kiểm tra, cung cấp dịch vụ; phát triển và cung cấp dịch
+vụ công trực tuyến, dịch vụ số, ứng dụng khác trong hoạt động quản lý nhà nước,
+sản xuất, kinh doanh và đời sống xã hội; xây dựng và phát triển bản sao số.
+
+===== CHUNK 32 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_4_khoan_5", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 4, "article_text": "Hoạt động chuyển đổi số", "clause": 5, "point": null, "content": "Thực hiện\ncác biện pháp bảo vệ an ninh mạng và bảo vệ dữ liệu trong thiết kế, triển khai,\nvận hành và sử dụng hệ thống số; triển khai hoạt động giám sát, đánh giá, ứng\nphó, quản trị rủi ro và khắc phục sự cố an ninh mạng theo quy định của pháp luật\nvề an ninh mạng.", "full_path": "|  |  | > Chương I > Điều 4 > Khoản 5"}
+content: Thực hiện
+các biện pháp bảo vệ an ninh mạng và bảo vệ dữ liệu trong thiết kế, triển khai,
+vận hành và sử dụng hệ thống số; triển khai hoạt động giám sát, đánh giá, ứng
+phó, quản trị rủi ro và khắc phục sự cố an ninh mạng theo quy định của pháp luật
+về an ninh mạng.
+
+===== CHUNK 33 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_4_khoan_6", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 4, "article_text": "Hoạt động chuyển đổi số", "clause": 6, "point": null, "content": "Nghiên cứu,\nthử nghiệm, thí điểm, đánh giá, triển khai ứng dụng sản phẩm, dịch vụ số, mô\nhình và giải pháp mới về chuyển đổi số; thực hiện cơ chế thử nghiệm có kiểm\nsoát trong chuyển đổi số.", "full_path": "|  |  | > Chương I > Điều 4 > Khoản 6"}
+content: Nghiên cứu,
+thử nghiệm, thí điểm, đánh giá, triển khai ứng dụng sản phẩm, dịch vụ số, mô
+hình và giải pháp mới về chuyển đổi số; thực hiện cơ chế thử nghiệm có kiểm
+soát trong chuyển đổi số.
+
+===== CHUNK 34 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_4_khoan_7", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 4, "article_text": "Hoạt động chuyển đổi số", "clause": 7, "point": null, "content": "Đào tạo,\nbồi dưỡng và phát triển năng lực số; phổ cập năng lực số cơ bản.", "full_path": "|  |  | > Chương I > Điều 4 > Khoản 7"}
+content: Đào tạo,
+bồi dưỡng và phát triển năng lực số; phổ cập năng lực số cơ bản.
+
+===== CHUNK 35 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_4_khoan_8", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 4, "article_text": "Hoạt động chuyển đổi số", "clause": 8, "point": null, "content": "Truyền\nthông, phổ biến chủ trương, chính sách, pháp luật về chuyển đổi số; hướng dẫn\nvà hỗ trợ tổ chức, cá nhân tiếp cận, sử dụng dịch vụ số và tham gia hoạt động\ntrên môi trường số.", "full_path": "|  |  | > Chương I > Điều 4 > Khoản 8"}
+content: Truyền
+thông, phổ biến chủ trương, chính sách, pháp luật về chuyển đổi số; hướng dẫn
+và hỗ trợ tổ chức, cá nhân tiếp cận, sử dụng dịch vụ số và tham gia hoạt động
+trên môi trường số.
+
+===== CHUNK 36 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_4_khoan_9", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 4, "article_text": "Hoạt động chuyển đổi số", "clause": 9, "point": null, "content": "Thuê chuyên\ngia, dịch vụ tư vấn, dịch vụ số, dịch vụ hỗ trợ kỹ thuật và dịch vụ khác\nphục vụ việc khảo sát, thiết kế, xây dựng, triển khai, vận hành, bảo trì, kiểm\nthử, kiểm toán, giám sát và đánh giá hoạt động chuyển đổi số.", "full_path": "|  |  | > Chương I > Điều 4 > Khoản 9"}
+content: Thuê chuyên
+gia, dịch vụ tư vấn, dịch vụ số, dịch vụ hỗ trợ kỹ thuật và dịch vụ khác
+phục vụ việc khảo sát, thiết kế, xây dựng, triển khai, vận hành, bảo trì, kiểm
+thử, kiểm toán, giám sát và đánh giá hoạt động chuyển đổi số.
+
+===== CHUNK 37 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_4_khoan_10", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 4, "article_text": "Hoạt động chuyển đổi số", "clause": 10, "point": null, "content": "Trang bị,\nmua sắm, thuê, khai thác và sử dụng hạ tầng chuyển đổi số, hệ thống số, nền tảng\nsố; sản phẩm, dịch vụ công nghệ số, dịch vụ điện toán đám mây, dịch vụ dữ liệu,\ndịch vụ an ninh mạng, dịch vụ tư vấn và các dịch vụ số khác; công cụ và thiết bị\nđầu cuối phục vụ chuyển đổi số.", "full_path": "|  |  | > Chương I > Điều 4 > Khoản 10"}
+content: Trang bị,
+mua sắm, thuê, khai thác và sử dụng hạ tầng chuyển đổi số, hệ thống số, nền tảng
+số; sản phẩm, dịch vụ công nghệ số, dịch vụ điện toán đám mây, dịch vụ dữ liệu,
+dịch vụ an ninh mạng, dịch vụ tư vấn và các dịch vụ số khác; công cụ và thiết bị
+đầu cuối phục vụ chuyển đổi số.
+
+===== CHUNK 38 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_4_khoan_11", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 4, "article_text": "Hoạt động chuyển đổi số", "clause": 11, "point": null, "content": "Phát triển\nthử nghiệm bao gồm việc xây dựng, vận hành thử nghiệm hệ thống số, nền tảng số,\ndịch vụ số chưa có sẵn trên thị trường; dự án chưa có tiền lệ trong phạm vi giới\nhạn nhằm đánh giá hiệu quả trước khi thực hiện các thủ tục đầu tư, thuê, mua sắm\ntheo quy định.", "full_path": "|  |  | > Chương I > Điều 4 > Khoản 11"}
+content: Phát triển
+thử nghiệm bao gồm việc xây dựng, vận hành thử nghiệm hệ thống số, nền tảng số,
+dịch vụ số chưa có sẵn trên thị trường; dự án chưa có tiền lệ trong phạm vi giới
+hạn nhằm đánh giá hiệu quả trước khi thực hiện các thủ tục đầu tư, thuê, mua sắm
+theo quy định.
+
+===== CHUNK 39 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_4_khoan_12", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 4, "article_text": "Hoạt động chuyển đổi số", "clause": 12, "point": null, "content": "Hoạt động\nchuyển đổi số khác theo quy định của Chính phủ.", "full_path": "|  |  | > Chương I > Điều 4 > Khoản 12"}
+content: Hoạt động
+chuyển đổi số khác theo quy định của Chính phủ.
+
+===== CHUNK 40 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_5_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 5, "article_text": "Các hành vi bị nghiêm cấm", "clause": 1, "point": null, "content": "Cản trở,\nphá hoại hoạt động chuyển đổi số; làm gián đoạn, đình trệ, gây mất an toàn cho\nhệ thống số của cơ quan, tổ chức, cá nhân.", "full_path": "|  |  | > Chương I > Điều 5 > Khoản 1"}
+content: Cản trở,
+phá hoại hoạt động chuyển đổi số; làm gián đoạn, đình trệ, gây mất an toàn cho
+hệ thống số của cơ quan, tổ chức, cá nhân.
+
+===== CHUNK 41 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_5_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 5, "article_text": "Các hành vi bị nghiêm cấm", "clause": 2, "point": null, "content": "Truy cập,\ncan thiệp trái phép, làm sai lệch, vô hiệu hóa, gây tổn hại đến hệ thống số, dữ\nliệu số, nền tảng số và dịch vụ số.", "full_path": "|  |  | > Chương I > Điều 5 > Khoản 2"}
+content: Truy cập,
+can thiệp trái phép, làm sai lệch, vô hiệu hóa, gây tổn hại đến hệ thống số, dữ
+liệu số, nền tảng số và dịch vụ số.
+
+===== CHUNK 42 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_5_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 5, "article_text": "Các hành vi bị nghiêm cấm", "clause": 3, "point": null, "content": "Thu thập,\nsử dụng, chia sẻ, mua, bán, khai thác dữ liệu số trái quy định của pháp luật.", "full_path": "|  |  | > Chương I > Điều 5 > Khoản 3"}
+content: Thu thập,
+sử dụng, chia sẻ, mua, bán, khai thác dữ liệu số trái quy định của pháp luật.
+
+===== CHUNK 43 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_5_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 5, "article_text": "Các hành vi bị nghiêm cấm", "clause": 4, "point": null, "content": "Lợi dụng\nchuyển đổi số để lừa đảo, thao túng, trục lợi, xâm phạm quyền và lợi ích hợp\npháp của cơ quan, tổ chức, cá nhân.", "full_path": "|  |  | > Chương I > Điều 5 > Khoản 4"}
+content: Lợi dụng
+chuyển đổi số để lừa đảo, thao túng, trục lợi, xâm phạm quyền và lợi ích hợp
+pháp của cơ quan, tổ chức, cá nhân.
+
+===== CHUNK 44 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_5_khoan_5", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 1, "chapter_text": "NHỮNG QUY ĐỊNH", "article": 5, "article_text": "Các hành vi bị nghiêm cấm", "clause": 5, "point": null, "content": "Lợi dụng\nchức trách, quyền hạn để gây cản trở, phân biệt đối xử, tạo độc quyền, cát cứ,\nhạn chế cạnh tranh trong phát triển, vận hành, khai thác hệ thống số.", "full_path": "|  |  | > Chương I > Điều 5 > Khoản 5"}
+content: Lợi dụng
+chức trách, quyền hạn để gây cản trở, phân biệt đối xử, tạo độc quyền, cát cứ,
+hạn chế cạnh tranh trong phát triển, vận hành, khai thác hệ thống số.
+
+===== CHUNK 45 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_6_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 6, "article_text": "Nguyên tắc chuyển đổi số", "clause": 1, "point": null, "content": "Thúc đẩy\nđổi mới sáng tạo, lấy người sử dụng làm trung tâm, nâng cao chất\nlượng dịch vụ và tạo giá trị mới cho cơ quan, tổ chức, doanh nghiệp và người\ndân.", "full_path": "|  |  | > Chương II > Điều 6 > Khoản 1"}
+content: Thúc đẩy
+đổi mới sáng tạo, lấy người sử dụng làm trung tâm, nâng cao chất
+lượng dịch vụ và tạo giá trị mới cho cơ quan, tổ chức, doanh nghiệp và người
+dân.
+
+===== CHUNK 46 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_6_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 6, "article_text": "Nguyên tắc chuyển đổi số", "clause": 2, "point": null, "content": "Tăng cường\nkết nối, chia sẻ và sử dụng lại dữ liệu, khai báo một lần là mặc định để nâng\ncao hiệu quả quản lý, hạn chế trùng lặp, giảm thủ tục và nâng cao năng lực ra\nquyết định.", "full_path": "|  |  | > Chương II > Điều 6 > Khoản 2"}
+content: Tăng cường
+kết nối, chia sẻ và sử dụng lại dữ liệu, khai báo một lần là mặc định để nâng
+cao hiệu quả quản lý, hạn chế trùng lặp, giảm thủ tục và nâng cao năng lực ra
+quyết định.
+
+===== CHUNK 47 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_6_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 6, "article_text": "Nguyên tắc chuyển đổi số", "clause": 3, "point": null, "content": "Bảo đảm\nan ninh mạng, bảo vệ dữ liệu và quyền riêng tư theo quy định của pháp luật;\nkhuyến khích áp dụng các biện pháp tiên tiến để nâng cao mức độ an toàn.", "full_path": "|  |  | > Chương II > Điều 6 > Khoản 3"}
+content: Bảo đảm
+an ninh mạng, bảo vệ dữ liệu và quyền riêng tư theo quy định của pháp luật;
+khuyến khích áp dụng các biện pháp tiên tiến để nâng cao mức độ an toàn.
+
+===== CHUNK 48 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_6_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 6, "article_text": "Nguyên tắc chuyển đổi số", "clause": 4, "point": null, "content": "Được\ntriển khai linh hoạt, thích ứng với sự phát triển nhanh của công nghệ; khuyến\nkhích thử nghiệm, ứng dụng công nghệ mới phù hợp với đặc thù từng lĩnh vực.", "full_path": "|  |  | > Chương II > Điều 6 > Khoản 4"}
+content: Được
+triển khai linh hoạt, thích ứng với sự phát triển nhanh của công nghệ; khuyến
+khích thử nghiệm, ứng dụng công nghệ mới phù hợp với đặc thù từng lĩnh vực.
+
+===== CHUNK 49 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_6_khoan_5", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 6, "article_text": "Nguyên tắc chuyển đổi số", "clause": 5, "point": null, "content": "Bảo đảm\ntính bao trùm, tạo điều kiện để mọi tổ chức và cá nhân đều có cơ hội tiếp cận,\nsử dụng dịch vụ số thuận lợi, an toàn và hiệu quả.", "full_path": "|  |  | > Chương II > Điều 6 > Khoản 5"}
+content: Bảo đảm
+tính bao trùm, tạo điều kiện để mọi tổ chức và cá nhân đều có cơ hội tiếp cận,
+sử dụng dịch vụ số thuận lợi, an toàn và hiệu quả.
+
+===== CHUNK 50 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_6_khoan_6", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 6, "article_text": "Nguyên tắc chuyển đổi số", "clause": 6, "point": null, "content": "Bảo đảm\nminh bạch và trách nhiệm giải trình đối với quyết định dựa trên công nghệ số nhằm\nnâng cao niềm tin của người sử dụng.", "full_path": "|  |  | > Chương II > Điều 6 > Khoản 6"}
+content: Bảo đảm
+minh bạch và trách nhiệm giải trình đối với quyết định dựa trên công nghệ số nhằm
+nâng cao niềm tin của người sử dụng.
+
+===== CHUNK 51 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_6_khoan_7", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 6, "article_text": "Nguyên tắc chuyển đổi số", "clause": 7, "point": null, "content": "Khuyến\nkhích gắn chuyển đổi số với hoạt động đo lường, đánh giá, giám sát và cải thiện\nliên tục để nâng cao hiệu quả triển khai và chất lượng dịch vụ.", "full_path": "|  |  | > Chương II > Điều 6 > Khoản 7"}
+content: Khuyến
+khích gắn chuyển đổi số với hoạt động đo lường, đánh giá, giám sát và cải thiện
+liên tục để nâng cao hiệu quả triển khai và chất lượng dịch vụ.
+
+===== CHUNK 52 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_6_khoan_8", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 6, "article_text": "Nguyên tắc chuyển đổi số", "clause": 8, "point": null, "content": "Cơ quan nhà nước\ncó trách nhiệm tuân thủ các nguyên tắc chuyển đổi số. Nhà nước khuyến khích tổ\nchức, doanh nghiệp ngoài khu vực nhà nước áp dụng các nguyên tắc quy định tại\nĐiều này trong hoạt động của mình.", "full_path": "|  |  | > Chương II > Điều 6 > Khoản 8"}
+content: Cơ quan nhà nước
+có trách nhiệm tuân thủ các nguyên tắc chuyển đổi số. Nhà nước khuyến khích tổ
+chức, doanh nghiệp ngoài khu vực nhà nước áp dụng các nguyên tắc quy định tại
+Điều này trong hoạt động của mình.
+
+===== CHUNK 53 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_7_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 7, "article_text": "Nguyên tắc kiến trúc và thiết kế hệ thống số", "clause": 1, "point": null, "content": "Được\nthiết kế theo hướng sử dụng nền tảng số và các thành phần dùng chung, thúc đẩy\nkhả năng mở rộng, tích hợp và sử dụng lại để nâng cao hiệu quả đầu tư và hạn chế\ntrùng lặp.", "full_path": "|  |  | > Chương II > Điều 7 > Khoản 1"}
+content: Được
+thiết kế theo hướng sử dụng nền tảng số và các thành phần dùng chung, thúc đẩy
+khả năng mở rộng, tích hợp và sử dụng lại để nâng cao hiệu quả đầu tư và hạn chế
+trùng lặp.
+
+===== CHUNK 54 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_7_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 7, "article_text": "Nguyên tắc kiến trúc và thiết kế hệ thống số", "clause": 2, "point": null, "content": "Bảo đảm\nkhai thác hiệu quả hạ tầng điện toán đám mây và các công nghệ cho phép mở rộng\nlinh hoạt theo nhu cầu, bảo đảm hiệu quả vận hành, an toàn và tối ưu chi phí.", "full_path": "|  |  | > Chương II > Điều 7 > Khoản 2"}
+content: Bảo đảm
+khai thác hiệu quả hạ tầng điện toán đám mây và các công nghệ cho phép mở rộng
+linh hoạt theo nhu cầu, bảo đảm hiệu quả vận hành, an toàn và tối ưu chi phí.
+
+===== CHUNK 55 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_7_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 7, "article_text": "Nguyên tắc kiến trúc và thiết kế hệ thống số", "clause": 3, "point": null, "content": "Hỗ trợ\nkết nối và tích hợp ngay từ giai đoạn thiết kế, dựa trên chuẩn mở, kiến trúc mở\nvà giao diện lập trình ứng dụng theo chuẩn để thuận lợi cho chia sẻ dữ liệu và\nliên thông giữa các hệ thống.", "full_path": "|  |  | > Chương II > Điều 7 > Khoản 3"}
+content: Hỗ trợ
+kết nối và tích hợp ngay từ giai đoạn thiết kế, dựa trên chuẩn mở, kiến trúc mở
+và giao diện lập trình ứng dụng theo chuẩn để thuận lợi cho chia sẻ dữ liệu và
+liên thông giữa các hệ thống.
+
+===== CHUNK 56 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_7_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 7, "article_text": "Nguyên tắc kiến trúc và thiết kế hệ thống số", "clause": 4, "point": null, "content": "Bảo đảm\nan ninh mạng và bảo vệ dữ liệu ngay từ giai đoạn thiết kế và phát triển; khuyến\nkhích áp dụng các biện pháp bảo vệ tiên tiến phù hợp với rủi ro.", "full_path": "|  |  | > Chương II > Điều 7 > Khoản 4"}
+content: Bảo đảm
+an ninh mạng và bảo vệ dữ liệu ngay từ giai đoạn thiết kế và phát triển; khuyến
+khích áp dụng các biện pháp bảo vệ tiên tiến phù hợp với rủi ro.
+
+===== CHUNK 57 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_7_khoan_5", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 7, "article_text": "Nguyên tắc kiến trúc và thiết kế hệ thống số", "clause": 5, "point": null, "content": "Lấy dữ\nliệu làm trung tâm; bảo đảm dữ liệu được thu thập, quản lý, chia sẻ và khai báo\nmột lần là yêu cầu mặc định; sử dụng hiệu quả để nâng cao chất lượng ra quyết định,\nchất lượng dịch vụ.", "full_path": "|  |  | > Chương II > Điều 7 > Khoản 5"}
+content: Lấy dữ
+liệu làm trung tâm; bảo đảm dữ liệu được thu thập, quản lý, chia sẻ và khai báo
+một lần là yêu cầu mặc định; sử dụng hiệu quả để nâng cao chất lượng ra quyết định,
+chất lượng dịch vụ.
+
+===== CHUNK 58 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_7_khoan_6", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 7, "article_text": "Nguyên tắc kiến trúc và thiết kế hệ thống số", "clause": 6, "point": null, "content": "Lấy người\nsử dụng làm trung tâm, bảo đảm thuận tiện, dễ tiếp cận, dễ sử dụng và phù hợp với\nnhiều nhóm đối tượng, đặc biệt là người yếu thế, các nhóm đối tượng dễ bị tổn\nthương.", "full_path": "|  |  | > Chương II > Điều 7 > Khoản 6"}
+content: Lấy người
+sử dụng làm trung tâm, bảo đảm thuận tiện, dễ tiếp cận, dễ sử dụng và phù hợp với
+nhiều nhóm đối tượng, đặc biệt là người yếu thế, các nhóm đối tượng dễ bị tổn
+thương.
+
+===== CHUNK 59 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_7_khoan_7", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 7, "article_text": "Nguyên tắc kiến trúc và thiết kế hệ thống số", "clause": 7, "point": null, "content": "Bảo đảm\nlinh hoạt, dễ nâng cấp và thích ứng với sự phát triển nhanh của công nghệ, khuyến\nkhích áp dụng mô hình kiến trúc mô-đun, thành phần độc lập và công nghệ mới phù\nhợp.", "full_path": "|  |  | > Chương II > Điều 7 > Khoản 7"}
+content: Bảo đảm
+linh hoạt, dễ nâng cấp và thích ứng với sự phát triển nhanh của công nghệ, khuyến
+khích áp dụng mô hình kiến trúc mô-đun, thành phần độc lập và công nghệ mới phù
+hợp.
+
+===== CHUNK 60 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_7_khoan_8", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 7, "article_text": "Nguyên tắc kiến trúc và thiết kế hệ thống số", "clause": 8, "point": null, "content": "Cơ quan nhà nước\ncó trách nhiệm tuân thủ các nguyên tắc thiết kế và kiến trúc hệ thống số. Nhà\nnước khuyến khích tổ chức, doanh nghiệp ngoài khu vực nhà nước áp dụng các\nnguyên tắc quy định tại Điều này trong hoạt động của mình.", "full_path": "|  |  | > Chương II > Điều 7 > Khoản 8"}
+content: Cơ quan nhà nước
+có trách nhiệm tuân thủ các nguyên tắc thiết kế và kiến trúc hệ thống số. Nhà
+nước khuyến khích tổ chức, doanh nghiệp ngoài khu vực nhà nước áp dụng các
+nguyên tắc quy định tại Điều này trong hoạt động của mình.
+
+===== CHUNK 61 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_7_khoan_9", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 7, "article_text": "Nguyên tắc kiến trúc và thiết kế hệ thống số", "clause": 9, "point": null, "content": "Chính phủ\nquy định chi tiết Điều này phù hợp với yêu cầu quản lý và thực tiễn triển khai.", "full_path": "|  |  | > Chương II > Điều 7 > Khoản 9"}
+content: Chính phủ
+quy định chi tiết Điều này phù hợp với yêu cầu quản lý và thực tiễn triển khai.
+
+===== CHUNK 62 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_8_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 8, "article_text": "Yêu cầu tối thiểu đối với hệ thống số", "clause": 1, "point": null, "content": "Yêu cầu\ntối thiểu đối với hệ thống số được áp dụng bắt buộc đối với hệ thống thông tin,\nnền tảng số, cơ sở dữ liệu và dịch vụ số của cơ quan nhà nước, hệ thống số phục\nvụ lợi ích công, dịch vụ số thiết yếu và hệ thống số của tổ chức, doanh nghiệp\nđược cơ quan nhà nước giao cung cấp dịch vụ công.\n\nĐối với hệ\nthống số của tổ chức, doanh nghiệp khác, Nhà nước khuyến khích áp dụng theo khả\nnăng và nhu cầu.", "full_path": "|  |  | > Chương II > Điều 8 > Khoản 1"}
+content: Yêu cầu
+tối thiểu đối với hệ thống số được áp dụng bắt buộc đối với hệ thống thông tin,
+nền tảng số, cơ sở dữ liệu và dịch vụ số của cơ quan nhà nước, hệ thống số phục
+vụ lợi ích công, dịch vụ số thiết yếu và hệ thống số của tổ chức, doanh nghiệp
+được cơ quan nhà nước giao cung cấp dịch vụ công.
+
+Đối với hệ
+thống số của tổ chức, doanh nghiệp khác, Nhà nước khuyến khích áp dụng theo khả
+năng và nhu cầu.
+
+===== CHUNK 63 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_8_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 8, "article_text": "Yêu cầu tối thiểu đối với hệ thống số", "clause": 2, "point": null, "content": "Bảo đảm\nan ninh mạng theo cấp độ; có cơ chế giám sát, phát hiện, cảnh báo, ứng cứu và\nkhôi phục hoạt động khi xảy ra sự cố.", "full_path": "|  |  | > Chương II > Điều 8 > Khoản 2"}
+content: Bảo đảm
+an ninh mạng theo cấp độ; có cơ chế giám sát, phát hiện, cảnh báo, ứng cứu và
+khôi phục hoạt động khi xảy ra sự cố.
+
+===== CHUNK 64 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_8_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 8, "article_text": "Yêu cầu tối thiểu đối với hệ thống số", "clause": 3, "point": null, "content": "Bảo đảm\nkhả năng kết nối và chia sẻ dữ liệu theo chuẩn với các hệ thống khác; hỗ trợ\ngiao diện lập trình ứng dụng theo tiêu chuẩn, quy chuẩn kỹ thuật; sử dụng chuẩn\ndữ liệu quốc gia, chuẩn mở, tiêu chuẩn, quy chuẩn kỹ thuật theo quy định.", "full_path": "|  |  | > Chương II > Điều 8 > Khoản 3"}
+content: Bảo đảm
+khả năng kết nối và chia sẻ dữ liệu theo chuẩn với các hệ thống khác; hỗ trợ
+giao diện lập trình ứng dụng theo tiêu chuẩn, quy chuẩn kỹ thuật; sử dụng chuẩn
+dữ liệu quốc gia, chuẩn mở, tiêu chuẩn, quy chuẩn kỹ thuật theo quy định.
+
+===== CHUNK 65 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_8_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 8, "article_text": "Yêu cầu tối thiểu đối với hệ thống số", "clause": 4, "point": null, "content": "Dữ liệu\nđược xử lý bởi hệ thống số phải được lưu trữ, sao lưu, bảo vệ và phục hồi theo\nphương án bảo đảm tính toàn vẹn, tính sẵn sàng và khả năng chống chịu sự cố;\ntuân thủ quy định về bảo vệ dữ liệu cá nhân và dữ liệu quan trọng, dữ liệu cốt lõi\ntheo pháp luật về bảo vệ dữ liệu cá nhân, pháp luật về dữ liệu.", "full_path": "|  |  | > Chương II > Điều 8 > Khoản 4"}
+content: Dữ liệu
+được xử lý bởi hệ thống số phải được lưu trữ, sao lưu, bảo vệ và phục hồi theo
+phương án bảo đảm tính toàn vẹn, tính sẵn sàng và khả năng chống chịu sự cố;
+tuân thủ quy định về bảo vệ dữ liệu cá nhân và dữ liệu quan trọng, dữ liệu cốt lõi
+theo pháp luật về bảo vệ dữ liệu cá nhân, pháp luật về dữ liệu.
+
+===== CHUNK 66 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_8_khoan_5", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 8, "article_text": "Yêu cầu tối thiểu đối với hệ thống số", "clause": 5, "point": null, "content": "Hệ thống\nsố và dịch vụ số phải duy trì mức độ sẵn sàng hoạt động tối thiểu; có phương án\ndự phòng và chuyển đổi dự phòng để bảo đảm hoạt động thông suốt đối với hệ thống\nquan trọng hoặc dịch vụ thiết yếu.", "full_path": "|  |  | > Chương II > Điều 8 > Khoản 5"}
+content: Hệ thống
+số và dịch vụ số phải duy trì mức độ sẵn sàng hoạt động tối thiểu; có phương án
+dự phòng và chuyển đổi dự phòng để bảo đảm hoạt động thông suốt đối với hệ thống
+quan trọng hoặc dịch vụ thiết yếu.
+
+===== CHUNK 67 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_8_khoan_6", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 8, "article_text": "Yêu cầu tối thiểu đối với hệ thống số", "clause": 6, "point": null, "content": "Hệ thống\nsố phải ghi nhận, lưu trữ và bảo vệ nhật ký hoạt động; bảo đảm khả năng kiểm\ntra, giám sát và truy vết phục vụ thanh tra, kiểm tra, kiểm toán, giải trình\nkhi cần thiết.", "full_path": "|  |  | > Chương II > Điều 8 > Khoản 6"}
+content: Hệ thống
+số phải ghi nhận, lưu trữ và bảo vệ nhật ký hoạt động; bảo đảm khả năng kiểm
+tra, giám sát và truy vết phục vụ thanh tra, kiểm tra, kiểm toán, giải trình
+khi cần thiết.
+
+===== CHUNK 68 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_8_khoan_7", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 8, "article_text": "Yêu cầu tối thiểu đối với hệ thống số", "clause": 7, "point": null, "content": "Hệ thống\nsố và dịch vụ số phải đáp ứng tiêu chuẩn, quy chuẩn, yêu cầu kỹ thuật về khả\nnăng tiếp cận tối thiểu đối với người sử dụng, đặc biệt là người khuyết tật,\nngười cao tuổi và các nhóm đối tượng dễ bị tổn thương khác.", "full_path": "|  |  | > Chương II > Điều 8 > Khoản 7"}
+content: Hệ thống
+số và dịch vụ số phải đáp ứng tiêu chuẩn, quy chuẩn, yêu cầu kỹ thuật về khả
+năng tiếp cận tối thiểu đối với người sử dụng, đặc biệt là người khuyết tật,
+người cao tuổi và các nhóm đối tượng dễ bị tổn thương khác.
+
+===== CHUNK 69 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_8_khoan_8", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 8, "article_text": "Yêu cầu tối thiểu đối với hệ thống số", "clause": 8, "point": null, "content": "Hệ thống\nsố được phân loại theo mức độ rủi ro, quan trọng, lĩnh vực, phạm vi ảnh hưởng\nvà có lộ trình áp dụng yêu cầu tối thiểu theo quy định của Chính phủ.", "full_path": "|  |  | > Chương II > Điều 8 > Khoản 8"}
+content: Hệ thống
+số được phân loại theo mức độ rủi ro, quan trọng, lĩnh vực, phạm vi ảnh hưởng
+và có lộ trình áp dụng yêu cầu tối thiểu theo quy định của Chính phủ.
+
+===== CHUNK 70 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_9_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 9, "article_text": "Chính sách của Nhà nước về chuyển đổi số", "clause": 1, "point": null, "content": "Phát triển\nhạ tầng chuyển đổi số thống nhất, an toàn, tin cậy và có khả năng mở rộng, đáp ứng\nyêu cầu kết nối, chia sẻ và cung cấp dịch vụ số.", "full_path": "|  |  | > Chương II > Điều 9 > Khoản 1"}
+content: Phát triển
+hạ tầng chuyển đổi số thống nhất, an toàn, tin cậy và có khả năng mở rộng, đáp ứng
+yêu cầu kết nối, chia sẻ và cung cấp dịch vụ số.
+
+===== CHUNK 71 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_9_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 9, "article_text": "Chính sách của Nhà nước về chuyển đổi số", "clause": 2, "point": null, "content": "Thúc đẩy\nhình thành và phát triển dữ liệu số, bảo đảm khả năng truy cập, chia sẻ, sử dụng\nlại và khai thác dữ liệu số theo quy định của pháp luật.", "full_path": "|  |  | > Chương II > Điều 9 > Khoản 2"}
+content: Thúc đẩy
+hình thành và phát triển dữ liệu số, bảo đảm khả năng truy cập, chia sẻ, sử dụng
+lại và khai thác dữ liệu số theo quy định của pháp luật.
+
+===== CHUNK 72 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_9_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 9, "article_text": "Chính sách của Nhà nước về chuyển đổi số", "clause": 3, "point": null, "content": "Khuyến khích\nphát triển và sử dụng nền tảng số dùng chung, nền tảng số mở và các sản phẩm, dịch\nvụ công nghệ số phục vụ quản trị, cung cấp dịch vụ và phát triển kinh tế - xã hội;\nbảo đảm khả năng tiếp cận và thụ hưởng bình đẳng trong chuyển đổi số, đặc biệt\nlà trong các lĩnh vực giáo dục, y tế, văn hóa, lao động, việc làm và an sinh xã\nhội.", "full_path": "|  |  | > Chương II > Điều 9 > Khoản 3"}
+content: Khuyến khích
+phát triển và sử dụng nền tảng số dùng chung, nền tảng số mở và các sản phẩm, dịch
+vụ công nghệ số phục vụ quản trị, cung cấp dịch vụ và phát triển kinh tế - xã hội;
+bảo đảm khả năng tiếp cận và thụ hưởng bình đẳng trong chuyển đổi số, đặc biệt
+là trong các lĩnh vực giáo dục, y tế, văn hóa, lao động, việc làm và an sinh xã
+hội.
+
+===== CHUNK 73 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_9_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 9, "article_text": "Chính sách của Nhà nước về chuyển đổi số", "clause": 4, "point": null, "content": "Bảo đảm\nan ninh mạng và bảo vệ dữ liệu trong hoạt động chuyển đổi số; phòng ngừa, phát\nhiện và xử lý các hành vi vi phạm pháp luật trên môi trường số.", "full_path": "|  |  | > Chương II > Điều 9 > Khoản 4"}
+content: Bảo đảm
+an ninh mạng và bảo vệ dữ liệu trong hoạt động chuyển đổi số; phòng ngừa, phát
+hiện và xử lý các hành vi vi phạm pháp luật trên môi trường số.
+
+===== CHUNK 74 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_9_khoan_5", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 9, "article_text": "Chính sách của Nhà nước về chuyển đổi số", "clause": 5, "point": null, "content": "Khuyến\nkhích đổi mới sáng tạo, thử nghiệm có kiểm soát và ứng dụng công nghệ số mới nhằm\nnâng cao hiệu quả cung cấp dịch vụ và phát triển sản phẩm, dịch vụ số.", "full_path": "|  |  | > Chương II > Điều 9 > Khoản 5"}
+content: Khuyến
+khích đổi mới sáng tạo, thử nghiệm có kiểm soát và ứng dụng công nghệ số mới nhằm
+nâng cao hiệu quả cung cấp dịch vụ và phát triển sản phẩm, dịch vụ số.
+
+===== CHUNK 75 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_9_khoan_6", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 9, "article_text": "Chính sách của Nhà nước về chuyển đổi số", "clause": 6, "point": null, "content": "Thúc đẩy,\nhỗ trợ doanh nghiệp, hợp tác xã, hộ kinh doanh thực hiện chuyển đổi số; ưu tiên\nhỗ trợ doanh nghiệp nhỏ và vừa, doanh nghiệp hoạt động tại vùng có điều kiện\nkinh tế - xã hội khó khăn, đặc biệt khó khăn.", "full_path": "|  |  | > Chương II > Điều 9 > Khoản 6"}
+content: Thúc đẩy,
+hỗ trợ doanh nghiệp, hợp tác xã, hộ kinh doanh thực hiện chuyển đổi số; ưu tiên
+hỗ trợ doanh nghiệp nhỏ và vừa, doanh nghiệp hoạt động tại vùng có điều kiện
+kinh tế - xã hội khó khăn, đặc biệt khó khăn.
+
+===== CHUNK 76 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_9_khoan_7", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 9, "article_text": "Chính sách của Nhà nước về chuyển đổi số", "clause": 7, "point": null, "content": "Tăng cường\nquản lý, giám sát hoạt động của hệ thống số, nền tảng số, đặc biệt là nền tảng\nsố trung gian có quy mô lớn, rất lớn nhằm bảo đảm cạnh tranh lành mạnh, an\ntoàn, minh bạch trên môi trường số.", "full_path": "|  |  | > Chương II > Điều 9 > Khoản 7"}
+content: Tăng cường
+quản lý, giám sát hoạt động của hệ thống số, nền tảng số, đặc biệt là nền tảng
+số trung gian có quy mô lớn, rất lớn nhằm bảo đảm cạnh tranh lành mạnh, an
+toàn, minh bạch trên môi trường số.
+
+===== CHUNK 77 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_9_khoan_8", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 9, "article_text": "Chính sách của Nhà nước về chuyển đổi số", "clause": 8, "point": null, "content": "Bảo đảm\nđiều phối thống nhất giữa các Bộ, ngành, địa phương; hoàn thiện cơ chế, chính\nsách, tiêu chuẩn và quy chuẩn kỹ thuật phục vụ chuyển đổi số; tránh phân tán\nnguồn lực, trùng lặp hệ thống số, nền tảng số và dữ liệu số.", "full_path": "|  |  | > Chương II > Điều 9 > Khoản 8"}
+content: Bảo đảm
+điều phối thống nhất giữa các Bộ, ngành, địa phương; hoàn thiện cơ chế, chính
+sách, tiêu chuẩn và quy chuẩn kỹ thuật phục vụ chuyển đổi số; tránh phân tán
+nguồn lực, trùng lặp hệ thống số, nền tảng số và dữ liệu số.
+
+===== CHUNK 78 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_9_khoan_9", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 9, "article_text": "Chính sách của Nhà nước về chuyển đổi số", "clause": 9, "point": null, "content": "Thu hút, trọng\ndụng nhân tài, nhân lực chất lượng cao; phổ cập, phát triển năng lực số cho cơ\nquan, tổ chức, doanh nghiệp và người dân; bảo đảm khả năng triển khai, vận hành\nvà thụ hưởng lợi ích từ chuyển đổi số an toàn, bền vững; hỗ trợ đào tạo, bồi dưỡng,\nchuyển đổi nghề nghiệp đối với lực lượng lao động bị ảnh hưởng hoặc mất việc\nlàm do quá trình chuyển đổi số.", "full_path": "|  |  | > Chương II > Điều 9 > Khoản 9"}
+content: Thu hút, trọng
+dụng nhân tài, nhân lực chất lượng cao; phổ cập, phát triển năng lực số cho cơ
+quan, tổ chức, doanh nghiệp và người dân; bảo đảm khả năng triển khai, vận hành
+và thụ hưởng lợi ích từ chuyển đổi số an toàn, bền vững; hỗ trợ đào tạo, bồi dưỡng,
+chuyển đổi nghề nghiệp đối với lực lượng lao động bị ảnh hưởng hoặc mất việc
+làm do quá trình chuyển đổi số.
+
+===== CHUNK 79 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_9_khoan_10", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 9, "article_text": "Chính sách của Nhà nước về chuyển đổi số", "clause": 10, "point": null, "content": "Phát triển\ncông dân số, thúc đẩy các điều kiện tiếp cận, sử dụng công bằng dịch vụ số cơ bản,\ntối thiểu bao gồm danh tính điện tử, năng lực số cơ bản, chứng thư chữ ký số\ntheo pháp luật về giao dịch điện tử, dịch vụ công trực tuyến, dịch vụ viễn\nthông cơ bản theo pháp luật về viễn thông, dịch vụ thanh toán không dùng tiền mặt\ntheo pháp luật về ngân hàng.", "full_path": "|  |  | > Chương II > Điều 9 > Khoản 10"}
+content: Phát triển
+công dân số, thúc đẩy các điều kiện tiếp cận, sử dụng công bằng dịch vụ số cơ bản,
+tối thiểu bao gồm danh tính điện tử, năng lực số cơ bản, chứng thư chữ ký số
+theo pháp luật về giao dịch điện tử, dịch vụ công trực tuyến, dịch vụ viễn
+thông cơ bản theo pháp luật về viễn thông, dịch vụ thanh toán không dùng tiền mặt
+theo pháp luật về ngân hàng.
+
+===== CHUNK 80 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_9_khoan_11", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 9, "article_text": "Chính sách của Nhà nước về chuyển đổi số", "clause": 11, "point": null, "content": "Hỗ trợ\nphát triển hạ tầng chuyển đổi số, thu hẹp khoảng cách số; hỗ trợ tiếp cận, khai\nthác, sử dụng hiệu quả hạ tầng chuyển đổi số, thiết bị công nghệ số, năng lực số;\nnâng cao năng lực tiếp cận thông tin, tri thức chuyển đổi số cho người khuyết tật,\nngười cao tuổi, trẻ em, người dân sinh sống ở khu vực biên giới, hải đảo, vùng\nđồng bào dân tộc thiểu số, miền núi, vùng có điều kiện kinh tế - xã hội khó\nkhăn, đặc biệt khó khăn, các nhóm dễ bị tổn thương khác trong xã hội theo quy định\ncủa pháp luật.", "full_path": "|  |  | > Chương II > Điều 9 > Khoản 11"}
+content: Hỗ trợ
+phát triển hạ tầng chuyển đổi số, thu hẹp khoảng cách số; hỗ trợ tiếp cận, khai
+thác, sử dụng hiệu quả hạ tầng chuyển đổi số, thiết bị công nghệ số, năng lực số;
+nâng cao năng lực tiếp cận thông tin, tri thức chuyển đổi số cho người khuyết tật,
+người cao tuổi, trẻ em, người dân sinh sống ở khu vực biên giới, hải đảo, vùng
+đồng bào dân tộc thiểu số, miền núi, vùng có điều kiện kinh tế - xã hội khó
+khăn, đặc biệt khó khăn, các nhóm dễ bị tổn thương khác trong xã hội theo quy định
+của pháp luật.
+
+===== CHUNK 81 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_9_khoan_12", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 9, "article_text": "Chính sách của Nhà nước về chuyển đổi số", "clause": 12, "point": null, "content": "Cơ quan nhà\nnước công khai, minh bạch các kế hoạch chuyển đổi số ngay sau khi phê\nduyệt để tạo cơ hội cho các thành phần kinh tế tham gia thị trường chuyển đổi số;\nkhuyến khích sử dụng sản phẩm, dịch vụ công nghệ số do doanh nghiệp Việt Nam sản\nxuất, làm chủ công nghệ; thực hiện cơ chế Nhà nước đặt hàng doanh nghiệp công\nnghệ số nghiên cứu, giải quyết các nhiệm vụ quan trọng của quốc gia.", "full_path": "|  |  | > Chương II > Điều 9 > Khoản 12"}
+content: Cơ quan nhà
+nước công khai, minh bạch các kế hoạch chuyển đổi số ngay sau khi phê
+duyệt để tạo cơ hội cho các thành phần kinh tế tham gia thị trường chuyển đổi số;
+khuyến khích sử dụng sản phẩm, dịch vụ công nghệ số do doanh nghiệp Việt Nam sản
+xuất, làm chủ công nghệ; thực hiện cơ chế Nhà nước đặt hàng doanh nghiệp công
+nghệ số nghiên cứu, giải quyết các nhiệm vụ quan trọng của quốc gia.
+
+===== CHUNK 82 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_10_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 10, "article_text": "Hợp tác quốc tế về chuyển đổi số", "clause": 1, "point": null, "content": "Nhà nước\nđẩy mạnh hợp tác song phương, đa phương với các quốc gia, tổ chức quốc tế,\ndoanh nghiệp toàn cầu trong lĩnh vực chuyển đổi số theo nguyên tắc tôn trọng độc\nlập, chủ quyền và bảo vệ chủ quyền quốc gia trên không gian mạng.", "full_path": "|  |  | > Chương II > Điều 10 > Khoản 1"}
+content: Nhà nước
+đẩy mạnh hợp tác song phương, đa phương với các quốc gia, tổ chức quốc tế,
+doanh nghiệp toàn cầu trong lĩnh vực chuyển đổi số theo nguyên tắc tôn trọng độc
+lập, chủ quyền và bảo vệ chủ quyền quốc gia trên không gian mạng.
+
+===== CHUNK 83 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_10_khoan_2_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 10, "article_text": "Hợp tác quốc tế về chuyển đổi số", "clause": 2, "point": "a", "content": "Trao đổi\nkinh nghiệm, chuyển giao công nghệ;", "full_path": "|  |  | > Chương II > Điều 10 > Khoản 2 > Điểm a"}
+content: Trao đổi
+kinh nghiệm, chuyển giao công nghệ;
+
+===== CHUNK 84 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_10_khoan_2_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 10, "article_text": "Hợp tác quốc tế về chuyển đổi số", "clause": 2, "point": "b", "content": "Thu hút đầu\ntư nước ngoài và mở rộng thị trường cho sản phẩm, hàng hóa, dịch vụ phục vụ\nchuyển đổi số của Việt Nam; thúc đẩy, mở rộng thương mại điện tử;", "full_path": "|  |  | > Chương II > Điều 10 > Khoản 2 > Điểm b"}
+content: Thu hút đầu
+tư nước ngoài và mở rộng thị trường cho sản phẩm, hàng hóa, dịch vụ phục vụ
+chuyển đổi số của Việt Nam; thúc đẩy, mở rộng thương mại điện tử;
+
+===== CHUNK 85 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_10_khoan_2_diem_c", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 10, "article_text": "Hợp tác quốc tế về chuyển đổi số", "clause": 2, "point": "c", "content": "Đào tạo,\ntrao đổi chuyên gia; đào tạo, phát triển nguồn nhân lực số;", "full_path": "|  |  | > Chương II > Điều 10 > Khoản 2 > Điểm c"}
+content: Đào tạo,
+trao đổi chuyên gia; đào tạo, phát triển nguồn nhân lực số;
+
+===== CHUNK 86 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_10_khoan_2_diem_d", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 2, "chapter_text": "NGUYÊN TẮC,", "article": 10, "article_text": "Hợp tác quốc tế về chuyển đổi số", "clause": 2, "point": "d", "content": "Xây dựng\ntiêu chuẩn, quy chuẩn kỹ thuật có tính tương thích quốc tế;\n\nđ) Tham gia tích\ncực các diễn đàn, sáng kiến và thiết lập khuôn khổ hợp tác quốc tế về\nchuyển đổi số.", "full_path": "|  |  | > Chương II > Điều 10 > Khoản 2 > Điểm d"}
+content: Xây dựng
+tiêu chuẩn, quy chuẩn kỹ thuật có tính tương thích quốc tế;
+
+đ) Tham gia tích
+cực các diễn đàn, sáng kiến và thiết lập khuôn khổ hợp tác quốc tế về
+chuyển đổi số.
+
+===== CHUNK 87 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_11_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 11, "article_text": "Nội dung quản lý nhà nước về chuyển đổi số", "clause": 1, "point": null, "content": "Xây dựng,\nban hành và tổ chức thực hiện chính sách, pháp luật về chuyển đổi số; tiêu chuẩn,\nquy chuẩn kỹ thuật; bộ chỉ số thống nhất về chuyển đổi số.", "full_path": "|  |  | > Chương III > Điều 11 > Khoản 1"}
+content: Xây dựng,
+ban hành và tổ chức thực hiện chính sách, pháp luật về chuyển đổi số; tiêu chuẩn,
+quy chuẩn kỹ thuật; bộ chỉ số thống nhất về chuyển đổi số.
+
+===== CHUNK 88 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_11_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 11, "article_text": "Nội dung quản lý nhà nước về chuyển đổi số", "clause": 2, "point": null, "content": "Xây dựng,\nban hành và tổ chức thực hiện chiến lược, chương trình, kế hoạch về chuyển đổi\nsố.", "full_path": "|  |  | > Chương III > Điều 11 > Khoản 2"}
+content: Xây dựng,
+ban hành và tổ chức thực hiện chiến lược, chương trình, kế hoạch về chuyển đổi
+số.
+
+===== CHUNK 89 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_11_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 11, "article_text": "Nội dung quản lý nhà nước về chuyển đổi số", "clause": 3, "point": null, "content": "Tuyên truyền,\nphổ biến về chuyển đổi số.", "full_path": "|  |  | > Chương III > Điều 11 > Khoản 3"}
+content: Tuyên truyền,
+phổ biến về chuyển đổi số.
+
+===== CHUNK 90 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_11_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 11, "article_text": "Nội dung quản lý nhà nước về chuyển đổi số", "clause": 4, "point": null, "content": "Quản\nlý, giám sát các hoạt động chuyển đổi số.", "full_path": "|  |  | > Chương III > Điều 11 > Khoản 4"}
+content: Quản
+lý, giám sát các hoạt động chuyển đổi số.
+
+===== CHUNK 91 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_11_khoan_5", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 11, "article_text": "Nội dung quản lý nhà nước về chuyển đổi số", "clause": 5, "point": null, "content": "Tổ chức\nthực hiện thống kê, đo lường, giám sát, đánh giá mức độ chuyển đổi số, hiệu quả\nchuyển đổi số.", "full_path": "|  |  | > Chương III > Điều 11 > Khoản 5"}
+content: Tổ chức
+thực hiện thống kê, đo lường, giám sát, đánh giá mức độ chuyển đổi số, hiệu quả
+chuyển đổi số.
+
+===== CHUNK 92 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_11_khoan_6", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 11, "article_text": "Nội dung quản lý nhà nước về chuyển đổi số", "clause": 6, "point": null, "content": "Thanh tra, kiểm\ntra, giải quyết khiếu nại, tố cáo và xử lý vi phạm pháp luật về chuyển đổi số.", "full_path": "|  |  | > Chương III > Điều 11 > Khoản 6"}
+content: Thanh tra, kiểm
+tra, giải quyết khiếu nại, tố cáo và xử lý vi phạm pháp luật về chuyển đổi số.
+
+===== CHUNK 93 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_11_khoan_7", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 11, "article_text": "Nội dung quản lý nhà nước về chuyển đổi số", "clause": 7, "point": null, "content": "Đào tạo,\nbồi dưỡng, phát triển nguồn nhân lực số.", "full_path": "|  |  | > Chương III > Điều 11 > Khoản 7"}
+content: Đào tạo,
+bồi dưỡng, phát triển nguồn nhân lực số.
+
+===== CHUNK 94 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_11_khoan_8", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 11, "article_text": "Nội dung quản lý nhà nước về chuyển đổi số", "clause": 8, "point": null, "content": "Hợp tác\nquốc tế về chuyển đổi số.", "full_path": "|  |  | > Chương III > Điều 11 > Khoản 8"}
+content: Hợp tác
+quốc tế về chuyển đổi số.
+
+===== CHUNK 95 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_12_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 12, "article_text": "Chiến lược, chương trình, kế hoạch chuyển đổi số", "clause": 1, "point": null, "content": "Thủ tướng\nChính phủ phê duyệt Chiến lược quốc gia về Chuyển đổi số phù hợp với chiến lược\nphát triển kinh tế - xã hội.", "full_path": "|  |  | > Chương III > Điều 12 > Khoản 1"}
+content: Thủ tướng
+Chính phủ phê duyệt Chiến lược quốc gia về Chuyển đổi số phù hợp với chiến lược
+phát triển kinh tế - xã hội.
+
+===== CHUNK 96 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_12_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 12, "article_text": "Chiến lược, chương trình, kế hoạch chuyển đổi số", "clause": 2, "point": null, "content": "Chương trình\nChuyển đổi số quốc gia là tập hợp các nội dung, nhiệm vụ về hoạt động\nchuyển đổi số, bao gồm nhiệm vụ liên ngành, liên vùng do Cơ quan quản lý nhà nước\nvề chuyển đổi số xây dựng, trình Thủ tướng Chính phủ ban hành theo từng thời kỳ,\nphù hợp với Chiến lược quốc gia về Chuyển đổi số quy định tại khoản 1 Điều này.", "full_path": "|  |  | > Chương III > Điều 12 > Khoản 2"}
+content: Chương trình
+Chuyển đổi số quốc gia là tập hợp các nội dung, nhiệm vụ về hoạt động
+chuyển đổi số, bao gồm nhiệm vụ liên ngành, liên vùng do Cơ quan quản lý nhà nước
+về chuyển đổi số xây dựng, trình Thủ tướng Chính phủ ban hành theo từng thời kỳ,
+phù hợp với Chiến lược quốc gia về Chuyển đổi số quy định tại khoản 1 Điều này.
+
+===== CHUNK 97 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_12_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 12, "article_text": "Chiến lược, chương trình, kế hoạch chuyển đổi số", "clause": 3, "point": null, "content": "Kế hoạch\nchuyển đổi số của Bộ, ngành, địa phương được xây dựng và ban hành phù hợp với\nChiến lược quốc gia về Chuyển đổi số, Chương trình Chuyển đổi số quốc gia quy định\ntại khoản 1 và khoản 2 Điều này.", "full_path": "|  |  | > Chương III > Điều 12 > Khoản 3"}
+content: Kế hoạch
+chuyển đổi số của Bộ, ngành, địa phương được xây dựng và ban hành phù hợp với
+Chiến lược quốc gia về Chuyển đổi số, Chương trình Chuyển đổi số quốc gia quy định
+tại khoản 1 và khoản 2 Điều này.
+
+===== CHUNK 98 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_12_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 12, "article_text": "Chiến lược, chương trình, kế hoạch chuyển đổi số", "clause": 4, "point": null, "content": "Kinh phí thực\nhiện Chiến lược, Chương trình Chuyển đổi số quốc gia, kế hoạch 05 năm, hằng năm\ntừ nguồn tài chính cho chuyển đổi số được quy định tại Mục 2 Chương V của Luật\nnày.", "full_path": "|  |  | > Chương III > Điều 12 > Khoản 4"}
+content: Kinh phí thực
+hiện Chiến lược, Chương trình Chuyển đổi số quốc gia, kế hoạch 05 năm, hằng năm
+từ nguồn tài chính cho chuyển đổi số được quy định tại Mục 2 Chương V của Luật
+này.
+
+===== CHUNK 99 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_12_khoan_5", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 12, "article_text": "Chiến lược, chương trình, kế hoạch chuyển đổi số", "clause": 5, "point": null, "content": "Chính phủ\nquy định chi tiết Điều này.", "full_path": "|  |  | > Chương III > Điều 12 > Khoản 5"}
+content: Chính phủ
+quy định chi tiết Điều này.
+
+===== CHUNK 100 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_13_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 13, "article_text": "Khung kiến trúc tổng thể quốc gia số", "clause": 1, "point": null, "content": "Khung kiến\ntrúc tổng thể quốc gia số khái quát mô hình kiến trúc số tổng thể cho quốc gia,\ntrong đó xác định những thành phần dùng chung, cơ bản nhất cho các cơ quan trong\nhệ thống chính trị; bảo đảm an ninh mạng; bảo vệ dữ liệu; bảo đảm kết nối, chia\nsẻ, dùng chung tài nguyên, dữ liệu; tránh trùng lặp trên quy mô quốc gia; hỗ trợ\nphát triển kinh tế - xã hội, phục vụ người dân, doanh nghiệp.", "full_path": "|  |  | > Chương III > Điều 13 > Khoản 1"}
+content: Khung kiến
+trúc tổng thể quốc gia số khái quát mô hình kiến trúc số tổng thể cho quốc gia,
+trong đó xác định những thành phần dùng chung, cơ bản nhất cho các cơ quan trong
+hệ thống chính trị; bảo đảm an ninh mạng; bảo vệ dữ liệu; bảo đảm kết nối, chia
+sẻ, dùng chung tài nguyên, dữ liệu; tránh trùng lặp trên quy mô quốc gia; hỗ trợ
+phát triển kinh tế - xã hội, phục vụ người dân, doanh nghiệp.
+
+===== CHUNK 101 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_13_khoan_2_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 13, "article_text": "Khung kiến trúc tổng thể quốc gia số", "clause": 2, "point": "a", "content": "Khung kiến\ntrúc số của cơ quan Đảng;", "full_path": "|  |  | > Chương III > Điều 13 > Khoản 2 > Điểm a"}
+content: Khung kiến
+trúc số của cơ quan Đảng;
+
+===== CHUNK 102 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_13_khoan_2_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 13, "article_text": "Khung kiến trúc tổng thể quốc gia số", "clause": 2, "point": "b", "content": "Khung kiến\ntrúc số của Quốc hội;", "full_path": "|  |  | > Chương III > Điều 13 > Khoản 2 > Điểm b"}
+content: Khung kiến
+trúc số của Quốc hội;
+
+===== CHUNK 103 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_13_khoan_2_diem_c", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 13, "article_text": "Khung kiến trúc tổng thể quốc gia số", "clause": 2, "point": "c", "content": "Khung kiến\ntrúc số của Mặt trận Tổ quốc Việt Nam;", "full_path": "|  |  | > Chương III > Điều 13 > Khoản 2 > Điểm c"}
+content: Khung kiến
+trúc số của Mặt trận Tổ quốc Việt Nam;
+
+===== CHUNK 104 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_13_khoan_2_diem_d", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 13, "article_text": "Khung kiến trúc tổng thể quốc gia số", "clause": 2, "point": "d", "content": "Khung kiến\ntrúc Chính phủ số;\n\nđ) Khung kiến\ntrúc số của các cơ quan, tổ chức khác.", "full_path": "|  |  | > Chương III > Điều 13 > Khoản 2 > Điểm d"}
+content: Khung kiến
+trúc Chính phủ số;
+
+đ) Khung kiến
+trúc số của các cơ quan, tổ chức khác.
+
+===== CHUNK 105 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_13_khoan_3_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 13, "article_text": "Khung kiến trúc tổng thể quốc gia số", "clause": 3, "point": "a", "content": "Xây dựng\nvà trình Thủ tướng Chính phủ ban hành Khung kiến trúc tổng thể quốc gia số;", "full_path": "|  |  | > Chương III > Điều 13 > Khoản 3 > Điểm a"}
+content: Xây dựng
+và trình Thủ tướng Chính phủ ban hành Khung kiến trúc tổng thể quốc gia số;
+
+===== CHUNK 106 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_13_khoan_3_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 13, "article_text": "Khung kiến trúc tổng thể quốc gia số", "clause": 3, "point": "b", "content": "Cập nhật,\ntổ chức triển khai Khung kiến trúc tổng thể quốc gia số.", "full_path": "|  |  | > Chương III > Điều 13 > Khoản 3 > Điểm b"}
+content: Cập nhật,
+tổ chức triển khai Khung kiến trúc tổng thể quốc gia số.
+
+===== CHUNK 107 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_13_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 13, "article_text": "Khung kiến trúc tổng thể quốc gia số", "clause": 4, "point": null, "content": "Việc\nxây dựng, phát triển, kết nối, chia sẻ giữa các hệ thống số, hệ thống thông\ntin, nền tảng số, cơ sở dữ liệu và dịch vụ số của các cơ quan trong hệ thống\nchính trị cần tuân thủ Khung kiến trúc tổng thể quốc gia số, Khung kiến trúc dữ\nliệu quốc gia, Khung quản trị, quản lý dữ liệu quốc gia.", "full_path": "|  |  | > Chương III > Điều 13 > Khoản 4"}
+content: Việc
+xây dựng, phát triển, kết nối, chia sẻ giữa các hệ thống số, hệ thống thông
+tin, nền tảng số, cơ sở dữ liệu và dịch vụ số của các cơ quan trong hệ thống
+chính trị cần tuân thủ Khung kiến trúc tổng thể quốc gia số, Khung kiến trúc dữ
+liệu quốc gia, Khung quản trị, quản lý dữ liệu quốc gia.
+
+===== CHUNK 108 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_14_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 14, "article_text": "Tiêu chuẩn, quy chuẩn kỹ thuật và đánh giá sự phù hợp với", "clause": 1, "point": null, "content": "Hoạt động\ntiêu chuẩn, quy chuẩn kỹ thuật, đánh giá sự phù hợp trong lĩnh vực chuyển đổi số\nphải bảo đảm nguyên tắc quy định tại Luật Tiêu\nchuẩn và quy chuẩn kỹ thuật, Luật Chất lượng\nsản phẩm, hàng hóa.", "full_path": "|  |  | > Chương III > Điều 14 > Khoản 1"}
+content: Hoạt động
+tiêu chuẩn, quy chuẩn kỹ thuật, đánh giá sự phù hợp trong lĩnh vực chuyển đổi số
+phải bảo đảm nguyên tắc quy định tại Luật Tiêu
+chuẩn và quy chuẩn kỹ thuật, Luật Chất lượng
+sản phẩm, hàng hóa.
+
+===== CHUNK 109 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_14_khoan_2_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 14, "article_text": "Tiêu chuẩn, quy chuẩn kỹ thuật và đánh giá sự phù hợp với", "clause": 2, "point": "a", "content": "Bảo đảm\ntính thống nhất, đồng bộ, liên thông và khả năng kết nối, chia sẻ dữ liệu giữa\ncác hệ thống số;", "full_path": "|  |  | > Chương III > Điều 14 > Khoản 2 > Điểm a"}
+content: Bảo đảm
+tính thống nhất, đồng bộ, liên thông và khả năng kết nối, chia sẻ dữ liệu giữa
+các hệ thống số;
+
+===== CHUNK 110 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_14_khoan_2_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 14, "article_text": "Tiêu chuẩn, quy chuẩn kỹ thuật và đánh giá sự phù hợp với", "clause": 2, "point": "b", "content": "Phù hợp\ntrình độ và định hướng phát triển công nghệ, điều kiện kinh tế - xã hội và yêu\ncầu quản lý nhà nước;", "full_path": "|  |  | > Chương III > Điều 14 > Khoản 2 > Điểm b"}
+content: Phù hợp
+trình độ và định hướng phát triển công nghệ, điều kiện kinh tế - xã hội và yêu
+cầu quản lý nhà nước;
+
+===== CHUNK 111 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_14_khoan_2_diem_c", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 14, "article_text": "Tiêu chuẩn, quy chuẩn kỹ thuật và đánh giá sự phù hợp với", "clause": 2, "point": "c", "content": "Cơ quan, tổ\nchức, cá nhân được phép áp dụng trực tiếp tiêu chuẩn quốc tế, tiêu chuẩn khu vực,\ntiêu chuẩn nước ngoài. Việc áp dụng các tiêu chuẩn quốc tế, tiêu chuẩn khu vực\nvà tiêu chuẩn nước ngoài không trái với quy định của pháp luật Việt Nam, không\nlàm tổn hại tới quốc phòng, an ninh, lợi ích kinh tế - xã hội và các lợi ích\nkhác của quốc gia;", "full_path": "|  |  | > Chương III > Điều 14 > Khoản 2 > Điểm c"}
+content: Cơ quan, tổ
+chức, cá nhân được phép áp dụng trực tiếp tiêu chuẩn quốc tế, tiêu chuẩn khu vực,
+tiêu chuẩn nước ngoài. Việc áp dụng các tiêu chuẩn quốc tế, tiêu chuẩn khu vực
+và tiêu chuẩn nước ngoài không trái với quy định của pháp luật Việt Nam, không
+làm tổn hại tới quốc phòng, an ninh, lợi ích kinh tế - xã hội và các lợi ích
+khác của quốc gia;
+
+===== CHUNK 112 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_14_khoan_2_diem_d", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 14, "article_text": "Tiêu chuẩn, quy chuẩn kỹ thuật và đánh giá sự phù hợp với", "clause": 2, "point": "d", "content": "Không tạo\nrào cản kỹ thuật không cần thiết cho chuyển đổi số;\n\nđ) Bảo đảm\nan ninh mạng, bảo vệ dữ liệu cá nhân và quyền con người, quyền công dân trên\nmôi trường số.", "full_path": "|  |  | > Chương III > Điều 14 > Khoản 2 > Điểm d"}
+content: Không tạo
+rào cản kỹ thuật không cần thiết cho chuyển đổi số;
+
+đ) Bảo đảm
+an ninh mạng, bảo vệ dữ liệu cá nhân và quyền con người, quyền công dân trên
+môi trường số.
+
+===== CHUNK 113 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_14_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 14, "article_text": "Tiêu chuẩn, quy chuẩn kỹ thuật và đánh giá sự phù hợp với", "clause": 3, "point": null, "content": "Chính phủ\nphân công Bộ chủ trì lập kế hoạch tổng thể xây dựng và định hướng phát triển\ntiêu chuẩn quốc gia, quy chuẩn kỹ thuật quốc gia trong lĩnh vực chuyển đổi số;\nđiều phối và thúc đẩy các Bộ, ngành triển khai kế hoạch phù hợp với Chiến lược\nquốc gia về Chuyển đổi số, Chương trình Chuyển đổi số quốc gia.\n\nBộ trưởng\nBộ Khoa học và Công nghệ, Bộ trưởng, Thủ trưởng cơ quan ngang Bộ, trong phạm vi\nnhiệm vụ, quyền hạn của mình tổ chức xây dựng, thẩm định, công bố tiêu chuẩn quốc\ngia, ban hành quy chuẩn kỹ thuật quốc gia trong lĩnh vực chuyển đổi số theo\nlĩnh vực quản lý nhà nước được phân công, phù hợp với quy định của Luật Tiêu chuẩn và quy chuẩn kỹ thuật.", "full_path": "|  |  | > Chương III > Điều 14 > Khoản 3"}
+content: Chính phủ
+phân công Bộ chủ trì lập kế hoạch tổng thể xây dựng và định hướng phát triển
+tiêu chuẩn quốc gia, quy chuẩn kỹ thuật quốc gia trong lĩnh vực chuyển đổi số;
+điều phối và thúc đẩy các Bộ, ngành triển khai kế hoạch phù hợp với Chiến lược
+quốc gia về Chuyển đổi số, Chương trình Chuyển đổi số quốc gia.
+
+Bộ trưởng
+Bộ Khoa học và Công nghệ, Bộ trưởng, Thủ trưởng cơ quan ngang Bộ, trong phạm vi
+nhiệm vụ, quyền hạn của mình tổ chức xây dựng, thẩm định, công bố tiêu chuẩn quốc
+gia, ban hành quy chuẩn kỹ thuật quốc gia trong lĩnh vực chuyển đổi số theo
+lĩnh vực quản lý nhà nước được phân công, phù hợp với quy định của Luật Tiêu chuẩn và quy chuẩn kỹ thuật.
+
+===== CHUNK 114 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_14_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 14, "article_text": "Tiêu chuẩn, quy chuẩn kỹ thuật và đánh giá sự phù hợp với", "clause": 4, "point": null, "content": "Cơ quan, tổ\nchức, cá nhân triển khai chuyển đổi số chịu trách nhiệm lựa chọn và áp dụng\ntiêu chuẩn phù hợp, bảo đảm tuân thủ các quy chuẩn kỹ thuật quốc gia.", "full_path": "|  |  | > Chương III > Điều 14 > Khoản 4"}
+content: Cơ quan, tổ
+chức, cá nhân triển khai chuyển đổi số chịu trách nhiệm lựa chọn và áp dụng
+tiêu chuẩn phù hợp, bảo đảm tuân thủ các quy chuẩn kỹ thuật quốc gia.
+
+===== CHUNK 115 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_14_khoan_5_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 14, "article_text": "Tiêu chuẩn, quy chuẩn kỹ thuật và đánh giá sự phù hợp với", "clause": 5, "point": "a", "content": "Tham gia các tổ\nchức quốc tế về tiêu chuẩn trong lĩnh vực chuyển đổi số mà Việt Nam là thành viên;", "full_path": "|  |  | > Chương III > Điều 14 > Khoản 5 > Điểm a"}
+content: Tham gia các tổ
+chức quốc tế về tiêu chuẩn trong lĩnh vực chuyển đổi số mà Việt Nam là thành viên;
+
+===== CHUNK 116 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_14_khoan_5_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 14, "article_text": "Tiêu chuẩn, quy chuẩn kỹ thuật và đánh giá sự phù hợp với", "clause": 5, "point": "b", "content": "Khuyến\nkhích chuyên gia là người Việt Nam tham gia các diễn đàn, tổ chức quốc tế về\ntiêu chuẩn trong lĩnh vực chuyển đổi số;", "full_path": "|  |  | > Chương III > Điều 14 > Khoản 5 > Điểm b"}
+content: Khuyến
+khích chuyên gia là người Việt Nam tham gia các diễn đàn, tổ chức quốc tế về
+tiêu chuẩn trong lĩnh vực chuyển đổi số;
+
+===== CHUNK 117 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_14_khoan_5_diem_c", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 14, "article_text": "Tiêu chuẩn, quy chuẩn kỹ thuật và đánh giá sự phù hợp với", "clause": 5, "point": "c", "content": "Đào tạo,\nbồi dưỡng chuyên gia kỹ thuật trình độ cao, có đủ năng lực đảm nhiệm vai trò chủ\nchốt tại các ban kỹ thuật, các nhóm công tác quốc tế về tiêu chuẩn trong lĩnh vực\nchuyển đổi số;", "full_path": "|  |  | > Chương III > Điều 14 > Khoản 5 > Điểm c"}
+content: Đào tạo,
+bồi dưỡng chuyên gia kỹ thuật trình độ cao, có đủ năng lực đảm nhiệm vai trò chủ
+chốt tại các ban kỹ thuật, các nhóm công tác quốc tế về tiêu chuẩn trong lĩnh vực
+chuyển đổi số;
+
+===== CHUNK 118 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_14_khoan_5_diem_d", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 3, "chapter_text": "ĐIỀU PHỐI QUỐC", "article": 14, "article_text": "Tiêu chuẩn, quy chuẩn kỹ thuật và đánh giá sự phù hợp với", "clause": 5, "point": "d", "content": "Khuyến\nkhích tổ chức, doanh nghiệp, cá nhân tham gia xây dựng, áp dụng tiêu chuẩn\ntrong lĩnh vực chuyển đổi số.", "full_path": "|  |  | > Chương III > Điều 14 > Khoản 5 > Điểm d"}
+content: Khuyến
+khích tổ chức, doanh nghiệp, cá nhân tham gia xây dựng, áp dụng tiêu chuẩn
+trong lĩnh vực chuyển đổi số.
+
+===== CHUNK 119 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_15_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 4, "chapter_text": "TRÁCH NHIỆM CỦA", "article": 15, "article_text": "Phân công trách nhiệm trong quản lý nhà nước về chuyển", "clause": 1, "point": null, "content": "Chính phủ\nthống nhất quản lý nhà nước về chuyển đổi số trên phạm vi toàn quốc; hằng năm\nbáo cáo Quốc hội về kết quả triển khai chuyển đổi số.", "full_path": "|  |  | > Chương IV > Điều 15 > Khoản 1"}
+content: Chính phủ
+thống nhất quản lý nhà nước về chuyển đổi số trên phạm vi toàn quốc; hằng năm
+báo cáo Quốc hội về kết quả triển khai chuyển đổi số.
+
+===== CHUNK 120 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_15_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 4, "chapter_text": "TRÁCH NHIỆM CỦA", "article": 15, "article_text": "Phân công trách nhiệm trong quản lý nhà nước về chuyển", "clause": 2, "point": null, "content": "Bộ Khoa\nhọc và Công nghệ là cơ quan đầu mối chịu trách nhiệm trước Chính phủ thực hiện\nquản lý nhà nước về chuyển đổi số.", "full_path": "|  |  | > Chương IV > Điều 15 > Khoản 2"}
+content: Bộ Khoa
+học và Công nghệ là cơ quan đầu mối chịu trách nhiệm trước Chính phủ thực hiện
+quản lý nhà nước về chuyển đổi số.
+
+===== CHUNK 121 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_15_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 4, "chapter_text": "TRÁCH NHIỆM CỦA", "article": 15, "article_text": "Phân công trách nhiệm trong quản lý nhà nước về chuyển", "clause": 3, "point": null, "content": "Các Bộ,\ncơ quan ngang Bộ, ủy ban nhân dân cấp tỉnh thực hiện quản lý nhà nước về chuyển\nđổi số trong ngành, lĩnh vực, địa bàn trong phạm vi nhiệm vụ, quyền hạn được\nphân công.", "full_path": "|  |  | > Chương IV > Điều 15 > Khoản 3"}
+content: Các Bộ,
+cơ quan ngang Bộ, ủy ban nhân dân cấp tỉnh thực hiện quản lý nhà nước về chuyển
+đổi số trong ngành, lĩnh vực, địa bàn trong phạm vi nhiệm vụ, quyền hạn được
+phân công.
+
+===== CHUNK 122 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_15_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 4, "chapter_text": "TRÁCH NHIỆM CỦA", "article": 15, "article_text": "Phân công trách nhiệm trong quản lý nhà nước về chuyển", "clause": 4, "point": null, "content": "Bộ Công\nan, Bộ Quốc phòng, Bộ trưởng Bộ Quốc phòng thực hiện quản lý nhà nước về dữ liệu\ntheo quy định của pháp luật về dữ liệu, pháp luật về cơ yếu.", "full_path": "|  |  | > Chương IV > Điều 15 > Khoản 4"}
+content: Bộ Công
+an, Bộ Quốc phòng, Bộ trưởng Bộ Quốc phòng thực hiện quản lý nhà nước về dữ liệu
+theo quy định của pháp luật về dữ liệu, pháp luật về cơ yếu.
+
+===== CHUNK 123 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_15_khoan_5_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 4, "chapter_text": "TRÁCH NHIỆM CỦA", "article": 15, "article_text": "Phân công trách nhiệm trong quản lý nhà nước về chuyển", "clause": 5, "point": "a", "content": "Trực tiếp\nchỉ đạo, tổ chức triển khai và chịu trách nhiệm về kết quả chuyển đổi số trong\nphạm vi ngành, lĩnh vực, địa bàn và cơ quan, đơn vị được phân công;", "full_path": "|  |  | > Chương IV > Điều 15 > Khoản 5 > Điểm a"}
+content: Trực tiếp
+chỉ đạo, tổ chức triển khai và chịu trách nhiệm về kết quả chuyển đổi số trong
+phạm vi ngành, lĩnh vực, địa bàn và cơ quan, đơn vị được phân công;
+
+===== CHUNK 124 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_15_khoan_5_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 4, "chapter_text": "TRÁCH NHIỆM CỦA", "article": 15, "article_text": "Phân công trách nhiệm trong quản lý nhà nước về chuyển", "clause": 5, "point": "b", "content": "Ưu tiên nguồn\nlực, nhân lực và các điều kiện cần thiết để thực hiện chuyển đổi số hiệu quả;", "full_path": "|  |  | > Chương IV > Điều 15 > Khoản 5 > Điểm b"}
+content: Ưu tiên nguồn
+lực, nhân lực và các điều kiện cần thiết để thực hiện chuyển đổi số hiệu quả;
+
+===== CHUNK 125 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_15_khoan_5_diem_c", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 4, "chapter_text": "TRÁCH NHIỆM CỦA", "article": 15, "article_text": "Phân công trách nhiệm trong quản lý nhà nước về chuyển", "clause": 5, "point": "c", "content": "Tổ chức\nkiểm tra nội bộ và báo cáo định kỳ về kết quả chuyển đổi số theo quy định.", "full_path": "|  |  | > Chương IV > Điều 15 > Khoản 5 > Điểm c"}
+content: Tổ chức
+kiểm tra nội bộ và báo cáo định kỳ về kết quả chuyển đổi số theo quy định.
+
+===== CHUNK 126 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_16_khoan_1_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 4, "chapter_text": "TRÁCH NHIỆM CỦA", "article": 16, "article_text": "Trách nhiệm của tổ chức, cá nhân trong chuyển đổi số", "clause": 1, "point": "a", "content": "Tuân thủ\npháp luật về chuyển đổi số, an ninh mạng, giao dịch điện tử, bảo vệ dữ liệu cá\nnhân, trí tuệ nhân tạo và pháp luật khác có liên quan khi tham gia, cung cấp hoặc\nsử dụng hệ thống số, hệ thống thông tin, nền tảng số, dữ liệu số và dịch vụ số;", "full_path": "|  |  | > Chương IV > Điều 16 > Khoản 1 > Điểm a"}
+content: Tuân thủ
+pháp luật về chuyển đổi số, an ninh mạng, giao dịch điện tử, bảo vệ dữ liệu cá
+nhân, trí tuệ nhân tạo và pháp luật khác có liên quan khi tham gia, cung cấp hoặc
+sử dụng hệ thống số, hệ thống thông tin, nền tảng số, dữ liệu số và dịch vụ số;
+
+===== CHUNK 127 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_16_khoan_1_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 4, "chapter_text": "TRÁCH NHIỆM CỦA", "article": 16, "article_text": "Trách nhiệm của tổ chức, cá nhân trong chuyển đổi số", "clause": 1, "point": "b", "content": "Cung cấp,\ncập nhật và chịu trách nhiệm về tính chính xác của thông tin, dữ liệu phục vụ\ngiao dịch điện tử, dịch vụ số;", "full_path": "|  |  | > Chương IV > Điều 16 > Khoản 1 > Điểm b"}
+content: Cung cấp,
+cập nhật và chịu trách nhiệm về tính chính xác của thông tin, dữ liệu phục vụ
+giao dịch điện tử, dịch vụ số;
+
+===== CHUNK 128 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_16_khoan_1_diem_c", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 4, "chapter_text": "TRÁCH NHIỆM CỦA", "article": 16, "article_text": "Trách nhiệm của tổ chức, cá nhân trong chuyển đổi số", "clause": 1, "point": "c", "content": "Bảo đảm\nan ninh mạng, bảo vệ dữ liệu cá nhân và triển khai các biện pháp phòng ngừa rủi\nro trong quá trình ứng dụng công nghệ số và vận hành hệ thống số, hệ thống\nthông tin, nền tảng số của tổ chức;", "full_path": "|  |  | > Chương IV > Điều 16 > Khoản 1 > Điểm c"}
+content: Bảo đảm
+an ninh mạng, bảo vệ dữ liệu cá nhân và triển khai các biện pháp phòng ngừa rủi
+ro trong quá trình ứng dụng công nghệ số và vận hành hệ thống số, hệ thống
+thông tin, nền tảng số của tổ chức;
+
+===== CHUNK 129 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_16_khoan_1_diem_d", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 4, "chapter_text": "TRÁCH NHIỆM CỦA", "article": 16, "article_text": "Trách nhiệm của tổ chức, cá nhân trong chuyển đổi số", "clause": 1, "point": "d", "content": "Phối hợp\nvới cơ quan nhà nước trong việc xác thực, chia sẻ dữ liệu số và thực hiện các\nnghĩa vụ khác phục vụ chuyển đổi số theo quy định của pháp luật;\n\nđ) Thực hiện\ncác nghĩa vụ khác có liên quan theo quy định của pháp luật.", "full_path": "|  |  | > Chương IV > Điều 16 > Khoản 1 > Điểm d"}
+content: Phối hợp
+với cơ quan nhà nước trong việc xác thực, chia sẻ dữ liệu số và thực hiện các
+nghĩa vụ khác phục vụ chuyển đổi số theo quy định của pháp luật;
+
+đ) Thực hiện
+các nghĩa vụ khác có liên quan theo quy định của pháp luật.
+
+===== CHUNK 130 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_16_khoan_2_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 4, "chapter_text": "TRÁCH NHIỆM CỦA", "article": 16, "article_text": "Trách nhiệm của tổ chức, cá nhân trong chuyển đổi số", "clause": 2, "point": "a", "content": "Tuân thủ\npháp luật khi tham gia hoạt động trên môi trường số, sử dụng dịch vụ số, nền tảng\nsố, hệ thống số, hệ thống thông tin;", "full_path": "|  |  | > Chương IV > Điều 16 > Khoản 2 > Điểm a"}
+content: Tuân thủ
+pháp luật khi tham gia hoạt động trên môi trường số, sử dụng dịch vụ số, nền tảng
+số, hệ thống số, hệ thống thông tin;
+
+===== CHUNK 131 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_16_khoan_2_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 4, "chapter_text": "TRÁCH NHIỆM CỦA", "article": 16, "article_text": "Trách nhiệm của tổ chức, cá nhân trong chuyển đổi số", "clause": 2, "point": "b", "content": "Cung cấp\nthông tin, dữ liệu đầy đủ, chính xác và chịu trách nhiệm về nội dung đã cung cấp\nkhi thực hiện thủ tục hành chính, dịch vụ số, giao dịch điện tử;", "full_path": "|  |  | > Chương IV > Điều 16 > Khoản 2 > Điểm b"}
+content: Cung cấp
+thông tin, dữ liệu đầy đủ, chính xác và chịu trách nhiệm về nội dung đã cung cấp
+khi thực hiện thủ tục hành chính, dịch vụ số, giao dịch điện tử;
+
+===== CHUNK 132 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_16_khoan_2_diem_c", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 4, "chapter_text": "TRÁCH NHIỆM CỦA", "article": 16, "article_text": "Trách nhiệm của tổ chức, cá nhân trong chuyển đổi số", "clause": 2, "point": "c", "content": "Bảo vệ\nthông tin tài khoản, dữ liệu cá nhân và thực hiện các biện pháp an toàn trong sử\ndụng dịch vụ số;", "full_path": "|  |  | > Chương IV > Điều 16 > Khoản 2 > Điểm c"}
+content: Bảo vệ
+thông tin tài khoản, dữ liệu cá nhân và thực hiện các biện pháp an toàn trong sử
+dụng dịch vụ số;
+
+===== CHUNK 133 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_16_khoan_2_diem_d", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 4, "chapter_text": "TRÁCH NHIỆM CỦA", "article": 16, "article_text": "Trách nhiệm của tổ chức, cá nhân trong chuyển đổi số", "clause": 2, "point": "d", "content": "Tham gia góp\ný, phản hồi, đánh giá để nâng cao chất lượng dịch vụ số.", "full_path": "|  |  | > Chương IV > Điều 16 > Khoản 2 > Điểm d"}
+content: Tham gia góp
+ý, phản hồi, đánh giá để nâng cao chất lượng dịch vụ số.
+
+===== CHUNK 134 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_17_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 17, "article_text": "Đào tạo, phát triển nguồn nhân lực số", "clause": 1, "point": null, "content": "Năng lực\nsố là nội dung bắt buộc trong các chương trình giáo dục, đào tạo theo quy định\ncủa pháp luật về giáo dục, giáo dục nghề nghiệp và giáo dục đại học.", "full_path": "|  |  | > Chương V > Điều 17 > Khoản 1"}
+content: Năng lực
+số là nội dung bắt buộc trong các chương trình giáo dục, đào tạo theo quy định
+của pháp luật về giáo dục, giáo dục nghề nghiệp và giáo dục đại học.
+
+===== CHUNK 135 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_17_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 17, "article_text": "Đào tạo, phát triển nguồn nhân lực số", "clause": 2, "point": null, "content": "Cơ quan quản\nlý nhà nước về chuyển đổi số ban hành, cập nhật Khung năng lực số làm cơ sở cho\ncác hoạt động đào tạo, bồi dưỡng, đánh giá, phân tích, tổng hợp thông tin về\nnguồn nhân lực số.", "full_path": "|  |  | > Chương V > Điều 17 > Khoản 2"}
+content: Cơ quan quản
+lý nhà nước về chuyển đổi số ban hành, cập nhật Khung năng lực số làm cơ sở cho
+các hoạt động đào tạo, bồi dưỡng, đánh giá, phân tích, tổng hợp thông tin về
+nguồn nhân lực số.
+
+===== CHUNK 136 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_17_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 17, "article_text": "Đào tạo, phát triển nguồn nhân lực số", "clause": 3, "point": null, "content": "Bộ, cơ\nquan ngang Bộ, cơ quan thuộc Chính phủ, Ủy ban nhân dân các cấp có trách nhiệm\ntổ chức phổ cập năng lực số cơ bản phù hợp với Khung năng lực số cho các đối tượng\nphù hợp với ngành, lĩnh vực, địa bàn được phân công.", "full_path": "|  |  | > Chương V > Điều 17 > Khoản 3"}
+content: Bộ, cơ
+quan ngang Bộ, cơ quan thuộc Chính phủ, Ủy ban nhân dân các cấp có trách nhiệm
+tổ chức phổ cập năng lực số cơ bản phù hợp với Khung năng lực số cho các đối tượng
+phù hợp với ngành, lĩnh vực, địa bàn được phân công.
+
+===== CHUNK 137 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_17_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 17, "article_text": "Đào tạo, phát triển nguồn nhân lực số", "clause": 4, "point": null, "content": "Cơ quan trong\nhệ thống chính trị có trách nhiệm tổ chức đào tạo, bồi dưỡng năng lực số\ntheo Khung năng lực số, bảo đảm cán bộ, công chức, viên chức có đủ năng lực số\ncần thiết để triển khai chuyển đổi số.", "full_path": "|  |  | > Chương V > Điều 17 > Khoản 4"}
+content: Cơ quan trong
+hệ thống chính trị có trách nhiệm tổ chức đào tạo, bồi dưỡng năng lực số
+theo Khung năng lực số, bảo đảm cán bộ, công chức, viên chức có đủ năng lực số
+cần thiết để triển khai chuyển đổi số.
+
+===== CHUNK 138 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_17_khoan_5", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 17, "article_text": "Đào tạo, phát triển nguồn nhân lực số", "clause": 5, "point": null, "content": "Doanh nghiệp,\ntổ chức sử dụng lao động có trách nhiệm tổ chức đào tạo, bồi dưỡng, phổ cập\nnăng lực số cơ bản cho người lao động; đào tạo, hướng dẫn chuyển đổi nghề nghiệp,\nnâng cao năng lực số phù hợp nhu cầu thị trường cho người lao động có nguy cơ mất\nviệc làm do chuyển đổi số.", "full_path": "|  |  | > Chương V > Điều 17 > Khoản 5"}
+content: Doanh nghiệp,
+tổ chức sử dụng lao động có trách nhiệm tổ chức đào tạo, bồi dưỡng, phổ cập
+năng lực số cơ bản cho người lao động; đào tạo, hướng dẫn chuyển đổi nghề nghiệp,
+nâng cao năng lực số phù hợp nhu cầu thị trường cho người lao động có nguy cơ mất
+việc làm do chuyển đổi số.
+
+===== CHUNK 139 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_18_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 18, "article_text": "Thu hút, trọng dụng chuyên gia về chuyển đổi số", "clause": 1, "point": null, "content": "Nhà nước\nthực hiện cơ chế, chính sách đặc biệt nhằm thu hút, trọng dụng chuyên gia, nhân\ntài, nhân lực chất lượng cao trong lĩnh vực chuyển đổi số theo quy định của\npháp luật về cán bộ, công chức, viên chức, pháp luật về khoa học, công nghệ và\nđổi mới sáng tạo, pháp luật về công nghiệp công nghệ số và pháp luật khác có\nliên quan.", "full_path": "|  |  | > Chương V > Điều 18 > Khoản 1"}
+content: Nhà nước
+thực hiện cơ chế, chính sách đặc biệt nhằm thu hút, trọng dụng chuyên gia, nhân
+tài, nhân lực chất lượng cao trong lĩnh vực chuyển đổi số theo quy định của
+pháp luật về cán bộ, công chức, viên chức, pháp luật về khoa học, công nghệ và
+đổi mới sáng tạo, pháp luật về công nghiệp công nghệ số và pháp luật khác có
+liên quan.
+
+===== CHUNK 140 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_18_khoan_2_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 18, "article_text": "Thu hút, trọng dụng chuyên gia về chuyển đổi số", "clause": 2, "point": "a", "content": "Chủ động\nlựa chọn hình thức và thời hạn giao kết với các nhân sự và chuyên gia trong nước,\nnước ngoài;", "full_path": "|  |  | > Chương V > Điều 18 > Khoản 2 > Điểm a"}
+content: Chủ động
+lựa chọn hình thức và thời hạn giao kết với các nhân sự và chuyên gia trong nước,
+nước ngoài;
+
+===== CHUNK 141 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_18_khoan_2_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 18, "article_text": "Thu hút, trọng dụng chuyên gia về chuyển đổi số", "clause": 2, "point": "b", "content": "Doanh nghiệp\nnhà nước được hợp tác, trao đổi, sử dụng chuyên gia và nhân sự phục vụ hoạt động\nchuyển đổi số.", "full_path": "|  |  | > Chương V > Điều 18 > Khoản 2 > Điểm b"}
+content: Doanh nghiệp
+nhà nước được hợp tác, trao đổi, sử dụng chuyên gia và nhân sự phục vụ hoạt động
+chuyển đổi số.
+
+===== CHUNK 142 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_18_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 18, "article_text": "Thu hút, trọng dụng chuyên gia về chuyển đổi số", "clause": 3, "point": null, "content": "Người\ncó thành tích xuất sắc tiêu biểu trong chuyển đổi số được tôn vinh, khen thưởng\ntheo quy định của pháp luật về thi đua, khen thưởng.", "full_path": "|  |  | > Chương V > Điều 18 > Khoản 3"}
+content: Người
+có thành tích xuất sắc tiêu biểu trong chuyển đổi số được tôn vinh, khen thưởng
+theo quy định của pháp luật về thi đua, khen thưởng.
+
+===== CHUNK 143 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_19_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 19, "article_text": "Ưu đãi cán bộ, công chức, viên chức làm công tác chuyển", "clause": 1, "point": null, "content": "Cơ quan thuộc\nhệ thống chính trị thực hiện chế độ đãi ngộ đặc thù cho người làm công tác chuyển\nđổi số, bao gồm cán bộ, công chức, viên chức thuộc đơn vị được giao thực hiện\nchức năng quản lý nhà nước về chuyển đổi số của các cơ quan ở Trung ương, tỉnh,\nthành phố; người làm công tác chuyên trách về chuyển đổi số, an ninh mạng trong\ncơ quan trong hệ thống chính trị; tổng công trình sư, kiến trúc sư trưởng về\nkhoa học, công nghệ, đổi mới sáng tạo, chuyển đổi số và các vị trí việc làm\nkhác liên quan đến chuyển đổi số.", "full_path": "|  |  | > Chương V > Điều 19 > Khoản 1"}
+content: Cơ quan thuộc
+hệ thống chính trị thực hiện chế độ đãi ngộ đặc thù cho người làm công tác chuyển
+đổi số, bao gồm cán bộ, công chức, viên chức thuộc đơn vị được giao thực hiện
+chức năng quản lý nhà nước về chuyển đổi số của các cơ quan ở Trung ương, tỉnh,
+thành phố; người làm công tác chuyên trách về chuyển đổi số, an ninh mạng trong
+cơ quan trong hệ thống chính trị; tổng công trình sư, kiến trúc sư trưởng về
+khoa học, công nghệ, đổi mới sáng tạo, chuyển đổi số và các vị trí việc làm
+khác liên quan đến chuyển đổi số.
+
+===== CHUNK 144 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_19_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 19, "article_text": "Ưu đãi cán bộ, công chức, viên chức làm công tác chuyển", "clause": 2, "point": null, "content": "Các hình thức\nđãi ngộ bao gồm tiền lương, phụ cấp, điều kiện làm việc, cơ hội phát triển nghề\nnghiệp và các hình thức khen thưởng khác.", "full_path": "|  |  | > Chương V > Điều 19 > Khoản 2"}
+content: Các hình thức
+đãi ngộ bao gồm tiền lương, phụ cấp, điều kiện làm việc, cơ hội phát triển nghề
+nghiệp và các hình thức khen thưởng khác.
+
+===== CHUNK 145 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_19_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 19, "article_text": "Ưu đãi cán bộ, công chức, viên chức làm công tác chuyển", "clause": 3, "point": null, "content": "Chế độ,\nchính sách đãi ngộ cho đối tượng quy định tại khoản 1 Điều này được thực hiện\ntheo quy định của Chính phủ.\n\nMục 2. TÀI CHÍNH CHO CHUYỂN ĐỔI SỐ", "full_path": "|  |  | > Chương V > Điều 19 > Khoản 3"}
+content: Chế độ,
+chính sách đãi ngộ cho đối tượng quy định tại khoản 1 Điều này được thực hiện
+theo quy định của Chính phủ.
+
+Mục 2. TÀI CHÍNH CHO CHUYỂN ĐỔI SỐ
+
+===== CHUNK 146 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_20_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 20, "article_text": "Nguồn tài chính cho chuyển đổi số", "clause": 1, "point": null, "content": "Nhà nước\nbảo đảm chi cho chuyển đổi số hằng năm tối thiểu 1% tổng chi ngân sách nhà nước\ntừ nguồn tổng chi tối thiểu 3% ngân sách nhà nước cho phát triển khoa học, công\nnghệ, đổi mới sáng tạo và chuyển đổi số và tăng dần theo yêu cầu phát triển để\nthực hiện chủ trương, chính sách của Đảng, Nhà nước trong từng thời kỳ.\n\nNguồn ngân\nsách nhà nước bố trí cho chuyển đổi số phục vụ quốc phòng, an ninh được thực hiện\ntheo quy định về một số nội dung đặc thù tại Luật\nNgân sách nhà nước quy định của Luật này và được tổng hợp chung trong tổng\nchi khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số.", "full_path": "|  |  | > Chương V > Điều 20 > Khoản 1"}
+content: Nhà nước
+bảo đảm chi cho chuyển đổi số hằng năm tối thiểu 1% tổng chi ngân sách nhà nước
+từ nguồn tổng chi tối thiểu 3% ngân sách nhà nước cho phát triển khoa học, công
+nghệ, đổi mới sáng tạo và chuyển đổi số và tăng dần theo yêu cầu phát triển để
+thực hiện chủ trương, chính sách của Đảng, Nhà nước trong từng thời kỳ.
+
+Nguồn ngân
+sách nhà nước bố trí cho chuyển đổi số phục vụ quốc phòng, an ninh được thực hiện
+theo quy định về một số nội dung đặc thù tại Luật
+Ngân sách nhà nước quy định của Luật này và được tổng hợp chung trong tổng
+chi khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số.
+
+===== CHUNK 147 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_20_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 20, "article_text": "Nguồn tài chính cho chuyển đổi số", "clause": 2, "point": null, "content": "Nguồn tài\nchính ngoài ngân sách nhà nước bao gồm nguồn tài chính hợp pháp của doanh nghiệp,\ntổ chức, cá nhân; Quỹ phát triển khoa học và công nghệ của doanh nghiệp, tổ chức,\nđơn vị sự nghiệp; các nguồn tài chính hợp pháp khác theo quy định của pháp luật.", "full_path": "|  |  | > Chương V > Điều 20 > Khoản 2"}
+content: Nguồn tài
+chính ngoài ngân sách nhà nước bao gồm nguồn tài chính hợp pháp của doanh nghiệp,
+tổ chức, cá nhân; Quỹ phát triển khoa học và công nghệ của doanh nghiệp, tổ chức,
+đơn vị sự nghiệp; các nguồn tài chính hợp pháp khác theo quy định của pháp luật.
+
+===== CHUNK 148 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_21_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 21, "article_text": "Chi ngân sách nhà nước cho chuyển đổi số", "clause": 1, "point": null, "content": "Nhiệm vụ\nchi của ngân sách nhà nước cho hoạt động chuyển đổi số theo quy định tại Điều 4 của Luật này.", "full_path": "|  |  | > Chương V > Điều 21 > Khoản 1"}
+content: Nhiệm vụ
+chi của ngân sách nhà nước cho hoạt động chuyển đổi số theo quy định tại Điều 4 của Luật này.
+
+===== CHUNK 149 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_21_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 21, "article_text": "Chi ngân sách nhà nước cho chuyển đổi số", "clause": 2, "point": null, "content": "Chính phủ\nquy định về quản lý đầu tư, mua sắm, thuê dịch vụ và cơ chế đặc thù cho phát\ntriển thử nghiệm trong chuyển đổi số sử dụng nguồn vốn ngân sách nhà nước; nhiệm\nvụ chi ngân sách nhà nước và phân cấp nhiệm vụ chi giữa ngân sách trung ương và\nngân sách địa phương cho chuyển đổi số.", "full_path": "|  |  | > Chương V > Điều 21 > Khoản 2"}
+content: Chính phủ
+quy định về quản lý đầu tư, mua sắm, thuê dịch vụ và cơ chế đặc thù cho phát
+triển thử nghiệm trong chuyển đổi số sử dụng nguồn vốn ngân sách nhà nước; nhiệm
+vụ chi ngân sách nhà nước và phân cấp nhiệm vụ chi giữa ngân sách trung ương và
+ngân sách địa phương cho chuyển đổi số.
+
+===== CHUNK 150 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_21_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 21, "article_text": "Chi ngân sách nhà nước cho chuyển đổi số", "clause": 3, "point": null, "content": "Bộ, cơ\nquan ngang Bộ, cơ quan thuộc Chính phủ, cơ quan khác ở trung ương và địa phương\nđề xuất sử dụng ngân sách nhà nước cho chuyển đổi số bảo đảm phù hợp với chiến\nlược, chương trình, kế hoạch chuyển đổi số quy định tại Điều 12\ncủa Luật này và nhiệm vụ chi ngân sách nhà nước theo quy định tại khoản 2\nĐiều này.\n\nMục 3. PHÁT TRIỂN HẠ TẦNG CHUYỂN ĐỔI SỐ", "full_path": "|  |  | > Chương V > Điều 21 > Khoản 3"}
+content: Bộ, cơ
+quan ngang Bộ, cơ quan thuộc Chính phủ, cơ quan khác ở trung ương và địa phương
+đề xuất sử dụng ngân sách nhà nước cho chuyển đổi số bảo đảm phù hợp với chiến
+lược, chương trình, kế hoạch chuyển đổi số quy định tại Điều 12
+của Luật này và nhiệm vụ chi ngân sách nhà nước theo quy định tại khoản 2
+Điều này.
+
+Mục 3. PHÁT TRIỂN HẠ TẦNG CHUYỂN ĐỔI SỐ
+
+===== CHUNK 151 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_22_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 22, "article_text": "Hạ tầng chuyển đổi số", "clause": 1, "point": null, "content": "Hạ tầng\nchuyển đổi số là hạ tầng để chuyển đổi số toàn diện, phục vụ việc sản xuất,\ntruyền đưa, thu thập, xử lý, lưu trữ và trao đổi dữ liệu số. Hạ tầng chuyển đổi\nsố bao gồm hạ tầng số và hạ tầng số công cộng.", "full_path": "|  |  | > Chương V > Điều 22 > Khoản 1"}
+content: Hạ tầng
+chuyển đổi số là hạ tầng để chuyển đổi số toàn diện, phục vụ việc sản xuất,
+truyền đưa, thu thập, xử lý, lưu trữ và trao đổi dữ liệu số. Hạ tầng chuyển đổi
+số bao gồm hạ tầng số và hạ tầng số công cộng.
+
+===== CHUNK 152 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_22_khoan_2_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 22, "article_text": "Hạ tầng chuyển đổi số", "clause": 2, "point": "a", "content": "Định\ndanh và xác thực điện tử theo pháp luật về căn cước;", "full_path": "|  |  | > Chương V > Điều 22 > Khoản 2 > Điểm a"}
+content: Định
+danh và xác thực điện tử theo pháp luật về căn cước;
+
+===== CHUNK 153 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_22_khoan_2_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 22, "article_text": "Hạ tầng chuyển đổi số", "clause": 2, "point": "b", "content": "Hạ tầng\nthanh toán số do Nhà nước quản lý, vận hành;", "full_path": "|  |  | > Chương V > Điều 22 > Khoản 2 > Điểm b"}
+content: Hạ tầng
+thanh toán số do Nhà nước quản lý, vận hành;
+
+===== CHUNK 154 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_22_khoan_2_diem_c", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 22, "article_text": "Hạ tầng chuyển đổi số", "clause": 2, "point": "c", "content": "Nền tảng\nkết nối, tích hợp, chia sẻ, điều phối dữ liệu cấp quốc gia;", "full_path": "|  |  | > Chương V > Điều 22 > Khoản 2 > Điểm c"}
+content: Nền tảng
+kết nối, tích hợp, chia sẻ, điều phối dữ liệu cấp quốc gia;
+
+===== CHUNK 155 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_22_khoan_2_diem_d", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 22, "article_text": "Hạ tầng chuyển đổi số", "clause": 2, "point": "d", "content": "Hạ tầng\nchứng thực điện tử quốc gia.", "full_path": "|  |  | > Chương V > Điều 22 > Khoản 2 > Điểm d"}
+content: Hạ tầng
+chứng thực điện tử quốc gia.
+
+===== CHUNK 156 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_22_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 22, "article_text": "Hạ tầng chuyển đổi số", "clause": 3, "point": null, "content": "Trong từng\nthời kỳ, Cơ quan quản lý nhà nước về chuyển đổi số xây dựng, trình Thủ tướng\nChính phủ ban hành Chiến lược hạ tầng số, trong đó xác định các thành phần hạ tầng\nsố, mục tiêu phát triển hạ tầng số, nhiệm vụ và giải pháp thực hiện.", "full_path": "|  |  | > Chương V > Điều 22 > Khoản 3"}
+content: Trong từng
+thời kỳ, Cơ quan quản lý nhà nước về chuyển đổi số xây dựng, trình Thủ tướng
+Chính phủ ban hành Chiến lược hạ tầng số, trong đó xác định các thành phần hạ tầng
+số, mục tiêu phát triển hạ tầng số, nhiệm vụ và giải pháp thực hiện.
+
+===== CHUNK 157 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_23_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 23, "article_text": "Phát triển trung tâm dữ liệu, điện toán đám mây", "clause": 1, "point": null, "content": "Cơ quan quản\nlý nhà nước về điện lực chủ trì xây dựng, ban hành hoặc trình cấp có thẩm quyền\nban hành, điều chỉnh, bổ sung quy hoạch phát triển điện lực quốc gia để bảo đảm\nđáp ứng nguồn điện xanh, sạch, bảo đảm dự phòng cho các trung tâm dữ liệu; chỉ\nđạo các đơn vị điện lực ưu tiên bố trí nguồn điện ổn định, chất lượng cao tại\ncác khu vực được quy hoạch phát triển trung tâm dữ liệu, phù hợp với Quy hoạch\nhạ tầng thông tin và truyền thông, Chiến lược hạ tầng số và quy hoạch tỉnh.", "full_path": "|  |  | > Chương V > Điều 23 > Khoản 1"}
+content: Cơ quan quản
+lý nhà nước về điện lực chủ trì xây dựng, ban hành hoặc trình cấp có thẩm quyền
+ban hành, điều chỉnh, bổ sung quy hoạch phát triển điện lực quốc gia để bảo đảm
+đáp ứng nguồn điện xanh, sạch, bảo đảm dự phòng cho các trung tâm dữ liệu; chỉ
+đạo các đơn vị điện lực ưu tiên bố trí nguồn điện ổn định, chất lượng cao tại
+các khu vực được quy hoạch phát triển trung tâm dữ liệu, phù hợp với Quy hoạch
+hạ tầng thông tin và truyền thông, Chiến lược hạ tầng số và quy hoạch tỉnh.
+
+===== CHUNK 158 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_23_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 23, "article_text": "Phát triển trung tâm dữ liệu, điện toán đám mây", "clause": 2, "point": null, "content": "Ủy ban\nnhân dân cấp tỉnh có trách nhiệm bố trí quỹ đất phù hợp trong quy hoạch, kế hoạch\nsử dụng đất tại địa phương cho các dự án trung tâm dữ liệu, ưu tiên việc bố trí\ntại các khu công nghệ cao, khu công nghệ số tập trung và các khu vực có điều kiện\nthuận lợi về hạ tầng kỹ thuật trên cơ sở phù hợp với Quy hoạch hạ tầng thông\ntin và truyền thông, Chiến lược hạ tầng số và quy hoạch tỉnh.", "full_path": "|  |  | > Chương V > Điều 23 > Khoản 2"}
+content: Ủy ban
+nhân dân cấp tỉnh có trách nhiệm bố trí quỹ đất phù hợp trong quy hoạch, kế hoạch
+sử dụng đất tại địa phương cho các dự án trung tâm dữ liệu, ưu tiên việc bố trí
+tại các khu công nghệ cao, khu công nghệ số tập trung và các khu vực có điều kiện
+thuận lợi về hạ tầng kỹ thuật trên cơ sở phù hợp với Quy hoạch hạ tầng thông
+tin và truyền thông, Chiến lược hạ tầng số và quy hoạch tỉnh.
+
+===== CHUNK 159 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_23_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 23, "article_text": "Phát triển trung tâm dữ liệu, điện toán đám mây", "clause": 3, "point": null, "content": "Bộ,\nngành, địa phương có trách nhiệm đánh giá, ưu tiên xem xét phương án lựa chọn\nmô hình triển khai trên điện toán đám mây trong các hoạt động đầu tư, mua sắm, thuê\ndịch vụ phục vụ hoạt động chuyển đổi số.", "full_path": "|  |  | > Chương V > Điều 23 > Khoản 3"}
+content: Bộ,
+ngành, địa phương có trách nhiệm đánh giá, ưu tiên xem xét phương án lựa chọn
+mô hình triển khai trên điện toán đám mây trong các hoạt động đầu tư, mua sắm, thuê
+dịch vụ phục vụ hoạt động chuyển đổi số.
+
+===== CHUNK 160 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_23_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 23, "article_text": "Phát triển trung tâm dữ liệu, điện toán đám mây", "clause": 4, "point": null, "content": "Cơ quan có thẩm\nquyền ban hành, công bố các tiêu chuẩn quốc gia, quy chuẩn kỹ thuật quốc gia về\ntrung tâm dữ liệu; quy định về công bố sự phù hợp của trung tâm dữ liệu với các\ntiêu chuẩn, quy chuẩn kỹ thuật theo pháp luật về viễn thông.", "full_path": "|  |  | > Chương V > Điều 23 > Khoản 4"}
+content: Cơ quan có thẩm
+quyền ban hành, công bố các tiêu chuẩn quốc gia, quy chuẩn kỹ thuật quốc gia về
+trung tâm dữ liệu; quy định về công bố sự phù hợp của trung tâm dữ liệu với các
+tiêu chuẩn, quy chuẩn kỹ thuật theo pháp luật về viễn thông.
+
+===== CHUNK 161 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_23_khoan_5", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 23, "article_text": "Phát triển trung tâm dữ liệu, điện toán đám mây", "clause": 5, "point": null, "content": "Cơ sở hạ\ntầng Trung tâm dữ liệu quốc gia là thành phần hạ tầng số quan trọng phục vụ\nchuyển đổi số quốc gia. Việc bảo đảm nguồn lực xây dựng, phát triển cơ sở hạ tầng\nTrung tâm dữ liệu quốc gia thực hiện theo quy định của pháp luật về dữ liệu.", "full_path": "|  |  | > Chương V > Điều 23 > Khoản 5"}
+content: Cơ sở hạ
+tầng Trung tâm dữ liệu quốc gia là thành phần hạ tầng số quan trọng phục vụ
+chuyển đổi số quốc gia. Việc bảo đảm nguồn lực xây dựng, phát triển cơ sở hạ tầng
+Trung tâm dữ liệu quốc gia thực hiện theo quy định của pháp luật về dữ liệu.
+
+===== CHUNK 162 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_24_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 24, "article_text": "Phát triển hạ tầng truyền dẫn cho kết nối máy tới máy", "clause": 1, "point": null, "content": "Nhà nước\nkhuyến khích và tạo điều kiện tích hợp thiết bị cảm biến cho phép thu thập dữ\nliệu về môi trường xung quanh và các ứng dụng công nghệ số vào hạ tầng kỹ thuật\ngiao thông, năng lượng, cấp thoát nước, đô thị, tòa nhà công cộng, môi trường\nvà hạ tầng kỹ thuật khác.", "full_path": "|  |  | > Chương V > Điều 24 > Khoản 1"}
+content: Nhà nước
+khuyến khích và tạo điều kiện tích hợp thiết bị cảm biến cho phép thu thập dữ
+liệu về môi trường xung quanh và các ứng dụng công nghệ số vào hạ tầng kỹ thuật
+giao thông, năng lượng, cấp thoát nước, đô thị, tòa nhà công cộng, môi trường
+và hạ tầng kỹ thuật khác.
+
+===== CHUNK 163 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_24_khoan_2_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 24, "article_text": "Phát triển hạ tầng truyền dẫn cho kết nối máy tới máy", "clause": 2, "point": "a", "content": "Khả\nnăng kết nối và chia sẻ dữ liệu thiết yếu phát sinh từ các thiết bị cảm biến,\ntuân thủ quy định của pháp luật về dữ liệu và bảo vệ dữ liệu cá nhân;", "full_path": "|  |  | > Chương V > Điều 24 > Khoản 2 > Điểm a"}
+content: Khả
+năng kết nối và chia sẻ dữ liệu thiết yếu phát sinh từ các thiết bị cảm biến,
+tuân thủ quy định của pháp luật về dữ liệu và bảo vệ dữ liệu cá nhân;
+
+===== CHUNK 164 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_24_khoan_2_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 24, "article_text": "Phát triển hạ tầng truyền dẫn cho kết nối máy tới máy", "clause": 2, "point": "b", "content": "Tuân thủ\ntiêu chuẩn, quy chuẩn kỹ thuật có liên quan; bảo đảm an ninh mạng và khả năng mở\nrộng, tương thích, liên thông, vận hành liên tục giữa các hệ thống; thúc đẩy\nchuyển đổi số toàn diện trong từng lĩnh vực.", "full_path": "|  |  | > Chương V > Điều 24 > Khoản 2 > Điểm b"}
+content: Tuân thủ
+tiêu chuẩn, quy chuẩn kỹ thuật có liên quan; bảo đảm an ninh mạng và khả năng mở
+rộng, tương thích, liên thông, vận hành liên tục giữa các hệ thống; thúc đẩy
+chuyển đổi số toàn diện trong từng lĩnh vực.
+
+===== CHUNK 165 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_24_khoan_3_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 24, "article_text": "Phát triển hạ tầng truyền dẫn cho kết nối máy tới máy", "clause": 3, "point": "a", "content": "Ban hành hoặc\ntrình cấp có thẩm quyền ban hành quy định về công trình hạ tầng kỹ thuật thuộc\nphạm vi quản lý bắt buộc tích hợp thiết bị cảm biến và các ứng dụng công nghệ số\nkhác, kèm theo lộ trình áp dụng phù hợp với Chiến lược hạ tầng số, các quy hoạch,\nchiến lược trong từng lĩnh vực;", "full_path": "|  |  | > Chương V > Điều 24 > Khoản 3 > Điểm a"}
+content: Ban hành hoặc
+trình cấp có thẩm quyền ban hành quy định về công trình hạ tầng kỹ thuật thuộc
+phạm vi quản lý bắt buộc tích hợp thiết bị cảm biến và các ứng dụng công nghệ số
+khác, kèm theo lộ trình áp dụng phù hợp với Chiến lược hạ tầng số, các quy hoạch,
+chiến lược trong từng lĩnh vực;
+
+===== CHUNK 166 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_24_khoan_3_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 24, "article_text": "Phát triển hạ tầng truyền dẫn cho kết nối máy tới máy", "clause": 3, "point": "b", "content": "Ban hành tiêu\nchuẩn, quy chuẩn kỹ thuật, yêu cầu về kết nối, chia sẻ, khai thác phù hợp\nvới từng lĩnh vực;", "full_path": "|  |  | > Chương V > Điều 24 > Khoản 3 > Điểm b"}
+content: Ban hành tiêu
+chuẩn, quy chuẩn kỹ thuật, yêu cầu về kết nối, chia sẻ, khai thác phù hợp
+với từng lĩnh vực;
+
+===== CHUNK 167 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_24_khoan_3_diem_c", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 24, "article_text": "Phát triển hạ tầng truyền dẫn cho kết nối máy tới máy", "clause": 3, "point": "c", "content": "Ban hành các\ntiêu chuẩn, quy chuẩn kỹ thuật, hướng dẫn để bảo đảm dữ liệu từ hạ tầng truyền\ndẫn cho kết nối máy tới máy có khả năng kết nối, chia sẻ và khai thác thống nhất;\nban hành tiêu chuẩn, quy chuẩn kỹ thuật về an ninh mạng đối với dữ liệu được tạo\nra, xử lý, truy xuất từ hạ tầng truyền dẫn cho kết nối máy tới máy.\n\nMục 4. PHÁT TRIỂN HỆ THỐNG SỐ, NỀN TẢNG SỐ DÙNG CHUNG QUỐC GIA", "full_path": "|  |  | > Chương V > Điều 24 > Khoản 3 > Điểm c"}
+content: Ban hành các
+tiêu chuẩn, quy chuẩn kỹ thuật, hướng dẫn để bảo đảm dữ liệu từ hạ tầng truyền
+dẫn cho kết nối máy tới máy có khả năng kết nối, chia sẻ và khai thác thống nhất;
+ban hành tiêu chuẩn, quy chuẩn kỹ thuật về an ninh mạng đối với dữ liệu được tạo
+ra, xử lý, truy xuất từ hạ tầng truyền dẫn cho kết nối máy tới máy.
+
+Mục 4. PHÁT TRIỂN HỆ THỐNG SỐ, NỀN TẢNG SỐ DÙNG CHUNG QUỐC GIA
+
+===== CHUNK 168 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_25_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 25, "article_text": "Phát triển hệ thống số dùng chung quốc gia", "clause": 1, "point": null, "content": "Nhà nước\nưu tiên nguồn lực ngân sách nhà nước để đầu tư, phát triển các hệ thống số dùng\nchung quốc gia.", "full_path": "|  |  | > Chương V > Điều 25 > Khoản 1"}
+content: Nhà nước
+ưu tiên nguồn lực ngân sách nhà nước để đầu tư, phát triển các hệ thống số dùng
+chung quốc gia.
+
+===== CHUNK 169 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_25_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 25, "article_text": "Phát triển hệ thống số dùng chung quốc gia", "clause": 2, "point": null, "content": "Nhà nước\nkhuyến khích tổ chức, doanh nghiệp tham gia phát triển, vận hành hệ thống số\ntheo phương thức đối tác công tư trên cơ sở tuân thủ tiêu chuẩn kỹ thuật, quy\nchuẩn kỹ thuật.", "full_path": "|  |  | > Chương V > Điều 25 > Khoản 2"}
+content: Nhà nước
+khuyến khích tổ chức, doanh nghiệp tham gia phát triển, vận hành hệ thống số
+theo phương thức đối tác công tư trên cơ sở tuân thủ tiêu chuẩn kỹ thuật, quy
+chuẩn kỹ thuật.
+
+===== CHUNK 170 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_26_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 26, "article_text": "Nền tảng số dùng chung của các cơ quan thuộc hệ thống", "clause": 1, "point": null, "content": "Cơ quan quản\nlý nhà nước về chuyển đổi số chủ trì xây dựng, trình Thủ tướng Chính phủ ban\nhành tiêu chí, Danh mục nền tảng số dùng chung quốc gia trong các cơ quan thuộc\nhệ thống chính trị; công bố, ban hành tiêu chuẩn, quy chuẩn, yêu cầu kỹ thuật về\nnền tảng số dùng chung; đo lường và giám sát trực tuyến hoạt động vận hành,\nkhai thác nền tảng số dùng chung.", "full_path": "|  |  | > Chương V > Điều 26 > Khoản 1"}
+content: Cơ quan quản
+lý nhà nước về chuyển đổi số chủ trì xây dựng, trình Thủ tướng Chính phủ ban
+hành tiêu chí, Danh mục nền tảng số dùng chung quốc gia trong các cơ quan thuộc
+hệ thống chính trị; công bố, ban hành tiêu chuẩn, quy chuẩn, yêu cầu kỹ thuật về
+nền tảng số dùng chung; đo lường và giám sát trực tuyến hoạt động vận hành,
+khai thác nền tảng số dùng chung.
+
+===== CHUNK 171 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_26_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 26, "article_text": "Nền tảng số dùng chung của các cơ quan thuộc hệ thống", "clause": 2, "point": null, "content": "Các cơ quan\ntrong hệ thống chính trị có trách nhiệm xây dựng, quản lý, vận hành các\nnền tảng số dùng chung thuộc thẩm quyền quản lý phục vụ hoạt động nghiệp vụ\nchuyên môn dùng chung, tránh trùng lặp, bảo đảm hiệu quả, theo hướng mở, linh\nhoạt; mở và công bố công khai các tiêu chuẩn, quy chuẩn kỹ thuật cho phép doanh\nnghiệp cùng tham gia phát triển, cung cấp dịch vụ trên nền tảng số.\n\nMục 5. CÁC BIỆN PHÁP BẢO ĐẢM KHÁC", "full_path": "|  |  | > Chương V > Điều 26 > Khoản 2"}
+content: Các cơ quan
+trong hệ thống chính trị có trách nhiệm xây dựng, quản lý, vận hành các
+nền tảng số dùng chung thuộc thẩm quyền quản lý phục vụ hoạt động nghiệp vụ
+chuyên môn dùng chung, tránh trùng lặp, bảo đảm hiệu quả, theo hướng mở, linh
+hoạt; mở và công bố công khai các tiêu chuẩn, quy chuẩn kỹ thuật cho phép doanh
+nghiệp cùng tham gia phát triển, cung cấp dịch vụ trên nền tảng số.
+
+Mục 5. CÁC BIỆN PHÁP BẢO ĐẢM KHÁC
+
+===== CHUNK 172 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_27_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 27, "article_text": "Bảo đảm an ninh mạng", "clause": 1, "point": null, "content": "Cơ quan, tổ\nchức, cá nhân tham gia hoặc có liên quan đến hoạt động chuyển đổi số phải tuân\nthủ quy định của pháp luật về an ninh mạng, dữ liệu, bảo vệ dữ liệu cá nhân, bí\nmật nhà nước và pháp luật khác có liên quan. Chủ quản dữ liệu phải chủ động thiết\nlập quy trình, biện pháp bảo vệ dữ liệu phù hợp với tính chất hoạt động và\nphương thức đáp ứng yêu cầu của chủ thể dữ liệu, trừ trường hợp pháp luật có\nquy định khác.", "full_path": "|  |  | > Chương V > Điều 27 > Khoản 1"}
+content: Cơ quan, tổ
+chức, cá nhân tham gia hoặc có liên quan đến hoạt động chuyển đổi số phải tuân
+thủ quy định của pháp luật về an ninh mạng, dữ liệu, bảo vệ dữ liệu cá nhân, bí
+mật nhà nước và pháp luật khác có liên quan. Chủ quản dữ liệu phải chủ động thiết
+lập quy trình, biện pháp bảo vệ dữ liệu phù hợp với tính chất hoạt động và
+phương thức đáp ứng yêu cầu của chủ thể dữ liệu, trừ trường hợp pháp luật có
+quy định khác.
+
+===== CHUNK 173 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_27_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 27, "article_text": "Bảo đảm an ninh mạng", "clause": 2, "point": null, "content": "Chủ quản\nhạ tầng số, hạ tầng số công cộng, hệ thống số, nền tảng số, hệ thống thông tin,\ncơ sở dữ liệu có trách nhiệm xây dựng công cụ để chủ động sàng lọc, phát hiện,\nthông báo, xử lý nhằm bảo vệ người sử dụng khỏi các nội dung xấu, độc hại,\nthông tin vi phạm pháp luật, tin giả, nội dung lừa đảo theo quy định của pháp luật\nvề an ninh mạng và pháp luật khác có liên quan.", "full_path": "|  |  | > Chương V > Điều 27 > Khoản 2"}
+content: Chủ quản
+hạ tầng số, hạ tầng số công cộng, hệ thống số, nền tảng số, hệ thống thông tin,
+cơ sở dữ liệu có trách nhiệm xây dựng công cụ để chủ động sàng lọc, phát hiện,
+thông báo, xử lý nhằm bảo vệ người sử dụng khỏi các nội dung xấu, độc hại,
+thông tin vi phạm pháp luật, tin giả, nội dung lừa đảo theo quy định của pháp luật
+về an ninh mạng và pháp luật khác có liên quan.
+
+===== CHUNK 174 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_28_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 28, "article_text": "Thử nghiệm có kiểm soát", "clause": 1, "point": null, "content": "Cơ quan, tổ\nchức, doanh nghiệp được triển khai thử nghiệm có kiểm soát đối với quy trình,\ngiải pháp, sản phẩm, dịch vụ và mô hình kinh doanh trong chuyển đổi số theo quy\nđịnh của pháp luật về khoa học, công nghệ và đổi mới sáng tạo, pháp luật về\ncông nghiệp công nghệ số, pháp luật về dữ liệu và pháp luật khác có liên quan.", "full_path": "|  |  | > Chương V > Điều 28 > Khoản 1"}
+content: Cơ quan, tổ
+chức, doanh nghiệp được triển khai thử nghiệm có kiểm soát đối với quy trình,
+giải pháp, sản phẩm, dịch vụ và mô hình kinh doanh trong chuyển đổi số theo quy
+định của pháp luật về khoa học, công nghệ và đổi mới sáng tạo, pháp luật về
+công nghiệp công nghệ số, pháp luật về dữ liệu và pháp luật khác có liên quan.
+
+===== CHUNK 175 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_29_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 29, "article_text": "Thúc đẩy phát triển và ứng dụng bản sao số", "clause": 1, "point": null, "content": "Cơ quan, tổ\nchức, cá nhân nghiên cứu, phát triển và ứng dụng bản sao số trong các ngành,\nlĩnh vực được hưởng ưu đãi theo quy định của pháp luật về khoa học, công nghệ\nvà đổi mới sáng tạo, pháp luật về công nghiệp công nghệ số; được bảo hộ quyền sở\nhữu trí tuệ đối với mô hình, thuật toán và giải pháp liên quan.", "full_path": "|  |  | > Chương V > Điều 29 > Khoản 1"}
+content: Cơ quan, tổ
+chức, cá nhân nghiên cứu, phát triển và ứng dụng bản sao số trong các ngành,
+lĩnh vực được hưởng ưu đãi theo quy định của pháp luật về khoa học, công nghệ
+và đổi mới sáng tạo, pháp luật về công nghiệp công nghệ số; được bảo hộ quyền sở
+hữu trí tuệ đối với mô hình, thuật toán và giải pháp liên quan.
+
+===== CHUNK 176 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_29_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 29, "article_text": "Thúc đẩy phát triển và ứng dụng bản sao số", "clause": 2, "point": null, "content": "Tổ chức,\ncá nhân triển khai bản sao số có nghĩa vụ bảo đảm tính chính xác, cập nhật và đồng\nbộ dữ liệu; thông báo cho người sử dụng khi đang tương tác hoặc sử dụng kết quả\nđầu ra do bản sao số tạo ra; chịu trách nhiệm về hệ quả phát sinh từ việc sử dụng\nbản sao số trong quản lý, vận hành và ra quyết định.", "full_path": "|  |  | > Chương V > Điều 29 > Khoản 2"}
+content: Tổ chức,
+cá nhân triển khai bản sao số có nghĩa vụ bảo đảm tính chính xác, cập nhật và đồng
+bộ dữ liệu; thông báo cho người sử dụng khi đang tương tác hoặc sử dụng kết quả
+đầu ra do bản sao số tạo ra; chịu trách nhiệm về hệ quả phát sinh từ việc sử dụng
+bản sao số trong quản lý, vận hành và ra quyết định.
+
+===== CHUNK 177 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_30_khoan_1_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 30, "article_text": "Thống kê, đo lường, giám sát, đánh giá hiệu quả chuyển", "clause": 1, "point": "a", "content": "Xây dựng,\ncông bố bộ chỉ số thống nhất phục vụ đánh giá mức độ chuyển đổi số; xây dựng,\nquản lý, vận hành Nền tảng thống kê, đo lường, giám sát, đánh giá triển khai\nchuyển đổi số;", "full_path": "|  |  | > Chương V > Điều 30 > Khoản 1 > Điểm a"}
+content: Xây dựng,
+công bố bộ chỉ số thống nhất phục vụ đánh giá mức độ chuyển đổi số; xây dựng,
+quản lý, vận hành Nền tảng thống kê, đo lường, giám sát, đánh giá triển khai
+chuyển đổi số;
+
+===== CHUNK 178 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_30_khoan_1_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 30, "article_text": "Thống kê, đo lường, giám sát, đánh giá hiệu quả chuyển", "clause": 1, "point": "b", "content": "Định kỳ\nhằng năm tổ chức đánh giá mức độ chuyển đổi số của quốc gia, các Bộ, ngành, địa\nphương; kết quả đánh giá được công bố công khai và là căn cứ xếp hạng, khen thưởng,\nđiều chỉnh chính sách, ưu tiên bố trí kinh phí cho các cơ quan, địa phương.", "full_path": "|  |  | > Chương V > Điều 30 > Khoản 1 > Điểm b"}
+content: Định kỳ
+hằng năm tổ chức đánh giá mức độ chuyển đổi số của quốc gia, các Bộ, ngành, địa
+phương; kết quả đánh giá được công bố công khai và là căn cứ xếp hạng, khen thưởng,
+điều chỉnh chính sách, ưu tiên bố trí kinh phí cho các cơ quan, địa phương.
+
+===== CHUNK 179 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_30_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 5, "chapter_text": "BIỆN PHÁP BẢO ĐẢM", "article": 30, "article_text": "Thống kê, đo lường, giám sát, đánh giá hiệu quả chuyển", "clause": 2, "point": null, "content": "Bộ, cơ\nquan ngang Bộ, cơ quan thuộc Chính phủ, cơ quan khác ở trung ương và Ủy ban\nnhân dân cấp tỉnh có trách nhiệm thu thập, cung cấp, cập nhật dữ liệu đầy đủ,\nchính xác, kịp thời trên Nền tảng thống kê, đo lường, giám sát, đánh giá triển\nkhai chuyển đổi số phục vụ công tác quản lý nhà nước về chuyển đổi số.", "full_path": "|  |  | > Chương V > Điều 30 > Khoản 2"}
+content: Bộ, cơ
+quan ngang Bộ, cơ quan thuộc Chính phủ, cơ quan khác ở trung ương và Ủy ban
+nhân dân cấp tỉnh có trách nhiệm thu thập, cung cấp, cập nhật dữ liệu đầy đủ,
+chính xác, kịp thời trên Nền tảng thống kê, đo lường, giám sát, đánh giá triển
+khai chuyển đổi số phục vụ công tác quản lý nhà nước về chuyển đổi số.
+
+===== CHUNK 180 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_31_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 31, "article_text": "Hoạt động của Chính phủ số", "clause": 1, "point": null, "content": "Cơ quan nhà nước\ncó trách nhiệm thực hiện cung cấp dịch vụ công, công tác quản trị nội bộ, chỉ đạo,\nđiều hành, giám sát, kiểm tra thực hiện toàn trình trên môi trường số, trừ trường\nhợp pháp luật có quy định khác; có phương án xử lý trong tình huống khẩn cấp hoặc\nxảy ra sự cố làm gián đoạn hoạt động trên môi trường số và phương án ứng phó,\nkhắc phục sự cố, duy trì hoạt động bình thường.", "full_path": "|  |  | > Chương VI > Điều 31 > Khoản 1"}
+content: Cơ quan nhà nước
+có trách nhiệm thực hiện cung cấp dịch vụ công, công tác quản trị nội bộ, chỉ đạo,
+điều hành, giám sát, kiểm tra thực hiện toàn trình trên môi trường số, trừ trường
+hợp pháp luật có quy định khác; có phương án xử lý trong tình huống khẩn cấp hoặc
+xảy ra sự cố làm gián đoạn hoạt động trên môi trường số và phương án ứng phó,
+khắc phục sự cố, duy trì hoạt động bình thường.
+
+===== CHUNK 181 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_31_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 31, "article_text": "Hoạt động của Chính phủ số", "clause": 2, "point": null, "content": "Hoạt động\nchỉ đạo, điều hành, ra quyết định được thực hiện dựa trên dữ liệu số đầy đủ,\nchính xác, kịp thời.", "full_path": "|  |  | > Chương VI > Điều 31 > Khoản 2"}
+content: Hoạt động
+chỉ đạo, điều hành, ra quyết định được thực hiện dựa trên dữ liệu số đầy đủ,
+chính xác, kịp thời.
+
+===== CHUNK 182 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_31_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 31, "article_text": "Hoạt động của Chính phủ số", "clause": 3, "point": null, "content": "Quy trình nghiệp\nvụ phải được rà soát, chuẩn hóa, tái cấu trúc và đơn giản hóa trước khi thực hiện\nsố hóa; bảo đảm tinh gọn, không trùng lặp, tăng cường tự động hóa và không yêu\ncầu tổ chức, cá nhân cung cấp lại thông tin, dữ liệu số hợp lệ đã được cung cấp.", "full_path": "|  |  | > Chương VI > Điều 31 > Khoản 3"}
+content: Quy trình nghiệp
+vụ phải được rà soát, chuẩn hóa, tái cấu trúc và đơn giản hóa trước khi thực hiện
+số hóa; bảo đảm tinh gọn, không trùng lặp, tăng cường tự động hóa và không yêu
+cầu tổ chức, cá nhân cung cấp lại thông tin, dữ liệu số hợp lệ đã được cung cấp.
+
+===== CHUNK 183 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_31_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 31, "article_text": "Hoạt động của Chính phủ số", "clause": 4, "point": null, "content": "Tuân thủ\nnguyên tắc chuyển đổi số quy định tại Điều 6 của Luật này.", "full_path": "|  |  | > Chương VI > Điều 31 > Khoản 4"}
+content: Tuân thủ
+nguyên tắc chuyển đổi số quy định tại Điều 6 của Luật này.
+
+===== CHUNK 184 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_32_khoan_1_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 32, "article_text": "Cung cấp dịch vụ công trực tuyến", "clause": 1, "point": "a", "content": "Thủ tục\nhành chính được cung cấp mặc định theo hình thức dịch vụ công trực tuyến toàn\ntrình;", "full_path": "|  |  | > Chương VI > Điều 32 > Khoản 1 > Điểm a"}
+content: Thủ tục
+hành chính được cung cấp mặc định theo hình thức dịch vụ công trực tuyến toàn
+trình;
+
+===== CHUNK 185 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_32_khoan_1_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 32, "article_text": "Cung cấp dịch vụ công trực tuyến", "clause": 1, "point": "b", "content": "Chỉ\ncung cấp theo hình thức dịch vụ công trực tuyến một phần trong trường hợp pháp luật\ncó quy định khác hoặc trong trường hợp xảy ra sự cố kỹ thuật chưa thể khắc phục\nngay.", "full_path": "|  |  | > Chương VI > Điều 32 > Khoản 1 > Điểm b"}
+content: Chỉ
+cung cấp theo hình thức dịch vụ công trực tuyến một phần trong trường hợp pháp luật
+có quy định khác hoặc trong trường hợp xảy ra sự cố kỹ thuật chưa thể khắc phục
+ngay.
+
+===== CHUNK 186 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_32_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 32, "article_text": "Cung cấp dịch vụ công trực tuyến", "clause": 2, "point": null, "content": "Việc\ncung cấp thông tin và dịch vụ công trực tuyến của cơ quan nhà nước trên môi trường\nsố thực hiện theo quy định của Chính phủ.", "full_path": "|  |  | > Chương VI > Điều 32 > Khoản 2"}
+content: Việc
+cung cấp thông tin và dịch vụ công trực tuyến của cơ quan nhà nước trên môi trường
+số thực hiện theo quy định của Chính phủ.
+
+===== CHUNK 187 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_32_khoan_3_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 32, "article_text": "Cung cấp dịch vụ công trực tuyến", "clause": 3, "point": "a", "content": "Hướng dẫn,\nhỗ trợ người dân trong quá trình thực hiện dịch vụ công trực tuyến; công khai\nquy trình, thời hạn xử lý và kết quả xử lý theo quy định của Luật này và pháp luật\ncó liên quan;", "full_path": "|  |  | > Chương VI > Điều 32 > Khoản 3 > Điểm a"}
+content: Hướng dẫn,
+hỗ trợ người dân trong quá trình thực hiện dịch vụ công trực tuyến; công khai
+quy trình, thời hạn xử lý và kết quả xử lý theo quy định của Luật này và pháp luật
+có liên quan;
+
+===== CHUNK 188 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_32_khoan_3_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 32, "article_text": "Cung cấp dịch vụ công trực tuyến", "clause": 3, "point": "b", "content": "Xử lý\ntheo quy định của pháp luật có liên quan đối với cán bộ, công chức, viên chức,\nngười lao động khi yêu cầu nộp thêm giấy tờ trong trường hợp hệ thống thông tin\nphục vụ giải quyết thủ tục hành chính đã kết nối, khai thác, sử dụng được dữ liệu\ntừ cơ sở dữ liệu quốc gia, cơ sở dữ liệu chuyên ngành.", "full_path": "|  |  | > Chương VI > Điều 32 > Khoản 3 > Điểm b"}
+content: Xử lý
+theo quy định của pháp luật có liên quan đối với cán bộ, công chức, viên chức,
+người lao động khi yêu cầu nộp thêm giấy tờ trong trường hợp hệ thống thông tin
+phục vụ giải quyết thủ tục hành chính đã kết nối, khai thác, sử dụng được dữ liệu
+từ cơ sở dữ liệu quốc gia, cơ sở dữ liệu chuyên ngành.
+
+===== CHUNK 189 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_33_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 33, "article_text": "Liên thông, tích hợp và khai thác dữ liệu phục vụ giải", "clause": 1, "point": null, "content": "Hệ thống\nthông tin giải quyết thủ tục hành chính, hệ thống thông tin tham gia vào việc xử\nlý thủ tục hành chính, cung cấp dịch vụ công trực tuyến phải được thiết kế, xây\ndựng, kết nối, liên thông, vận hành tuân thủ Khung kiến trúc tổng thể quốc gia\nsố, Khung kiến trúc dữ liệu quốc gia, Khung quản trị, quản lý dữ liệu quốc gia,\nTừ điển dữ liệu dùng chung, tiêu chuẩn, quy chuẩn, yêu cầu kỹ thuật liên quan.", "full_path": "|  |  | > Chương VI > Điều 33 > Khoản 1"}
+content: Hệ thống
+thông tin giải quyết thủ tục hành chính, hệ thống thông tin tham gia vào việc xử
+lý thủ tục hành chính, cung cấp dịch vụ công trực tuyến phải được thiết kế, xây
+dựng, kết nối, liên thông, vận hành tuân thủ Khung kiến trúc tổng thể quốc gia
+số, Khung kiến trúc dữ liệu quốc gia, Khung quản trị, quản lý dữ liệu quốc gia,
+Từ điển dữ liệu dùng chung, tiêu chuẩn, quy chuẩn, yêu cầu kỹ thuật liên quan.
+
+===== CHUNK 190 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_33_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 33, "article_text": "Liên thông, tích hợp và khai thác dữ liệu phục vụ giải", "clause": 2, "point": null, "content": "Cơ quan nhà nước\ncó trách nhiệm kết nối, chia sẻ, khai thác dữ liệu từ cơ sở dữ liệu quốc gia,\ncơ sở dữ liệu chuyên ngành và hệ thống thông tin của cơ quan khác để giải quyết\nthủ tục hành chính, cung cấp dịch vụ công trực tuyến, bảo đảm liên thông xuyên\nsuốt, không phân mảnh giữa trung ương và địa phương.", "full_path": "|  |  | > Chương VI > Điều 33 > Khoản 2"}
+content: Cơ quan nhà nước
+có trách nhiệm kết nối, chia sẻ, khai thác dữ liệu từ cơ sở dữ liệu quốc gia,
+cơ sở dữ liệu chuyên ngành và hệ thống thông tin của cơ quan khác để giải quyết
+thủ tục hành chính, cung cấp dịch vụ công trực tuyến, bảo đảm liên thông xuyên
+suốt, không phân mảnh giữa trung ương và địa phương.
+
+===== CHUNK 191 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_34_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 34, "article_text": "Bảo đảm chất lượng dịch vụ công trực tuyến", "clause": 1, "point": null, "content": "Hệ thống\nthông tin giải quyết thủ tục hành chính và hệ thống thông tin tham gia vào việc\nxử lý thủ tục hành chính, cung cấp dịch vụ công trực tuyến phải được thiết kế để\nđo lường, giám sát chất lượng dịch vụ theo thời gian thực, bao gồm tốc độ, tính\nổn định, khả năng xử lý, mức độ tự động hóa, trải nghiệm của người sử dụng và bảo\nđảm an ninh mạng.", "full_path": "|  |  | > Chương VI > Điều 34 > Khoản 1"}
+content: Hệ thống
+thông tin giải quyết thủ tục hành chính và hệ thống thông tin tham gia vào việc
+xử lý thủ tục hành chính, cung cấp dịch vụ công trực tuyến phải được thiết kế để
+đo lường, giám sát chất lượng dịch vụ theo thời gian thực, bao gồm tốc độ, tính
+ổn định, khả năng xử lý, mức độ tự động hóa, trải nghiệm của người sử dụng và bảo
+đảm an ninh mạng.
+
+===== CHUNK 192 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_34_khoan_2_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 34, "article_text": "Bảo đảm chất lượng dịch vụ công trực tuyến", "clause": 2, "point": "a", "content": "Cam kết\nchất lượng dịch vụ;", "full_path": "|  |  | > Chương VI > Điều 34 > Khoản 2 > Điểm a"}
+content: Cam kết
+chất lượng dịch vụ;
+
+===== CHUNK 193 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_34_khoan_2_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 34, "article_text": "Bảo đảm chất lượng dịch vụ công trực tuyến", "clause": 2, "point": "b", "content": "Các chỉ\nsố giám sát chất lượng theo thời gian thực;", "full_path": "|  |  | > Chương VI > Điều 34 > Khoản 2 > Điểm b"}
+content: Các chỉ
+số giám sát chất lượng theo thời gian thực;
+
+===== CHUNK 194 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_34_khoan_2_diem_c", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 34, "article_text": "Bảo đảm chất lượng dịch vụ công trực tuyến", "clause": 2, "point": "c", "content": "Cơ chế\nphản hồi và xử lý sự cố;", "full_path": "|  |  | > Chương VI > Điều 34 > Khoản 2 > Điểm c"}
+content: Cơ chế
+phản hồi và xử lý sự cố;
+
+===== CHUNK 195 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_34_khoan_2_diem_d", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 34, "article_text": "Bảo đảm chất lượng dịch vụ công trực tuyến", "clause": 2, "point": "d", "content": "Kết quả\ncải thiện chất lượng dịch vụ;\n\nđ) Hiệu quả\nsử dụng dịch vụ;", "full_path": "|  |  | > Chương VI > Điều 34 > Khoản 2 > Điểm d"}
+content: Kết quả
+cải thiện chất lượng dịch vụ;
+
+đ) Hiệu quả
+sử dụng dịch vụ;
+
+===== CHUNK 196 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_34_khoan_2_diem_e", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 34, "article_text": "Bảo đảm chất lượng dịch vụ công trực tuyến", "clause": 2, "point": "e", "content": "Mức độ\nhài lòng của người dân, doanh nghiệp khi sử dụng dịch vụ.", "full_path": "|  |  | > Chương VI > Điều 34 > Khoản 2 > Điểm e"}
+content: Mức độ
+hài lòng của người dân, doanh nghiệp khi sử dụng dịch vụ.
+
+===== CHUNK 197 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_34_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 34, "article_text": "Bảo đảm chất lượng dịch vụ công trực tuyến", "clause": 3, "point": null, "content": "Chất lượng\ndịch vụ công trực tuyến phải được cải thiện liên tục dựa trên kết quả đánh giá\nđộc lập, khảo sát người sử dụng và dữ liệu thực tế sử dụng.", "full_path": "|  |  | > Chương VI > Điều 34 > Khoản 3"}
+content: Chất lượng
+dịch vụ công trực tuyến phải được cải thiện liên tục dựa trên kết quả đánh giá
+độc lập, khảo sát người sử dụng và dữ liệu thực tế sử dụng.
+
+===== CHUNK 198 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_34_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 34, "article_text": "Bảo đảm chất lượng dịch vụ công trực tuyến", "clause": 4, "point": null, "content": "Bộ trưởng\nBộ Khoa học và Công nghệ ban hành tiêu chuẩn, quy chuẩn, yêu cầu kỹ thuật đối với\ndịch vụ công trực tuyến; hướng dẫn phương pháp đo lường, đánh giá và công bố chất\nlượng dịch vụ công trực tuyến.", "full_path": "|  |  | > Chương VI > Điều 34 > Khoản 4"}
+content: Bộ trưởng
+Bộ Khoa học và Công nghệ ban hành tiêu chuẩn, quy chuẩn, yêu cầu kỹ thuật đối với
+dịch vụ công trực tuyến; hướng dẫn phương pháp đo lường, đánh giá và công bố chất
+lượng dịch vụ công trực tuyến.
+
+===== CHUNK 199 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_35_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 35, "article_text": "Khả năng tiếp cận toàn dân trong sử dụng dịch vụ công", "clause": 1, "point": null, "content": "Cơ quan cung cấp\ndịch vụ công trực tuyến phải bảo đảm người sử dụng dễ dàng tiếp cận và truy cập,\nđặc biệt là người khuyết tật, người cao tuổi, trẻ em, người dân sinh sống ở khu\nvực biên giới, hải đảo, vùng đồng bào dân tộc thiểu số, miền núi, vùng có điều\nkiện kinh tế - xã hội khó khăn, đặc biệt khó khăn và các nhóm đối tượng dễ bị tổn\nthương khác.", "full_path": "|  |  | > Chương VI > Điều 35 > Khoản 1"}
+content: Cơ quan cung cấp
+dịch vụ công trực tuyến phải bảo đảm người sử dụng dễ dàng tiếp cận và truy cập,
+đặc biệt là người khuyết tật, người cao tuổi, trẻ em, người dân sinh sống ở khu
+vực biên giới, hải đảo, vùng đồng bào dân tộc thiểu số, miền núi, vùng có điều
+kiện kinh tế - xã hội khó khăn, đặc biệt khó khăn và các nhóm đối tượng dễ bị tổn
+thương khác.
+
+===== CHUNK 200 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_35_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 6, "chapter_text": "CHÍNH PHỦ SỐ", "article": 35, "article_text": "Khả năng tiếp cận toàn dân trong sử dụng dịch vụ công", "clause": 2, "point": null, "content": "Cơ quan thực\nhiện dịch vụ công trực tuyến có trách nhiệm tự đánh giá định kỳ mức độ phổ cập\nvà khả năng tiếp cận dịch vụ công trực tuyến; công khai kết quả đánh giá; tiếp\nnhận, xử lý phản ánh của tổ chức, cá nhân và có biện pháp khắc phục kịp thời.", "full_path": "|  |  | > Chương VI > Điều 35 > Khoản 2"}
+content: Cơ quan thực
+hiện dịch vụ công trực tuyến có trách nhiệm tự đánh giá định kỳ mức độ phổ cập
+và khả năng tiếp cận dịch vụ công trực tuyến; công khai kết quả đánh giá; tiếp
+nhận, xử lý phản ánh của tổ chức, cá nhân và có biện pháp khắc phục kịp thời.
+
+===== CHUNK 201 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_36_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 36, "article_text": "Phát triển kinh tế số", "clause": 1, "point": null, "content": "Phát triển\nkinh tế số là nhiệm vụ trọng tâm, đột phá trong chiến lược phát triển kinh tế -\nxã hội của đất nước nhằm thúc đẩy tăng trưởng nhanh, bền vững, bao trùm và hiệu\nquả dựa trên hệ thống số, nền tảng số, công nghệ số và dữ liệu số.", "full_path": "|  |  | > Chương VII > Điều 36 > Khoản 1"}
+content: Phát triển
+kinh tế số là nhiệm vụ trọng tâm, đột phá trong chiến lược phát triển kinh tế -
+xã hội của đất nước nhằm thúc đẩy tăng trưởng nhanh, bền vững, bao trùm và hiệu
+quả dựa trên hệ thống số, nền tảng số, công nghệ số và dữ liệu số.
+
+===== CHUNK 202 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_36_khoan_2_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 36, "article_text": "Phát triển kinh tế số", "clause": 2, "point": "a", "content": "Lấy\ndoanh nghiệp là trung tâm, thúc đẩy việc ứng dụng, phát triển công nghệ số;", "full_path": "|  |  | > Chương VII > Điều 36 > Khoản 2 > Điểm a"}
+content: Lấy
+doanh nghiệp là trung tâm, thúc đẩy việc ứng dụng, phát triển công nghệ số;
+
+===== CHUNK 203 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_36_khoan_2_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 36, "article_text": "Phát triển kinh tế số", "clause": 2, "point": "b", "content": "Ưu tiên phát\ntriển các hệ thống số, nền tảng số, hệ sinh thái số phục vụ nhu cầu thị\ntrường trong nước và quốc tế;", "full_path": "|  |  | > Chương VII > Điều 36 > Khoản 2 > Điểm b"}
+content: Ưu tiên phát
+triển các hệ thống số, nền tảng số, hệ sinh thái số phục vụ nhu cầu thị
+trường trong nước và quốc tế;
+
+===== CHUNK 204 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_36_khoan_2_diem_c", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 36, "article_text": "Phát triển kinh tế số", "clause": 2, "point": "c", "content": "Gắn với\nviệc bảo đảm an ninh mạng và bảo vệ dữ liệu cá nhân;", "full_path": "|  |  | > Chương VII > Điều 36 > Khoản 2 > Điểm c"}
+content: Gắn với
+việc bảo đảm an ninh mạng và bảo vệ dữ liệu cá nhân;
+
+===== CHUNK 205 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_36_khoan_2_diem_d", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 36, "article_text": "Phát triển kinh tế số", "clause": 2, "point": "d", "content": "Tuân thủ\nnguyên tắc chuyển đổi số quy định tại Điều 6 của Luật này.", "full_path": "|  |  | > Chương VII > Điều 36 > Khoản 2 > Điểm d"}
+content: Tuân thủ
+nguyên tắc chuyển đổi số quy định tại Điều 6 của Luật này.
+
+===== CHUNK 206 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_36_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 36, "article_text": "Phát triển kinh tế số", "clause": 3, "point": null, "content": "Nhà nước\ncó trách nhiệm tạo môi trường cạnh tranh lành mạnh, thúc đẩy các hoạt động kinh\ntế số; quản lý rủi ro và giám sát hoạt động kinh tế số.", "full_path": "|  |  | > Chương VII > Điều 36 > Khoản 3"}
+content: Nhà nước
+có trách nhiệm tạo môi trường cạnh tranh lành mạnh, thúc đẩy các hoạt động kinh
+tế số; quản lý rủi ro và giám sát hoạt động kinh tế số.
+
+===== CHUNK 207 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_37_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 37, "article_text": "Chính sách phát triển kinh tế số đối với các doanh nghiệp", "clause": 1, "point": null, "content": "Nhà nước\nthực hiện các biện pháp hỗ trợ tài chính và các hình thức hỗ trợ khác cho doanh\nnghiệp nhỏ và vừa, hợp tác xã, hộ kinh doanh chuyển đổi số, tham gia vào hoạt động\nphát triển kinh tế số, đóng góp cho mục tiêu tăng trưởng nhanh, bền vững.", "full_path": "|  |  | > Chương VII > Điều 37 > Khoản 1"}
+content: Nhà nước
+thực hiện các biện pháp hỗ trợ tài chính và các hình thức hỗ trợ khác cho doanh
+nghiệp nhỏ và vừa, hợp tác xã, hộ kinh doanh chuyển đổi số, tham gia vào hoạt động
+phát triển kinh tế số, đóng góp cho mục tiêu tăng trưởng nhanh, bền vững.
+
+===== CHUNK 208 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_37_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 37, "article_text": "Chính sách phát triển kinh tế số đối với các doanh nghiệp", "clause": 2, "point": null, "content": "Việc hỗ\ntrợ được thực hiện theo nguyên tắc công khai, minh bạch, đúng đối tượng, phù hợp\nvới nhu cầu, mức độ chuyển đổi số của từng tổ chức, doanh nghiệp; bảo đảm trọng\ntâm, trọng điểm, phù hợp với khả năng cân đối nguồn lực.", "full_path": "|  |  | > Chương VII > Điều 37 > Khoản 2"}
+content: Việc hỗ
+trợ được thực hiện theo nguyên tắc công khai, minh bạch, đúng đối tượng, phù hợp
+với nhu cầu, mức độ chuyển đổi số của từng tổ chức, doanh nghiệp; bảo đảm trọng
+tâm, trọng điểm, phù hợp với khả năng cân đối nguồn lực.
+
+===== CHUNK 209 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_37_khoan_3_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 37, "article_text": "Chính sách phát triển kinh tế số đối với các doanh nghiệp", "clause": 3, "point": "a", "content": "Hoạt động\ntại vùng đồng bào dân tộc thiểu số, vùng có điều kiện kinh tế - xã hội khó\nkhăn, đặc biệt khó khăn;", "full_path": "|  |  | > Chương VII > Điều 37 > Khoản 3 > Điểm a"}
+content: Hoạt động
+tại vùng đồng bào dân tộc thiểu số, vùng có điều kiện kinh tế - xã hội khó
+khăn, đặc biệt khó khăn;
+
+===== CHUNK 210 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_37_khoan_3_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 37, "article_text": "Chính sách phát triển kinh tế số đối với các doanh nghiệp", "clause": 3, "point": "b", "content": "Hoạt động\ntrong các ngành, lĩnh vực được ưu tiên chuyển đổi số theo Chiến lược quốc gia về\nChuyển đổi số, Chương trình Chuyển đổi số quốc gia.", "full_path": "|  |  | > Chương VII > Điều 37 > Khoản 3 > Điểm b"}
+content: Hoạt động
+trong các ngành, lĩnh vực được ưu tiên chuyển đổi số theo Chiến lược quốc gia về
+Chuyển đổi số, Chương trình Chuyển đổi số quốc gia.
+
+===== CHUNK 211 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_37_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 37, "article_text": "Chính sách phát triển kinh tế số đối với các doanh nghiệp", "clause": 4, "point": null, "content": "Cơ quan quản\nlý nhà nước về chuyển đổi số chủ trì, phối hợp với Bộ, cơ quan ngang Bộ, cơ\nquan thuộc Chính phủ và Ủy ban nhân dân cấp tỉnh hướng dẫn, tổ chức thực hiện\nhoạt động hỗ trợ; định kỳ tổng hợp, đánh giá và báo cáo Chính phủ theo quy định.", "full_path": "|  |  | > Chương VII > Điều 37 > Khoản 4"}
+content: Cơ quan quản
+lý nhà nước về chuyển đổi số chủ trì, phối hợp với Bộ, cơ quan ngang Bộ, cơ
+quan thuộc Chính phủ và Ủy ban nhân dân cấp tỉnh hướng dẫn, tổ chức thực hiện
+hoạt động hỗ trợ; định kỳ tổng hợp, đánh giá và báo cáo Chính phủ theo quy định.
+
+===== CHUNK 212 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_38_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 38, "article_text": "Trách nhiệm của chủ quản hệ thống số, nền tảng số", "clause": 1, "point": null, "content": "Công khai,\nminh bạch quy tắc ứng xử, điều khoản, điều kiện sử dụng, cơ chế tiếp nhận,\ngiải quyết khiếu nại và chính sách bảo vệ quyền lợi người sử dụng.", "full_path": "|  |  | > Chương VII > Điều 38 > Khoản 1"}
+content: Công khai,
+minh bạch quy tắc ứng xử, điều khoản, điều kiện sử dụng, cơ chế tiếp nhận,
+giải quyết khiếu nại và chính sách bảo vệ quyền lợi người sử dụng.
+
+===== CHUNK 213 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_38_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 38, "article_text": "Trách nhiệm của chủ quản hệ thống số, nền tảng số", "clause": 2, "point": null, "content": "Chịu trách\nnhiệm thiết lập biện pháp kỹ thuật và quy trình quản lý để phát hiện, ngăn chặn,\ngỡ bỏ thông tin, nội dung vi phạm pháp luật, trái thuần phong mỹ tục hoặc gây hại\ncho người sử dụng trên hệ thống số, nền tảng số theo yêu cầu của cơ quan nhà nước\ncó thẩm quyền.", "full_path": "|  |  | > Chương VII > Điều 38 > Khoản 2"}
+content: Chịu trách
+nhiệm thiết lập biện pháp kỹ thuật và quy trình quản lý để phát hiện, ngăn chặn,
+gỡ bỏ thông tin, nội dung vi phạm pháp luật, trái thuần phong mỹ tục hoặc gây hại
+cho người sử dụng trên hệ thống số, nền tảng số theo yêu cầu của cơ quan nhà nước
+có thẩm quyền.
+
+===== CHUNK 214 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_38_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 38, "article_text": "Trách nhiệm của chủ quản hệ thống số, nền tảng số", "clause": 3, "point": null, "content": "Chủ quản\nnền tảng số trung gian không được thực hiện các hành vi ngăn cản, áp đặt, phân\nbiệt đối xử trái pháp luật, cạnh tranh không lành mạnh đối với các nhà cung cấp\nkhác khi tham gia cung cấp sản phẩm, dịch vụ trên nền tảng số.", "full_path": "|  |  | > Chương VII > Điều 38 > Khoản 3"}
+content: Chủ quản
+nền tảng số trung gian không được thực hiện các hành vi ngăn cản, áp đặt, phân
+biệt đối xử trái pháp luật, cạnh tranh không lành mạnh đối với các nhà cung cấp
+khác khi tham gia cung cấp sản phẩm, dịch vụ trên nền tảng số.
+
+===== CHUNK 215 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_38_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 38, "article_text": "Trách nhiệm của chủ quản hệ thống số, nền tảng số", "clause": 4, "point": null, "content": "Tuân thủ\npháp luật về giao dịch điện tử, thương mại điện tử, an ninh mạng, bảo vệ dữ liệu\ncá nhân và pháp luật khác có liên quan.", "full_path": "|  |  | > Chương VII > Điều 38 > Khoản 4"}
+content: Tuân thủ
+pháp luật về giao dịch điện tử, thương mại điện tử, an ninh mạng, bảo vệ dữ liệu
+cá nhân và pháp luật khác có liên quan.
+
+===== CHUNK 216 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_39_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 39, "article_text": "Thống kê và báo cáo về kinh tế số", "clause": 1, "point": null, "content": "Hệ thống\nthống kê về kinh tế số được thiết lập nhằm theo dõi, đo lường và đánh giá các\nhoạt động thuộc kinh tế số, làm cơ sở cho việc hoạch định chính sách, chiến lược,\nquy hoạch và phục vụ công tác quản lý nhà nước đối với phát triển kinh tế số.", "full_path": "|  |  | > Chương VII > Điều 39 > Khoản 1"}
+content: Hệ thống
+thống kê về kinh tế số được thiết lập nhằm theo dõi, đo lường và đánh giá các
+hoạt động thuộc kinh tế số, làm cơ sở cho việc hoạch định chính sách, chiến lược,
+quy hoạch và phục vụ công tác quản lý nhà nước đối với phát triển kinh tế số.
+
+===== CHUNK 217 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_39_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 39, "article_text": "Thống kê và báo cáo về kinh tế số", "clause": 2, "point": null, "content": "Cơ quan quản\nlý nhà nước về thống kê có trách nhiệm xây dựng, cập nhật và công bố hệ thống\nchỉ tiêu thống kê, phương pháp đo lường, cơ chế báo cáo và chia sẻ dữ liệu thống\nkê về kinh tế số.", "full_path": "|  |  | > Chương VII > Điều 39 > Khoản 2"}
+content: Cơ quan quản
+lý nhà nước về thống kê có trách nhiệm xây dựng, cập nhật và công bố hệ thống
+chỉ tiêu thống kê, phương pháp đo lường, cơ chế báo cáo và chia sẻ dữ liệu thống
+kê về kinh tế số.
+
+===== CHUNK 218 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_39_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 39, "article_text": "Thống kê và báo cáo về kinh tế số", "clause": 3, "point": null, "content": "Cơ quan, tổ\nchức, doanh nghiệp có trách nhiệm cung cấp và báo cáo dữ liệu phục vụ thống kê\nvề kinh tế số theo yêu cầu của cơ quan nhà nước có thẩm quyền và theo quy định\ncủa pháp luật.\n\nMục 2. XÃ HỘI SỐ", "full_path": "|  |  | > Chương VII > Điều 39 > Khoản 3"}
+content: Cơ quan, tổ
+chức, doanh nghiệp có trách nhiệm cung cấp và báo cáo dữ liệu phục vụ thống kê
+về kinh tế số theo yêu cầu của cơ quan nhà nước có thẩm quyền và theo quy định
+của pháp luật.
+
+Mục 2. XÃ HỘI SỐ
+
+===== CHUNK 219 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_40_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 40, "article_text": "Phát triển xã hội số", "clause": 1, "point": null, "content": "Phát triển\nxã hội số nhằm tạo lập môi trường làm việc, học tập, tương tác bảo đảm tổ chức,\ncá nhân được tiếp cận, sử dụng và thụ hưởng lợi ích từ chuyển đổi số một cách thuận\ntiện, an toàn và hiệu quả trên môi trường số.", "full_path": "|  |  | > Chương VII > Điều 40 > Khoản 1"}
+content: Phát triển
+xã hội số nhằm tạo lập môi trường làm việc, học tập, tương tác bảo đảm tổ chức,
+cá nhân được tiếp cận, sử dụng và thụ hưởng lợi ích từ chuyển đổi số một cách thuận
+tiện, an toàn và hiệu quả trên môi trường số.
+
+===== CHUNK 220 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_40_khoan_2_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 40, "article_text": "Phát triển xã hội số", "clause": 2, "point": "a", "content": "Bảo đảm\nmọi đối tượng người dân, đặc biệt là các nhóm đối tượng dễ bị tổn thương và người\ndân sinh sống ở khu vực biên giới, hải đảo, vùng đồng bào dân tộc thiểu số, miền\nnúi, vùng có điều kiện kinh tế - xã hội khó khăn, đặc biệt khó khăn đều có cơ hội\ntiếp cận và thụ hưởng các dịch vụ số;", "full_path": "|  |  | > Chương VII > Điều 40 > Khoản 2 > Điểm a"}
+content: Bảo đảm
+mọi đối tượng người dân, đặc biệt là các nhóm đối tượng dễ bị tổn thương và người
+dân sinh sống ở khu vực biên giới, hải đảo, vùng đồng bào dân tộc thiểu số, miền
+núi, vùng có điều kiện kinh tế - xã hội khó khăn, đặc biệt khó khăn đều có cơ hội
+tiếp cận và thụ hưởng các dịch vụ số;
+
+===== CHUNK 221 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_40_khoan_2_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 40, "article_text": "Phát triển xã hội số", "clause": 2, "point": "b", "content": "Bảo vệ\ndữ liệu cá nhân, bảo đảm an ninh mạng cho người dân, doanh nghiệp khi tham gia\nvào giao dịch điện tử, dịch vụ số;", "full_path": "|  |  | > Chương VII > Điều 40 > Khoản 2 > Điểm b"}
+content: Bảo vệ
+dữ liệu cá nhân, bảo đảm an ninh mạng cho người dân, doanh nghiệp khi tham gia
+vào giao dịch điện tử, dịch vụ số;
+
+===== CHUNK 222 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_40_khoan_2_diem_c", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 40, "article_text": "Phát triển xã hội số", "clause": 2, "point": "c", "content": "Thúc đẩy\nhành vi và văn hóa ứng xử có trách nhiệm trên môi trường số;", "full_path": "|  |  | > Chương VII > Điều 40 > Khoản 2 > Điểm c"}
+content: Thúc đẩy
+hành vi và văn hóa ứng xử có trách nhiệm trên môi trường số;
+
+===== CHUNK 223 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_40_khoan_2_diem_d", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 40, "article_text": "Phát triển xã hội số", "clause": 2, "point": "d", "content": "Tuân thủ\nnguyên tắc chuyển đổi số quy định tại Điều 6 của Luật này.", "full_path": "|  |  | > Chương VII > Điều 40 > Khoản 2 > Điểm d"}
+content: Tuân thủ
+nguyên tắc chuyển đổi số quy định tại Điều 6 của Luật này.
+
+===== CHUNK 224 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_40_khoan_3_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 40, "article_text": "Phát triển xã hội số", "clause": 3, "point": "a", "content": "Phát triển\nnăng lực số;", "full_path": "|  |  | > Chương VII > Điều 40 > Khoản 3 > Điểm a"}
+content: Phát triển
+năng lực số;
+
+===== CHUNK 225 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_40_khoan_3_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 40, "article_text": "Phát triển xã hội số", "clause": 3, "point": "b", "content": "Thu hẹp\nkhoảng cách số;", "full_path": "|  |  | > Chương VII > Điều 40 > Khoản 3 > Điểm b"}
+content: Thu hẹp
+khoảng cách số;
+
+===== CHUNK 226 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_40_khoan_3_diem_c", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 40, "article_text": "Phát triển xã hội số", "clause": 3, "point": "c", "content": "Bảo đảm\nmôi trường số an toàn;", "full_path": "|  |  | > Chương VII > Điều 40 > Khoản 3 > Điểm c"}
+content: Bảo đảm
+môi trường số an toàn;
+
+===== CHUNK 227 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_40_khoan_3_diem_d", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 40, "article_text": "Phát triển xã hội số", "clause": 3, "point": "d", "content": "Bảo vệ\nquyền con người, quyền công dân trên môi trường số;\n\nđ) Phát triển\nvăn hóa số.", "full_path": "|  |  | > Chương VII > Điều 40 > Khoản 3 > Điểm d"}
+content: Bảo vệ
+quyền con người, quyền công dân trên môi trường số;
+
+đ) Phát triển
+văn hóa số.
+
+===== CHUNK 228 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_41_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 41, "article_text": "Quyền con người, quyền công dân trên môi trường số", "clause": 1, "point": null, "content": "Quyền\ncon người, quyền công dân được công nhận, tôn trọng, bảo vệ và không bị phủ nhận\nchỉ vì được thực hiện trên môi trường số.", "full_path": "|  |  | > Chương VII > Điều 41 > Khoản 1"}
+content: Quyền
+con người, quyền công dân được công nhận, tôn trọng, bảo vệ và không bị phủ nhận
+chỉ vì được thực hiện trên môi trường số.
+
+===== CHUNK 229 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_41_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 41, "article_text": "Quyền con người, quyền công dân trên môi trường số", "clause": 2, "point": null, "content": "Đăng ký, sử\ndụng và quản lý tài khoản danh tính điện tử, tài khoản giao dịch điện tử, chữ\nký số theo quy định của pháp luật về định danh và xác thực điện tử, giao dịch\nđiện tử.", "full_path": "|  |  | > Chương VII > Điều 41 > Khoản 2"}
+content: Đăng ký, sử
+dụng và quản lý tài khoản danh tính điện tử, tài khoản giao dịch điện tử, chữ
+ký số theo quy định của pháp luật về định danh và xác thực điện tử, giao dịch
+điện tử.
+
+===== CHUNK 230 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_41_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 41, "article_text": "Quyền con người, quyền công dân trên môi trường số", "clause": 3, "point": null, "content": "Được bảo\nvệ dữ liệu cá nhân theo pháp luật về bảo vệ dữ liệu cá nhân.", "full_path": "|  |  | > Chương VII > Điều 41 > Khoản 3"}
+content: Được bảo
+vệ dữ liệu cá nhân theo pháp luật về bảo vệ dữ liệu cá nhân.
+
+===== CHUNK 231 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_41_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 41, "article_text": "Quyền con người, quyền công dân trên môi trường số", "clause": 4, "point": null, "content": "Được phổ\ncập năng lực số cơ bản.", "full_path": "|  |  | > Chương VII > Điều 41 > Khoản 4"}
+content: Được phổ
+cập năng lực số cơ bản.
+
+===== CHUNK 232 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_41_khoan_5", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 41, "article_text": "Quyền con người, quyền công dân trên môi trường số", "clause": 5, "point": null, "content": "Được lựa\nchọn sử dụng hoặc ngừng sử dụng sản phẩm, dịch vụ số trên cơ sở được cung cấp\nthông tin đầy đủ, rõ ràng, chính xác, minh bạch, kịp thời về điều khoản, điều\nkiện sử dụng; không bị áp đặt điều kiện bất hợp lý hoặc bị phân biệt đối xử khi\nsử dụng sản phẩm, dịch vụ số.", "full_path": "|  |  | > Chương VII > Điều 41 > Khoản 5"}
+content: Được lựa
+chọn sử dụng hoặc ngừng sử dụng sản phẩm, dịch vụ số trên cơ sở được cung cấp
+thông tin đầy đủ, rõ ràng, chính xác, minh bạch, kịp thời về điều khoản, điều
+kiện sử dụng; không bị áp đặt điều kiện bất hợp lý hoặc bị phân biệt đối xử khi
+sử dụng sản phẩm, dịch vụ số.
+
+===== CHUNK 233 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_41_khoan_6", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 41, "article_text": "Quyền con người, quyền công dân trên môi trường số", "clause": 6, "point": null, "content": "Được bảo\nđảm điều kiện tiếp cận công bằng, an toàn, đặc biệt là đối tượng dễ bị tổn thương\ntrên môi trường số.", "full_path": "|  |  | > Chương VII > Điều 41 > Khoản 6"}
+content: Được bảo
+đảm điều kiện tiếp cận công bằng, an toàn, đặc biệt là đối tượng dễ bị tổn thương
+trên môi trường số.
+
+===== CHUNK 234 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_41_khoan_7", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 41, "article_text": "Quyền con người, quyền công dân trên môi trường số", "clause": 7, "point": null, "content": "Được\nyêu cầu cơ quan có thẩm quyền bảo vệ quyền hợp pháp trên môi trường số.", "full_path": "|  |  | > Chương VII > Điều 41 > Khoản 7"}
+content: Được
+yêu cầu cơ quan có thẩm quyền bảo vệ quyền hợp pháp trên môi trường số.
+
+===== CHUNK 235 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_41_khoan_8", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 41, "article_text": "Quyền con người, quyền công dân trên môi trường số", "clause": 8, "point": null, "content": "Được bảo\nđảm các quyền lợi của công dân số theo quy định của pháp luật có liên quan.", "full_path": "|  |  | > Chương VII > Điều 41 > Khoản 8"}
+content: Được bảo
+đảm các quyền lợi của công dân số theo quy định của pháp luật có liên quan.
+
+===== CHUNK 236 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_42_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 42, "article_text": "Thu hẹp khoảng cách số", "clause": 1, "point": null, "content": "Nhà nước\nưu tiên bố trí nguồn lực gồm nguồn vốn đầu tư và các hình thức hỗ trợ tài chính\nđể thu hẹp khoảng cách số; bảo đảm bố trí nguồn lực cao hơn mức trung bình của\ncả nước đối với khu vực biên giới, hải đảo, vùng đồng bào dân tộc thiểu số, miền\nnúi, vùng có điều kiện kinh tế - xã hội khó khăn, đặc biệt khó khăn.", "full_path": "|  |  | > Chương VII > Điều 42 > Khoản 1"}
+content: Nhà nước
+ưu tiên bố trí nguồn lực gồm nguồn vốn đầu tư và các hình thức hỗ trợ tài chính
+để thu hẹp khoảng cách số; bảo đảm bố trí nguồn lực cao hơn mức trung bình của
+cả nước đối với khu vực biên giới, hải đảo, vùng đồng bào dân tộc thiểu số, miền
+núi, vùng có điều kiện kinh tế - xã hội khó khăn, đặc biệt khó khăn.
+
+===== CHUNK 237 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_42_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 42, "article_text": "Thu hẹp khoảng cách số", "clause": 2, "point": null, "content": "Bộ, cơ\nquan ngang Bộ, cơ quan thuộc Chính phủ, Ủy ban nhân dân các cấp theo Chiến lược\nquốc gia về Chuyển đổi số, Chương trình Chuyển đổi số quốc gia có trách nhiệm\nphổ cập, hỗ trợ các điều kiện tiếp cận, khả năng sử dụng dịch vụ số cơ bản,\nnâng yêu cầu phổ cập dịch vụ viễn thông, chú trọng nhóm đối tượng dễ bị tổn\nthương; người dân sinh sống ở khu vực biên giới, hải đảo, vùng đồng bào dân tộc\nthiểu số, miền núi, vùng có điều kiện kinh tế - xã hội khó khăn, đặc biệt khó\nkhăn.", "full_path": "|  |  | > Chương VII > Điều 42 > Khoản 2"}
+content: Bộ, cơ
+quan ngang Bộ, cơ quan thuộc Chính phủ, Ủy ban nhân dân các cấp theo Chiến lược
+quốc gia về Chuyển đổi số, Chương trình Chuyển đổi số quốc gia có trách nhiệm
+phổ cập, hỗ trợ các điều kiện tiếp cận, khả năng sử dụng dịch vụ số cơ bản,
+nâng yêu cầu phổ cập dịch vụ viễn thông, chú trọng nhóm đối tượng dễ bị tổn
+thương; người dân sinh sống ở khu vực biên giới, hải đảo, vùng đồng bào dân tộc
+thiểu số, miền núi, vùng có điều kiện kinh tế - xã hội khó khăn, đặc biệt khó
+khăn.
+
+===== CHUNK 238 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_42_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 42, "article_text": "Thu hẹp khoảng cách số", "clause": 3, "point": null, "content": "Nhà nước\ncó chính sách hỗ trợ doanh nghiệp cấp miễn phí chứng thư chữ ký số công cộng\ncho người dân phù hợp với địa bàn, đối tượng và thời gian trong Chiến lược quốc\ngia về chuyển đổi số, Chương trình chuyển đổi số quốc gia quy định tại Điều 12 của Luật này.", "full_path": "|  |  | > Chương VII > Điều 42 > Khoản 3"}
+content: Nhà nước
+có chính sách hỗ trợ doanh nghiệp cấp miễn phí chứng thư chữ ký số công cộng
+cho người dân phù hợp với địa bàn, đối tượng và thời gian trong Chiến lược quốc
+gia về chuyển đổi số, Chương trình chuyển đổi số quốc gia quy định tại Điều 12 của Luật này.
+
+===== CHUNK 239 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_42_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 42, "article_text": "Thu hẹp khoảng cách số", "clause": 4, "point": null, "content": "Doanh nghiệp\nviễn thông có trách nhiệm cung cấp dịch vụ viễn thông phổ cập theo danh mục, địa\nbàn, khu vực, điều kiện, chất lượng và giá dịch vụ theo quy định của pháp luật\nvề viễn thông.", "full_path": "|  |  | > Chương VII > Điều 42 > Khoản 4"}
+content: Doanh nghiệp
+viễn thông có trách nhiệm cung cấp dịch vụ viễn thông phổ cập theo danh mục, địa
+bàn, khu vực, điều kiện, chất lượng và giá dịch vụ theo quy định của pháp luật
+về viễn thông.
+
+===== CHUNK 240 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_43_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 43, "article_text": "Bảo đảm môi trường số an toàn, phù hợp với trẻ em", "clause": 1, "point": null, "content": "Quyền của\ntrẻ em được bảo vệ, bảo đảm an toàn, lành mạnh trên môi trường số ngay từ giai\nđoạn thiết kế sản phẩm và dịch vụ số.", "full_path": "|  |  | > Chương VII > Điều 43 > Khoản 1"}
+content: Quyền của
+trẻ em được bảo vệ, bảo đảm an toàn, lành mạnh trên môi trường số ngay từ giai
+đoạn thiết kế sản phẩm và dịch vụ số.
+
+===== CHUNK 241 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_43_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 43, "article_text": "Bảo đảm môi trường số an toàn, phù hợp với trẻ em", "clause": 2, "point": null, "content": "Bộ trưởng,\nThủ trưởng cơ quan ngang Bộ tổ chức xây dựng, công bố, ban hành tiêu chuẩn, quy\nchuẩn kỹ thuật đối với sản phẩm, dịch vụ bảo vệ trẻ em trên môi trường số; cơ\nchế giám sát, cảnh báo và xử lý nghiêm các hành vi xâm hại hoặc cung cấp thông\ntin gây hại đến trẻ em trên môi trường số phù hợp với yêu cầu quản lý ngành,\nlĩnh vực được phân công.", "full_path": "|  |  | > Chương VII > Điều 43 > Khoản 2"}
+content: Bộ trưởng,
+Thủ trưởng cơ quan ngang Bộ tổ chức xây dựng, công bố, ban hành tiêu chuẩn, quy
+chuẩn kỹ thuật đối với sản phẩm, dịch vụ bảo vệ trẻ em trên môi trường số; cơ
+chế giám sát, cảnh báo và xử lý nghiêm các hành vi xâm hại hoặc cung cấp thông
+tin gây hại đến trẻ em trên môi trường số phù hợp với yêu cầu quản lý ngành,
+lĩnh vực được phân công.
+
+===== CHUNK 242 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_43_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 43, "article_text": "Bảo đảm môi trường số an toàn, phù hợp với trẻ em", "clause": 3, "point": null, "content": "Gia đình, nhà\ntrường có trách nhiệm chủ động giáo dục, hướng dẫn trẻ em về năng lực số\nvà hành vi ứng xử trên môi trường số; giám sát thời gian, nội dung truy cập và\nlựa chọn cho phép các hoạt động trực tuyến của trẻ em trên môi trường số.", "full_path": "|  |  | > Chương VII > Điều 43 > Khoản 3"}
+content: Gia đình, nhà
+trường có trách nhiệm chủ động giáo dục, hướng dẫn trẻ em về năng lực số
+và hành vi ứng xử trên môi trường số; giám sát thời gian, nội dung truy cập và
+lựa chọn cho phép các hoạt động trực tuyến của trẻ em trên môi trường số.
+
+===== CHUNK 243 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_43_khoan_4", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 43, "article_text": "Bảo đảm môi trường số an toàn, phù hợp với trẻ em", "clause": 4, "point": null, "content": "Sản phẩm\nnội dung số mang nội dung không có lợi cho trẻ em phải có dấu hiệu cảnh báo.", "full_path": "|  |  | > Chương VII > Điều 43 > Khoản 4"}
+content: Sản phẩm
+nội dung số mang nội dung không có lợi cho trẻ em phải có dấu hiệu cảnh báo.
+
+===== CHUNK 244 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_44_khoan_1_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 44, "article_text": "Hỗ trợ người cao tuổi, người khuyết tật trong chuyển đổi", "clause": 1, "point": "a", "content": "Được miễn,\ngiảm phí xác thực điện tử, phí thực hiện dịch vụ công trực tuyến theo quy định\ncủa pháp luật;", "full_path": "|  |  | > Chương VII > Điều 44 > Khoản 1 > Điểm a"}
+content: Được miễn,
+giảm phí xác thực điện tử, phí thực hiện dịch vụ công trực tuyến theo quy định
+của pháp luật;
+
+===== CHUNK 245 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_44_khoan_1_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 44, "article_text": "Hỗ trợ người cao tuổi, người khuyết tật trong chuyển đổi", "clause": 1, "point": "b", "content": "Được tư\nvấn, hướng dẫn khi thực hiện giao dịch điện tử liên quan đến thủ tục hành chính,\ny tế, bảo hiểm và an sinh xã hội;", "full_path": "|  |  | > Chương VII > Điều 44 > Khoản 1 > Điểm b"}
+content: Được tư
+vấn, hướng dẫn khi thực hiện giao dịch điện tử liên quan đến thủ tục hành chính,
+y tế, bảo hiểm và an sinh xã hội;
+
+===== CHUNK 246 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_44_khoan_1_diem_c", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 44, "article_text": "Hỗ trợ người cao tuổi, người khuyết tật trong chuyển đổi", "clause": 1, "point": "c", "content": "Được hỗ\ntrợ tham gia các chương trình phổ cập, bồi dưỡng năng lực số cơ bản được thiết\nkế phù hợp với người cao tuổi và người khuyết tật.", "full_path": "|  |  | > Chương VII > Điều 44 > Khoản 1 > Điểm c"}
+content: Được hỗ
+trợ tham gia các chương trình phổ cập, bồi dưỡng năng lực số cơ bản được thiết
+kế phù hợp với người cao tuổi và người khuyết tật.
+
+===== CHUNK 247 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_44_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 44, "article_text": "Hỗ trợ người cao tuổi, người khuyết tật trong chuyển đổi", "clause": 2, "point": null, "content": "Doanh nghiệp\nđược khuyến khích tham gia phát triển, cung cấp sản phẩm, dịch vụ số đáp ứng\ntiêu chuẩn hỗ trợ tiếp cận đối với người cao tuổi và người khuyết tật theo quy\nđịnh của pháp luật.", "full_path": "|  |  | > Chương VII > Điều 44 > Khoản 2"}
+content: Doanh nghiệp
+được khuyến khích tham gia phát triển, cung cấp sản phẩm, dịch vụ số đáp ứng
+tiêu chuẩn hỗ trợ tiếp cận đối với người cao tuổi và người khuyết tật theo quy
+định của pháp luật.
+
+===== CHUNK 248 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_44_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 44, "article_text": "Hỗ trợ người cao tuổi, người khuyết tật trong chuyển đổi", "clause": 3, "point": null, "content": "Ủy ban\nnhân dân cấp tỉnh có trách nhiệm tổ chức triển khai các hoạt động hỗ trợ và\nthúc đẩy chuyển đổi số đối với người cao tuổi và người khuyết tật trên địa bàn;\nbảo đảm điều kiện tiếp cận thuận lợi, an toàn và phù hợp với nhu cầu của nhóm đối\ntượng này.", "full_path": "|  |  | > Chương VII > Điều 44 > Khoản 3"}
+content: Ủy ban
+nhân dân cấp tỉnh có trách nhiệm tổ chức triển khai các hoạt động hỗ trợ và
+thúc đẩy chuyển đổi số đối với người cao tuổi và người khuyết tật trên địa bàn;
+bảo đảm điều kiện tiếp cận thuận lợi, an toàn và phù hợp với nhu cầu của nhóm đối
+tượng này.
+
+===== CHUNK 249 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_45_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 45, "article_text": "Văn hóa số", "clause": 1, "point": null, "content": "Văn hóa số\nlà các giá trị, chuẩn mực, hành vi ứng xử, hoạt động sáng tạo và chia sẻ nội\ndung văn hóa trên môi trường số phù hợp với quy định của pháp luật và truyền thống\nvăn hóa Việt Nam.", "full_path": "|  |  | > Chương VII > Điều 45 > Khoản 1"}
+content: Văn hóa số
+là các giá trị, chuẩn mực, hành vi ứng xử, hoạt động sáng tạo và chia sẻ nội
+dung văn hóa trên môi trường số phù hợp với quy định của pháp luật và truyền thống
+văn hóa Việt Nam.
+
+===== CHUNK 250 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_45_khoan_2_diem_a", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 45, "article_text": "Văn hóa số", "clause": 2, "point": "a", "content": "Ban hành và tổ\nchức thực hiện Bộ quy tắc ứng xử văn hóa trên môi trường số;", "full_path": "|  |  | > Chương VII > Điều 45 > Khoản 2 > Điểm a"}
+content: Ban hành và tổ
+chức thực hiện Bộ quy tắc ứng xử văn hóa trên môi trường số;
+
+===== CHUNK 251 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_45_khoan_2_diem_b", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 45, "article_text": "Văn hóa số", "clause": 2, "point": "b", "content": "Xây dựng,\nquản lý, vận hành, cập nhật, duy trì và hướng dẫn khai thác, sử dụng cơ sở dữ\nliệu quốc gia về di sản văn hóa.", "full_path": "|  |  | > Chương VII > Điều 45 > Khoản 2 > Điểm b"}
+content: Xây dựng,
+quản lý, vận hành, cập nhật, duy trì và hướng dẫn khai thác, sử dụng cơ sở dữ
+liệu quốc gia về di sản văn hóa.
+
+===== CHUNK 252 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_45_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 7, "chapter_text": "KINH TẾ SỐ, XÃ HỘI", "article": 45, "article_text": "Văn hóa số", "clause": 3, "point": null, "content": "Nhà nước\ncó chính sách khuyến khích, hỗ trợ tổ chức, cá nhân sáng tạo, sản xuất và phân\nphối sản phẩm nội dung số bảo đảm tuân thủ quy định của pháp luật, phù hợp với\ntruyền thống văn hóa Việt Nam.", "full_path": "|  |  | > Chương VII > Điều 45 > Khoản 3"}
+content: Nhà nước
+có chính sách khuyến khích, hỗ trợ tổ chức, cá nhân sáng tạo, sản xuất và phân
+phối sản phẩm nội dung số bảo đảm tuân thủ quy định của pháp luật, phù hợp với
+truyền thống văn hóa Việt Nam.
+
+===== CHUNK 253 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_46_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 8, "chapter_text": "ĐIỀU KHOẢN THI", "article": 46, "article_text": "Sửa đổi, bổ sung, bãi bỏ một số điều, khoản, điểm của", "clause": 1, "point": null, "content": "Bổ sung\nđiểm d1 vào sau điểm d khoản 2 Điều 66 của Luật Khoa học, công\nnghệ và đổi mới sáng tạo số 93/2025/QH15 như sau:\n\n“d1) Thực\nhiện hoạt động chuyển đổi số theo quy định của pháp luật về chuyển đổi số;”.", "full_path": "|  |  | > Chương VIII > Điều 46 > Khoản 1"}
+content: Bổ sung
+điểm d1 vào sau điểm d khoản 2 Điều 66 của Luật Khoa học, công
+nghệ và đổi mới sáng tạo số 93/2025/QH15 như sau:
+
+“d1) Thực
+hiện hoạt động chuyển đổi số theo quy định của pháp luật về chuyển đổi số;”.
+
+===== CHUNK 254 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_46_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 8, "chapter_text": "ĐIỀU KHOẢN THI", "article": 46, "article_text": "Sửa đổi, bổ sung, bãi bỏ một số điều, khoản, điểm của", "clause": 2, "point": null, "content": "Bãi bỏ khoản 5 Điều 42 của Luật Giao dịch điện tử số 20/2023/QH15 đã\nđược sửa đổi, bổ sung một số điều theo Luật số 60/2024/QH15\nvà Luật số 116/2025/QH15.", "full_path": "|  |  | > Chương VIII > Điều 46 > Khoản 2"}
+content: Bãi bỏ khoản 5 Điều 42 của Luật Giao dịch điện tử số 20/2023/QH15 đã
+được sửa đổi, bổ sung một số điều theo Luật số 60/2024/QH15
+và Luật số 116/2025/QH15.
+
+===== CHUNK 255 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_47_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 8, "chapter_text": "ĐIỀU KHOẢN THI", "article": 47, "article_text": "Hiệu lực thi hành", "clause": 1, "point": null, "content": "Luật này\ncó hiệu lực thi hành từ ngày 01 tháng 7 năm 2026.", "full_path": "|  |  | > Chương VIII > Điều 47 > Khoản 1"}
+content: Luật này
+có hiệu lực thi hành từ ngày 01 tháng 7 năm 2026.
+
+===== CHUNK 256 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_47_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 8, "chapter_text": "ĐIỀU KHOẢN THI", "article": 47, "article_text": "Hiệu lực thi hành", "clause": 2, "point": null, "content": "Luật Công nghệ thông tin số 67/2006/QH11\nđã được sửa đổi, bổ sung một số điều theo Luật số 21/2017/QH14,\nLuật số 20/2023/QH15, Luật số 24/2023/QH15, Luật số 71/2025/QH15 và Luật số 84/2025/QH15 (sau đây gọi là Luật Công nghệ\nthông tin số 67/2006/QH11) hết hiệu lực kể từ ngày Luật này có hiệu lực thi\nhành, trừ trường hợp quy định tại khoản 1 và khoản 2 Điều 48 của\nLuật này.", "full_path": "|  |  | > Chương VIII > Điều 47 > Khoản 2"}
+content: Luật Công nghệ thông tin số 67/2006/QH11
+đã được sửa đổi, bổ sung một số điều theo Luật số 21/2017/QH14,
+Luật số 20/2023/QH15, Luật số 24/2023/QH15, Luật số 71/2025/QH15 và Luật số 84/2025/QH15 (sau đây gọi là Luật Công nghệ
+thông tin số 67/2006/QH11) hết hiệu lực kể từ ngày Luật này có hiệu lực thi
+hành, trừ trường hợp quy định tại khoản 1 và khoản 2 Điều 48 của
+Luật này.
+
+===== CHUNK 257 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_48_khoan_1", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 8, "chapter_text": "ĐIỀU KHOẢN THI", "article": 48, "article_text": "Điều khoản chuyển tiếp", "clause": 1, "point": null, "content": "Chiến lược,\nchương trình, đề án, dự án, nhiệm vụ công nghệ thông tin, ứng dụng công nghệ\nthông tin, chuyển đổi số đã được phê duyệt và đang triển khai trước ngày Luật\nnày có hiệu lực thi hành thì được tiếp tục thực hiện theo quy định của Luật Công nghệ thông tin số 67/2006/QH11 và\ncác văn bản quy phạm pháp luật quy định chi tiết Luật\nCông nghệ thông tin số 67/2006/QH11 cho đến khi kết thúc, trừ trường hợp\ncác bên lựa chọn áp dụng Luật này.", "full_path": "|  |  | > Chương VIII > Điều 48 > Khoản 1"}
+content: Chiến lược,
+chương trình, đề án, dự án, nhiệm vụ công nghệ thông tin, ứng dụng công nghệ
+thông tin, chuyển đổi số đã được phê duyệt và đang triển khai trước ngày Luật
+này có hiệu lực thi hành thì được tiếp tục thực hiện theo quy định của Luật Công nghệ thông tin số 67/2006/QH11 và
+các văn bản quy phạm pháp luật quy định chi tiết Luật
+Công nghệ thông tin số 67/2006/QH11 cho đến khi kết thúc, trừ trường hợp
+các bên lựa chọn áp dụng Luật này.
+
+===== CHUNK 258 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_48_khoan_2", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 8, "chapter_text": "ĐIỀU KHOẢN THI", "article": 48, "article_text": "Điều khoản chuyển tiếp", "clause": 2, "point": null, "content": "Chứng\nchỉ công nghệ thông tin, chứng chỉ ứng dụng công nghệ thông tin đã được cấp\ntheo Luật Công nghệ thông tin số 67/2006/QH11\nvà các văn bản quy phạm pháp luật khác có liên quan tiếp tục có hiệu lực cho đến\nkhi hết thời hạn ghi trên chứng chỉ.", "full_path": "|  |  | > Chương VIII > Điều 48 > Khoản 2"}
+content: Chứng
+chỉ công nghệ thông tin, chứng chỉ ứng dụng công nghệ thông tin đã được cấp
+theo Luật Công nghệ thông tin số 67/2006/QH11
+và các văn bản quy phạm pháp luật khác có liên quan tiếp tục có hiệu lực cho đến
+khi hết thời hạn ghi trên chứng chỉ.
+
+===== CHUNK 259 =====
+{"doc_id": "luat_unknown", "chunk_id": "luat_unknown_dieu_48_khoan_3", "doc_type": "luat", "doc_name": "|  |  |", "chapter": 8, "chapter_text": "ĐIỀU KHOẢN THI", "article": 48, "article_text": "Điều khoản chuyển tiếp", "clause": 3, "point": null, "content": "Đối với\ncác văn bản quy phạm pháp luật quy định chi tiết, quy định biện pháp cụ thể để\ntổ chức, hướng dẫn thi hành Luật Công nghệ\nthông tin số 67/2006/QH11 đã được ban hành trước ngày Luật này có hiệu lực\nthi hành, các Bộ, cơ quan ngang Bộ có trách nhiệm rà soát, công bố hoặc trình cấp\ncó thẩm quyền công bố việc tiếp tục có hiệu lực toàn bộ hoặc một phần theo quy\nđịnh của Luật Ban hành văn bản quy phạm pháp luật.\n\n*Luật này\nđược Quốc hội nước Cộng hòa xã hội chủ nghĩa Việt Nam khóa XV, Kỳ họp thứ 10\nthông qua ngày 11 tháng 12 năm 2025.*\n\n|  |  |\n| --- | --- |\n|  |", "full_path": "|  |  | > Chương VIII > Điều 48 > Khoản 3"}
+content: Đối với
+các văn bản quy phạm pháp luật quy định chi tiết, quy định biện pháp cụ thể để
+tổ chức, hướng dẫn thi hành Luật Công nghệ
+thông tin số 67/2006/QH11 đã được ban hành trước ngày Luật này có hiệu lực
+thi hành, các Bộ, cơ quan ngang Bộ có trách nhiệm rà soát, công bố hoặc trình cấp
+có thẩm quyền công bố việc tiếp tục có hiệu lực toàn bộ hoặc một phần theo quy
+định của Luật Ban hành văn bản quy phạm pháp luật.
+
+*Luật này
+được Quốc hội nước Cộng hòa xã hội chủ nghĩa Việt Nam khóa XV, Kỳ họp thứ 10
+thông qua ngày 11 tháng 12 năm 2025.*
+
+|  |  |
+| --- | --- |
+|  |
+

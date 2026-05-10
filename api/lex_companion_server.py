@@ -20,10 +20,11 @@ from api.utils.minio_conn import LexCompanionMinio
 from api.utils.minio_conn import MINIO_CONFIG
 from api.utils.redis_conn import REDIS_CONN
 from api.worker.task_execution import start_task_worker, stop_task_worker
-
+from api.utils.llm_client import LLMProvider
+from api.utils.llm_client import config
 logger = setup_logging()
 
-
+llm_client = LLMProvider(config)
 @asynccontextmanager
 async def app_lifespan(app: FastAPI):
     """Handle app startup and shutdown lifecycle."""

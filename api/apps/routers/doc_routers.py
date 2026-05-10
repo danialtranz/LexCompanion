@@ -1,4 +1,5 @@
 from fastapi import APIRouter, File, Query, Request, UploadFile
+from pydantic import BaseModel
 
 from api.apps.controllers.doc_controller import (
     delete_document,
@@ -7,10 +8,16 @@ from api.apps.controllers.doc_controller import (
     run_document_parse,
     stream_document_content,
     upload_document,
+    upload_document_via_url,
 )
 from api.apps.middleware.jwt_auth import CurrentUser
 
 router = APIRouter(prefix="/v1", tags=["doc"])
+
+
+class UploadViaUrlRequest(BaseModel):
+    url_scraping: str
+    doc_name: str | None = None
 
 
 @router.get("/docs")
@@ -37,6 +44,25 @@ async def doc_upload(
     ),
 ):
     return await upload_document(user=user, file=file, kb_id=kb_id, request=request)
+
+
+@router.post("/doc/upload_via_url")
+async def doc_upload_via_url(
+    request: Request,
+    user: CurrentUser,
+    payload: UploadViaUrlRequest,
+    kb_id: str | None = Query(
+        None,
+        description="Knowledge base id; omit or 'null' to use your latest KB (permission=me)",
+    ),
+):
+    return await upload_document_via_url(
+        user=user,
+        kb_id=kb_id,
+        url_scraping=payload.url_scraping,
+        doc_name=payload.doc_name,
+        request=request,
+    )
 
 
 @router.get("/doc/content")

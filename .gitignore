@@ -23,3 +23,7 @@ instruction.md
 server.log
 api_creating_instruction.md
 esdata/
+
+### ignore ollama models
+model_serving/llms/phi3/.ollama/
+model_serving/llms/phi3/.ollama-runtime/

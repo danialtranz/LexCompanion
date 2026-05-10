@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from contextlib import asynccontextmanager
 import os
+import threading
 import time
 from typing import Any
 
@@ -45,6 +46,11 @@ async def lifespan(_: FastAPI):
 
 
 app = FastAPI(title="Vietnamese Embedding v2 Serving", lifespan=lifespan)
+_MAX_CONCURRENT = max(1, int(os.getenv("EMBEDDING_MAX_CONCURRENT", "1")))
+_QUEUE_TIMEOUT_SEC = float(os.getenv("EMBEDDING_QUEUE_TIMEOUT_SEC", "3"))
+_COOLDOWN_MS = max(0, int(os.getenv("EMBEDDING_COOLDOWN_MS", "80")))
+_MAX_BATCH_SIZE = max(1, int(os.getenv("EMBEDDING_MAX_BATCH_SIZE", "8")))
+_infer_semaphore = threading.BoundedSemaphore(_MAX_CONCURRENT)
 
 
 def _get_jwt_secret() -> str:
@@ -92,6 +98,14 @@ def _validate_jwt_from_header(authorization: str | None) -> None:
         ) from e
 
 
+def _try_acquire_infer_slot() -> bool:
+    return _infer_semaphore.acquire(timeout=_QUEUE_TIMEOUT_SEC)
+
+
+def _release_infer_slot() -> None:
+    _infer_semaphore.release()
+
+
 @app.get("/health", response_model=ApiResponse)
 def health() -> JSONResponse:
     try:
@@ -133,9 +147,37 @@ def openai_compatible_embeddings(
                     }
                 },
             )
+        if len(texts) > _MAX_BATCH_SIZE:
+            return JSONResponse(
+                status_code=429,
+                content={
+                    "error": {
+                        "message": (
+                            f"Too many input items: {len(texts)} > {_MAX_BATCH_SIZE}. "
+                            "Please reduce batch size."
+                        ),
+                        "type": "rate_limit_error",
+                    }
+                },
+            )
 
-        loaded = get_loaded_model()
-        vectors = loaded.model.encode(texts, convert_to_numpy=True)
+        if not _try_acquire_infer_slot():
+            return JSONResponse(
+                status_code=429,
+                content={
+                    "error": {
+                        "message": "Embedding server is busy. Please retry shortly.",
+                        "type": "rate_limit_error",
+                    }
+                },
+            )
+        try:
+            loaded = get_loaded_model()
+            vectors = loaded.model.encode(texts, convert_to_numpy=True)
+        finally:
+            _release_infer_slot()
+            if _COOLDOWN_MS > 0:
+                time.sleep(_COOLDOWN_MS / 1000.0)
         if vectors.ndim == 1:
             rows = [vectors.tolist()]
         else:
@@ -186,8 +228,18 @@ def embed(req: EmbedRequest, authorization: str | None = Header(default=None)) -
     try:
         _validate_jwt_from_header(authorization)
         start = time.perf_counter()
-        loaded = get_loaded_model()
-        vector = loaded.model.encode(req.text, convert_to_numpy=True).tolist()
+        if not _try_acquire_infer_slot():
+            return JSONResponse(
+                status_code=429,
+                content={"code": 429, "msg": "Embedding server is busy. Please retry shortly.", "data": None},
+            )
+        try:
+            loaded = get_loaded_model()
+            vector = loaded.model.encode(req.text, convert_to_numpy=True).tolist()
+        finally:
+            _release_infer_slot()
+            if _COOLDOWN_MS > 0:
+                time.sleep(_COOLDOWN_MS / 1000.0)
         processing_time_ms = int((time.perf_counter() - start) * 1000)
         return JSONResponse(
             status_code=200,

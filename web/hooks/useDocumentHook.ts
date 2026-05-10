@@ -100,7 +100,11 @@ const QK = {
  */
 export const useUploadDocument = () => {
   const queryClient = useQueryClient();
-  const { data, isPending: loading, mutateAsync } = useMutation({
+  const {
+    data,
+    isPending: loading,
+    mutateAsync,
+  } = useMutation({
     mutationKey: ["document", "upload"],
     mutationFn: async (params: {
       file: File;
@@ -179,7 +183,11 @@ export const useDocumentAccess = (
  */
 export const useDeleteDocument = () => {
   const queryClient = useQueryClient();
-  const { data, isPending: loading, mutateAsync } = useMutation({
+  const {
+    data,
+    isPending: loading,
+    mutateAsync,
+  } = useMutation({
     mutationKey: ["document", "delete"],
     mutationFn: async (doc_id: string): Promise<number> => {
       const axiosResponse = await documentService.deleteDocument(
@@ -197,4 +205,50 @@ export const useDeleteDocument = () => {
     },
   });
   return { data, loading, deleteDocument: mutateAsync };
+};
+
+export const useUploadDocumentViaUrl = () => {
+  const queryClient = useQueryClient();
+  const {
+    data,
+    isPending: loading,
+    mutateAsync,
+  } = useMutation({
+    mutationKey: ["document", "uploadViaUrl"],
+    mutationFn: async (params: {
+      url: string;
+      doc_name: string | null;
+      kb_id?: string | null;
+    }): Promise<ApiEnvelope<UploadDocumentData>> => {
+      const axiosResponse = await documentService.uploadDocumentViaUrl(
+        {
+          params: { kb_id: normalizeKbQuery(params.kb_id) },
+          data: {
+            url_scraping: params.url,
+            doc_name: params.doc_name,
+          },
+        },
+        true,
+      );
+      // refetch lai ds documents
+      queryClient.invalidateQueries({ queryKey: ["documents", "list"] });
+      return axiosResponse.data ?? { code: -1, msg: "Empty response" };
+    },
+  });
+  return { data, loading, uploadDocumentViaUrl: mutateAsync };
+};
+
+export const useRunDocument = () => {
+  return useMutation({
+    mutationKey: ["document", "run"],
+    mutationFn: async (doc_id: string): Promise<ApiEnvelope<void>> => {
+      const axiosResponse = await documentService.runDocument(
+        {
+          params: { doc_id },
+        },
+        true,
+      );
+      return axiosResponse.data ?? { code: -1, msg: "Empty response" };
+    },
+  });
 };

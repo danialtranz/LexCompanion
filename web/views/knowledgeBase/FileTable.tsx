@@ -9,6 +9,7 @@ import { getToken } from "@/utils/tokenManager";
 import {
   useDeleteDocument,
   useDocumentsList,
+  useRunDocument,
   type DocumentListItem,
 } from "@/hooks/useDocumentHook";
 
@@ -136,6 +137,7 @@ async function openDocumentBlobInNewTab(docId: string): Promise<void> {
 export function FileTable({ kb_id = null, page_size = 5 }: FileTableProps) {
   const [page, setPage] = useState(1);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [runningId, setRunningId] = useState<string | null>(null);
   const [preview, setPreview] = useState<{
     id: string;
     name: string;
@@ -156,6 +158,7 @@ export function FileTable({ kb_id = null, page_size = 5 }: FileTableProps) {
   const totalPages = Math.max(1, Math.ceil(total / page_size));
 
   const { deleteDocument } = useDeleteDocument();
+  const { mutateAsync: runDocument } = useRunDocument();
 
   const fetchPreviewBlob = !!preview?.id && canEmbedInIframe(preview.type);
 
@@ -164,9 +167,25 @@ export function FileTable({ kb_id = null, page_size = 5 }: FileTableProps) {
     fetchPreviewBlob,
   );
 
-  const handleRun = useCallback((item: DocumentListItem) => {
-    toast.success(`Đã chọn chạy xử lý: ${item.name}`);
-  }, []);
+  const handleRun = useCallback(
+    async (item: DocumentListItem) => {
+      setRunningId(item.id);
+      try {
+        const res = await runDocument(item.id);
+        if (res.code === 0) {
+          toast.success(`Đã đưa vào hàng đợi parse: ${item.name}`);
+          await refetch();
+        } else {
+          toast.error(res.msg || "Không chạy được tài liệu");
+        }
+      } catch {
+        toast.error("Không chạy được tài liệu");
+      } finally {
+        setRunningId(null);
+      }
+    },
+    [runDocument, refetch],
+  );
 
   const handleDelete = useCallback(
     async (docId: string, name: string) => {
@@ -279,7 +298,10 @@ export function FileTable({ kb_id = null, page_size = 5 }: FileTableProps) {
                         <div className="flex flex-wrap items-center justify-end gap-2">
                           <RunControl
                             run={row.run}
-                            onRun={() => handleRun(row)}
+                            onRun={() => {
+                              if (runningId === row.id) return;
+                              void handleRun(row);
+                            }}
                           />
                           <button
                             type="button"
