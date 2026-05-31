@@ -6,11 +6,11 @@ Monorepo gồm **API FastAPI** (`api/`), **agent / xử lý văn bản pháp lu�
 
 ## Yêu cầu
 
-| Thành phần | Phiên bản |
-|------------|-----------|
-| Python | **3.12+** |
-| [uv](https://docs.astral.sh/uv/getting-started/installation/) | mới nhất |
-| Docker (tùy chọn) | Postgres, MinIO, Redis — xem `api/deployment.readme.md` |
+| Thành phần                                                    | Phiên bản                                               |
+| ------------------------------------------------------------- | ------------------------------------------------------- |
+| Python                                                        | **3.12+**                                               |
+| [uv](https://docs.astral.sh/uv/getting-started/installation/) | mới nhất                                                |
+| Docker (tùy chọn)                                             | Postgres, MinIO, Redis — xem `api/deployment.readme.md` |
 
 ---
 
@@ -158,11 +158,11 @@ uv sync
 
 ## Lệnh **không** nên dùng với repo này
 
-| Lệnh | Lý do |
-|------|--------|
-| `uv pip install -e .` | Project không đóng gói wheel; sẽ lỗi thiếu `src/langgraph_base/` |
-| `pip install -e .` | Giống trên |
-| `python api/lex_companion_server.py` | Thiếu `PYTHONPATH=.` → lỗi `ModuleNotFoundError: api` |
+| Lệnh                                 | Lý do                                                            |
+| ------------------------------------ | ---------------------------------------------------------------- |
+| `uv pip install -e .`                | Project không đóng gói wheel; sẽ lỗi thiếu `src/langgraph_base/` |
+| `pip install -e .`                   | Giống trên                                                       |
+| `python api/lex_companion_server.py` | Thiếu `PYTHONPATH=.` → lỗi `ModuleNotFoundError: api`            |
 
 Chỉ cần: **`uv sync`** + chạy module **`api.lex_companion_server`**.
 
@@ -231,15 +231,17 @@ Kiểm tra container MinIO và biến `MINIO_*` trong `.env`.
 
 ## Phát triển thêm
 
-| Việc cần làm | Lệnh / tài liệu |
-|--------------|-----------------|
-| Tạo API mới | `api_creating_instruction.md` |
-| Docker Postgres/MinIO/Redis | `api/deployment.readme.md` |
-| Elasticsearch | `model_serving/retrievers/elastic_search/deployment.readme.md` |
-| LangGraph dev (tùy chọn) | `uv sync --group dev` rồi `uv run langgraph dev` |
+| Việc cần làm                | Lệnh / tài liệu                                                |
+| --------------------------- | -------------------------------------------------------------- |
+| Tạo API mới                 | `api_creating_instruction.md`                                  |
+| Docker Postgres/MinIO/Redis | `api/deployment.readme.md`                                     |
+| Elasticsearch               | `model_serving/retrievers/elastic_search/deployment.readme.md` |
+| LangGraph dev (tùy chọn)    | `uv sync --group dev` rồi `uv run langgraph dev`               |
 
 ---
 
 ## License
 
 Generated / maintained by project contributors.
+
+uv run python -m api.lex_companion_server

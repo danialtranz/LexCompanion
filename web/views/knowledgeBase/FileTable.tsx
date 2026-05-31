@@ -16,6 +16,8 @@ import {
 type FileTableProps = {
   kb_id?: string | null;
   page_size?: number;
+  hideHeader?: boolean;
+  onRefetchReady?: (refetch: () => void) => void;
 };
 
 function formatBytes(bytes: number): string {
@@ -134,7 +136,12 @@ async function openDocumentBlobInNewTab(docId: string): Promise<void> {
   window.setTimeout(() => URL.revokeObjectURL(url), 120_000);
 }
 
-export function FileTable({ kb_id = null, page_size = 5 }: FileTableProps) {
+export function FileTable({
+  kb_id = null,
+  page_size = 5,
+  hideHeader = false,
+  onRefetchReady,
+}: FileTableProps) {
   const [page, setPage] = useState(1);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [runningId, setRunningId] = useState<string | null>(null);
@@ -222,22 +229,30 @@ export function FileTable({ kb_id = null, page_size = 5 }: FileTableProps) {
 
   const closePreview = useCallback(() => setPreview(null), []);
 
+  useEffect(() => {
+    onRefetchReady?.(() => {
+      void refetch();
+    });
+  }, [onRefetchReady, refetch]);
+
   return (
     <section className="w-full">
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        <h2 className="text-xl font-bold tracking-tight text-stone-900 sm:text-2xl">
-          Uploaded
-        </h2>
-        <button
-          type="button"
-          onClick={() => void refetch()}
-          className="self-start text-sm font-medium text-violet-700 hover:underline sm:self-auto"
-        >
-          Làm mới
-        </button>
-      </div>
+      {!hideHeader && (
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="text-xl font-bold tracking-tight text-stone-900 sm:text-2xl">
+            Uploaded
+          </h2>
+          <button
+            type="button"
+            onClick={() => void refetch()}
+            className="self-start text-sm font-medium text-violet-700 hover:underline sm:self-auto"
+          >
+            Làm mới
+          </button>
+        </div>
+      )}
 
-      <div className="mt-4 overflow-hidden rounded-2xl border border-stone-200/90 bg-white/80 shadow-sm ring-1 ring-stone-100/80">
+      <div className={hideHeader ? "" : "mt-4"}>
         {isPending && items.length === 0 ? (
           <div className="flex min-h-[200px] items-center justify-center gap-2 py-16 text-stone-500">
             <Loader2 className="h-6 w-6 animate-spin" />
@@ -429,7 +444,9 @@ export function FileTable({ kb_id = null, page_size = 5 }: FileTableProps) {
                       </p>
                       <button
                         type="button"
-                        onClick={() => void openDocumentBlobInNewTab(preview.id)}
+                        onClick={() =>
+                          void openDocumentBlobInNewTab(preview.id)
+                        }
                         className="rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:from-violet-500 hover:to-fuchsia-500"
                       >
                         Thử mở trong tab mới

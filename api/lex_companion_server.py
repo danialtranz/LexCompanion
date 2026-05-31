@@ -144,7 +144,7 @@ def load_routers(app: FastAPI) -> None:
 async def run_server() -> None:
     """Run uvicorn server with graceful shutdown signal handling."""
     app = create_app()
-    config = uvicorn.Config(app=app, host="0.0.0.0", port=5999, log_config=None)
+    config = uvicorn.Config(app=app, host="0.0.0.0", port=5999, log_config=None ,reload=True)
     server = uvicorn.Server(config)
 
     loop = asyncio.get_running_loop()

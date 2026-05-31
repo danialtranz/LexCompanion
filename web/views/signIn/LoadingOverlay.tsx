@@ -1,14 +1,14 @@
 interface LoadingOverlayProps {
-    isLoading: boolean;
+  isLoading: boolean;
 }
 
 export const LoadingOverlay = ({ isLoading }: LoadingOverlayProps) => {
-    if (!isLoading) return null;
+  if (!isLoading) return null;
 
-    return (
-        <div className="fixed inset-0 bg-white/95 backdrop-blur-sm flex items-center justify-center flex-col gap-4 z-[9999]">
-            <div className="w-12 h-12 border-4 border-gray-200 border-t-indigo-600 rounded-full animate-spin"></div>
-            <p className="text-gray-600 text-base font-medium">Đang đăng nhập...</p>
-        </div>
-    );
+  return (
+    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-4 bg-[#fffdf8]/95 backdrop-blur-sm">
+      <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#eee4d7] border-t-[#b77519]" />
+      <p className="text-base font-medium text-[#6f665c]">Đang đăng nhập...</p>
+    </div>
+  );
 };

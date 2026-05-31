@@ -13,5 +13,9 @@ const api = {
   docContentUrl: `${api_host}/v1/doc/content`,
   docUploadViaUrl: `${api_host}/v1/doc/upload_via_url`,
   docRunUrl: `${api_host}/v1/doc/run`,
+  // admin legal corpus
+  adminDocTopicUrl: `${api_host}/v1/admin/doc/topic`,
+  adminDocSubjectUrl: `${api_host}/v1/admin/doc/subject`,
+  adminDocArticlesUrl: `${api_host}/v1/admin/doc/articles`,
 };
 export default api;

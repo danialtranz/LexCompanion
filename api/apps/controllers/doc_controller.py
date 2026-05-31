@@ -17,12 +17,16 @@ from weasyprint import HTML
 
 from api.apps.services.doc_service import DocumentService
 from api.apps.services.file_service import FileService
-from api.apps.services.hf_dataset_service import (
-    import_hf_dataset_batch,
-    preview_hf_dataset_all_configs,
-)
+from api.apps.services.hf_dataset_service import preview_hf_dataset_all_configs
 from api.apps.services.kb_service import KnowledgebaseService
-from api.db.models import Document, Knowledgebase, Users
+from api.apps.services.legal_service import (
+    LegalArticleService,
+    LegalIngestionJobService,
+    LegalSubjectService,
+    LegalTopicService,
+    LegalTreeNodeService,
+)
+from api.db.models import Document, Knowledgebase, LegalArticle, LegalSubject, LegalTopic, LegalTreeNode, Users
 from api.utils.logger import setup_logging
 from api.utils.minio_conn import LexCompanionMinio, MINIO_CONFIG
 from api.utils.redis_conn import REDIS_CONN
@@ -661,10 +665,268 @@ def _is_super_admin(user: Users) -> bool:
     return bool(getattr(user, "super_admin", False))
 
 
+def _legal_tree_topic_to_dict(row: LegalTreeNode) -> dict:
+    return {
+        "id": row.id,
+        "node_id": row.node_id,
+        "parent_id": row.parent_id,
+        "kind": row.kind,
+        "number": row.number,
+        "title": row.title,
+        "created_at": row.created_at.isoformat() if row.created_at else None,
+        "updated_at": row.updated_at.isoformat() if row.updated_at else None,
+    }
+
+
+def _legal_topic_detail_to_dict(row: LegalTopic) -> dict:
+    return {
+        "id": row.id,
+        "topic_id": row.topic_id,
+        "topic_number": row.topic_number,
+        "topic_title_vi": row.topic_title_vi,
+        "topic_title_en": row.topic_title_en,
+        "topic_note": row.topic_note,
+        "article_count": row.article_count,
+        "demuc_count": row.demuc_count,
+        "created_at": row.created_at.isoformat() if row.created_at else None,
+        "updated_at": row.updated_at.isoformat() if row.updated_at else None,
+    }
+
+
+def _legal_subject_detail_to_dict(row: LegalSubject) -> dict:
+    return {
+        "id": row.id,
+        "subject_id": row.subject_id,
+        "topic_id": row.topic_id,
+        "topic_number": row.topic_number,
+        "topic_title": row.topic_title,
+        "subject_number": row.subject_number,
+        "subject_title": row.subject_title,
+        "source_url": row.source_url,
+        "file_version": row.file_version,
+        "fetch_status": row.fetch_status,
+        "fetch_error": row.fetch_error,
+        "scraped_at": row.scraped_at,
+        "created_at": row.created_at.isoformat() if row.created_at else None,
+        "updated_at": row.updated_at.isoformat() if row.updated_at else None,
+    }
+
+
+def _legal_article_to_dict(row: LegalArticle) -> dict:
+    return {
+        "id": row.id,
+        "subject_id": row.subject_id,
+        "topic_id": row.topic_id,
+        "topic_number": row.topic_number,
+        "topic_title": row.topic_title,
+        "subject_number": row.subject_number,
+        "subject_title": row.subject_title,
+        "article_anchor": row.article_anchor,
+        "article_title": row.article_title,
+        "chapter_title": row.chapter_title,
+        "source_note_text": row.source_note_text,
+        "source_links": row.source_links,
+        "related_note_text": row.related_note_text,
+        "content_text": row.content_text,
+        "content_char_len": row.content_char_len,
+        "content_word_count": row.content_word_count,
+        "source_url": row.source_url,
+        "scraped_at": row.scraped_at,
+        "created_at": row.created_at.isoformat() if row.created_at else None,
+        "updated_at": row.updated_at.isoformat() if row.updated_at else None,
+    }
+
+
+def admin_list_legal_topics(
+    *,
+    user: Users,
+    page: int = 1,
+    page_size: int = 5,
+) -> dict:
+    try:
+        logger.info(
+            "admin_list_legal_topics: user_id={} page={} page_size={}",
+            user.id,
+            page,
+            page_size,
+        )
+        if not _is_super_admin(user):
+            return {"code": 403, "msg": "Super admin required", "data": None}
+
+        total, rows = LegalTreeNodeService.list_top_level_topics_paginated(page, page_size)
+        logger.info("admin_list_legal_topics: total={} returned={}", total, len(rows))
+        return {
+            "code": 200,
+            "msg": "OK",
+            "data": {
+                "total": total,
+                "page": page,
+                "page_size": page_size,
+                "items": [_legal_tree_topic_to_dict(r) for r in rows],
+            },
+        }
+    except Exception as e:
+        logger.error("admin_list_legal_topics error: {}", e)
+        return {"code": 500, "msg": str(e), "data": None}
+
+
+def admin_get_legal_topic_detail(*, user: Users, topic_id: str) -> dict:
+    try:
+        logger.info(
+            "admin_get_legal_topic_detail: user_id={} topic_id={}",
+            user.id,
+            topic_id,
+        )
+        if not _is_super_admin(user):
+            return {"code": 403, "msg": "Super admin required", "data": None}
+
+        topic_id = (topic_id or "").strip()
+        if not topic_id:
+            return {"code": 400, "msg": "topic_id is required", "data": None}
+
+        row = LegalTopicService.get_by_topic_id(topic_id)
+        if not row:
+            return {"code": 404, "msg": "Topic not found", "data": None}
+
+        logger.info("admin_get_legal_topic_detail: found topic_id={}", topic_id)
+        return {
+            "code": 200,
+            "msg": "OK",
+            "data": _legal_topic_detail_to_dict(row),
+        }
+    except Exception as e:
+        logger.error("admin_get_legal_topic_detail error: {}", e)
+        return {"code": 500, "msg": str(e), "data": None}
+
+
+def admin_list_legal_subjects(
+    *,
+    user: Users,
+    topic_id: str,
+    page: int = 1,
+    page_size: int = 5,
+) -> dict:
+    try:
+        logger.info(
+            "admin_list_legal_subjects: user_id={} topic_id={} page={} page_size={}",
+            user.id,
+            topic_id,
+            page,
+            page_size,
+        )
+        if not _is_super_admin(user):
+            return {"code": 403, "msg": "Super admin required", "data": None}
+
+        topic_id = (topic_id or "").strip()
+        if not topic_id:
+            return {"code": 400, "msg": "topic_id is required", "data": None}
+
+        total, rows = LegalTreeNodeService.list_subjects_by_topic_paginated(
+            topic_id, page, page_size
+        )
+        logger.info(
+            "admin_list_legal_subjects: topic_id={} total={} returned={}",
+            topic_id,
+            total,
+            len(rows),
+        )
+        return {
+            "code": 200,
+            "msg": "OK",
+            "data": {
+                "topic_id": topic_id,
+                "total": total,
+                "page": page,
+                "page_size": page_size,
+                "items": [_legal_tree_topic_to_dict(r) for r in rows],
+            },
+        }
+    except Exception as e:
+        logger.error("admin_list_legal_subjects error: {}", e)
+        return {"code": 500, "msg": str(e), "data": None}
+
+
+def admin_get_legal_subject_detail(*, user: Users, subject_id: str) -> dict:
+    try:
+        logger.info(
+            "admin_get_legal_subject_detail: user_id={} subject_id={}",
+            user.id,
+            subject_id,
+        )
+        if not _is_super_admin(user):
+            return {"code": 403, "msg": "Super admin required", "data": None}
+
+        subject_id = (subject_id or "").strip()
+        if not subject_id:
+            return {"code": 400, "msg": "subject_id is required", "data": None}
+
+        row = LegalSubjectService.get_by_subject_id(subject_id)
+        if not row:
+            return {"code": 404, "msg": "Subject not found", "data": None}
+
+        logger.info("admin_get_legal_subject_detail: found subject_id={}", subject_id)
+        return {
+            "code": 200,
+            "msg": "OK",
+            "data": _legal_subject_detail_to_dict(row),
+        }
+    except Exception as e:
+        logger.error("admin_get_legal_subject_detail error: {}", e)
+        return {"code": 500, "msg": str(e), "data": None}
+
+
+def admin_list_legal_articles(
+    *,
+    user: Users,
+    subject_id: str,
+    page: int = 1,
+    page_size: int = 5,
+) -> dict:
+    try:
+        logger.info(
+            "admin_list_legal_articles: user_id={} subject_id={} page={} page_size={}",
+            user.id,
+            subject_id,
+            page,
+            page_size,
+        )
+        if not _is_super_admin(user):
+            return {"code": 403, "msg": "Super admin required", "data": None}
+
+        subject_id = (subject_id or "").strip()
+        if not subject_id:
+            return {"code": 400, "msg": "subject_id is required", "data": None}
+
+        total, rows = LegalArticleService.list_by_subject_paginated(
+            subject_id, page, page_size
+        )
+        logger.info(
+            "admin_list_legal_articles: subject_id={} total={} returned={}",
+            subject_id,
+            total,
+            len(rows),
+        )
+        return {
+            "code": 200,
+            "msg": "OK",
+            "data": {
+                "subject_id": subject_id,
+                "total": total,
+                "page": page,
+                "page_size": page_size,
+                "items": [_legal_article_to_dict(r) for r in rows],
+            },
+        }
+    except Exception as e:
+        logger.error("admin_list_legal_articles error: {}", e)
+        return {"code": 500, "msg": str(e), "data": None}
+
+
 def admin_upload_hf_dataset(
     *,
     user: Users,
     dataset_name: str,
+    dataset_version: str,
     config: str | None = None,
     offset: int = 0,
     limit: int | None = None,
@@ -708,28 +970,85 @@ def admin_upload_hf_dataset(
                 "data": result,
             }
 
-        kb = KnowledgebaseService.ensure_kb_for_super_admin(user)
-        logger.info(f"admin hf upload: kb_id={kb.id} tenant_id={kb.tenant_id}")
+        cfg = (config or "all").strip().lower() or "all"
+        if cfg != "all":
+            return {
+                "code": 400,
+                "msg": "Only config=all is supported for import (full dataset to PostgreSQL)",
+                "data": None,
+            }
 
-        batch_limit = limit if limit is not None else int(
-            os.getenv("HF_IMPORT_DEFAULT_LIMIT", "50")
+        if not REDIS_CONN.is_alive() or REDIS_CONN.REDIS is None:
+            logger.warning(f"admin hf upload: redis unavailable dataset={dataset_name!r}")
+            return {"code": 503, "msg": "Task queue unavailable", "data": None}
+
+        dataset_version = (dataset_version or "").strip()
+        if not dataset_version:
+            return {"code": 400, "msg": "dataset_version is required", "data": None}
+
+        running_job = LegalIngestionJobService.get_running_job(
+            dataset_name, dataset_version
         )
-        result = import_hf_dataset_batch(
-            user=user,
-            kb=kb,
+        if running_job:
+            logger.info(
+                f"admin hf upload blocked: running job_id={running_job.id} "
+                f"dataset={dataset_name!r} version={dataset_version!r}"
+            )
+            return {
+                "code": 409,
+                "msg": "Import already running for this dataset and version",
+                "data": {
+                    "job_id": running_job.id,
+                    "dataset_name": dataset_name,
+                    "dataset_version": dataset_version,
+                    "status": running_job.status,
+                },
+            }
+
+        latest_completed = LegalIngestionJobService.get_latest_completed_job(dataset_name)
+        if latest_completed and (latest_completed.dataset_version or "") == dataset_version:
+            logger.info(
+                f"admin hf upload blocked: already imported job_id={latest_completed.id} "
+                f"dataset={dataset_name!r} version={dataset_version!r}"
+            )
+            return {
+                "code": 409,
+                "msg": "This dataset version was already imported",
+                "data": {
+                    "job_id": latest_completed.id,
+                    "dataset_name": dataset_name,
+                    "dataset_version": dataset_version,
+                    "status": latest_completed.status,
+                    "finished_at": (
+                        latest_completed.finished_at.isoformat()
+                        if latest_completed.finished_at
+                        else None
+                    ),
+                },
+            }
+
+        job = LegalIngestionJobService.create_running(
             dataset_name=dataset_name,
-            config=(config or "articles").strip() or "articles",
-            offset=max(0, offset),
-            limit=batch_limit,
+            dataset_version=dataset_version,
         )
-        logger.info(
-            f"admin hf upload done: imported={result['imported']} failed={result['failed']}"
-        )
-        return {
-            "code": 201,
-            "msg": "Hugging Face dataset batch imported",
-            "data": result,
+        payload = {
+            "type": "import_hf_phapdien",
+            "job_id": job.id,
+            "dataset_name": dataset_name,
+            "dataset_version": dataset_version,
         }
+        ok = REDIS_CONN.queue_product(_LEX_TASK_STREAM, payload)
+        if not ok:
+            LegalIngestionJobService.mark_finished(
+                job.id,
+                status="failed",
+                error_message="Failed to enqueue import task",
+            )
+            logger.error(f"admin hf upload: queue_product failed job_id={job.id}")
+            return {"code": 502, "msg": "Failed to enqueue import task", "data": None}
+
+        logger.info(f"admin hf upload enqueued job_id={job.id} dataset={dataset_name!r}")
+        return {"code": 0, "msg": "running", "data": None}
     except Exception as e:
         logger.error(f"admin_upload_hf_dataset error: {e}")
         return {"code": 500, "msg": str(e), "data": None}

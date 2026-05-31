@@ -3,4 +3,4 @@
 3. Tạo thêm các Index trong elastic search để quản lý search . Trong đó Postgres = data gốc + quan hệ + version
    Elasticsearch = search index + vector retrieval
 
-4.2 Bảng File và Document nên đơn giản thôi .Bỏ các quan hệ và sửa đổi đi
+4.2 Bảng File và Document nên đơn giản thôi .Bỏ các quan hệ và sửa đổi đi . File , Doc và Kb chủ yếu là quản lý file do user upload lên .

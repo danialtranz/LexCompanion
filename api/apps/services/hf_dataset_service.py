@@ -1,37 +1,31 @@
-"""Import Hugging Face datasets (e.g. phapdien) into File, Document, and Elasticsearch."""
+"""Import Hugging Face datasets (e.g. phapdien) into legal PostgreSQL tables."""
 
 from __future__ import annotations
 
-import json
+import hashlib
 import os
+from datetime import datetime
 from typing import Any
 
 from datasets import get_dataset_config_names, load_dataset, load_dataset_builder
 
-from api.apps.services.doc_service import DocumentService
-from api.apps.services.file_service import FileService
-from api.apps.services.kb_service import KnowledgebaseService
-from api.db.models import Knowledgebase, Users
-from api.utils.logger import setup_logging
-from api.utils.minio_conn import LexCompanionMinio
-from api.utils.upload_preview import content_hash_xxhash128_hex
-from api.utils.utils import get_uuid
-from api.utils.elastic_chunk_index import (
-    bulk_index_vectors,
-    embed_documents_with_backpressure,
-    embedding_from_env,
-    ensure_chunk_index,
-    get_elasticsearch_client,
+from api.apps.services.legal_service import LegalIngestionJobService
+from api.db.models import (
+    DB,
+    LegalArticle,
+    LegalGlossary,
+    LegalOntologySubject,
+    LegalSubject,
+    LegalTopic,
+    LegalTreeNode,
 )
+from api.utils.logger import setup_logging
 
 logger = setup_logging()
 
 _DEFAULT_DATASET_CONFIG = "articles"
-_DEFAULT_LIMIT = 50
-_MAX_LIMIT = 500
 _DEFAULT_PREVIEW_SAMPLES = 20
 _MAX_PREVIEW_SAMPLES = 100
-_PARSE_TYPE = "hf_phapdien"
 
 # tmquan/phapdien-moj-gov-vn — 6 bảng trên Hugging Face
 PHAPDIEN_MOJ_CONFIG_META: dict[str, str] = {
@@ -44,10 +38,6 @@ PHAPDIEN_MOJ_CONFIG_META: dict[str, str] = {
 }
 
 _PREVIEW_TEXT_TRUNCATE = 800
-
-
-def _subject_title(row: dict[str, Any]) -> str | None:
-    return (row.get("subject_title") or row.get("demuc_title") or "").strip() or None
 
 
 def resolve_dataset_configs(dataset_name: str) -> list[str]:
@@ -145,216 +135,303 @@ def preview_hf_dataset_all_configs(
     }
 
 
-def _normalize_anchor(anchor: str | None) -> str:
-    raw = (anchor or "").strip()
-    if raw.startswith("#"):
-        return raw[1:]
-    return raw
+_POSTGRES_BATCH_SIZE = int(os.getenv("HF_POSTGRES_BATCH_SIZE", "500"))
+
+_ONTOLOGY_TOPICS_FIELDS = (
+    "topic_id",
+    "topic_number",
+    "topic_title_vi",
+    "topic_title_en",
+    "topic_note",
+    "article_count",
+    "demuc_count",
+)
+_ONTOLOGY_SUBJECTS_FIELDS = (
+    "topic_id",
+    "topic_number",
+    "topic_title_vi",
+    "topic_title_en",
+    "subject_id",
+    "subject_title_vi",
+    "subject_title_en",
+    "article_count",
+)
+_SUBJECTS_FIELDS = (
+    "subject_id",
+    "topic_id",
+    "topic_number",
+    "topic_title",
+    "subject_number",
+    "subject_title",
+    "source_url",
+    "file_version",
+    "fetch_status",
+    "fetch_error",
+    "scraped_at",
+)
+_TREE_NODES_FIELDS = ("node_id", "parent_id", "kind", "number", "title", "raw_text")
+_GLOSSARY_FIELDS = ("category", "vi", "en", "note")
+_ARTICLES_FIELDS = (
+    "subject_id",
+    "topic_id",
+    "topic_number",
+    "topic_title",
+    "subject_number",
+    "subject_title",
+    "article_anchor",
+    "article_title",
+    "chapter_title",
+    "source_note_text",
+    "source_links",
+    "related_note_text",
+    "content_text",
+    "content_char_len",
+    "content_word_count",
+    "source_url",
+    "scraped_at",
+)
 
 
-def _build_article_body(row: dict[str, Any]) -> str:
-    parts: list[str] = []
-    chapter = (row.get("chapter_title") or "").strip()
-    title = (row.get("article_title") or "").strip()
-    content = (row.get("content_text") or "").strip()
-    source_note = (row.get("source_note_text") or "").strip()
-    if chapter:
-        parts.append(chapter)
-    if title:
-        parts.append(title)
-    if content:
-        parts.append(content)
-    if source_note:
-        parts.append(f"\n[Nguồn] {source_note}")
-    return "\n\n".join(parts).strip()
+def build_article_id(
+    subject_id: str,
+    article_anchor: str | None,
+    article_title: str | None = None,
+) -> str:
+    """Mã tham chiếu ổn định cho Elasticsearch; không lưu trong PostgreSQL."""
+    raw = f"{subject_id or ''}{article_anchor or ''}{article_title or ''}"
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
-def _load_dataset_slice(
-    dataset_name: str,
+def _article_row_fingerprint(row: dict[str, Any]) -> str:
+    """Nhận diện row trùng hệt (~33 cặp trong corpus phapdien)."""
+    parts = (
+        row.get("subject_id"),
+        row.get("article_anchor"),
+        row.get("article_title"),
+        row.get("source_url"),
+        row.get("content_text"),
+    )
+    raw = "|".join(str(p or "") for p in parts)
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+
+def _as_text(value: Any) -> str | None:
+    if value is None:
+        return None
+    text = str(value).strip()
+    return text or None
+
+
+def _normalize_source_links(value: Any) -> list[dict[str, Any]] | None:
+    if not value:
+        return None
+    if not isinstance(value, (list, tuple)):
+        return None
+    links: list[dict[str, Any]] = []
+    for item in value:
+        if not isinstance(item, dict):
+            continue
+        links.append({"text": item.get("text"), "href": item.get("href")})
+    return links or None
+
+
+def _map_hf_rows(
+    rows: list[dict[str, Any]],
+    fields: tuple[str, ...],
     *,
-    config: str,
-    offset: int,
-    limit: int,
+    required_field: str | None = None,
+    str_fields: frozenset[str] = frozenset(),
+    json_fields: frozenset[str] = frozenset(),
 ) -> list[dict[str, Any]]:
-    end = offset + limit
-    split = f"train[{offset}:{end}]"
-    ds = load_dataset(dataset_name, config, split=split)
+    now = datetime.utcnow()
+    out: list[dict[str, Any]] = []
+    for row in rows:
+        if required_field and not _as_text(row.get(required_field)):
+            continue
+        mapped: dict[str, Any] = {}
+        for field in fields:
+            value = row.get(field)
+            if field in json_fields:
+                mapped[field] = _normalize_source_links(value)
+            elif field in str_fields:
+                mapped[field] = _as_text(value)
+            else:
+                mapped[field] = value
+        mapped["created_at"] = now
+        mapped["updated_at"] = now
+        out.append(mapped)
+    return out
+
+
+def _load_full_config(dataset_name: str, config: str) -> list[dict[str, Any]]:
+    ds = load_dataset(dataset_name, config, split="train")
     return [dict(row) for row in ds]
 
 
-def _index_article_to_elasticsearch(
-    *,
-    es,
-    index_name: str,
-    document_id: str,
-    kb_id: str,
-    body: str,
-    row: dict[str, Any],
-) -> int:
-    anchor = _normalize_anchor(row.get("article_anchor"))
-    chunk_id = anchor or f"{document_id}_0"
-    chunk_payload = {
-        "content": body,
-        "doc_id": document_id,
-        "chunk_id": chunk_id,
-        "doc_name": (row.get("article_title") or "")[:255],
-        "doc_type": "phapdien",
-        "chapter_text": row.get("chapter_title"),
-        "article_text": row.get("article_title"),
-        "law_number": anchor[:64] if anchor else None,
-        "law_name": (_subject_title(row) or "")[:255] or None,
-        "full_path": row.get("source_url") or "",
-    }
-    chunk_json = json.dumps(chunk_payload, ensure_ascii=False)
-    embeddings = embedding_from_env()
-    vectors = embed_documents_with_backpressure(embeddings, [body])
-    dims = len(vectors[0])
-    ensure_chunk_index(es, index_name, dims)
-    bulk_index_vectors(
-        es,
-        index_name,
-        document_id=document_id,
-        kb_id=kb_id,
-        parse_type=_PARSE_TYPE,
-        chunks=[chunk_json],
-        vectors=vectors,
-        content_md=body,
+def _bulk_insert(model, rows: list[dict[str, Any]], batch_size: int = _POSTGRES_BATCH_SIZE) -> int:
+    if not rows:
+        return 0
+    with DB.atomic():
+        for i in range(0, len(rows), batch_size):
+            model.insert_many(rows[i : i + batch_size]).execute()
+    return len(rows)
+
+
+def _clear_legal_tables() -> None:
+    with DB.atomic():
+        LegalArticle.delete().execute()
+        LegalOntologySubject.delete().execute()
+        LegalTreeNode.delete().execute()
+        LegalSubject.delete().execute()
+        LegalTopic.delete().execute()
+        LegalGlossary.delete().execute()
+
+
+def _rows_from_ontology_topics(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return _map_hf_rows(rows, _ONTOLOGY_TOPICS_FIELDS)
+
+
+def _rows_from_ontology_subjects(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return _map_hf_rows(rows, _ONTOLOGY_SUBJECTS_FIELDS)
+
+
+def _rows_from_subjects(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return _map_hf_rows(
+        rows,
+        _SUBJECTS_FIELDS,
+        required_field="subject_id",
+        str_fields=frozenset({"scraped_at"}),
     )
-    return dims
 
 
-def import_hf_dataset_batch(
+def _rows_from_tree_nodes(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return _map_hf_rows(rows, _TREE_NODES_FIELDS, required_field="node_id")
+
+
+def _rows_from_glossary(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return _map_hf_rows(rows, _GLOSSARY_FIELDS, required_field="vi")
+
+
+def _rows_from_articles(rows: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], int]:
+    now = datetime.utcnow()
+    article_rows: list[dict[str, Any]] = []
+    skipped_exact_duplicates = 0
+    seen_fingerprints: set[str] = set()
+    str_fields = frozenset({"scraped_at"})
+    json_fields = frozenset({"source_links"})
+    for row in rows:
+        subject_id = _as_text(row.get("subject_id"))
+        if not subject_id:
+            continue
+        fingerprint = _article_row_fingerprint(row)
+        if fingerprint in seen_fingerprints:
+            skipped_exact_duplicates += 1
+            continue
+        seen_fingerprints.add(fingerprint)
+        mapped: dict[str, Any] = {}
+        for field in _ARTICLES_FIELDS:
+            value = row.get(field)
+            if field in json_fields:
+                mapped[field] = _normalize_source_links(value)
+            elif field in str_fields:
+                mapped[field] = _as_text(value)
+            else:
+                mapped[field] = value
+        mapped["created_at"] = now
+        mapped["updated_at"] = now
+        article_rows.append(mapped)
+    return article_rows, skipped_exact_duplicates
+
+
+def resolve_dataset_version(dataset_name: str) -> str | None:
+    try:
+        builder = load_dataset_builder(dataset_name, "articles")
+        version = getattr(builder.info, "version", None)
+        if version:
+            return str(version)
+    except Exception:
+        pass
+    return None
+
+
+@DB.connection_context()
+def import_phapdien_to_postgres(
     *,
-    user: Users,
-    kb: Knowledgebase,
     dataset_name: str,
-    config: str = _DEFAULT_DATASET_CONFIG,
-    offset: int = 0,
-    limit: int = _DEFAULT_LIMIT,
-    skip_existing: bool = True,
+    job_id: int,
+    finalize: bool = True,
 ) -> dict[str, Any]:
     """
-    Tải một lô bản ghi từ HF, lưu MinIO + file/document + Elasticsearch.
-    Gọi nhiều lần với offset tăng dần để import toàn bộ corpus lớn.
+    Tải toàn bộ config phapdien từ Hugging Face và ghi vào các bảng legal_*.
+    Không ghi File, Document hay KB. Elasticsearch được sync ở worker sau bước này.
     """
-    limit = max(1, min(limit, _MAX_LIMIT))
-    offset = max(0, offset)
-    index_name = os.getenv("ELASTIC_INDEX", "lex-companion-chunks")
-    es = get_elasticsearch_client()
-    minio = LexCompanionMinio()
+    success_rows = 0
+    failed_rows = 0
+    total_rows = 0
+    stats: dict[str, int] = {}
 
-    rows = _load_dataset_slice(dataset_name, config=config, offset=offset, limit=limit)
-    imported = 0
-    skipped_empty = 0
-    skipped_duplicate = 0
-    failed = 0
-    document_ids: list[str] = []
-    vector_dims: int | None = None
+    try:
+        logger.info(f"import_phapdien_to_postgres start job_id={job_id} dataset={dataset_name!r}")
+        _clear_legal_tables()
 
-    for row in rows:
-        body = _build_article_body(row)
-        if not body:
-            skipped_empty += 1
-            continue
+        steps = [
+            ("ontology_topics", LegalTopic, _rows_from_ontology_topics),
+            ("ontology_subjects", LegalOntologySubject, _rows_from_ontology_subjects),
+            ("subjects", LegalSubject, _rows_from_subjects),
+            ("tree_nodes", LegalTreeNode, _rows_from_tree_nodes),
+            ("ontology_glossary", LegalGlossary, _rows_from_glossary),
+        ]
 
-        anchor = _normalize_anchor(row.get("article_anchor"))
-        content_hash = content_hash_xxhash128_hex(
-            (anchor or body).encode("utf-8")
+        for config, model, mapper in steps:
+            raw_rows = _load_full_config(dataset_name, config)
+            mapped = mapper(raw_rows)
+            inserted = _bulk_insert(model, mapped)
+            stats[config] = inserted
+            total_rows += len(raw_rows)
+            success_rows += inserted
+            LegalIngestionJobService.update_progress(job_id, success_rows=success_rows, failed_rows=failed_rows)
+            logger.info(f"import_phapdien job_id={job_id} config={config} inserted={inserted}")
+
+        article_raw = _load_full_config(dataset_name, "articles")
+        total_rows += len(article_raw)
+        article_rows, skipped_dup = _rows_from_articles(article_raw)
+        article_inserted = _bulk_insert(LegalArticle, article_rows)
+        stats["articles"] = article_inserted
+        stats["articles_skipped_exact_duplicate"] = skipped_dup
+        if skipped_dup:
+            logger.info(f"import_phapdien job_id={job_id} skipped exact duplicate articles={skipped_dup}")
+        success_rows += article_inserted
+
+        result = {
+            "job_id": job_id,
+            "dataset_name": dataset_name,
+            "total_rows": total_rows,
+            "success_rows": success_rows,
+            "failed_rows": failed_rows,
+            "stats": stats,
+            "status": "completed",
+        }
+        if finalize:
+            LegalIngestionJobService.mark_finished(
+                job_id,
+                status="completed",
+                total_rows=total_rows,
+                success_rows=success_rows,
+                failed_rows=failed_rows,
+            )
+            logger.info(
+                f"import_phapdien_to_postgres done job_id={job_id} "
+                f"total_rows={total_rows} success_rows={success_rows}"
+            )
+        return result
+    except Exception as exc:
+        logger.error(f"import_phapdien_to_postgres failed job_id={job_id}: {exc}")
+        LegalIngestionJobService.mark_finished(
+            job_id,
+            status="failed",
+            total_rows=total_rows,
+            success_rows=success_rows,
+            failed_rows=failed_rows + 1,
+            error_message=str(exc),
         )
-        if skip_existing and DocumentService.get_active_by_kb_and_content_hash(
-            kb.id, content_hash
-        ):
-            skipped_duplicate += 1
-            continue
-
-        try:
-            body_bytes = body.encode("utf-8")
-            file_id = get_uuid()
-            doc_id = get_uuid()
-            display_name = ((row.get("article_title") or anchor or "article")[:250]).strip()
-            if not display_name.endswith(".txt"):
-                file_name = f"{display_name}.txt"
-            else:
-                file_name = display_name
-
-            object_key = f"{kb.id}/{file_id}.txt"
-            put_res = minio.put(kb.tenant_id, object_key, body_bytes)
-            if put_res is None:
-                failed += 1
-                continue
-
-            file_row = FileService.save(
-                id=file_id,
-                tenant_id=kb.tenant_id,
-                created_by=user.id,
-                name=file_name[:255],
-                location=object_key,
-                file_content=body,
-                size=len(body_bytes),
-                type="txt",
-                source_type="huggingface",
-            )
-
-            dims = _index_article_to_elasticsearch(
-                es=es,
-                index_name=index_name,
-                document_id=doc_id,
-                kb_id=kb.id,
-                body=body,
-                row=row,
-            )
-            vector_dims = dims
-
-            DocumentService.save(
-                id=doc_id,
-                kb_id=kb.id,
-                file_id=file_row.id,
-                source_type="huggingface",
-                type="txt",
-                created_by=user.id,
-                name=file_name[:255],
-                location=f"elasticsearch:{index_name}"[:255],
-                size=len(body_bytes),
-                token_num=int(row.get("content_word_count") or 0),
-                chunk_num=1,
-                progress=1.0,
-                process_duration=0.0,
-                suffix=".txt",
-                content_hash=content_hash,
-                run="0",
-                status="1",
-                doc_type="phapdien",
-                law_number=(anchor[:255] if anchor else None),
-                law_name=(_subject_title(row) or "")[:255] or None,
-            )
-            imported += 1
-            document_ids.append(doc_id)
-        except Exception as exc:
-            failed += 1
-            logger.error(f"hf import row failed anchor={anchor!r}: {exc}")
-
-    if imported and vector_dims:
-        KnowledgebaseService.update_by_id(
-            kb.id,
-            {
-                "doc_num": (kb.doc_num or 0) + imported,
-                "chunk_num": (kb.chunk_num or 0) + imported,
-                "vector_size": vector_dims if not kb.vector_size else kb.vector_size,
-            },
-        )
-
-    return {
-        "dataset_name": dataset_name,
-        "config": config,
-        "offset": offset,
-        "limit": limit,
-        "fetched": len(rows),
-        "imported": imported,
-        "skipped_empty": skipped_empty,
-        "skipped_duplicate": skipped_duplicate,
-        "failed": failed,
-        "document_ids": document_ids,
-        "kb_id": kb.id,
-        "elastic_index": index_name,
-        "next_offset": offset + len(rows),
-    }
+        raise

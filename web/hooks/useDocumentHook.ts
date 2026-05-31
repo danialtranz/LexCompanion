@@ -252,3 +252,217 @@ export const useRunDocument = () => {
     },
   });
 };
+
+// --- Admin legal corpus (topic / subject / article) ---
+
+export type LegalTreeNodeItem = {
+  id: number;
+  node_id: string;
+  parent_id: string | null;
+  kind: string | null;
+  number: number | null;
+  title: string | null;
+  created_at: string | null;
+  updated_at: string | null;
+};
+
+export type AdminLegalTopicsListData = {
+  total: number;
+  page: number;
+  page_size: number;
+  items: LegalTreeNodeItem[];
+};
+
+export type AdminLegalTopicDetail = {
+  id: number;
+  topic_id: string | null;
+  topic_number: number | null;
+  topic_title_vi: string | null;
+  topic_title_en: string | null;
+  topic_note: string | null;
+  article_count: number | null;
+  demuc_count: number | null;
+  created_at: string | null;
+  updated_at: string | null;
+};
+
+export type AdminLegalSubjectsListData = {
+  topic_id: string;
+  total: number;
+  page: number;
+  page_size: number;
+  items: LegalTreeNodeItem[];
+};
+
+export type AdminLegalSubjectDetail = {
+  id: number;
+  subject_id: string;
+  topic_id: string | null;
+  topic_number: number | null;
+  topic_title: string | null;
+  subject_number: number | null;
+  subject_title: string | null;
+  source_url: string | null;
+  file_version: string | null;
+  fetch_status: string | null;
+  fetch_error: string | null;
+  scraped_at: string | null;
+  created_at: string | null;
+  updated_at: string | null;
+};
+
+export type AdminLegalArticleItem = {
+  id: number;
+  subject_id: string;
+  topic_id: string | null;
+  topic_number: number | null;
+  topic_title: string | null;
+  subject_number: number | null;
+  subject_title: string | null;
+  article_anchor: string | null;
+  article_title: string | null;
+  chapter_title: string | null;
+  source_note_text: string | null;
+  source_links: unknown;
+  related_note_text: string | null;
+  content_text: string | null;
+  content_char_len: number | null;
+  content_word_count: number | null;
+  source_url: string | null;
+  scraped_at: string | null;
+  created_at: string | null;
+  updated_at: string | null;
+};
+
+export type AdminLegalArticlesListData = {
+  subject_id: string;
+  total: number;
+  page: number;
+  page_size: number;
+  items: AdminLegalArticleItem[];
+};
+
+export type AdminLegalListQueryParams = {
+  page?: number;
+  page_size?: number;
+};
+
+const ADMIN_LEGAL_QK = {
+  topics: (page: number, pageSize: number) =>
+    ["adminLegal", "topics", page, pageSize] as const,
+  topicDetail: (topicId: string) => ["adminLegal", "topic", topicId] as const,
+  subjects: (topicId: string, page: number, pageSize: number) =>
+    ["adminLegal", "subjects", topicId, page, pageSize] as const,
+  subjectDetail: (subjectId: string) =>
+    ["adminLegal", "subject", subjectId] as const,
+  articles: (subjectId: string, page: number, pageSize: number) =>
+    ["adminLegal", "articles", subjectId, page, pageSize] as const,
+};
+
+/** Danh sách topic gốc (legal_tree_nodes, kind=topic). */
+export const useAdminLegalTopicsList = (
+  params: AdminLegalListQueryParams = {},
+) => {
+  const page = params.page ?? 1;
+  const page_size = params.page_size ?? 5;
+
+  return useQuery({
+    queryKey: ADMIN_LEGAL_QK.topics(page, page_size),
+    placeholderData: keepPreviousData,
+    queryFn: async (): Promise<ApiEnvelope<AdminLegalTopicsListData>> => {
+      const axiosResponse = await documentService.listAdminLegalTopics(
+        { params: { page, page_size } },
+        true,
+      );
+      return axiosResponse.data ?? { code: -1, msg: "Empty response" };
+    },
+  });
+};
+
+/** Chi tiết topic theo topic_id (legal_topics). */
+export const useAdminLegalTopicDetail = (
+  topicId: string | undefined,
+  options?: { enabled?: boolean },
+) => {
+  const enabled = (options?.enabled ?? true) && !!topicId;
+
+  return useQuery({
+    queryKey: ADMIN_LEGAL_QK.topicDetail(topicId ?? ""),
+    queryFn: async (): Promise<ApiEnvelope<AdminLegalTopicDetail>> => {
+      const axiosResponse = await documentService.getAdminLegalTopicDetail(
+        { params: { topic_id: topicId! } },
+        true,
+      );
+      return axiosResponse.data ?? { code: -1, msg: "Empty response" };
+    },
+    enabled,
+  });
+};
+
+/** Danh sách subject con của topic (legal_tree_nodes, kind=subject). */
+export const useAdminLegalSubjectsList = (
+  topicId: string | undefined,
+  params: AdminLegalListQueryParams = {},
+  options?: { enabled?: boolean },
+) => {
+  const page = params.page ?? 1;
+  const page_size = params.page_size ?? 5;
+  const enabled = (options?.enabled ?? true) && !!topicId;
+
+  return useQuery({
+    queryKey: ADMIN_LEGAL_QK.subjects(topicId ?? "", page, page_size),
+    placeholderData: keepPreviousData,
+    queryFn: async (): Promise<ApiEnvelope<AdminLegalSubjectsListData>> => {
+      const axiosResponse = await documentService.listAdminLegalSubjects(
+        { params: { topic_id: topicId!, page, page_size } },
+        true,
+      );
+      return axiosResponse.data ?? { code: -1, msg: "Empty response" };
+    },
+    enabled,
+  });
+};
+
+/** Chi tiết subject theo subject_id (legal_subjects). */
+export const useAdminLegalSubjectDetail = (
+  subjectId: string | undefined,
+  options?: { enabled?: boolean },
+) => {
+  const enabled = (options?.enabled ?? true) && !!subjectId;
+
+  return useQuery({
+    queryKey: ADMIN_LEGAL_QK.subjectDetail(subjectId ?? ""),
+    queryFn: async (): Promise<ApiEnvelope<AdminLegalSubjectDetail>> => {
+      const axiosResponse = await documentService.getAdminLegalSubjectDetail(
+        { params: { subject_id: subjectId! } },
+        true,
+      );
+      return axiosResponse.data ?? { code: -1, msg: "Empty response" };
+    },
+    enabled,
+  });
+};
+
+/** Danh sách articles theo subject_id (legal_articles). */
+export const useAdminLegalArticlesList = (
+  subjectId: string | undefined,
+  params: AdminLegalListQueryParams = {},
+  options?: { enabled?: boolean },
+) => {
+  const page = params.page ?? 1;
+  const page_size = params.page_size ?? 5;
+  const enabled = (options?.enabled ?? true) && !!subjectId;
+
+  return useQuery({
+    queryKey: ADMIN_LEGAL_QK.articles(subjectId ?? "", page, page_size),
+    placeholderData: keepPreviousData,
+    queryFn: async (): Promise<ApiEnvelope<AdminLegalArticlesListData>> => {
+      const axiosResponse = await documentService.listAdminLegalArticles(
+        { params: { subject_id: subjectId!, page, page_size } },
+        true,
+      );
+      return axiosResponse.data ?? { code: -1, msg: "Empty response" };
+    },
+    enabled,
+  });
+};

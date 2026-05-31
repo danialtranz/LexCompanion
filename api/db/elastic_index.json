@@ -1,0 +1,37 @@
+[
+  {
+    "index": "legal_articles_v1",
+    "article_id": "...",
+    "subject_id": "...",
+    "topic_id": "...",
+    "subject_title": "...",
+    "topic_title": "...",
+    "chapter_title": "...",
+    "article_title": "...",
+    "content_text": "...",
+    "source_note_text": "...",
+    "related_note_text": "...",
+    "source_url": "...",
+    "source_links": [],
+    "content_vector": [0.01, 0.02],
+    "scraped_at": "..."
+  },
+
+  {
+    "index": "legal_glossary_v1",
+    "term": "người nộp thuế",
+    "definition": "...",
+    "subject_id": "...",
+    "topic_id": "...",
+    "term_vector": [0.01, 0.02]
+  },
+
+  {
+    "index": "legal_subjects_v1",
+    "subject_id": "...",
+    "topic_id": "...",
+    "subject_title": "An ninh mạng",
+    "topic_title": "An ninh quốc gia",
+    "subject_vector": [0.01, 0.02]
+  }
+]

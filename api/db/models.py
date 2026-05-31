@@ -4,14 +4,17 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from peewee import (
+    AutoField,
     BigIntegerField,
     BooleanField,
-    DateField,
     DateTimeField,
     FixedCharField,
     Model,
     PostgresqlDatabase,
-    TextField,CharField,IntegerField,FloatField
+    TextField,
+    CharField,
+    IntegerField,
+    FloatField,
 )
 from playhouse.migrate import PostgresqlMigrator, migrate
 from playhouse.postgres_ext import JSONField
@@ -117,33 +120,11 @@ class Document(BaseModel):
 
     run = CharField(max_length=1, null=True, help_text="start to run processing or cancel.(1: run it; 2: cancel)", default="0", index=True)
     status = CharField(max_length=1, null=True, help_text="is it validate(0: wasted, 1: validate)", default="1", index=True)
-    #### metadata for document
-    doc_type = CharField( null=True, index=True)
-    law_number = CharField( null=True, index=True)
-    law_name = CharField( null=True, index=True)
     
-    effective_date = DateField(null=True, index=True)
-    time_issued = DateTimeField(null=True, index=True)
-    expiry_date = DateField(null=True, index=True)
-    date_status = CharField(max_length=1, null=True, help_text="is it effective(0: wasted, 1: effective)", default="1", index=True)
+   
     class Meta:
         db_table = "documents"
 
-class DocumentRelation(BaseModel):
-    id = CharField(max_length=36, primary_key=True)
-    sourced_doc_id = CharField(null=False, index=True)
-    related_doc_id = CharField(null=False, index=True)
-    relation_type = CharField(null=False, index=True)
-    relation_value = CharField(null=False, index=True)
-    # AMENDS = "AMENDS", "Sửa đổi"
-    # REPEALS = "REPEALS", "Bãi bỏ"
-    # REPLACES = "REPLACES", "Thay thế"
-    # BASED_ON = "BASED_ON", "Dựa trên"
-    # IMPLEMENTS = "IMPLEMENTS", "Hướng dẫn thi hành"
-    # REFERENCES = "REFERENCES", "Viện dẫn"
-    # EXTENDS = "EXTENDS", "Mở rộng"
-    class Meta:
-        db_table = "document_relations"
 
 class File(BaseModel):
     id = CharField(max_length=36, primary_key=True)
@@ -182,44 +163,153 @@ class UserTenant(BaseModel):
     class Meta:
         db_table = "user_tenants"
 
-class LexDocumentChunk(BaseModel):
-    id = CharField(max_length=36, primary_key=True)
-    chunk_id = CharField( null=True, index=True)
-    # Identifier & metadata
-    doc_id = CharField(null=False, index=True)
-    version_id = IntegerField(null=True, index=True) 
-    doc_type = CharField( null=True, index=True)
-    law_number = CharField( null=True, index=True)
-    law_name = CharField( null=True, index=True)
-    issued_by = CharField( null=True, index=True)
-    signer = CharField( null=True)
-    status = CharField( null=True, index=True)
 
-    # Legal relations (store as JSON array string)
-    based_on = JSONField(null=True, help_text="JSON array string of based-on document ids") ### phải là 1 mảng  
-    implements = JSONField(null=True, help_text="JSON array string of implemented legal targets")### phải là 1 mảng 
-
-    doc_name = TextField(null=True)
-    content_md = TextField(null=True)
-
-    # Legal structure
-    chapter = IntegerField(null=True, index=True)
-    chapter_text = CharField( null=True, index=True)
-    article = IntegerField(null=True, index=True)
-    article_text = CharField( null=True, index=True)
-    clause = IntegerField(null=True, index=True)
-    clause_text = CharField( null=True, index=True)
-    point = IntegerField(null=True, index=True)
-    point_text = CharField( null=True, index=True)
-    # Time
-    effective_date = DateField(null=True, index=True)
-    expiry_date = DateField(null=True, index=True)
-    references = JSONField(null=True, help_text="JSON array of objects: {target_doc, target_article, target_clause, target_point , ref_type Vd Internal . External . }") ### phải là 1 mảng các json
-    # Amend relations (store as JSON array/object string)
-    amends = JSONField(null=True, help_text="JSON array string of amend objects") ### phải là 1 mảng các json
+class _LegalTimestampModel(Model):
+    created_at = DateTimeField(default=datetime.utcnow)
+    updated_at = DateTimeField(default=datetime.utcnow)
 
     class Meta:
-        db_table = "lex_document_chunks"
+        database = db
+
+    def save(self, *args, **kwargs):
+        self.updated_at = datetime.utcnow()
+        return super().save(*args, **kwargs)
+
+
+class LegalTopic(_LegalTimestampModel):
+    """ontology_topics — schema tmquan/phapdien-moj-gov-vn."""
+
+    id = AutoField(primary_key=True)
+    topic_id = TextField(null=True, index=True)
+    topic_number = BigIntegerField(null=True, index=True)
+    topic_title_vi = TextField(null=True)
+    topic_title_en = TextField(null=True)
+    topic_note = TextField(null=True)
+    article_count = BigIntegerField(null=True)
+    demuc_count = BigIntegerField(null=True)
+
+    class Meta:
+        table_name = "legal_topics"
+
+
+class LegalSubject(_LegalTimestampModel):
+    """subjects — schema tmquan/phapdien-moj-gov-vn."""
+
+    id = AutoField(primary_key=True)
+    subject_id = TextField(null=False, index=True)
+    topic_id = TextField(null=True, index=True)
+    topic_number = BigIntegerField(null=True, index=True)
+    topic_title = TextField(null=True)
+    subject_number = BigIntegerField(null=True, index=True)
+    subject_title = TextField(null=True)
+    source_url = TextField(null=True)
+    file_version = TextField(null=True)
+    fetch_status = TextField(null=True, index=True)
+    fetch_error = TextField(null=True)
+    scraped_at = TextField(null=True)
+
+    class Meta:
+        table_name = "legal_subjects"
+
+
+class LegalTreeNode(_LegalTimestampModel):
+    """tree_nodes — schema tmquan/phapdien-moj-gov-vn."""
+
+    id = AutoField(primary_key=True)
+    node_id = TextField(null=False, index=True)
+    parent_id = TextField(null=True, index=True)
+    kind = TextField(null=True, index=True)
+    number = BigIntegerField(null=True, index=True)
+    title = TextField(null=True)
+    raw_text = TextField(null=True)
+
+    class Meta:
+        table_name = "legal_tree_nodes"
+
+
+class LegalArticle(_LegalTimestampModel):
+    """articles — schema tmquan/phapdien-moj-gov-vn."""
+
+    id = AutoField(primary_key=True)
+    subject_id = TextField(null=False, index=True)
+    topic_id = TextField(null=True, index=True)
+    topic_number = BigIntegerField(null=True, index=True)
+    topic_title = TextField(null=True)
+    subject_number = BigIntegerField(null=True, index=True)
+    subject_title = TextField(null=True)
+    article_anchor = TextField(null=True, index=True)
+    article_title = TextField(null=True)
+    chapter_title = TextField(null=True)
+    source_note_text = TextField(null=True)
+    source_links = JSONField(null=True)
+    related_note_text = TextField(null=True)
+    content_text = TextField(null=True)
+    content_char_len = BigIntegerField(null=True)
+    content_word_count = BigIntegerField(null=True)
+    source_url = TextField(null=True)
+    scraped_at = TextField(null=True)
+
+    class Meta:
+        table_name = "legal_articles"
+
+
+class LegalOntologySubject(_LegalTimestampModel):
+    """ontology_subjects — schema tmquan/phapdien-moj-gov-vn."""
+
+    id = AutoField(primary_key=True)
+    topic_id = TextField(null=True, index=True)
+    topic_number = BigIntegerField(null=True, index=True)
+    topic_title_vi = TextField(null=True)
+    topic_title_en = TextField(null=True)
+    subject_id = TextField(null=True, index=True)
+    subject_title_vi = TextField(null=True)
+    subject_title_en = TextField(null=True)
+    article_count = BigIntegerField(null=True)
+
+    class Meta:
+        table_name = "legal_ontology_subjects"
+
+
+class LegalGlossary(_LegalTimestampModel):
+    """ontology_glossary — schema tmquan/phapdien-moj-gov-vn."""
+
+    id = AutoField(primary_key=True)
+    category = TextField(null=True, index=True)
+    vi = TextField(null=False, index=True)
+    en = TextField(null=True)
+    note = TextField(null=True)
+
+    class Meta:
+        table_name = "legal_glossary"
+
+
+class LegalIngestionJob(Model):
+    id = AutoField(primary_key=True)
+    dataset_name = TextField(null=True, index=True)
+    dataset_version = TextField(null=True)
+    status = TextField(null=True, index=True)
+    started_at = DateTimeField(null=True)
+    finished_at = DateTimeField(null=True)
+    total_rows = IntegerField(null=True)
+    success_rows = IntegerField(null=True)
+    failed_rows = IntegerField(null=True)
+    error_message = TextField(null=True)
+    created_at = DateTimeField(default=datetime.utcnow)
+
+    class Meta:
+        database = db
+        table_name = "legal_ingestion_jobs"
+
+
+LEGAL_MODELS = [
+    LegalTopic,
+    LegalSubject,
+    LegalTreeNode,
+    LegalArticle,
+    LegalOntologySubject,
+    LegalGlossary,
+    LegalIngestionJob,
+]
 
 
 def _column_exists(table_name: str, column_name: str) -> bool:
@@ -329,46 +419,101 @@ def _build_migration_ops(migrator: PostgresqlMigrator):
             "create_time": lambda: BigIntegerField(default=lambda: int(current_timestamp())),
             "update_time": lambda: BigIntegerField(default=lambda: int(current_timestamp())),
         },
-        LexDocumentChunk._meta.table_name: {
-            "id": lambda: CharField(max_length=36, primary_key=True),
-            "chunk_id": lambda: CharField( null=True, index=True),
-            "doc_id": lambda: CharField(null=False, index=True),
-            "version_id": lambda: IntegerField(null=True, index=True),
-            "doc_type": lambda: CharField( null=True, index=True),
-            "law_number": lambda: CharField( null=True, index=True),
-            "law_name": lambda: CharField( null=True, index=True),
-            "issued_by": lambda: CharField( null=True, index=True),
-            "signer": lambda: CharField( null=True),
-            "status": lambda: CharField( null=True, index=True),
-            "based_on": lambda: JSONField(null=True),
-            "implements": lambda: JSONField(null=True),
-            "doc_name": lambda: TextField(null=True),
-            "content_md": lambda: TextField(null=True),
-            "chapter": lambda: IntegerField(null=True, index=True),
-            "chapter_text": lambda: CharField( null=True, index=True),
-            "article": lambda: IntegerField(null=True, index=True),
-            "article_text": lambda: CharField( null=True, index=True),
-            "clause": lambda: IntegerField(null=True, index=True),
-            "clause_text": lambda: CharField( null=True, index=True),
-            "point": lambda: IntegerField(null=True, index=True),
-            "point_text": lambda: CharField( null=True, index=True),
-            "effective_date": lambda: DateField(null=True, index=True),
-            "expiry_date": lambda: DateField(null=True, index=True),
-            "references": lambda: JSONField(null=True),### phải là 1 mảng các json
-            "amends": lambda: JSONField(null=True), ### phải là 1 mảng các json 
-            "create_date": lambda: DateTimeField(default=datetime.utcnow),
-            "update_date": lambda: DateTimeField(default=datetime.utcnow),
-            "create_time": lambda: BigIntegerField(default=lambda: int(current_timestamp())),
-            "update_time": lambda: BigIntegerField(default=lambda: int(current_timestamp())),
+        LegalTopic._meta.table_name: {
+            "id": lambda: AutoField(primary_key=True),
+            "topic_id": lambda: TextField(null=True, index=True),
+            "topic_number": lambda: BigIntegerField(null=True, index=True),
+            "topic_title_vi": lambda: TextField(null=True),
+            "topic_title_en": lambda: TextField(null=True),
+            "topic_note": lambda: TextField(null=True),
+            "article_count": lambda: BigIntegerField(null=True),
+            "demuc_count": lambda: BigIntegerField(null=True),
+            "created_at": lambda: DateTimeField(default=datetime.utcnow),
+            "updated_at": lambda: DateTimeField(default=datetime.utcnow),
         },
-        DocumentRelation._meta.table_name: {
-            "id": lambda: CharField(max_length=36, primary_key=True),
-            "sourced_doc_id": lambda: CharField(null=False, index=True),
-            "related_doc_id": lambda: CharField(null=False, index=True),
-            "relation_type": lambda: CharField(null=False, index=True),
-            "relation_value": lambda: CharField(null=False, index=True),
-            "create_date": lambda: DateTimeField(default=datetime.utcnow),
-            "update_date": lambda: DateTimeField(default=datetime.utcnow),
+        LegalSubject._meta.table_name: {
+            "id": lambda: AutoField(primary_key=True),
+            "subject_id": lambda: TextField(null=False, index=True),
+            "topic_id": lambda: TextField(null=True, index=True),
+            "topic_number": lambda: BigIntegerField(null=True, index=True),
+            "topic_title": lambda: TextField(null=True),
+            "subject_number": lambda: BigIntegerField(null=True, index=True),
+            "subject_title": lambda: TextField(null=True),
+            "source_url": lambda: TextField(null=True),
+            "file_version": lambda: TextField(null=True),
+            "fetch_status": lambda: TextField(null=True, index=True),
+            "fetch_error": lambda: TextField(null=True),
+            "scraped_at": lambda: TextField(null=True),
+            "created_at": lambda: DateTimeField(default=datetime.utcnow),
+            "updated_at": lambda: DateTimeField(default=datetime.utcnow),
+        },
+        LegalTreeNode._meta.table_name: {
+            "id": lambda: AutoField(primary_key=True),
+            "node_id": lambda: TextField(null=False, index=True),
+            "parent_id": lambda: TextField(null=True, index=True),
+            "kind": lambda: TextField(null=True, index=True),
+            "number": lambda: BigIntegerField(null=True, index=True),
+            "title": lambda: TextField(null=True),
+            "raw_text": lambda: TextField(null=True),
+            "created_at": lambda: DateTimeField(default=datetime.utcnow),
+            "updated_at": lambda: DateTimeField(default=datetime.utcnow),
+        },
+        LegalArticle._meta.table_name: {
+            "id": lambda: AutoField(primary_key=True),
+            "subject_id": lambda: TextField(null=False, index=True),
+            "topic_id": lambda: TextField(null=True, index=True),
+            "topic_number": lambda: BigIntegerField(null=True, index=True),
+            "topic_title": lambda: TextField(null=True),
+            "subject_number": lambda: BigIntegerField(null=True, index=True),
+            "subject_title": lambda: TextField(null=True),
+            "article_anchor": lambda: TextField(null=True, index=True),
+            "article_title": lambda: TextField(null=True),
+            "chapter_title": lambda: TextField(null=True),
+            "source_note_text": lambda: TextField(null=True),
+            "source_links": lambda: JSONField(null=True),
+            "related_note_text": lambda: TextField(null=True),
+            "content_text": lambda: TextField(null=True),
+            "content_char_len": lambda: BigIntegerField(null=True),
+            "content_word_count": lambda: BigIntegerField(null=True),
+            "source_url": lambda: TextField(null=True),
+            "scraped_at": lambda: TextField(null=True),
+            "created_at": lambda: DateTimeField(default=datetime.utcnow),
+            "updated_at": lambda: DateTimeField(default=datetime.utcnow),
+        },
+        LegalOntologySubject._meta.table_name: {
+            "id": lambda: AutoField(primary_key=True),
+            "topic_id": lambda: TextField(null=True, index=True),
+            "topic_number": lambda: BigIntegerField(null=True, index=True),
+            "topic_title_vi": lambda: TextField(null=True),
+            "topic_title_en": lambda: TextField(null=True),
+            "subject_id": lambda: TextField(null=True, index=True),
+            "subject_title_vi": lambda: TextField(null=True),
+            "subject_title_en": lambda: TextField(null=True),
+            "article_count": lambda: BigIntegerField(null=True),
+            "created_at": lambda: DateTimeField(default=datetime.utcnow),
+            "updated_at": lambda: DateTimeField(default=datetime.utcnow),
+        },
+        LegalGlossary._meta.table_name: {
+            "id": lambda: AutoField(primary_key=True),
+            "category": lambda: TextField(null=True, index=True),
+            "vi": lambda: TextField(null=False, index=True),
+            "en": lambda: TextField(null=True),
+            "note": lambda: TextField(null=True),
+            "created_at": lambda: DateTimeField(default=datetime.utcnow),
+            "updated_at": lambda: DateTimeField(default=datetime.utcnow),
+        },
+        LegalIngestionJob._meta.table_name: {
+            "id": lambda: AutoField(primary_key=True),
+            "dataset_name": lambda: TextField(null=True, index=True),
+            "dataset_version": lambda: TextField(null=True),
+            "status": lambda: TextField(null=True, index=True),
+            "started_at": lambda: DateTimeField(null=True),
+            "finished_at": lambda: DateTimeField(null=True),
+            "total_rows": lambda: IntegerField(null=True),
+            "success_rows": lambda: IntegerField(null=True),
+            "failed_rows": lambda: IntegerField(null=True),
+            "error_message": lambda: TextField(null=True),
+            "created_at": lambda: DateTimeField(default=datetime.utcnow),
         },
     }
 
@@ -393,7 +538,10 @@ def run_migration() -> None:
         connection_opened_here = True
 
     try:
-        db.create_tables([Users, Knowledgebase, Document, File, Tenant, UserTenant, LexDocumentChunk , DocumentRelation], safe=True)
+        db.create_tables(
+            [Users, Knowledgebase, Document, File, Tenant, UserTenant, *LEGAL_MODELS],
+            safe=True,
+        )
         migration_ops = _build_migration_ops(PostgresqlMigrator(db))
         if migration_ops:
             migrate(*migration_ops)
