@@ -117,10 +117,33 @@ class Document(BaseModel):
 
     run = CharField(max_length=1, null=True, help_text="start to run processing or cancel.(1: run it; 2: cancel)", default="0", index=True)
     status = CharField(max_length=1, null=True, help_text="is it validate(0: wasted, 1: validate)", default="1", index=True)
-
+    #### metadata for document
+    doc_type = CharField( null=True, index=True)
+    law_number = CharField( null=True, index=True)
+    law_name = CharField( null=True, index=True)
+    
+    effective_date = DateField(null=True, index=True)
+    time_issued = DateTimeField(null=True, index=True)
+    expiry_date = DateField(null=True, index=True)
+    date_status = CharField(max_length=1, null=True, help_text="is it effective(0: wasted, 1: effective)", default="1", index=True)
     class Meta:
         db_table = "documents"
 
+class DocumentRelation(BaseModel):
+    id = CharField(max_length=36, primary_key=True)
+    sourced_doc_id = CharField(null=False, index=True)
+    related_doc_id = CharField(null=False, index=True)
+    relation_type = CharField(null=False, index=True)
+    relation_value = CharField(null=False, index=True)
+    # AMENDS = "AMENDS", "Sửa đổi"
+    # REPEALS = "REPEALS", "Bãi bỏ"
+    # REPLACES = "REPLACES", "Thay thế"
+    # BASED_ON = "BASED_ON", "Dựa trên"
+    # IMPLEMENTS = "IMPLEMENTS", "Hướng dẫn thi hành"
+    # REFERENCES = "REFERENCES", "Viện dẫn"
+    # EXTENDS = "EXTENDS", "Mở rộng"
+    class Meta:
+        db_table = "document_relations"
 
 class File(BaseModel):
     id = CharField(max_length=36, primary_key=True)
@@ -338,6 +361,15 @@ def _build_migration_ops(migrator: PostgresqlMigrator):
             "create_time": lambda: BigIntegerField(default=lambda: int(current_timestamp())),
             "update_time": lambda: BigIntegerField(default=lambda: int(current_timestamp())),
         },
+        DocumentRelation._meta.table_name: {
+            "id": lambda: CharField(max_length=36, primary_key=True),
+            "sourced_doc_id": lambda: CharField(null=False, index=True),
+            "related_doc_id": lambda: CharField(null=False, index=True),
+            "relation_type": lambda: CharField(null=False, index=True),
+            "relation_value": lambda: CharField(null=False, index=True),
+            "create_date": lambda: DateTimeField(default=datetime.utcnow),
+            "update_date": lambda: DateTimeField(default=datetime.utcnow),
+        },
     }
 
     ops = []
@@ -361,7 +393,7 @@ def run_migration() -> None:
         connection_opened_here = True
 
     try:
-        db.create_tables([Users, Knowledgebase, Document, File, Tenant, UserTenant, LexDocumentChunk], safe=True)
+        db.create_tables([Users, Knowledgebase, Document, File, Tenant, UserTenant, LexDocumentChunk , DocumentRelation], safe=True)
         migration_ops = _build_migration_ops(PostgresqlMigrator(db))
         if migration_ops:
             migrate(*migration_ops)

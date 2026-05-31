@@ -4,10 +4,13 @@ import json
 import re
 from typing import Any
 
+from langchain_core.language_models.chat_models import BaseChatModel
+from langchain_core.messages import HumanMessage
 from langchain_text_splitters.base import TextSplitter
 
 from api.utils.logger import logger
-from api.utils.llm_client import LLMProvider,config
+from api.utils.llm_client import LLMProvider, config
+from deepagent.core.prompts.prompt import EXTRACT_ENFORCEMENT_PROMPT
 
 
 def _clean_legal_text(raw_text: str) -> str:
@@ -78,11 +81,28 @@ def _split_markdown_preface_and_body(text_md: str) -> tuple[str, str]:
     return text[: m.start()].strip(), text[m.start() :].strip()
 
 
-def _split_markdown_body_and_footer(text_md: str, doc_type: str) -> tuple[str, str]:
+_ENFORCEMENT_CLAUSE_PATTERN = re.compile(
+    r"(?is)(?:\*\*\s*)?điều\s+khoản\s+thi\s+hành(?:\s*\*\*)?"
+)
+
+
+def _split_enforcement_clause(section: str) -> tuple[str, str]:
+    """Tách phần trước và từ marker 'điều khoản thi hành' trở đi."""
+    text = (section or "").strip()
+    if not text:
+        return "", ""
+    match = _ENFORCEMENT_CLAUSE_PATTERN.search(text)
+    if not match:
+        return text, ""
+    return text[: match.start()].strip(), text[match.start() :].strip()
+
+
+def _split_markdown_body_and_footer(text_md: str, doc_type: str) -> tuple[str, str, str]:
     """
     Tách markdown thành:
-    - body: phần nội dung chính để đem đi split.
-    - footer: phần cuối văn bản (layout để tùy chỉnh theo từng nhóm doc_type).
+    - body: phần nội dung chính (trước điều khoản thi hành).
+    - footer: phần cuối văn bản (layout tùy doc_type).
+    - enforcement_clause: từ "điều khoản thi hành" đến trước footer.
 
     Rule:
     - nghị định/nghị định sửa đổi: tìm marker **Nơi nhận:
@@ -111,36 +131,217 @@ def _split_markdown_body_and_footer(text_md: str, doc_type: str) -> tuple[str, s
 
         start_match = footer_start_pattern.search(text)
         if not start_match:
-            return text, ""
+            body, enforcement_clause = _split_enforcement_clause(text)
+            return body, "", enforcement_clause
 
         start_idx = start_match.start()
         end_match = footer_end_pattern.search(text, pos=start_idx)
-        if end_match:
-            end_idx = end_match.end()
-            return text[:start_idx].strip(), text[start_idx:end_idx].strip()
-        return text[:start_idx].strip(), text[start_idx:].strip()
+        body_part = text[:start_idx].strip()
+        footer = (
+            text[start_idx:end_match.end()].strip()
+            if end_match
+            else text[start_idx:].strip()
+        )
+        body, enforcement_clause = _split_enforcement_clause(body_part)
+        return body, footer, enforcement_clause
     else:
-        return text, ""
+        body, enforcement_clause = _split_enforcement_clause(text)
+        return body, "", enforcement_clause
 
     m = footer_pattern.search(text)
     if not m:
-        return text, ""
+        body, enforcement_clause = _split_enforcement_clause(text)
+        return body, "", enforcement_clause
 
     marker_start, marker_end = m.start(), m.end()
     footer_start = max(0, marker_start - 50)
     footer_end = min(len(text), marker_end + 50)
 
-    body = text[:marker_start].strip()
+    body_part = text[:marker_start].strip()
     footer = text[footer_start:footer_end].strip()
-    return body, footer
+    body, enforcement_clause = _split_enforcement_clause(body_part)
+    return body, footer, enforcement_clause
+
+
+_VALID_RELATION_TYPES = frozenset({"based_on", "implements"})
+_VALID_REPLACEMENT_TYPES = frozenset({"full_replacement", "partial_replacement"})
+
+
+class LLMResponseValidationError(ValueError):
+    """Raised when LLM output does not match the expected prompt schema."""
+
+
+def _parse_llm_json_array(raw: str) -> dict[str, Any]:
+    """
+    Parse and validate LLM JSON against EXTRACT_ENFORCEMENT_PROMPT output schema.
+
+    Expected shape:
+    {
+      "relations": [{"relation_type": "based_on"|"implements", "relation_to": str}, ...],
+      "enforcement": {
+        "effective_time": str | null,
+        "replacement_relations": [
+          {"replacement_type": "full_replacement"|"partial_replacement", "relation_to": str}, ...
+        ]
+      }
+    }
+    """
+    text = (raw or "").strip()
+    if not text:
+        raise LLMResponseValidationError("LLM response is empty")
+
+    if text.startswith("```"):
+        text = re.sub(r"^```(?:json)?\s*", "", text, flags=re.IGNORECASE)
+        text = re.sub(r"\s*```$", "", text)
+
+    try:
+        parsed = json.loads(text)
+    except json.JSONDecodeError as exc:
+        raise LLMResponseValidationError(
+            f"LLM response is not valid JSON: {exc.msg}"
+        ) from exc
+
+    if not isinstance(parsed, dict):
+        raise LLMResponseValidationError("LLM response must be a JSON object")
+
+    relations = parsed.get("relations")
+    if relations is None:
+        raise LLMResponseValidationError("Missing required field: relations")
+    if not isinstance(relations, list):
+        raise LLMResponseValidationError("Field 'relations' must be a list")
+
+    for index, item in enumerate(relations):
+        if not isinstance(item, dict):
+            raise LLMResponseValidationError(f"relations[{index}] must be an object")
+        rel_type = item.get("relation_type")
+        if rel_type not in _VALID_RELATION_TYPES:
+            raise LLMResponseValidationError(
+                f"relations[{index}].relation_type must be one of "
+                f"{sorted(_VALID_RELATION_TYPES)}, got {rel_type!r}"
+            )
+        rel_to = item.get("relation_to")
+        if not isinstance(rel_to, str) or not rel_to.strip():
+            raise LLMResponseValidationError(
+                f"relations[{index}].relation_to must be a non-empty string"
+            )
+
+    enforcement = parsed.get("enforcement")
+    if enforcement is None:
+        raise LLMResponseValidationError("Missing required field: enforcement")
+    if not isinstance(enforcement, dict):
+        raise LLMResponseValidationError("Field 'enforcement' must be an object")
+
+    effective_time = enforcement.get("effective_time")
+    if effective_time is not None and not isinstance(effective_time, str):
+        raise LLMResponseValidationError(
+            "enforcement.effective_time must be a string or null"
+        )
+
+    replacement_relations = enforcement.get("replacement_relations")
+    if replacement_relations is None:
+        raise LLMResponseValidationError(
+            "Missing required field: enforcement.replacement_relations"
+        )
+    if not isinstance(replacement_relations, list):
+        raise LLMResponseValidationError(
+            "Field 'enforcement.replacement_relations' must be a list"
+        )
+
+    for index, item in enumerate(replacement_relations):
+        if not isinstance(item, dict):
+            raise LLMResponseValidationError(
+                f"enforcement.replacement_relations[{index}] must be an object"
+            )
+        replacement_type = item.get("replacement_type")
+        if replacement_type not in _VALID_REPLACEMENT_TYPES:
+            raise LLMResponseValidationError(
+                f"enforcement.replacement_relations[{index}].replacement_type must be one of "
+                f"{sorted(_VALID_REPLACEMENT_TYPES)}, got {replacement_type!r}"
+            )
+        rel_to = item.get("relation_to")
+        if not isinstance(rel_to, str) or not rel_to.strip():
+            raise LLMResponseValidationError(
+                f"enforcement.replacement_relations[{index}].relation_to "
+                "must be a non-empty string"
+            )
+
+    return parsed
+
+
+def _load_existing_documents() -> list[str]:
+    from api.db.models import Document, LexDocumentChunk, db
+
+    names: list[str] = []
+    try:
+        with db.connection_context():
+            for row in (
+                Document.select(Document.law_name)
+                .where(Document.law_name.is_null(False))
+                .distinct()
+            ):
+                name = (row.law_name or "").strip()
+                if name:
+                    names.append(name)
+            for row in LexDocumentChunk.select(
+                LexDocumentChunk.doc_name, LexDocumentChunk.law_name
+            ).distinct():
+                for field in (row.doc_name, row.law_name):
+                    name = (field or "").strip()
+                    if name:
+                        names.append(name)
+    except Exception:
+        logger.exception("Failed to load existing documents for relation extraction")
+    return list(dict.fromkeys(names))
+
+
+def resolve_document_relation(
+    extract_llm: BaseChatModel | None,
+    preface_text_md: str,
+    enforcement_clause_md: str,
+) -> dict[str, list[str]]:
+    """Extract document-level based_on / implements relations from preface via LLM."""
+    empty = {"based_on": [], "implements": []}
+    preface = (preface_text_md or "").strip()
+    if not preface or extract_llm is None:
+        return empty
+
+    existing_documents = _load_existing_documents()
+    prompt = (
+        EXTRACT_ENFORCEMENT_PROMPT.replace(
+            "{{EXISTING_DOCUMENTS_JSON}}",
+            json.dumps(existing_documents, ensure_ascii=False),
+        )
+        .replace("{{INPUT_TEXT}}", preface)
+        .replace("{{ENFORCEMENT_CLAUSE}}", enforcement_clause_md or "")
+    )
+
+    response = extract_llm.invoke([HumanMessage(content=prompt)])
+    raw = getattr(response, "content", str(response))
+    parsed = _parse_llm_json_array(raw)
+
+    based_on: list[str] = []
+    implements: list[str] = []
+    for item in parsed["relations"]:
+        rel_type = (item.get("relation_type") or "").strip().lower()
+        rel_to = (item.get("relation_to") or "").strip()
+        if rel_type == "based_on":
+            based_on.append(rel_to)
+        elif rel_type == "implements":
+            implements.append(rel_to)
+
+    return {
+        "based_on": list(dict.fromkeys(based_on)),
+        "implements": list(dict.fromkeys(implements)),
+    }
 
 
 class LawTextSplitter(TextSplitter):
 
     """Split Vietnamese legal text to JSON-per-clause chunks."""
 
-    def __init__(self, **kwargs: Any):
+    def __init__(self, extract_llm: BaseChatModel | None = None, **kwargs: Any):
         super().__init__(**kwargs)
+        self.extract_llm = extract_llm
 
     def split_text(self, text_md: str) -> list[str]:
         preface_text_md, body_text_md = _split_markdown_preface_and_body(text_md)
@@ -149,7 +350,7 @@ class LawTextSplitter(TextSplitter):
         print(f"[LawTextSplitter] preface_len={len(preface_text_md)} body_len={len(body_text_md)}")
         print("[LawTextSplitter] preface_preview=", preface_text_md)
         print("[LawTextSplitter] body_preview=", body_text_md[:300])
-        llm_client = LLMProvider(config)
+        llm_client = LLMProvider(self.extract_llm)
         response_doc_type = llm_client.response(dialogue=[{"role": "user", "content": body_text_md}], prompt_template_number=1)
         llm_doc_type = (response_doc_type or {}).get("doc_type")
 
@@ -157,16 +358,20 @@ class LawTextSplitter(TextSplitter):
         doc_type = (llm_doc_type or fallback_doc_type or "luat").strip().lower()
         doc_id = _extract_doc_id(text_md, doc_type)
 
-        body_text_md, footer_text_md = _split_markdown_body_and_footer(body_text_md, doc_type)
+        body_text_md, footer_text_md, enforcement_clause_md = _split_markdown_body_and_footer(
+            body_text_md, doc_type
+        )
         response_signer_role = llm_client.response(dialogue=[{"role": "user", "content": footer_text_md}], prompt_template_number=2)
         print(f"[LawTextSplitter] response_signer_role={response_signer_role}")
         print(f"[LawTextSplitter] footer_text_md={footer_text_md}...")
+        print(f"[LawTextSplitter] enforcement_clause_md={enforcement_clause_md[:300]}...")
         print(f"[LawTextSplitter] body_text_md={body_text_md[-300:]}...")
         logger.debug(
-            "[LawTextSplitter] doc_type={} body_len={} footer_len={}",
+            "[LawTextSplitter] doc_type={} body_len={} footer_len={} enforcement_len={}",
             doc_type,
             len(body_text_md),
             len(footer_text_md),
+            len(enforcement_clause_md),
         )
 
         if doc_type == "luat":
@@ -174,69 +379,76 @@ class LawTextSplitter(TextSplitter):
                 text_md=text_md,
                 body_text_md=body_text_md,
                 preface_text_md=preface_text_md,
-                footer_text_md=footer_text_md,
+                enforcement_clause_md=enforcement_clause_md,
                 doc_type=doc_type,
                 doc_name=doc_name,
                 doc_id=doc_id,
+                extract_llm=self.extract_llm,
             )
         if doc_type == "luat_sua_doi":
             return self._split_strategy_luat_sua_doi(
                 text_md=text_md,
                 body_text_md=body_text_md,
                 preface_text_md=preface_text_md,
-                footer_text_md=footer_text_md,
+                enforcement_clause_md=enforcement_clause_md,
                 doc_type=doc_type,
                 doc_name=doc_name,
                 doc_id=doc_id,
+                extract_llm=self.extract_llm,
             )
         if doc_type == "nghi_dinh":
             return self._split_strategy_nghi_dinh(
                 text_md=text_md,
                 body_text_md=body_text_md,
                 preface_text_md=preface_text_md,
-                footer_text_md=footer_text_md,
+                enforcement_clause_md=enforcement_clause_md,
                 doc_type=doc_type,
                 doc_name=doc_name,
                 doc_id=doc_id,
+                extract_llm=self.extract_llm,
             )
         if doc_type == "nghi_dinh_sua_doi":
             return self._split_strategy_nghi_dinh_sua_doi(
                 text_md=text_md,
                 body_text_md=body_text_md,
                 preface_text_md=preface_text_md,
-                footer_text_md=footer_text_md,
+                enforcement_clause_md=enforcement_clause_md,
                 doc_type=doc_type,
                 doc_name=doc_name,
                 doc_id=doc_id,
+                extract_llm=self.extract_llm,
             )
         if doc_type == "thong_tu":
             return self._split_strategy_thong_tu(
                 text_md=text_md,
                 body_text_md=body_text_md,
                 preface_text_md=preface_text_md,
-                footer_text_md=footer_text_md,
+                enforcement_clause_md=enforcement_clause_md,
                 doc_type=doc_type,
                 doc_name=doc_name,
                 doc_id=doc_id,
+                extract_llm=self.extract_llm,
             )
         if doc_type == "thong_tu_sua_doi":
             return self._split_strategy_thong_tu_sua_doi(
                 text_md=text_md,
                 body_text_md=body_text_md,
                 preface_text_md=preface_text_md,
-                footer_text_md=footer_text_md,
+                enforcement_clause_md=enforcement_clause_md,
                 doc_type=doc_type,
                 doc_name=doc_name,
                 doc_id=doc_id,
+                extract_llm=self.extract_llm,
             )
         return self._split_strategy_default(
             text_md=text_md,
             body_text_md=body_text_md,
             preface_text_md=preface_text_md,
-            footer_text_md=footer_text_md,
+            enforcement_clause_md=enforcement_clause_md,
             doc_type=doc_type,
             doc_name=doc_name,
             doc_id=doc_id,
+            extract_llm=self.extract_llm,
         )
 
     def _split_strategy_luat(
@@ -244,11 +456,14 @@ class LawTextSplitter(TextSplitter):
         text_md: str,
         body_text_md: str,
         preface_text_md: str,
-        footer_text_md: str,
+        enforcement_clause_md: str,
         doc_type: str,
         doc_name: str,
         doc_id: str,
+        extract_llm: BaseChatModel,
     ) -> list[str]:
+        doc_relations = resolve_document_relation(extract_llm, preface_text_md, enforcement_clause_md)
+        logger.debug("[LawTextSplitter] doc_relations=%s", doc_relations)
         legal_text = _clean_legal_text(body_text_md.replace("**", ""))
         if not legal_text:
             return []
@@ -361,6 +576,7 @@ class LawTextSplitter(TextSplitter):
             doc_type=doc_type,
             doc_name=doc_name,
             doc_id=doc_id,
+            extract_llm=extract_llm,
         )
 
     def _split_strategy_luat_sua_doi(
@@ -368,16 +584,20 @@ class LawTextSplitter(TextSplitter):
         text_md: str,
         body_text_md: str,
         preface_text_md: str,
-        footer_text_md: str,
+        enforcement_clause_md: str,
         doc_type: str,
         doc_name: str,
         doc_id: str,
+        extract_llm: BaseChatModel,
     ) -> list[str]:
+        doc_relations = resolve_document_relation(extract_llm, preface_text_md, enforcement_clause_md)
+        logger.debug("[LawTextSplitter] doc_relations=%s", doc_relations)
         return self._split_common_article_clause(
             body_text_md=body_text_md,
             doc_type=doc_type,
             doc_name=doc_name,
             doc_id=doc_id,
+            extract_llm=extract_llm,
         )
 
     def _split_strategy_nghi_dinh(
@@ -385,11 +605,14 @@ class LawTextSplitter(TextSplitter):
         text_md: str,
         body_text_md: str,
         preface_text_md: str,
-        footer_text_md: str,
+        enforcement_clause_md: str,
         doc_type: str,
         doc_name: str,
         doc_id: str,
+        extract_llm: BaseChatModel,
     ) -> list[str]:
+        doc_relations = resolve_document_relation(extract_llm, preface_text_md, enforcement_clause_md)
+        logger.debug("[LawTextSplitter] doc_relations=%s", doc_relations)
         legal_text = _clean_legal_text(body_text_md.replace("**", ""))
         if not legal_text:
             return []
@@ -502,6 +725,7 @@ class LawTextSplitter(TextSplitter):
             doc_type=doc_type,
             doc_name=doc_name,
             doc_id=doc_id,
+            extract_llm=extract_llm,
         )
 
     def _split_strategy_nghi_dinh_sua_doi(
@@ -509,16 +733,20 @@ class LawTextSplitter(TextSplitter):
         text_md: str,
         body_text_md: str,
         preface_text_md: str,
-        footer_text_md: str,
+        enforcement_clause_md: str,
         doc_type: str,
         doc_name: str,
         doc_id: str,
+        extract_llm: BaseChatModel,
     ) -> list[str]:
+        doc_relations = resolve_document_relation(extract_llm, preface_text_md, enforcement_clause_md)
+        logger.debug("[LawTextSplitter] doc_relations=%s", doc_relations)
         return self._split_common_article_clause(
             body_text_md=body_text_md,
             doc_type=doc_type,
             doc_name=doc_name,
             doc_id=doc_id,
+            extract_llm=extract_llm,
         )
 
     def _split_strategy_thong_tu(
@@ -526,16 +754,20 @@ class LawTextSplitter(TextSplitter):
         text_md: str,
         body_text_md: str,
         preface_text_md: str,
-        footer_text_md: str,
+        enforcement_clause_md: str,
         doc_type: str,
         doc_name: str,
         doc_id: str,
+        extract_llm: BaseChatModel,
     ) -> list[str]:
+        doc_relations = resolve_document_relation(extract_llm, preface_text_md, enforcement_clause_md)
+        logger.debug("[LawTextSplitter] doc_relations=%s", doc_relations)
         return self._split_common_article_clause(
             body_text_md=body_text_md,
             doc_type=doc_type,
             doc_name=doc_name,
             doc_id=doc_id,
+            extract_llm=extract_llm,
         )
 
     def _split_strategy_thong_tu_sua_doi(
@@ -543,16 +775,20 @@ class LawTextSplitter(TextSplitter):
         text_md: str,
         body_text_md: str,
         preface_text_md: str,
-        footer_text_md: str,
+        enforcement_clause_md: str,
         doc_type: str,
         doc_name: str,
         doc_id: str,
+        extract_llm: BaseChatModel,
     ) -> list[str]:
+        doc_relations = resolve_document_relation(extract_llm, preface_text_md, enforcement_clause_md)
+        logger.debug("[LawTextSplitter] doc_relations=%s", doc_relations)
         return self._split_common_article_clause(
             body_text_md=body_text_md,
             doc_type=doc_type,
             doc_name=doc_name,
             doc_id=doc_id,
+            extract_llm=extract_llm,
         )
 
     def _split_strategy_default(
@@ -560,7 +796,7 @@ class LawTextSplitter(TextSplitter):
         text_md: str,
         body_text_md: str,
         preface_text_md: str,
-        footer_text_md: str,
+        enforcement_clause_md: str,
         doc_type: str,
         doc_name: str,
         doc_id: str,
@@ -578,7 +814,9 @@ class LawTextSplitter(TextSplitter):
         doc_type: str,
         doc_name: str,
         doc_id: str,
+        extract_llm: BaseChatModel,
     ) -> list[str]:
+        llm_client = LLMProvider(extract_llm)
         legal_text = _clean_legal_text(body_text_md.replace("**", ""))
         if not legal_text:
             return []

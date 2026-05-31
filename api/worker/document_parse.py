@@ -14,14 +14,19 @@ from typing import Any
 from elasticsearch.helpers import bulk
 from markdownify import markdownify as md
 
-from deepagent.core.text_splitters.law_split import LawTextSplitter
+from deepagent.core.text_splitters.law_split import LawTextSplitter, LLMResponseValidationError
 from api.apps.services.doc_service import DocumentService
 from api.apps.services.file_service import FileService
 from api.apps.services.kb_service import KnowledgebaseService
 from api.db.models import LexDocumentChunk, db
 from api.utils.logger import setup_logging
 from api.utils.minio_conn import LexCompanionMinio
+from langchain_core.language_models.chat_models import BaseChatModel
+from langchain_core.messages import HumanMessage
+
 from deepagent.core.providers.embeddings.base import create_embeddings
+from deepagent.core.providers.llms.base import create_chat_model
+from deepagent.core.prompts.prompt import EXTRACT_LAW_REFERENCE_PROMPT
 from deepagent.core.retrievers.base import build_elasticsearch_client, create_retriever
 import json
 from enum import Enum
@@ -87,6 +92,26 @@ def _embedding_from_env():
     return create_embeddings(provider=provider, **kwargs)
 
 
+def _llm_from_env() -> BaseChatModel:
+    kwargs: dict[str, Any] = {
+        "api_key": os.getenv("OPENAI_API_KEY") or "",
+        "base_url": _normalize_openai_base_url(os.getenv("OPENAI_BASE_URL")),
+    }
+    model = os.getenv("LLM_MODEL")
+    if model:
+        kwargs["model"] = model
+    temperature = os.getenv("LLM_TEMPERATURE")
+    if temperature:
+        kwargs["temperature"] = float(temperature)
+    max_tokens = os.getenv("LLM_MAX_TOKENS")
+    if max_tokens:
+        kwargs["max_tokens"] = int(max_tokens)
+    timeout = os.getenv("LLM_TIMEOUT")
+    if timeout:
+        kwargs["timeout"] = int(timeout)
+    return create_chat_model(provider="openai", **kwargs)
+
+
 def get_docling_converter() -> Any:
     """Lazily construct one ``DocumentConverter`` per process (thread-safe)."""
     global _docling_converter
@@ -123,9 +148,13 @@ def _docling_to_markdown(path: Path) -> str:
     return result.document.export_to_markdown()
 
 
-def _split_chunks(text_md: str) -> list[str]:
-    splitter = LawTextSplitter()
-    parts = splitter.split_text(text_md)
+def _split_chunks(text_md: str, extract_llm: BaseChatModel) -> list[str]:
+    splitter = LawTextSplitter(extract_llm=extract_llm)
+    try:
+        parts = splitter.split_text(text_md)
+    except LLMResponseValidationError:
+        logger.exception("LLM response validation failed during chunk splitting")
+        raise
     return [p for p in parts if p.strip()]
 
 
@@ -289,155 +318,335 @@ def _detect_reference_phrases(content: str, ref_type: str) -> list[dict[str, Any
     return refs
 
 
-def _resolve_reference_for_law(content: str) -> list[dict[str, Any]]:
-    text = content or ""
-    text_lower = text.lower()
-    idx_tai = text_lower.find("quy định tại")
-    idx_cua = text_lower.find("quy định của")
+_REFERENCE_PATTERNS = [
+    re.compile(r"\bquy\s*định\s*tại\b", flags=re.IGNORECASE),
+    re.compile(r"\bquy\s*định\s*của\b", flags=re.IGNORECASE),
+]
 
-    # Bỏ qua nếu không có cụm nào, hoặc có đồng thời cả 2 cụm.
-    if (idx_tai == -1 and idx_cua == -1) or (idx_tai != -1 and idx_cua != -1):
+_QUY_DINH_TAI_RE = re.compile(r"quy\s*định\s*tại", flags=re.IGNORECASE)
+_LAW_LEVEL_POINT_RE = re.compile(
+    r"\b((?:các\s+)?điểm)\s+([^;,.\n]+?)(?=\s+(?:các\s+)?khoản|\s+(?:các\s+)?điều|\s+quy\s*định|\Z)",
+    flags=re.IGNORECASE,
+)
+_LAW_LEVEL_CLAUSE_RE = re.compile(
+    r"\b((?:các\s+)?khoản)\s+([^;,.\n]+?)(?=\s+(?:các\s+)?điều|\s+quy\s*định|\Z)",
+    flags=re.IGNORECASE,
+)
+_LAW_LEVEL_ARTICLE_RE = re.compile(
+    r"\b((?:các\s+)?điều)\s+([^;,.\n]+?)(?=\s+quy\s*định|\Z)",
+    flags=re.IGNORECASE,
+)
+_INTERNAL_LUAT_NAY_RE = re.compile(r"luật\s+này", flags=re.IGNORECASE)
+_INTERNAL_CUA_LUAT_NAY_RE = re.compile(r"của\s+luật\s+này", flags=re.IGNORECASE)
+_EXTERNAL_LAW_RE = re.compile(
+    r"\b(bộ\s+luật|luật)\s+(?!này\b)",
+    flags=re.IGNORECASE,
+)
+
+
+def _split_reference_values(raw: str) -> list[str | int]:
+    text = (raw or "").strip().lower()
+    if not text or text == "này":
+        return ["này"]
+    values: list[str | int] = []
+    for piece in re.split(r"\s*,\s*|\s+và\s+", text):
+        token = piece.strip()
+        if not token or token == "này":
+            values.append("này")
+            continue
+        if token.isdigit():
+            values.append(int(token))
+            continue
+        if len(token) == 1 and token.isalpha():
+            values.append(token)
+            continue
         return []
+    return values or ["này"]
 
-    refs: list[dict[str, Any]] = []
 
-    if idx_tai != -1:
-        # Dò tối đa 25 ký tự từ vị trí bắt đầu cụm "quy định tại".
-        initial_window = text[idx_tai : idx_tai + 25]
-        prefix = text[max(0, idx_tai - 120) : idx_tai]
+def _suffix_matches_internal(scope: str, suffix: str) -> bool:
+    normalized = (suffix or "").strip().lower()
+    if scope == "article":
+        return bool(_INTERNAL_LUAT_NAY_RE.search(normalized))
+    return bool(_INTERNAL_CUA_LUAT_NAY_RE.search(normalized))
 
-        clause_tokens = re.findall(
-            r"\bkhoản\s+([0-9]+|[a-zA-Z](?:\s*,\s*[a-zA-Z])*)\b",
-            prefix,
-            flags=re.IGNORECASE,
-        )
-        article_tokens = re.findall(
-            r"\bđiều\s+([0-9]+(?:\s*,\s*[0-9]+)*)\b",
-            prefix,
-            flags=re.IGNORECASE,
-        )
-        point_tokens = re.findall(
-            r"\bđiểm\s+([a-zA-Z](?:\s*,\s*[a-zA-Z])*)\b",
-            prefix,
-            flags=re.IGNORECASE,
-        )
 
-        clauses: list[str] = []
-        for token in clause_tokens:
-            pieces = [p.strip().lower() for p in token.split(",") if p.strip()]
-            clauses.extend(pieces)
+def _is_external_law_target(suffix: str) -> bool:
+    normalized = (suffix or "").strip()
+    if _INTERNAL_LUAT_NAY_RE.search(normalized):
+        return False
+    return bool(_EXTERNAL_LAW_RE.search(normalized))
 
-        articles: list[int] = []
-        for token in article_tokens:
-            for p in token.split(","):
-                p = p.strip()
-                if p.isdigit():
-                    articles.append(int(p))
-        points: list[str] = []
-        for token in point_tokens:
-            pieces = [p.strip().lower() for p in token.split(",") if p.strip()]
-            points.extend(pieces)
 
-        unique_clauses = list(dict.fromkeys(clauses))
-        unique_articles = list(dict.fromkeys(articles))
-        unique_points = list(dict.fromkeys(points))
+def _materialize_nay_tokens(
+    parsed: dict[str, Any], chunk_data: dict[str, Any]
+) -> dict[str, Any]:
+    article = _normalize_int(chunk_data.get("article"))
+    clause = _normalize_int(chunk_data.get("clause"))
+    point = chunk_data.get("point")
 
-        # Nếu có nhiều điều/khoản thì mở rộng cửa sổ dò lên 40 ký tự tiếp theo.
-        need_extend = (
-            len(unique_clauses) > 1
-            or len(unique_articles) > 1
-            or len(unique_points) > 1
-        )
-        scan_window = text[idx_tai : idx_tai + (40 if need_extend else 25)]
-        scan_lower = scan_window.lower()
-        has_cua = "của" in scan_lower
-        has_nay = "này" in scan_lower
+    def _resolve(values: list[Any], current: Any) -> list[Any]:
+        resolved: list[Any] = []
+        for value in values:
+            if value == "này":
+                if current is None:
+                    resolved.append("này")
+                else:
+                    resolved.append(current)
+            else:
+                resolved.append(value)
+        return resolved
 
-        close_enough = True
-        if has_cua and has_nay:
-            # Khoảng cách giữa "của" và "này" không quá 3 từ.
-            words = re.findall(r"\S+", scan_window)
-            pos_cua = next((i for i, w in enumerate(words) if w.lower() == "của"), None)
-            pos_nay = next((i for i, w in enumerate(words) if w.lower() == "này"), None)
-            if pos_cua is not None and pos_nay is not None:
-                close_enough = abs(pos_cua - pos_nay) <= 4
+    return {
+        **parsed,
+        "articles": _resolve(parsed.get("articles") or [], article),
+        "clauses": _resolve(parsed.get("clauses") or [], clause),
+        "points": _resolve(parsed.get("points") or [], point),
+    }
 
-        if (has_cua or has_nay) and close_enough and (
-            unique_clauses or unique_articles or unique_points
+
+def _build_internal_law_ref(
+    *,
+    pattern: str,
+    start: int,
+    end: int,
+    scope: str,
+    articles: list[Any],
+    clauses: list[Any],
+    points: list[Any],
+    window_text: str,
+    source: str,
+) -> dict[str, Any]:
+    return {
+        "ref_type": "internal",
+        "pattern": pattern,
+        "scope": scope,
+        "articles": articles,
+        "clauses": clauses,
+        "points": points,
+        "window_text": window_text,
+        "start": start,
+        "end": end,
+        "source": source,
+    }
+
+
+def _parse_internal_quy_dinh_tai(prefix: str, suffix: str) -> dict[str, Any] | None:
+    """Validate nested internal ref: điểm→khoản→điều→luật này or shorter chains."""
+    tail = (prefix or "")[-180:]
+    point_match = None
+    for match in _LAW_LEVEL_POINT_RE.finditer(tail):
+        point_match = match
+    clause_match = None
+    for match in _LAW_LEVEL_CLAUSE_RE.finditer(tail):
+        clause_match = match
+    article_match = None
+    for match in _LAW_LEVEL_ARTICLE_RE.finditer(tail):
+        article_match = match
+
+    if point_match:
+        if not clause_match or not article_match:
+            return None
+        if not (
+            point_match.start() < clause_match.start() < article_match.start()
         ):
-            refs.append(
-                {
-                    "ref_type": "law",
-                    "pattern": "quy định tại",
-                    "clauses": unique_clauses,
-                    "articles": unique_articles,
-                    "points": unique_points,
-                    "window_text": scan_window,
-                    "start": idx_tai,
-                    "end": idx_tai + len("quy định tại"),
-                }
-            )
-        logger.info(f"refs: {refs}")
-        return refs
-
-    # Case "quy định của"
-    idx_after = idx_cua + len("quy định của")
-    tail = text[idx_after:]
-    law_match = re.search(r"\bLuật\b", tail)
-    if not law_match:
-        return []
-
-    law_start = idx_after + law_match.start()
-    prev_20 = text[max(0, law_start - 20) : law_start].rstrip()
-    if not prev_20.endswith(";"):
-        return []
-
-    semicolon_after = text.find(";", law_start)
-    if semicolon_after == -1:
-        return []
-
-    law_name = text[law_start:semicolon_after].strip()
-    refs.append(
-        {
-            "ref_type": "law",
-            "pattern": "quy định của",
-            "law_name": law_name,
-            "start": idx_cua,
-            "end": idx_cua + len("quy định của"),
+            return None
+        if not _suffix_matches_internal("point", suffix):
+            return None
+        points = _split_reference_values(point_match.group(2))
+        clauses = _split_reference_values(clause_match.group(2))
+        articles = _split_reference_values(article_match.group(2))
+        if not points or not clauses or not articles:
+            return None
+        return {
+            "scope": "point",
+            "articles": articles,
+            "clauses": clauses,
+            "points": points,
         }
-    )
-    logger.info(f"refs: {refs}")
+
+    if clause_match:
+        if not article_match or clause_match.start() >= article_match.start():
+            return None
+        if not _suffix_matches_internal("clause", suffix):
+            return None
+        clauses = _split_reference_values(clause_match.group(2))
+        articles = _split_reference_values(article_match.group(2))
+        if not clauses or not articles:
+            return None
+        return {
+            "scope": "clause",
+            "articles": articles,
+            "clauses": clauses,
+            "points": [],
+        }
+
+    if article_match:
+        if clause_match or point_match:
+            return None
+        if not _suffix_matches_internal("article", suffix):
+            return None
+        articles = _split_reference_values(article_match.group(2))
+        if not articles:
+            return None
+        return {
+            "scope": "article",
+            "articles": articles,
+            "clauses": [],
+            "points": [],
+        }
+
+    return None
+
+
+def _parse_llm_law_reference_response(raw: str) -> list[dict[str, Any]]:
+    text = (raw or "").strip()
+    if text.startswith("```"):
+        text = re.sub(r"^```(?:json)?\s*", "", text, flags=re.IGNORECASE)
+        text = re.sub(r"\s*```$", "", text)
+    parsed = json.loads(text)
+    if not isinstance(parsed, list):
+        raise ValueError("LLM law reference response must be a JSON array")
+    refs: list[dict[str, Any]] = []
+    for item in parsed:
+        if not isinstance(item, dict):
+            continue
+        scope = (item.get("scope") or "").strip().lower()
+        if scope not in {"article", "clause", "point"}:
+            continue
+        refs.append(
+            {
+                "scope": scope,
+                "articles": item.get("articles") or [],
+                "clauses": item.get("clauses") or [],
+                "points": item.get("points") or [],
+                "ref_type": "internal",
+            }
+        )
     return refs
 
 
-def _resolve_reference_for_decree(content: str) -> list[dict[str, Any]]:
+def _resolve_law_reference_with_llm(
+    content: str,
+    extract_llm: BaseChatModel,
+    chunk_data: dict[str, Any],
+) -> list[dict[str, Any]]:
+    chunk_context = {
+        "article": chunk_data.get("article"),
+        "clause": chunk_data.get("clause"),
+        "point": chunk_data.get("point"),
+    }
+    prompt = (
+        EXTRACT_LAW_REFERENCE_PROMPT.replace(
+            "{{CHUNK_CONTEXT_JSON}}",
+            json.dumps(chunk_context, ensure_ascii=False),
+        ).replace("{{INPUT_TEXT}}", content)
+    )
+    response = extract_llm.invoke([HumanMessage(content=prompt)])
+    raw = getattr(response, "content", str(response))
+    llm_refs = _parse_llm_law_reference_response(raw)
+    return [_materialize_nay_tokens(ref, chunk_data) for ref in llm_refs]
+
+
+def _resolve_reference_for_law(
+    content: str,
+    extract_llm: BaseChatModel,
+    chunk_data: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    text = content or ""
+    chunk_data = chunk_data or {}
+    if not _QUY_DINH_TAI_RE.search(text):
+        return []
+
+    refs: list[dict[str, Any]] = []
+    llm_needed = False
+
+    for match in _QUY_DINH_TAI_RE.finditer(text):
+        start, end = match.start(), match.end()
+        prefix = text[max(0, start - 180) : start]
+        suffix = text[end : end + 80]
+        window_text = text[max(0, start - 40) : end + 40]
+
+        if _is_external_law_target(suffix):
+            continue
+
+        parsed = _parse_internal_quy_dinh_tai(prefix, suffix)
+        if parsed:
+            materialized = _materialize_nay_tokens(parsed, chunk_data)
+            refs.append(
+                _build_internal_law_ref(
+                    pattern=match.group(0),
+                    start=start,
+                    end=end,
+                    scope=materialized["scope"],
+                    articles=materialized.get("articles") or [],
+                    clauses=materialized.get("clauses") or [],
+                    points=materialized.get("points") or [],
+                    window_text=window_text,
+                    source="rule",
+                )
+            )
+            continue
+
+        if _INTERNAL_LUAT_NAY_RE.search(suffix) or _INTERNAL_CUA_LUAT_NAY_RE.search(
+            suffix
+        ):
+            llm_needed = True
+
+    if llm_needed and extract_llm is not None:
+        try:
+            llm_refs = _resolve_law_reference_with_llm(content, extract_llm, chunk_data)
+            for ref in llm_refs:
+                refs.append(
+                    _build_internal_law_ref(
+                        pattern="quy định tại",
+                        start=-1,
+                        end=-1,
+                        scope=ref["scope"],
+                        articles=ref.get("articles") or [],
+                        clauses=ref.get("clauses") or [],
+                        points=ref.get("points") or [],
+                        window_text=content[:200],
+                        source="llm",
+                    )
+                )
+        except Exception:
+            logger.exception("LLM fallback failed for law reference extraction")
+
+    logger.info("law refs: %s", refs)
+    return refs
+
+
+def _resolve_reference_for_decree(content: str, extract_llm: BaseChatModel) -> list[dict[str, Any]]:
     return _detect_reference_phrases(content, ref_type="decree")
 
 
-def _resolve_reference_for_circular(content: str) -> list[dict[str, Any]]:
+def _resolve_reference_for_circular(content: str, extract_llm: BaseChatModel) -> list[dict[str, Any]]:
     return _detect_reference_phrases(content, ref_type="circular")
 
 
-def resolve_reference(doc_type: str | None, chunk_data: dict[str, Any]) -> list[dict[str, Any]]:
+def resolve_reference(doc_type: str | None, chunk_data: dict[str, Any], extract_llm: BaseChatModel) -> list[dict[str, Any]]:
     normalized_doc_type = (doc_type or "").strip().lower()
     content = (chunk_data.get("content") or "").strip()
 
     if normalized_doc_type in {"luat", "luat_sua_doi"}:
-        return _resolve_reference_for_law(content)
+        return _resolve_reference_for_law(content, extract_llm, chunk_data)
     if normalized_doc_type in {"nghi_dinh", "nghi_dinh_sua_doi"}:
-        return _resolve_reference_for_decree(content)
+        return _resolve_reference_for_decree(content, extract_llm)
     if normalized_doc_type in {"thong_tu", "thong_tu_sua_doi"}:
-        return _resolve_reference_for_circular(content)
+        return _resolve_reference_for_circular(content, extract_llm)
     return chunk_data.get("references") or []
 
 
-def _build_chunk_row(document_id: str, raw_chunk: str) -> dict[str, Any]:
+def _build_chunk_row(
+    document_id: str, raw_chunk: str, extract_llm: BaseChatModel
+) -> dict[str, Any]:
     chunk_data = json.loads(raw_chunk)
     doc_type = chunk_data.get("doc_type")
     chunk_id = (chunk_data.get("chunk_id") or "").strip()
     if not chunk_id:
         chunk_id = f"{document_id}_{uuid.uuid4().hex[:8]}"
-    resolved_references = resolve_reference(doc_type, chunk_data)
+    resolved_references = resolve_reference(doc_type, chunk_data, extract_llm)
 
     return {
         "id": uuid.uuid4().hex,
@@ -469,14 +678,16 @@ def _build_chunk_row(document_id: str, raw_chunk: str) -> dict[str, Any]:
     }
 
 
-def _persist_chunks_to_postgres(document_id: str, chunks: list[str]) -> None:
+def _persist_chunks_to_postgres(
+    document_id: str, chunks: list[str], extract_llm: BaseChatModel
+) -> None:
     if not chunks:
         return
 
     rows: list[dict[str, Any]] = []
     for raw_chunk in chunks:
         try:
-            rows.append(_build_chunk_row(document_id, raw_chunk))
+            rows.append(_build_chunk_row(document_id, raw_chunk, extract_llm))
         except Exception:
             logger.exception("Skip invalid chunk JSON while saving doc_id=%s", document_id)
 
@@ -500,10 +711,12 @@ def _persist_chunks_to_postgres(document_id: str, chunks: list[str]) -> None:
     )
 
 
-def enqueue_chunk_persist(document_id: str, chunks: list[str]) -> None:
+def enqueue_chunk_persist(
+    document_id: str, chunks: list[str], extract_llm: BaseChatModel
+) -> None:
     def _runner() -> None:
         try:
-            _persist_chunks_to_postgres(document_id, chunks)
+            _persist_chunks_to_postgres(document_id, chunks, extract_llm)
         except Exception:
             logger.exception("Background chunk persist failed doc_id=%s", document_id)
 
@@ -584,6 +797,7 @@ def _bulk_index_vectors(
 def run_parse_document_job(document_id: str, parse_type: str = "docdealing") -> None:
     """Sync pipeline: load Document → MinIO → Docling → chunk → embed → ES. Updates ``progress`` on the row."""
     t0 = time.monotonic()
+    extract_llm = _llm_from_env()
     index_name = os.getenv("ELASTIC_INDEX", "lex-companion-chunks")
     text_md: str | None = None
 
@@ -649,7 +863,17 @@ def run_parse_document_job(document_id: str, parse_type: str = "docdealing") -> 
     if _should_cancel(document_id):
         return
 
-    chunks = _split_chunks(text_md)
+    try:
+        chunks = _split_chunks(text_md, extract_llm)
+    except LLMResponseValidationError as exc:
+        logger.error(
+            "parse_document aborted: invalid LLM response doc_id=%s error=%s",
+            document_id,
+            exc,
+        )
+        raise RuntimeError(
+            f"Invalid LLM response while parsing document {document_id}: {exc}"
+        ) from exc
     # Ghi debug chunks vào đúng thư mục worker (không phụ thuộc cwd lúc chạy process).
     debug_chunks_file = Path(__file__).resolve().parent / f"chunks_{document_id}.txt"
     with debug_chunks_file.open("w", encoding="utf-8") as f:
@@ -666,7 +890,7 @@ def run_parse_document_job(document_id: str, parse_type: str = "docdealing") -> 
             f.write("\n")
 
     # Lưu chunks vào DB ở background thread để không block parse pipeline chính.
-    enqueue_chunk_persist(document_id, chunks)
+    enqueue_chunk_persist(document_id, chunks, extract_llm)
     logger.info(f"Wrote debug chunks file: {debug_chunks_file}")
 
     logger.info(f"Parse document: {document_id} chunks: {len(chunks)}")

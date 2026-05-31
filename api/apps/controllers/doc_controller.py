@@ -17,6 +17,10 @@ from weasyprint import HTML
 
 from api.apps.services.doc_service import DocumentService
 from api.apps.services.file_service import FileService
+from api.apps.services.hf_dataset_service import (
+    import_hf_dataset_batch,
+    preview_hf_dataset_all_configs,
+)
 from api.apps.services.kb_service import KnowledgebaseService
 from api.db.models import Document, Knowledgebase, Users
 from api.utils.logger import setup_logging
@@ -650,6 +654,84 @@ def run_document_parse(
         }
     except Exception as e:
         logger.error(f"run_document_parse error: {e}")
+        return {"code": 500, "msg": str(e), "data": None}
+
+
+def _is_super_admin(user: Users) -> bool:
+    return bool(getattr(user, "super_admin", False))
+
+
+def admin_upload_hf_dataset(
+    *,
+    user: Users,
+    dataset_name: str,
+    config: str | None = None,
+    offset: int = 0,
+    limit: int | None = None,
+    preview: bool = False,
+    samples_per_config: int | None = None,
+) -> dict:
+    """
+    Super admin: preview toàn bộ config HF, hoặc import một config vào KB/MinIO/ES.
+    """
+    try:
+        logger.info(
+            f"admin hf upload: user_id={user.id} dataset={dataset_name!r} "
+            f"preview={preview} offset={offset}"
+        )
+        if not _is_super_admin(user):
+            return {"code": 403, "msg": "Super admin required", "data": None}
+
+        dataset_name = (dataset_name or "").strip()
+        if not dataset_name or "/" not in dataset_name:
+            return {
+                "code": 400,
+                "msg": "dataset_name must be a Hugging Face repo id (e.g. org/name)",
+                "data": None,
+            }
+
+        if preview:
+            per_cfg = samples_per_config if samples_per_config is not None else int(
+                os.getenv("HF_PREVIEW_SAMPLES_PER_CONFIG", "20")
+            )
+            result = preview_hf_dataset_all_configs(
+                dataset_name=dataset_name,
+                samples_per_config=per_cfg,
+            )
+            logger.info(
+                f"admin hf preview done: configs={result['config_count']} "
+                f"samples_per_config={per_cfg}"
+            )
+            return {
+                "code": 200,
+                "msg": "Hugging Face dataset preview (all configs)",
+                "data": result,
+            }
+
+        kb = KnowledgebaseService.ensure_kb_for_super_admin(user)
+        logger.info(f"admin hf upload: kb_id={kb.id} tenant_id={kb.tenant_id}")
+
+        batch_limit = limit if limit is not None else int(
+            os.getenv("HF_IMPORT_DEFAULT_LIMIT", "50")
+        )
+        result = import_hf_dataset_batch(
+            user=user,
+            kb=kb,
+            dataset_name=dataset_name,
+            config=(config or "articles").strip() or "articles",
+            offset=max(0, offset),
+            limit=batch_limit,
+        )
+        logger.info(
+            f"admin hf upload done: imported={result['imported']} failed={result['failed']}"
+        )
+        return {
+            "code": 201,
+            "msg": "Hugging Face dataset batch imported",
+            "data": result,
+        }
+    except Exception as e:
+        logger.error(f"admin_upload_hf_dataset error: {e}")
         return {"code": 500, "msg": str(e), "data": None}
 
 

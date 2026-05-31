@@ -35,3 +35,17 @@ class DocumentService(CommonService):
     def mark_parse_queued(cls, doc_id: str) -> int:
         """Đánh dấu document đã được đưa vào hàng đợi parse (run=1)."""
         return cls.update_by_id(doc_id, {"run": "1"})
+
+    @classmethod
+    @DB.connection_context()
+    def get_active_by_kb_and_content_hash(
+        cls, kb_id: str, content_hash: str
+    ) -> Document | None:
+        """Document active trong KB đã có cùng content_hash (tránh import trùng)."""
+        if not content_hash:
+            return None
+        return cls.model.get_or_none(
+            (cls.model.kb_id == kb_id)
+            & (cls.model.status == "1")
+            & (cls.model.content_hash == content_hash)
+        )
