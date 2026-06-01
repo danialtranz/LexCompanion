@@ -87,7 +87,7 @@ Trả về theo format:
 }
 """
 config = {
-    "model_name": "gpt-4o-mini",
+    "model_name": os.getenv("LLM_MODEL", "gpt-4o-mini"),
     "api_key": os.getenv("OPENAI_API_KEY"),
     "base_url": os.getenv("OPENAI_BASE_URL"),
     "timeout": 300,
@@ -204,6 +204,44 @@ class LLMProvider:
                 return None
         except Exception as e:
             logger.error(f"Error in response generation: {e}")
+            return None
+
+    def chat_text(
+        self,
+        dialogue: list[dict],
+        *,
+        system_prompt: str | None = None,
+        **kwargs,
+    ) -> str | None:
+        """OpenAI chat completion; returns plain text (no JSON validation)."""
+        try:
+            dialogue = self.normalize_dialogue(dialogue)
+            messages: list[dict] = []
+            if system_prompt:
+                messages.append({"role": "system", "content": system_prompt})
+            messages.extend(dialogue)
+
+            request_params: dict = {
+                "model": kwargs.get("model") or self.model_name,
+                "messages": messages,
+                "stream": False,
+            }
+            llm_options = kwargs.get("llm_options", {}) or {}
+            for key in ["max_tokens", "temperature", "top_p", "frequency_penalty", "presence_penalty"]:
+                value = kwargs.get(key, llm_options.get(key, getattr(self, key, None)))
+                if value is not None:
+                    request_params[key] = value
+
+            responses = self.client.chat.completions.create(**request_params)
+            if responses.usage:
+                logger.info(
+                    "chat_text tokens: prompt={} completion={}",
+                    responses.usage.prompt_tokens,
+                    responses.usage.completion_tokens,
+                )
+            return responses.choices[0].message.content
+        except Exception as e:
+            logger.error(f"Error in chat_text: {e}")
             return None
 
 

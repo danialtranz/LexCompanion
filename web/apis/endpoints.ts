@@ -19,5 +19,11 @@ const api = {
   adminDocArticlesUrl: `${api_host}/v1/admin/doc/articles`,
   /** POST — tra cứu pháp điển (search → rerank → LLM) */
   adminDocRetrievalUrl: `${api_host}/v1/admin/doc/retrieval`,
+  /** User chat sessions */
+  userChatUrl: `${api_host}/v1/user/chat`,
+  userChatSessionsUrl: `${api_host}/v1/user/sessions`,
+  userChatSessionUrl: `${api_host}/v1/user/session`,
+  /** POST multipart — user upload file (PDF/DOCX/ảnh) gắn session tùy chọn */
+  userUploadUrl: `${api_host}/v1/user/upload`,
 };
 export default api;

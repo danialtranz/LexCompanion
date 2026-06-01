@@ -4,7 +4,19 @@ import { SidebarNav } from "./SidebarNav";
 import { SidebarUpgrade } from "./SidebarUpgrade";
 import { SidebarUser } from "./SidebarUser";
 
-export const ChatSidebar = () => (
+type ChatSidebarProps = {
+  onOpenKnowledgeBase?: () => void;
+  onToggleHistory?: () => void;
+  knowledgeBaseActive?: boolean;
+  historyActive?: boolean;
+};
+
+export const ChatSidebar = ({
+  onOpenKnowledgeBase,
+  onToggleHistory,
+  knowledgeBaseActive = false,
+  historyActive = false,
+}: ChatSidebarProps) => (
   <aside className="hidden min-h-screen w-[240px] shrink-0 flex-col border-r border-[#ebe3d6] bg-[#fffdf9] px-4 pb-5 pt-6 lg:flex">
     <SidebarBrand />
 
@@ -16,7 +28,12 @@ export const ChatSidebar = () => (
       Tạo cuộc trò chuyện
     </button>
 
-    <SidebarNav />
+    <SidebarNav
+      onOpenKnowledgeBase={onOpenKnowledgeBase}
+      onToggleHistory={onToggleHistory}
+      knowledgeBaseActive={knowledgeBaseActive}
+      historyActive={historyActive}
+    />
 
     <div className="mt-auto flex flex-col gap-4 pt-6">
       <SidebarUpgrade />

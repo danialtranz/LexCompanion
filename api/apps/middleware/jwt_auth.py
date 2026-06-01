@@ -60,7 +60,7 @@ def get_current_user(
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    logger.info("jwt_auth: querying user in DB user_id=%s", user_id)
+    logger.info(f"jwt_auth: querying user in DB user_id={user_id}")
     user = UserService.get_or_none(id=user_id)
 
     if user is None:

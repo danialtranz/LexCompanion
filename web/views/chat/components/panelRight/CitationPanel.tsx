@@ -1,22 +1,33 @@
-import { BookOpen, ExternalLink } from "lucide-react";
+import { BookOpen, ExternalLink, X } from "lucide-react";
 import type { ChatCitation } from "../../types";
 import { PanelRight } from "./PanelRight";
 
 interface CitationPanelProps {
   citation: ChatCitation | null;
+  onClose?: () => void;
 }
 
-export const CitationPanel = ({ citation }: CitationPanelProps) => (
+export const CitationPanel = ({ citation, onClose }: CitationPanelProps) => (
   <PanelRight>
     <div className="flex h-[60px] shrink-0 items-center gap-2.5 border-b border-[#ebe3d6] px-6">
-      <BookOpen className="h-4 w-4 text-[#9a6c2b]" strokeWidth={2} />
-      <h2 className="m-0 text-sm font-semibold text-[#2c2620]">
+      <BookOpen className="h-4 w-4 shrink-0 text-[#9a6c2b]" strokeWidth={2} />
+      <h2 className="m-0 flex-1 text-sm font-semibold text-[#2c2620]">
         Chi tiết trích dẫn
       </h2>
       {citation && (
-        <span className="ml-auto rounded-md bg-[#f5e6cc] px-2 py-0.5 text-xs font-bold text-[#9a6c2b]">
+        <span className="rounded-md bg-[#f5e6cc] px-2 py-0.5 text-xs font-bold text-[#9a6c2b]">
           [{citation.index}]
         </span>
+      )}
+      {onClose && (
+        <button
+          type="button"
+          aria-label="Đóng panel trích dẫn"
+          onClick={onClose}
+          className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border-0 bg-transparent text-[#8a8178] transition-colors hover:bg-[#faf5ec] hover:text-[#2c2620] cursor-pointer"
+        >
+          <X className="h-4 w-4" strokeWidth={2} />
+        </button>
       )}
     </div>
 

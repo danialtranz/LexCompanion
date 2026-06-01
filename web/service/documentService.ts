@@ -10,6 +10,7 @@ const {
   adminDocTopicUrl,
   adminDocSubjectUrl,
   adminDocArticlesUrl,
+  userUploadUrl,
 } = api;
 
 const methods = {
@@ -58,6 +59,11 @@ const methods = {
   listAdminLegalArticles: {
     url: adminDocArticlesUrl,
     method: "get",
+  },
+  /** POST multipart; form: `file`, optional `session_id` */
+  uploadUserDocument: {
+    url: userUploadUrl,
+    method: "post",
   },
 } as const;
 

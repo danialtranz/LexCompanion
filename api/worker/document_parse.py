@@ -44,9 +44,7 @@ class RefType(Enum):
 
 _TYPE_ALIASES = {"parse_ducument": "parse_document"}
 
-# Docling loads RapidOCR / torch weights once per process — reuse a single converter.
-_docling_converter: Any = None
-_docling_lock = threading.Lock()
+from deepagent.core.document_loaders.docdealing import warmup_docling
 
 
 

@@ -11,6 +11,7 @@ from urllib.parse import urlencode, urlparse
 
 from bs4 import BeautifulSoup
 from fastapi import HTTPException, Request, UploadFile, status
+from typing import Any
 from fastapi.responses import Response
 from markdownify import markdownify as md
 from weasyprint import HTML
@@ -19,6 +20,8 @@ from api.apps.services.doc_service import DocumentService
 from api.apps.services.file_service import FileService
 from api.apps.services.hf_dataset_service import preview_hf_dataset_all_configs
 from api.apps.services.kb_service import KnowledgebaseService
+from api.apps.services.chat_service import ChatSessionService
+from api.apps.services.retrieval_service import admin_retrieve_and_answer
 from api.apps.services.legal_service import (
     LegalArticleService,
     LegalIngestionJobService,
@@ -1051,6 +1054,91 @@ def admin_upload_hf_dataset(
         return {"code": 0, "msg": "running", "data": None}
     except Exception as e:
         logger.error(f"admin_upload_hf_dataset error: {e}")
+        return {"code": 500, "msg": str(e), "data": None}
+
+
+def admin_doc_retrieval(
+    *,
+    user: Users,
+    request: Request,
+    query: str,
+    session_id: str | None = None,
+    candidate_size: int = 100,
+    similarity_threshold: float = 0.5,
+    final_size: int = 5,
+    keyword_weight: float = 0.3,
+    field_weights: list[str] | None = None,
+    topic_ids: list[str] | None = None,
+    subject_ids: list[str] | None = None,
+    doc_ids: list[str] | None = None,
+) -> dict:
+    try:
+        logger.info(
+            "admin_doc_retrieval: user_id={} candidate_size={} threshold={} final_size={} query={}",
+            user.id,
+            candidate_size,
+            similarity_threshold,
+            final_size,
+            query,
+        )
+        if not _is_super_admin(user):
+            return {"code": 403, "msg": "Super admin required", "data": None}
+
+        query = (query or "").strip()
+        if not query:
+            return {"code": 400, "msg": "query is required", "data": None}
+
+        persist_session_id = (session_id or "").strip() or None
+
+        reranker = getattr(request.app.state, "reranker", None)
+        payload: dict[str, Any] = admin_retrieve_and_answer(
+            query=query,
+            session_id=persist_session_id,
+            user_id=user.id,
+            candidate_size=candidate_size,
+            similarity_threshold=similarity_threshold,
+            final_size=final_size,
+            keyword_weight=keyword_weight,
+            field_weights=field_weights,
+            topic_ids=topic_ids or None,
+            subject_ids=subject_ids or None,
+            extra_doc_ids=doc_ids or None,
+            reranker=reranker,
+        )
+        if not payload.get("answer"):
+            return {
+                "code": 502,
+                "msg": "LLM did not return an answer",
+                "data": payload,
+            }
+
+        logger.info(
+            "admin_doc_retrieval: references={}",
+            len(payload.get("reference") or []),
+        )
+
+        if persist_session_id:
+            try:
+                ChatSessionService.save_retrieval_exchange(
+                    session_id=persist_session_id,
+                    user=user,
+                    query=query,
+                    answer=payload["answer"],
+                    references=payload.get("reference"),
+                )
+            except PermissionError as e:
+                logger.warning("admin_doc_retrieval session denied: {}", e)
+                return {"code": 403, "msg": str(e), "data": None}
+
+        return {"code": 200, "msg": "OK", "data": payload}
+    except PermissionError as e:
+        logger.warning("admin_doc_retrieval session denied: {}", e)
+        return {"code": 403, "msg": str(e), "data": None}
+    except ValueError as e:
+        logger.error("admin_doc_retrieval validation error: {}", e)
+        return {"code": 400, "msg": str(e), "data": None}
+    except Exception as e:
+        logger.error("admin_doc_retrieval error: {}", e)
         return {"code": 500, "msg": str(e), "data": None}
 
 

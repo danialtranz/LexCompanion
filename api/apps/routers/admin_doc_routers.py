@@ -1,7 +1,8 @@
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Body, Query, Request
 from pydantic import BaseModel, Field
 
 from api.apps.controllers.doc_controller import (
+    admin_doc_retrieval,
     admin_get_legal_subject_detail,
     admin_get_legal_topic_detail,
     admin_list_legal_articles,
@@ -12,6 +13,48 @@ from api.apps.controllers.doc_controller import (
 from api.apps.middleware.jwt_auth import CurrentUser
 
 router = APIRouter(prefix="/v1/admin", tags=["admin-doc"])
+
+
+class AdminRetrievalFieldWeights(BaseModel):
+    fields: list[str] = Field(
+        default_factory=lambda: [
+            "article_title^8",
+            "subject_title^6",
+            "topic_title^5",
+            "content_text^2",
+        ],
+        description="ES multi_match fields, e.g. article_title^8",
+    )
+
+
+class AdminRetrievalReference(BaseModel):
+    topic_ids: list[str] = Field(default_factory=list)
+    subject_ids: list[str] = Field(default_factory=list)
+    doc_ids: list[str] = Field(
+        default_factory=list,
+        description=(
+            "Document ids bổ sung từ client; chỉ merge vào document_ids khi "
+            "session retrieval_strategy là load_in_context"
+        ),
+    )
+
+
+class AdminRetrievalRequest(BaseModel):
+    query: str = Field(..., description="Câu hỏi tra cứu")
+    session_id: str | None = Field(
+        None,
+        description="ID phiên chat; nếu có thì lưu user/assistant message vào PostgreSQL",
+    )
+    candidate_size: int = Field(100, ge=1, le=500)
+    similarity_threshold: float = Field(
+        0.5,
+        ge=0.0,
+        description="ES _score phải lớn hơn ngưỡng này mới đưa vào rerank",
+    )
+    final_size: int = Field(5, ge=1, le=50)
+    keyword_weight: float = Field(0.3, ge=0.0, le=1.0)
+    field_weights: AdminRetrievalFieldWeights | None = None
+    reference: AdminRetrievalReference | None = None
 
 
 class AdminDatasetUploadRequest(BaseModel):
@@ -91,6 +134,30 @@ def admin_doc_list_articles(
         subject_id=subject_id,
         page=page,
         page_size=page_size,
+    )
+
+
+@router.post("/doc/retrieval")
+def admin_doc_retrieval_route(
+    user: CurrentUser,
+    request: Request,
+    payload: AdminRetrievalRequest = Body(...),
+):
+    ref = payload.reference
+    fields = payload.field_weights.fields if payload.field_weights else None
+    return admin_doc_retrieval(
+        user=user,
+        request=request,
+        query=payload.query,
+        session_id=payload.session_id,
+        candidate_size=payload.candidate_size,
+        similarity_threshold=payload.similarity_threshold,
+        final_size=payload.final_size,
+        keyword_weight=payload.keyword_weight,
+        field_weights=fields,
+        topic_ids=ref.topic_ids if ref else None,
+        subject_ids=ref.subject_ids if ref else None,
+        doc_ids=ref.doc_ids if ref else None,
     )
 
 

@@ -12,6 +12,7 @@ import {
   useRunDocument,
   type DocumentListItem,
 } from "@/hooks/useDocumentHook";
+import { useKbDocumentRowDrag } from "@/views/chat/utils/useKbDocumentRowDrag";
 
 type FileTableProps = {
   kb_id?: string | null;
@@ -114,6 +115,80 @@ function usePreviewBlobUrl(docId: string | undefined, enabled: boolean) {
   const fetchFailed = enabled && !!docId && blobError;
 
   return { displayUrl, blobLoading, fetchFailed };
+}
+
+function DocumentTableRow({
+  row,
+  runningId,
+  deletingId,
+  onRun,
+  onPreview,
+  onDelete,
+}: {
+  row: DocumentListItem;
+  runningId: string | null;
+  deletingId: string | null;
+  onRun: () => void;
+  onPreview: () => void;
+  onDelete: () => void;
+}) {
+  const { draggable, onDragStart, title, ready } = useKbDocumentRowDrag(row);
+
+  return (
+    <tr
+      draggable={draggable}
+      onDragStart={onDragStart}
+      title={title}
+      className={`transition hover:bg-stone-50/80 ${
+        ready ? "cursor-grab active:cursor-grabbing" : ""
+      }`}
+    >
+      <td className="max-w-[220px] truncate px-3 py-3 font-medium text-stone-800 sm:px-4">
+        {row.name}
+      </td>
+      <td className="px-3 py-3 text-stone-600 sm:px-4">{row.type}</td>
+      <td className="whitespace-nowrap px-3 py-3 text-stone-600 sm:px-4">
+        {formatBytes(row.size)}
+      </td>
+      <td className="whitespace-nowrap px-3 py-3 text-stone-600 sm:px-4">
+        {formatCreateDate(row.create_date)}
+      </td>
+      <td className="px-3 py-3 sm:px-4">
+        <div className="flex flex-wrap items-center justify-end gap-2">
+          <RunControl
+            run={row.run}
+            onRun={() => {
+              if (runningId === row.id) return;
+              onRun();
+            }}
+          />
+          <button
+            type="button"
+            onClick={onPreview}
+            className="inline-flex shrink-0 items-center justify-center rounded-lg border border-stone-200 bg-white p-2 text-stone-500 transition hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+            title="Xem trước"
+            aria-label={`Xem ${row.name}`}
+          >
+            <Eye className="h-4 w-4" strokeWidth={1.75} />
+          </button>
+          <button
+            type="button"
+            disabled={deletingId === row.id}
+            onClick={onDelete}
+            className="inline-flex shrink-0 items-center justify-center rounded-lg border border-stone-200 bg-white p-2 text-stone-500 transition hover:border-rose-200 hover:bg-rose-50 hover:text-rose-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 disabled:opacity-50"
+            title="Xóa"
+            aria-label={`Xóa ${row.name}`}
+          >
+            {deletingId === row.id ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Trash2 className="h-4 w-4" strokeWidth={1.75} />
+            )}
+          </button>
+        </div>
+      </td>
+    </tr>
+  );
 }
 
 async function openDocumentBlobInNewTab(docId: string): Promise<void> {
@@ -293,63 +368,21 @@ export function FileTable({
                 </thead>
                 <tbody className="divide-y divide-stone-100">
                   {items.map((row) => (
-                    <tr
+                    <DocumentTableRow
                       key={row.id}
-                      className="transition hover:bg-stone-50/80"
-                    >
-                      <td className="max-w-[220px] truncate px-3 py-3 font-medium text-stone-800 sm:px-4">
-                        {row.name}
-                      </td>
-                      <td className="px-3 py-3 text-stone-600 sm:px-4">
-                        {row.type}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-3 text-stone-600 sm:px-4">
-                        {formatBytes(row.size)}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-3 text-stone-600 sm:px-4">
-                        {formatCreateDate(row.create_date)}
-                      </td>
-                      <td className="px-3 py-3 sm:px-4">
-                        <div className="flex flex-wrap items-center justify-end gap-2">
-                          <RunControl
-                            run={row.run}
-                            onRun={() => {
-                              if (runningId === row.id) return;
-                              void handleRun(row);
-                            }}
-                          />
-                          <button
-                            type="button"
-                            onClick={() =>
-                              setPreview({
-                                id: row.id,
-                                name: row.name,
-                                type: row.type,
-                              })
-                            }
-                            className="inline-flex shrink-0 items-center justify-center rounded-lg border border-stone-200 bg-white p-2 text-stone-500 transition hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
-                            title="Xem trước"
-                            aria-label={`Xem ${row.name}`}
-                          >
-                            <Eye className="h-4 w-4" strokeWidth={1.75} />
-                          </button>
-                          <button
-                            type="button"
-                            disabled={deletingId === row.id}
-                            onClick={() => void handleDelete(row.id, row.name)}
-                            className="inline-flex shrink-0 items-center justify-center rounded-lg border border-stone-200 bg-white p-2 text-stone-500 transition hover:border-rose-200 hover:bg-rose-50 hover:text-rose-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 disabled:opacity-50"
-                            title="Xóa"
-                            aria-label={`Xóa ${row.name}`}
-                          >
-                            {deletingId === row.id ? (
-                              <Loader2 className="h-4 w-4 animate-spin" />
-                            ) : (
-                              <Trash2 className="h-4 w-4" strokeWidth={1.75} />
-                            )}
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
+                      row={row}
+                      runningId={runningId}
+                      deletingId={deletingId}
+                      onRun={() => void handleRun(row)}
+                      onPreview={() =>
+                        setPreview({
+                          id: row.id,
+                          name: row.name,
+                          type: row.type,
+                        })
+                      }
+                      onDelete={() => void handleDelete(row.id, row.name)}
+                    />
                   ))}
                 </tbody>
               </table>

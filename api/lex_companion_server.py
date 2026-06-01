@@ -47,7 +47,7 @@ async def app_lifespan(app: FastAPI):
 
     if getattr(app.state, "task_worker_task", None) is not None:
         try:
-            from api.worker.document_parse import warmup_docling
+            from deepagent.core.document_loaders.docdealing import warmup_docling
 
             logger.info("Preloading Docling (OCR) in background thread...")
             await asyncio.to_thread(warmup_docling)

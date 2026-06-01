@@ -19,5 +19,20 @@
     "order": null,
     "parent_chunk_id": "...",
     "created_at": "2026-05-31T14:42:46.459142"
+  },
+  {
+    "index": "user_documents",
+    "chunk_id": "...",
+    "user_id": "...",
+    "kb_id": "...",
+    "document_id": "...",
+    "doc_title": "",
+    "doc_type": "",
+    "max_chunks": 1,
+    "chunk_parent_id": "",
+    "chunk_order": "",
+    "content_text": "",
+    "content_vector": [0.01, 0.02],
+    "created_at": "2026-05-31T14:42:46.459142"
   }
 ]

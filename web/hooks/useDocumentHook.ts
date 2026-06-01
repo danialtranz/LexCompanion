@@ -65,6 +65,24 @@ export type UploadDocumentData = {
   has_thumbnail?: boolean;
 };
 
+/** POST /v1/user/upload — file user chat (parse + index user_documents) */
+export type UploadUserDocumentData = {
+  document_id: string;
+  file_id: string;
+  kb_id: string;
+  session_id: string | null;
+  name: string;
+  size: number;
+  type: string;
+  suffix: string;
+  chunk_count: number;
+  token_count: number;
+  retrieval_strategy: string;
+  object_key: string;
+  access_url: string;
+  content_hash?: string | null;
+};
+
 export type DocumentAccessData = {
   document_id: string;
   file_id: string;
@@ -129,6 +147,66 @@ export const useUploadDocument = () => {
     },
   });
   return { data, loading, upload: mutateAsync };
+};
+
+function normalizeSessionIdForm(
+  session_id: string | null | undefined,
+): string | undefined {
+  if (session_id === undefined || session_id === null) return undefined;
+  const s = String(session_id).trim();
+  if (s === "" || s.toLowerCase() === "null" || s.toLowerCase() === "undefined") {
+    return undefined;
+  }
+  return s;
+}
+
+/**
+ * User upload file vào chat (POST /v1/user/upload).
+ * Form: `file`, optional `session_id`. Backend trả code 201 khi thành công.
+ */
+export const useUploadUserDocument = () => {
+  const queryClient = useQueryClient();
+  const {
+    data,
+    isPending: loading,
+    isError,
+    error,
+    mutateAsync,
+    reset,
+  } = useMutation({
+    mutationKey: ["user", "upload"],
+    mutationFn: async (params: {
+      file: File;
+      session_id?: string | null;
+    }): Promise<ApiEnvelope<UploadUserDocumentData>> => {
+      const formData = new FormData();
+      formData.append("file", params.file);
+      const sid = normalizeSessionIdForm(params.session_id);
+      if (sid) {
+        formData.append("session_id", sid);
+      }
+      const axiosResponse: AxiosResponse<ApiEnvelope<UploadUserDocumentData>> =
+        await documentService.uploadUserDocument({ data: formData }, true);
+      const res =
+        axiosResponse.data ?? ({} as ApiEnvelope<UploadUserDocumentData>);
+      if (res.code === 201 || res.code === 0) {
+        queryClient.invalidateQueries({ queryKey: ["documents", "list"] });
+        if (sid) {
+          queryClient.invalidateQueries({ queryKey: ["chat", "session", sid] });
+        }
+        queryClient.invalidateQueries({ queryKey: ["chat", "sessions"] });
+      }
+      return res;
+    },
+  });
+  return {
+    data,
+    loading,
+    isError,
+    error,
+    upload: mutateAsync,
+    reset,
+  };
 };
 
 /**

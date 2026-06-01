@@ -7,14 +7,15 @@ from peewee import (
     AutoField,
     BigIntegerField,
     BooleanField,
+    CharField,
     DateTimeField,
     FixedCharField,
+    FloatField,
+    ForeignKeyField,
+    IntegerField,
     Model,
     PostgresqlDatabase,
     TextField,
-    CharField,
-    IntegerField,
-    FloatField,
 )
 from playhouse.migrate import PostgresqlMigrator, migrate
 from playhouse.postgres_ext import JSONField
@@ -301,6 +302,61 @@ class LegalIngestionJob(Model):
         table_name = "legal_ingestion_jobs"
 
 
+class ChatSession(_LegalTimestampModel):
+    """Cuộc trò chuyện — bảng chat_sessions."""
+
+    id = CharField(max_length=36, primary_key=True)
+    user_id = CharField(max_length=36, null=False, index=True)
+    title = TextField(null=True)
+    metadata = JSONField(default=dict)
+    status = CharField(max_length=64, null=True, index=True)
+    deleted_at = DateTimeField(null=True)
+
+    class Meta:
+        table_name = "chat_sessions"
+
+
+class ChatMessage(Model):
+    """Tin nhắn trong phiên — bảng chat_messages."""
+
+    id = CharField(max_length=36, primary_key=True)
+    session = ForeignKeyField(
+        ChatSession,
+        backref="messages",
+        column_name="session_id",
+        on_delete="CASCADE",
+        index=True,
+    )
+    user_id = CharField(max_length=36, null=True, index=True)
+    role = CharField(max_length=16, null=False)
+    content = TextField(null=False)
+    message_references = JSONField(default=list, column_name="references")
+    created_at = DateTimeField(default=datetime.utcnow)
+
+    class Meta:
+        database = db
+        table_name = "chat_messages"
+
+    VALID_ROLES = frozenset({"user", "assistant", "system", "tool"})
+
+    @property
+    def references(self):
+        return self.message_references
+
+    @references.setter
+    def references(self, value):
+        self.message_references = value
+
+    def save(self, *args, **kwargs):
+        if self.role not in self.VALID_ROLES:
+            raise ValueError(
+                f"Invalid role {self.role!r}; must be one of {sorted(self.VALID_ROLES)}"
+            )
+        return super().save(*args, **kwargs)
+
+
+CHAT_MODELS = [ChatSession, ChatMessage]
+
 LEGAL_MODELS = [
     LegalTopic,
     LegalSubject,
@@ -310,6 +366,63 @@ LEGAL_MODELS = [
     LegalGlossary,
     LegalIngestionJob,
 ]
+
+
+def _constraint_exists(constraint_name: str) -> bool:
+    row = db.execute_sql(
+        """
+        SELECT 1
+        FROM pg_constraint
+        WHERE conname = %s
+        LIMIT 1
+        """,
+        (constraint_name,),
+    ).fetchone()
+    return row is not None
+
+
+def _chat_messages_session_fk_exists() -> bool:
+    row = db.execute_sql(
+        """
+        SELECT 1
+        FROM information_schema.table_constraints AS tc
+        JOIN information_schema.key_column_usage AS kcu
+          ON tc.constraint_schema = kcu.constraint_schema
+         AND tc.constraint_name = kcu.constraint_name
+        WHERE tc.table_schema = 'public'
+          AND tc.table_name = 'chat_messages'
+          AND tc.constraint_type = 'FOREIGN KEY'
+          AND kcu.column_name = 'session_id'
+        LIMIT 1
+        """
+    ).fetchone()
+    return row is not None
+
+
+def _ensure_chat_messages_constraints() -> None:
+    """Bổ sung FK và CHECK role nếu bảng được tạo qua migrate từng cột."""
+    if not _column_exists(ChatMessage._meta.table_name, "session_id"):
+        return
+
+    if not _chat_messages_session_fk_exists():
+        db.execute_sql(
+            """
+            ALTER TABLE chat_messages
+            ADD CONSTRAINT chat_messages_session_id_fkey
+            FOREIGN KEY (session_id)
+            REFERENCES chat_sessions (id)
+            ON DELETE CASCADE
+            """
+        )
+
+    if not _constraint_exists("chat_messages_role_check"):
+        db.execute_sql(
+            """
+            ALTER TABLE chat_messages
+            ADD CONSTRAINT chat_messages_role_check
+            CHECK (role IN ('user', 'assistant', 'system', 'tool'))
+            """
+        )
 
 
 def _column_exists(table_name: str, column_name: str) -> bool:
@@ -515,6 +628,25 @@ def _build_migration_ops(migrator: PostgresqlMigrator):
             "error_message": lambda: TextField(null=True),
             "created_at": lambda: DateTimeField(default=datetime.utcnow),
         },
+        ChatSession._meta.table_name: {
+            "id": lambda: CharField(max_length=36, primary_key=True),
+            "user_id": lambda: CharField(max_length=36, null=False, index=True),
+            "title": lambda: TextField(null=True),
+            "metadata": lambda: JSONField(default=dict),
+            "status": lambda: CharField(max_length=64, null=True, index=True),
+            "deleted_at": lambda: DateTimeField(null=True),
+            "created_at": lambda: DateTimeField(default=datetime.utcnow),
+            "updated_at": lambda: DateTimeField(default=datetime.utcnow),
+        },
+        ChatMessage._meta.table_name: {
+            "id": lambda: CharField(max_length=36, primary_key=True),
+            "session_id": lambda: CharField(max_length=36, null=False, index=True),
+            "user_id": lambda: CharField(max_length=36, null=True, index=True),
+            "role": lambda: CharField(max_length=16, null=False),
+            "content": lambda: TextField(null=False),
+            "references": lambda: JSONField(default=list),
+            "created_at": lambda: DateTimeField(default=datetime.utcnow),
+        },
     }
 
     ops = []
@@ -539,9 +671,19 @@ def run_migration() -> None:
 
     try:
         db.create_tables(
-            [Users, Knowledgebase, Document, File, Tenant, UserTenant, *LEGAL_MODELS],
+            [
+                Users,
+                Knowledgebase,
+                Document,
+                File,
+                Tenant,
+                UserTenant,
+                *CHAT_MODELS,
+                *LEGAL_MODELS,
+            ],
             safe=True,
         )
+        _ensure_chat_messages_constraints()
         migration_ops = _build_migration_ops(PostgresqlMigrator(db))
         if migration_ops:
             migrate(*migration_ops)
