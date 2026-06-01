@@ -55,6 +55,19 @@ async def app_lifespan(app: FastAPI):
         except Exception as e:
             logger.warning(f"Docling warmup failed (first parse will still work): {e}")
 
+    app.state.reranker = None
+    if os.getenv("RERANK_ENABLED", "true").strip().lower() in {"1", "true", "yes", "on"}:
+        try:
+            from deepagent.core.rerank.rerank import init_reranker
+
+            logger.info("Loading bge-reranker-v2-m3 (FlagEmbedding)...")
+            app.state.reranker = await asyncio.to_thread(init_reranker)
+            logger.info("bge-reranker-v2-m3 ready")
+        except Exception as e:
+            logger.warning(f"Reranker init failed (search will work without rerank): {e}")
+    else:
+        logger.info("Reranker disabled (RERANK_ENABLED=false)")
+
     logger.info("FastAPI server started successfully on port 5999")
     yield
     if getattr(app.state, "task_worker_task", None) is not None:

@@ -11,6 +11,9 @@ from elasticsearch.helpers import bulk
 
 from deepagent.core.providers.embeddings.base import create_embeddings
 from deepagent.core.retrievers.base import build_elasticsearch_client
+from api.utils.logger import setup_logging
+
+logger = setup_logging()
 
 
 def elastic_url() -> str:
@@ -61,6 +64,57 @@ def embedding_from_env():
     return create_embeddings(provider=provider, **kwargs)
 
 
+def _normalize_embed_inputs(chunks: list[str]) -> list[str]:
+    """Some providers drop empty strings; use a placeholder instead."""
+    return [text if (text and str(text).strip()) else "." for text in chunks]
+
+
+def _embed_batch_resilient(
+    embeddings,
+    batch: list[str],
+    *,
+    max_retries: int,
+    retry_base_ms: int,
+) -> list[list[float]]:
+    """
+    Embed one batch; if the API returns fewer vectors than inputs, fall back per item.
+
+    OpenAI-compatible servers occasionally return partial batches (e.g. 5/8) without
+    raising — that must not propagate or chunk↔vector pairs will be misaligned.
+    """
+    normalized = _normalize_embed_inputs(batch)
+    attempt = 0
+    while True:
+        attempt += 1
+        try:
+            vectors = embeddings.embed_documents(normalized)
+            break
+        except Exception as e:
+            msg = str(e)
+            is_rate_limit = ("429" in msg) or ("rate_limit_error" in msg.lower())
+            if (not is_rate_limit) or attempt >= max_retries:
+                raise
+            time.sleep((retry_base_ms * attempt) / 1000.0)
+
+    if len(vectors) == len(normalized):
+        return vectors
+
+    logger.warning(
+        "embed_documents returned {}/{} vectors for batch; retrying one-by-one",
+        len(vectors),
+        len(normalized),
+    )
+    one_by_one: list[list[float]] = []
+    for text in normalized:
+        item_vectors = embeddings.embed_documents([text])
+        if len(item_vectors) != 1:
+            raise RuntimeError(
+                f"embed_documents returned {len(item_vectors)} vectors for a single input"
+            )
+        one_by_one.append(item_vectors[0])
+    return one_by_one
+
+
 def embed_documents_with_backpressure(embeddings, chunks: list[str]) -> list[list[float]]:
     batch_size = max(1, int(os.getenv("EMBEDDING_BATCH_SIZE", "8")))
     delay_ms = max(0, int(os.getenv("EMBEDDING_BATCH_DELAY_MS", "120")))
@@ -71,21 +125,20 @@ def embed_documents_with_backpressure(embeddings, chunks: list[str]) -> list[lis
     total = len(chunks)
     for start in range(0, total, batch_size):
         batch = chunks[start : start + batch_size]
-        attempt = 0
-        while True:
-            attempt += 1
-            try:
-                vectors = embeddings.embed_documents(batch)
-                all_vectors.extend(vectors)
-                break
-            except Exception as e:
-                msg = str(e)
-                is_rate_limit = ("429" in msg) or ("rate_limit_error" in msg.lower())
-                if (not is_rate_limit) or attempt >= max_retries:
-                    raise
-                time.sleep((retry_base_ms * attempt) / 1000.0)
+        vectors = _embed_batch_resilient(
+            embeddings,
+            batch,
+            max_retries=max_retries,
+            retry_base_ms=retry_base_ms,
+        )
+        all_vectors.extend(vectors)
         if delay_ms > 0:
             time.sleep(delay_ms / 1000.0)
+
+    if len(all_vectors) != total:
+        raise RuntimeError(
+            f"Embedding count mismatch after resilient embed: {len(all_vectors)} != {total}"
+        )
     return all_vectors
 
 

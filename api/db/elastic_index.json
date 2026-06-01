@@ -1,37 +1,23 @@
 [
   {
-    "index": "legal_articles_v1",
+    "index": "lex_chunks_v1",
     "article_id": "...",
-    "subject_id": "...",
     "topic_id": "...",
-    "subject_title": "...",
     "topic_title": "...",
-    "chapter_title": "...",
+    "topic_note": "...",
+    "subject_id": "...",
+    "subject_title": "...",
+    "source_subject": "...",
     "article_title": "...",
-    "content_text": "...",
+    "chapter_title": "...",
     "source_note_text": "...",
+    "source_link": "...",
     "related_note_text": "...",
-    "source_url": "...",
-    "source_links": [],
+    "content_text": "...",
     "content_vector": [0.01, 0.02],
-    "scraped_at": "..."
-  },
-
-  {
-    "index": "legal_glossary_v1",
-    "term": "người nộp thuế",
-    "definition": "...",
-    "subject_id": "...",
-    "topic_id": "...",
-    "term_vector": [0.01, 0.02]
-  },
-
-  {
-    "index": "legal_subjects_v1",
-    "subject_id": "...",
-    "topic_id": "...",
-    "subject_title": "An ninh mạng",
-    "topic_title": "An ninh quốc gia",
-    "subject_vector": [0.01, 0.02]
+    "max_chunks": 1,
+    "order": null,
+    "parent_chunk_id": "...",
+    "created_at": "2026-05-31T14:42:46.459142"
   }
 ]
