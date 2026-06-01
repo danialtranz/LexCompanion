@@ -1,7 +1,10 @@
-export interface ChatSource {
+export interface ChatCitation {
   id: string;
+  index: number;
   title: string;
+  excerpt: string;
   href?: string;
+  meta?: string;
 }
 
 export interface UserMessage {
@@ -14,11 +17,10 @@ export interface UserMessage {
 export interface BotMessage {
   id: string;
   type: "bot";
-  intro: string;
-  steps: string[];
-  outro: string;
+  content: string;
   time: string;
-  sources: ChatSource[];
+  citations: ChatCitation[];
+  error?: boolean;
 }
 
 export type ChatMessage = UserMessage | BotMessage;

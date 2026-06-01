@@ -17,5 +17,7 @@ const api = {
   adminDocTopicUrl: `${api_host}/v1/admin/doc/topic`,
   adminDocSubjectUrl: `${api_host}/v1/admin/doc/subject`,
   adminDocArticlesUrl: `${api_host}/v1/admin/doc/articles`,
+  /** POST — tra cứu pháp điển (search → rerank → LLM) */
+  adminDocRetrievalUrl: `${api_host}/v1/admin/doc/retrieval`,
 };
 export default api;

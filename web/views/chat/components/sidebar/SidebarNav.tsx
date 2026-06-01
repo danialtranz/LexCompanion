@@ -1,13 +1,28 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import {
+  Clock3,
+  FileText,
+  MessageCircle,
+  Settings,
+  type LucideIcon,
+} from "lucide-react";
 import { CHAT_NAV_ITEMS } from "../../constants/navigation";
+
+const NAV_ICONS: Record<string, LucideIcon> = {
+  chat: MessageCircle,
+  "legal-docs": FileText,
+  history: Clock3,
+  settings: Settings,
+};
 
 export const SidebarNav = () => {
   const router = useRouter();
 
   return (
-    <nav className="grid gap-3">
+    <nav className="grid gap-1">
       {CHAT_NAV_ITEMS.map((item) => {
+        const Icon = NAV_ICONS[item.id] ?? MessageCircle;
         const isActive =
           item.href !== "#" &&
           (router.pathname === item.href ||
@@ -17,13 +32,13 @@ export const SidebarNav = () => {
           <Link
             key={item.id}
             href={item.href}
-            className={`flex h-[50px] items-center gap-2.5 rounded-[10px] px-3.5 text-[13px] transition-colors ${
+            className={`flex h-11 items-center gap-3 rounded-xl px-3.5 text-[13px] font-medium transition-colors ${
               isActive
-                ? "bg-gradient-to-r from-[#fff4df] to-[#fffaf2] text-[#9b6416] shadow-[inset_0_0_0_1px_#f1e2cb]"
-                : "text-[#635d56] hover:bg-gradient-to-r hover:from-[#fff4df] hover:to-[#fffaf2] hover:text-[#9b6416] hover:shadow-[inset_0_0_0_1px_#f1e2cb]"
+                ? "bg-[#f5ebe0] text-[#9a6c2b] shadow-[inset_0_0_0_1px_#e8d5b8]"
+                : "text-[#5c554d] hover:bg-[#faf5ec] hover:text-[#9a6c2b]"
             }`}
           >
-            <span aria-hidden>{item.icon}</span>
+            <Icon className="h-[18px] w-[18px] shrink-0" strokeWidth={1.75} />
             {item.label}
           </Link>
         );

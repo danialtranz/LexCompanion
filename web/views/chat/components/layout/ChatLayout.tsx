@@ -3,11 +3,19 @@ import { ChatSidebar } from "../sidebar/ChatSidebar";
 
 interface ChatLayoutProps {
   children: ReactNode;
+  panelRight?: ReactNode;
 }
 
-export const ChatLayout = ({ children }: ChatLayoutProps) => (
-  <main className="grid min-h-screen grid-cols-1 bg-[linear-gradient(90deg,rgba(255,255,255,0.88),rgba(255,255,255,0.96)),radial-gradient(circle_at_74%_14%,rgba(214,162,67,0.12),transparent_20%)] lg:grid-cols-[186px_1fr]">
+export const ChatLayout = ({ children, panelRight }: ChatLayoutProps) => (
+  <main
+    className={`grid min-h-screen grid-cols-1 bg-[#faf7f2] ${
+      panelRight
+        ? "lg:grid-cols-[240px_minmax(0,1fr)_400px]"
+        : "lg:grid-cols-[240px_minmax(0,1fr)]"
+    }`}
+  >
     <ChatSidebar />
     {children}
+    {panelRight}
   </main>
 );
