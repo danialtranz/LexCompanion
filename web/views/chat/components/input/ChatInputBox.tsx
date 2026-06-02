@@ -149,7 +149,10 @@ export const ChatInputBox = ({
           className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border-0 bg-gradient-to-br from-[#d4a96a] to-[#9a6c2b] text-white shadow-[0_4px_12px_rgba(155,108,43,0.3)] transition-transform hover:-translate-y-px cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading ? (
-            <Loader2 className="h-[18px] w-[18px] animate-spin" strokeWidth={2.5} />
+            <Loader2
+              className="h-[18px] w-[18px] animate-spin"
+              strokeWidth={2.5}
+            />
           ) : (
             <SendHorizontal className="h-[18px] w-[18px]" strokeWidth={2.5} />
           )}

@@ -53,6 +53,8 @@ def get_current_user(
         )
 
     user_id = payload.get("user_id") or payload.get("id")
+    if isinstance(user_id, str):
+        user_id = user_id.strip()
     if not user_id:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

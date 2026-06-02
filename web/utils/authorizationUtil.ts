@@ -68,5 +68,5 @@ export default storage;
 
 // Will not jump to the login page
 export function redirectToLogin() {
-  window.location.href = location.origin + `/login`;
+  window.location.href = location.origin + `/sign-in`;
 }

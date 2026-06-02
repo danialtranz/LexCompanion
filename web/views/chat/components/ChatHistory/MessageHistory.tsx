@@ -1,4 +1,4 @@
-import { MessageCircle } from "lucide-react";
+import { Loader2, MessageCircle, Trash2 } from "lucide-react";
 import { formatHistoryTimestamp } from "../../utils/formatHistoryTimestamp";
 import type { MessageHistoryItem } from "./types";
 
@@ -6,12 +6,16 @@ type MessageHistoryProps = {
   item: MessageHistoryItem;
   active?: boolean;
   onSelect: (id: string) => void;
+  onDelete?: (id: string) => void;
+  deleting?: boolean;
 };
 
 export const MessageHistory = ({
   item,
   active = false,
   onSelect,
+  onDelete,
+  deleting = false,
 }: MessageHistoryProps) => (
   <button
     type="button"
@@ -41,8 +45,29 @@ export const MessageHistory = ({
         >
           {item.title}
         </span>
-        <span className="shrink-0 text-[11px] font-medium text-[#8a8178]">
-          {formatHistoryTimestamp(item.updatedAt)}
+        <span className="flex shrink-0 items-center gap-1">
+          <span className="text-[11px] font-medium text-[#8a8178]">
+            {formatHistoryTimestamp(item.updatedAt)}
+          </span>
+          {onDelete && (
+            <button
+              type="button"
+              disabled={deleting}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onDelete(item.id);
+              }}
+              aria-label="Xoá hội thoại"
+              className="grid h-6 w-6 place-items-center rounded-md border border-[#ece2d3] bg-white text-[#9a938a] transition-colors hover:border-[#e2c4a0] hover:text-[#9a6c2b] disabled:opacity-60 cursor-pointer"
+            >
+              {deleting ? (
+                <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={2} />
+              ) : (
+                <Trash2 className="h-3.5 w-3.5" strokeWidth={1.9} />
+              )}
+            </button>
+          )}
         </span>
       </span>
       <span className="line-clamp-2 text-[12px] leading-relaxed text-[#8a8178]">

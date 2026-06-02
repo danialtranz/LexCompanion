@@ -9,6 +9,7 @@ interface ConversationProps {
   selectedCitation?: ChatCitation | null;
   selectedMessageId?: string | null;
   onSelectCitation?: (messageId: string, citation: ChatCitation) => void;
+  searchKeyword?: string;
 }
 
 export const Conversation = ({
@@ -17,15 +18,21 @@ export const Conversation = ({
   selectedCitation,
   selectedMessageId,
   onSelectCitation,
+  searchKeyword = "",
 }: ConversationProps) => (
   <div className="mx-auto flex w-full max-w-3xl flex-col gap-8">
     {messages.map((message) =>
       message.type === "user" ? (
-        <UserMessageCard key={message.id} message={message} />
+        <UserMessageCard
+          key={message.id}
+          message={message}
+          searchKeyword={searchKeyword}
+        />
       ) : (
         <BotMessageCard
           key={message.id}
           message={message}
+          searchKeyword={searchKeyword}
           selectedCitationId={
             selectedMessageId === message.id ? selectedCitation?.id : undefined
           }

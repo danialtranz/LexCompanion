@@ -2,9 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { ChevronDown, Loader2, Trash2 } from "lucide-react";
-import { useChatSessionsList } from "@/hooks/useChatHook";
+import { useDeleteChatSession, useChatSessionsList } from "@/hooks/useChatHook";
 import { MOCK_CHAT_SESSIONS } from "../../constants/mockChatSessions";
 import { mapSessionToHistoryItem } from "../../utils/mapSessionToHistoryItem";
+import { DeleteSessionConfirmModal } from "./DeleteSessionConfirmModal";
 import { MessageHistory } from "./MessageHistory";
 import type { MessageHistoryItem } from "./types";
 
@@ -13,29 +14,67 @@ const PAGE_SIZE = 5;
 type ChatHistoryProps = {
   selectedSessionId: string | null;
   onSelectSession: (sessionId: string) => void;
+  onDeleteSession?: (sessionId: string) => void;
 };
 
 export const ChatHistory = ({
   selectedSessionId,
   onSelectSession,
+  onDeleteSession,
 }: ChatHistoryProps) => {
   const [page, setPage] = useState(1);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [deletedIds, setDeletedIds] = useState<string[]>([]);
+  const [pendingDelete, setPendingDelete] = useState<MessageHistoryItem | null>(
+    null,
+  );
 
   const { data, isLoading, isFetching } = useChatSessionsList({
     page,
     page_size: PAGE_SIZE,
   });
+  const { deleteSession, loading: deleting } = useDeleteChatSession();
 
   const apiItems = useMemo((): MessageHistoryItem[] => {
     if (data?.code !== 200 || !data.data?.items?.length) return [];
     return data.data.items.map(mapSessionToHistoryItem);
   }, [data]);
 
-  const items = apiItems.length > 0 ? apiItems : MOCK_CHAT_SESSIONS;
+  const items = (apiItems.length > 0 ? apiItems : MOCK_CHAT_SESSIONS).filter(
+    (item) => !deletedIds.includes(item.id),
+  );
 
   const total = data?.data?.total ?? 0;
   const hasMore = apiItems.length > 0 && page * PAGE_SIZE < total;
   const showLoadMore = hasMore;
+
+  const requestDeleteSession = (sessionId: string) => {
+    const item = items.find((x) => x.id === sessionId);
+    if (!item) return;
+    setPendingDelete(item);
+  };
+
+  const handleConfirmDeleteSession = async () => {
+    if (!pendingDelete) return;
+    const sessionId = pendingDelete.id;
+    if (sessionId.startsWith("mock-")) {
+      setDeletedIds((prev) => [...prev, sessionId]);
+      onDeleteSession?.(sessionId);
+      setPendingDelete(null);
+      return;
+    }
+    try {
+      setDeletingId(sessionId);
+      const res = await deleteSession(sessionId);
+      if (res.code === 200) {
+        setDeletedIds((prev) => [...prev, sessionId]);
+        onDeleteSession?.(sessionId);
+        setPendingDelete(null);
+      }
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
   return (
     <aside className="hidden min-h-screen w-full max-w-[320px] shrink-0 flex-col border-r border-[#ebe3d6] bg-[#fffdf9] lg:flex">
@@ -46,14 +85,10 @@ export const ChatHistory = ({
           aria-haspopup="listbox"
         >
           <span className="truncate">Tất cả hội thoại</span>
-          <ChevronDown className="h-4 w-4 shrink-0 text-[#8a8178]" strokeWidth={2} />
-        </button>
-        <button
-          type="button"
-          aria-label="Quản lý hội thoại"
-          className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-[#ebe3d6] bg-white text-[#8a8178] transition-colors hover:border-[#dcc9a8] hover:text-[#9a6c2b] cursor-pointer"
-        >
-          <Trash2 className="h-4 w-4" strokeWidth={1.75} />
+          <ChevronDown
+            className="h-4 w-4 shrink-0 text-[#8a8178]"
+            strokeWidth={2}
+          />
         </button>
       </header>
 
@@ -72,6 +107,8 @@ export const ChatHistory = ({
                     item={item}
                     active={selectedSessionId === item.id}
                     onSelect={onSelectSession}
+                    onDelete={requestDeleteSession}
+                    deleting={deleting && deletingId === item.id}
                   />
                 </li>
               ))}
@@ -97,6 +134,16 @@ export const ChatHistory = ({
           </div>
         )}
       </div>
+      <DeleteSessionConfirmModal
+        open={Boolean(pendingDelete)}
+        loading={deleting}
+        sessionTitle={pendingDelete?.title || "Hội thoại"}
+        onConfirm={handleConfirmDeleteSession}
+        onCancel={() => {
+          if (deleting) return;
+          setPendingDelete(null);
+        }}
+      />
     </aside>
   );
 };

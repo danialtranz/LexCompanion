@@ -12,6 +12,13 @@ logger = setup_logging()
 _SESSION_TITLE_MAX_LEN = 200
 
 
+def _normalize_user_id(user_id: str | None) -> str | None:
+    if user_id is None:
+        return None
+    s = str(user_id).strip()
+    return s or None
+
+
 class ChatSessionService(CommonService):
     model = ChatSession
     @classmethod
@@ -27,9 +34,13 @@ class ChatSessionService(CommonService):
         user: Users,
         title_hint: str | None = None,
     ) -> ChatSession:
+        normalized_user_id = _normalize_user_id(user.id)
+        if not normalized_user_id:
+            raise ValueError("Invalid user id")
+
         session = ChatSession.get_or_none(ChatSession.id == session_id)
         if session:
-            if session.user_id != user.id:
+            if _normalize_user_id(session.user_id) != normalized_user_id:
                 raise PermissionError("Session does not belong to this user")
             if title_hint and not (session.title or "").strip():
                 session.title = title_hint.strip()[:_SESSION_TITLE_MAX_LEN] or None
@@ -39,7 +50,7 @@ class ChatSessionService(CommonService):
         title = (title_hint or "").strip()[:_SESSION_TITLE_MAX_LEN] or None
         session = ChatSession.create(
             id=session_id,
-            user_id=user.id,
+            user_id=normalized_user_id,
             title=title,
             status="active",
             metadata={},
@@ -47,7 +58,7 @@ class ChatSessionService(CommonService):
         logger.info(
             "chat_session created id={} user_id={}",
             session_id,
-            user.id,
+            normalized_user_id,
         )
         return session
 
@@ -77,6 +88,10 @@ class ChatSessionService(CommonService):
         answer: str,
         references: list[Any] | None = None,
     ) -> None:
+        normalized_user_id = _normalize_user_id(user.id)
+        if not normalized_user_id:
+            raise ValueError("Invalid user id")
+
         cls._ensure_session_in_tx(
             session_id=session_id,
             user=user,
@@ -87,7 +102,7 @@ class ChatSessionService(CommonService):
         ChatMessage.create(
             id=get_uuid(),
             session_id=session_id,
-            user_id=user.id,
+            user_id=normalized_user_id,
             role="user",
             content=query,
             message_references=[],
@@ -95,7 +110,7 @@ class ChatSessionService(CommonService):
         ChatMessage.create(
             id=get_uuid(),
             session_id=session_id,
-            user_id=user.id,
+            user_id=normalized_user_id,
             role="assistant",
             content=answer,
             message_references=refs,
@@ -113,7 +128,8 @@ class ChatSessionService(CommonService):
         session = cls.get_or_none(id=session_id)
         if not session:
             return False
-        if user_id and session.user_id != user_id:
+        normalized_user_id = _normalize_user_id(user_id)
+        if normalized_user_id and _normalize_user_id(session.user_id) != normalized_user_id:
             return False
         session.status = "use_up_token"
         session.save()
@@ -124,10 +140,13 @@ class ChatSessionService(CommonService):
     @DB.connection_context()
     def mark_deleted(cls, *, session_id: str, user_id: str) -> bool | None:
         """Đánh dấu session deleted. None=không tồn tại, False=không thuộc user, True=OK."""
+        normalized_user_id = _normalize_user_id(user_id)
+        if not normalized_user_id:
+            return False
         session = cls.get_or_none(id=session_id)
         if not session:
             return None
-        if session.user_id != user_id:
+        if _normalize_user_id(session.user_id) != normalized_user_id:
             return False
         session.status = "deleted"
         session.save()
@@ -139,15 +158,17 @@ class ChatSessionService(CommonService):
         cls, user_id: str, page: int, page_size: int
     ) -> tuple[int, list[ChatSession]]:
         """Sessions của user có status khác 'deleted', sắp xếp updated_at giảm dần."""
+        normalized_user_id = _normalize_user_id(user_id)
+        if not normalized_user_id:
+            return 0, []
         page = max(1, page)
         page_size = max(1, min(page_size, 100))
         q = (
             cls.model.select()
             .where(
-                (cls.model.user_id == user_id)
+                (cls.model.user_id == normalized_user_id)
                 & (
-                    (cls.model.status != "deleted")
-                    | (cls.model.status.is_null())
+                    (cls.model.status != "deleted") | (cls.model.status.is_null())
                 )
             )
             .order_by(cls.model.updated_at.desc())
@@ -166,11 +187,14 @@ class ChatMessageService(CommonService):
         cls, *, session_id: str, user_id: str
     ) -> list[ChatMessage]:
         """Tin nhắn trong session của user, sắp xếp theo created_at tăng dần."""
+        normalized_user_id = _normalize_user_id(user_id)
+        if not normalized_user_id:
+            return []
         return list(
             cls.model.select()
             .where(
                 (cls.model.session_id == session_id)
-                & (cls.model.user_id == user_id)
+                & (cls.model.user_id == normalized_user_id)
             )
             .order_by(cls.model.created_at.asc())
         )

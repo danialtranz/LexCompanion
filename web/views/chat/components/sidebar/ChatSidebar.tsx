@@ -5,6 +5,7 @@ import { SidebarUpgrade } from "./SidebarUpgrade";
 import { SidebarUser } from "./SidebarUser";
 
 type ChatSidebarProps = {
+  onCreateConversation?: () => void;
   onOpenKnowledgeBase?: () => void;
   onToggleHistory?: () => void;
   knowledgeBaseActive?: boolean;
@@ -12,6 +13,7 @@ type ChatSidebarProps = {
 };
 
 export const ChatSidebar = ({
+  onCreateConversation,
   onOpenKnowledgeBase,
   onToggleHistory,
   knowledgeBaseActive = false,
@@ -22,10 +24,11 @@ export const ChatSidebar = ({
 
     <button
       type="button"
+      onClick={onCreateConversation}
       className="mb-6 flex h-11 w-full items-center justify-center gap-2 rounded-xl border-0 bg-gradient-to-r from-[#d4a96a] to-[#b8874a] text-sm font-semibold text-white shadow-[0_4px_14px_rgba(155,108,43,0.28)] transition-transform hover:-translate-y-px cursor-pointer"
     >
       <Plus className="h-4 w-4" strokeWidth={2.5} />
-      Tạo cuộc trò chuyện
+      Tạo cuộc trò chuyện mới
     </button>
 
     <SidebarNav

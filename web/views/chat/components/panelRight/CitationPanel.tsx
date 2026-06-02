@@ -1,13 +1,19 @@
 import { BookOpen, ExternalLink, X } from "lucide-react";
 import type { ChatCitation } from "../../types";
+import { highlightText } from "../messages/highlightText";
 import { PanelRight } from "./PanelRight";
 
 interface CitationPanelProps {
   citation: ChatCitation | null;
   onClose?: () => void;
+  searchKeyword?: string;
 }
 
-export const CitationPanel = ({ citation, onClose }: CitationPanelProps) => (
+export const CitationPanel = ({
+  citation,
+  onClose,
+  searchKeyword = "",
+}: CitationPanelProps) => (
   <PanelRight>
     <div className="flex h-[60px] shrink-0 items-center gap-2.5 border-b border-[#ebe3d6] px-6">
       <BookOpen className="h-4 w-4 shrink-0 text-[#9a6c2b]" strokeWidth={2} />
@@ -45,11 +51,11 @@ export const CitationPanel = ({ citation, onClose }: CitationPanelProps) => (
       ) : (
         <article>
           <h3 className="m-0 text-[15px] font-bold leading-snug text-[#2c2620]">
-            {citation.title}
+            {highlightText(citation.title, searchKeyword)}
           </h3>
           {citation.meta && (
             <p className="mt-2 m-0 text-xs leading-relaxed text-[#8a8178]">
-              {citation.meta}
+              {highlightText(citation.meta, searchKeyword)}
             </p>
           )}
           {citation.href && (
@@ -65,7 +71,10 @@ export const CitationPanel = ({ citation, onClose }: CitationPanelProps) => (
           )}
           <div className="mt-5 rounded-xl border border-[#ebe3d6] bg-[#faf7f2] p-4">
             <p className="m-0 whitespace-pre-wrap text-sm leading-[1.85] text-[#2c2620]">
-              {citation.excerpt || "Không có nội dung trích dẫn."}
+              {highlightText(
+                citation.excerpt || "Không có nội dung trích dẫn.",
+                searchKeyword,
+              )}
             </p>
           </div>
         </article>

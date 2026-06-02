@@ -19,10 +19,17 @@ def _normalize_session_id(session_id: str | None) -> str | None:
     return s
 
 
+def _normalize_user_id(user_id: str | None) -> str | None:
+    if user_id is None:
+        return None
+    s = str(user_id).strip()
+    return s or None
+
+
 def _session_to_dict(row: ChatSession) -> dict:
     return {
         "id": row.id,
-        "user_id": row.user_id,
+        "user_id": _normalize_user_id(row.user_id),
         "title": row.title,
         "status": row.status,
         "metadata": row.metadata or {},
@@ -35,7 +42,7 @@ def _message_to_dict(row: ChatMessage) -> dict:
     return {
         "id": row.id,
         "session_id": row.session_id,
-        "user_id": row.user_id,
+        "user_id": _normalize_user_id(row.user_id),
         "role": row.role,
         "content": row.content,
         "references": row.message_references or [],
@@ -46,11 +53,14 @@ def _message_to_dict(row: ChatMessage) -> dict:
 def delete_user_chat_session(*, user: Users, session_id: str | None) -> dict:
     try:
         sid = _normalize_session_id(session_id)
+        uid = _normalize_user_id(user.id)
         if not sid:
             return {"code": 400, "msg": "session_id is required", "data": None}
+        if not uid:
+            return {"code": 401, "msg": "Invalid user id", "data": None}
 
-        logger.info("delete_user_chat_session: user_id={} session_id={}", user.id, sid)
-        ok = ChatSessionService.mark_deleted(session_id=sid, user_id=user.id)
+        logger.info("delete_user_chat_session: user_id={} session_id={}", uid, sid)
+        ok = ChatSessionService.mark_deleted(session_id=sid, user_id=uid)
         if ok is None:
             return {"code": 404, "msg": "Session not found", "data": None}
         if ok is False:
@@ -70,18 +80,21 @@ def list_user_chat_sessions(
     page_size: int = 5,
 ) -> dict:
     try:
+        uid = _normalize_user_id(user.id)
+        if not uid:
+            return {"code": 401, "msg": "Invalid user id", "data": None}
         logger.info(
             "list_user_chat_sessions: user_id={} page={} page_size={}",
-            user.id,
+            uid,
             page,
             page_size,
         )
         total, rows = ChatSessionService.list_active_by_user_paginated(
-            user.id, page, page_size
+            uid, page, page_size
         )
         logger.info(
             "list_user_chat_sessions: user_id={} total={} returned={}",
-            user.id,
+            uid,
             total,
             len(rows),
         )
@@ -103,25 +116,28 @@ def list_user_chat_sessions(
 def get_user_chat_session_messages(*, user: Users, session_id: str | None) -> dict:
     try:
         sid = _normalize_session_id(session_id)
+        uid = _normalize_user_id(user.id)
         if not sid:
             return {"code": 400, "msg": "session_id is required", "data": None}
+        if not uid:
+            return {"code": 401, "msg": "Invalid user id", "data": None}
 
         logger.info(
             "get_user_chat_session_messages: user_id={} session_id={}",
-            user.id,
+            uid,
             sid,
         )
         session = ChatSessionService.get_session(sid)
         if not session:
             return {"code": 404, "msg": "Session not found", "data": None}
-        if session.user_id != user.id:
+        if _normalize_user_id(session.user_id) != uid:
             return {"code": 403, "msg": "Session does not belong to this user", "data": None}
         if session.status == "deleted":
             return {"code": 404, "msg": "Session not found", "data": None}
 
         messages = ChatMessageService.list_by_session_and_user(
             session_id=sid,
-            user_id=user.id,
+            user_id=uid,
         )
         logger.info(
             "get_user_chat_session_messages: session_id={} message_count={}",

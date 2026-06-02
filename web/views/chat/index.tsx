@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { type DragEvent, useCallback, useMemo, useState } from "react";
 import type { UploadUserDocumentData } from "@/hooks/useDocumentHook";
 import {
   fetchChatSessionDetail,
@@ -22,9 +22,20 @@ import type { BotMessage, ChatCitation, ChatMessage, UserMessage } from "./types
 import { formatChatTime } from "./utils/formatChatTime";
 import { mapRetrievalReferencesToCitations } from "./utils/mapRetrievalReferences";
 import { mapSessionMessagesToChatMessages } from "./utils/mapSessionMessages";
-import type { ChatAttachedDocument } from "./utils/chatDocumentDrag";
+import {
+  isChatDocumentDragEvent,
+  parseChatDocumentDragPayload,
+  type ChatAttachedDocument,
+} from "./utils/chatDocumentDrag";
 
 type RightPanelMode = "closed" | "citation" | "knowledge";
+
+function createChatSessionId(): string {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID().replace(/-/g, "");
+  }
+  return `${Date.now()}${Math.random().toString(16).slice(2)}`.slice(0, 32);
+}
 
 export const ChatView = () => {
   const [inputValue, setInputValue] = useState("");
@@ -42,6 +53,9 @@ export const ChatView = () => {
   >(null);
   const [chatSessionId, setChatSessionId] = useState<string | null>(null);
   const [knowledgeKbId, setKnowledgeKbId] = useState<string | null>(null);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [isConversationDragOver, setIsConversationDragOver] = useState(false);
   const [attachedDocuments, setAttachedDocuments] = useState<
     ChatAttachedDocument[]
   >([]);
@@ -90,6 +104,40 @@ export const ChatView = () => {
     }
   }, []);
 
+  const handleCreateConversation = useCallback(() => {
+    setInputValue("");
+    setMessages([]);
+    setSelectedCitation(null);
+    setSelectedMessageId(null);
+    setRightPanel("closed");
+    setHistoryOpen(false);
+    setSelectedHistorySessionId(null);
+    setAttachedDocuments([]);
+    setKnowledgeKbId(null);
+    setSearchOpen(false);
+    setSearchKeyword("");
+    setChatSessionId(createChatSessionId());
+  }, []);
+
+  const handleDeleteHistorySession = useCallback(
+    (sessionId: string) => {
+      if (selectedHistorySessionId !== sessionId) return;
+      setSelectedHistorySessionId(null);
+      setMessages([]);
+      setSelectedCitation(null);
+      setSelectedMessageId(null);
+      setChatSessionId(createChatSessionId());
+    },
+    [selectedHistorySessionId],
+  );
+
+  const toggleSearch = useCallback(() => {
+    setSearchOpen((open) => {
+      if (open) setSearchKeyword("");
+      return !open;
+    });
+  }, []);
+
   const handleSelectCitation = useCallback(
     (messageId: string, citation: ChatCitation) => {
       setSelectedMessageId(messageId);
@@ -109,6 +157,37 @@ export const ChatView = () => {
   const handleRemoveAttachedDocument = useCallback((docId: string) => {
     setAttachedDocuments((prev) => prev.filter((d) => d.id !== docId));
   }, []);
+
+  const handleConversationDragEnter = useCallback((event: DragEvent) => {
+    if (!isChatDocumentDragEvent(event)) return;
+    event.preventDefault();
+    setIsConversationDragOver(true);
+  }, []);
+
+  const handleConversationDragOver = useCallback((event: DragEvent) => {
+    if (!isChatDocumentDragEvent(event)) return;
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "copy";
+    setIsConversationDragOver(true);
+  }, []);
+
+  const handleConversationDragLeave = useCallback((event: DragEvent) => {
+    if (!isChatDocumentDragEvent(event)) return;
+    const next = event.relatedTarget as Node | null;
+    if (next && event.currentTarget.contains(next)) return;
+    setIsConversationDragOver(false);
+  }, []);
+
+  const handleConversationDrop = useCallback(
+    (event: DragEvent) => {
+      if (!isChatDocumentDragEvent(event)) return;
+      event.preventDefault();
+      setIsConversationDragOver(false);
+      const doc = parseChatDocumentDragPayload(event.dataTransfer);
+      if (doc) handleAttachDocument(doc);
+    },
+    [handleAttachDocument],
+  );
 
   const handleUploadSuccess = useCallback((data: UploadUserDocumentData) => {
     if (data.kb_id) {
@@ -134,6 +213,7 @@ export const ChatView = () => {
       return (
         <CitationPanel
           citation={selectedCitation}
+          searchKeyword={searchKeyword}
           onClose={closeRightPanel}
         />
       );
@@ -145,6 +225,7 @@ export const ChatView = () => {
     chatSessionId,
     closeRightPanel,
     handleUploadSuccess,
+    searchKeyword,
     selectedCitation,
   ]);
 
@@ -228,6 +309,7 @@ export const ChatView = () => {
     <ChatHistory
       selectedSessionId={selectedHistorySessionId}
       onSelectSession={handleSelectHistorySession}
+      onDeleteSession={handleDeleteHistorySession}
     />
   ) : null;
 
@@ -236,6 +318,7 @@ export const ChatView = () => {
       panelRight={panelRight}
       historyPanel={historyPanel}
       historyOpen={historyOpen}
+      onCreateConversation={handleCreateConversation}
       onOpenKnowledgeBase={openKnowledgeBase}
       onToggleHistory={toggleHistory}
       knowledgeBaseActive={rightPanel === "knowledge"}
@@ -260,9 +343,33 @@ export const ChatView = () => {
           </ChatFooter>
         }
       >
-        <ChatHeader />
+        <ChatHeader
+          historyOpen={historyOpen}
+          onToggleHistory={toggleHistory}
+          searchOpen={searchOpen}
+          searchValue={searchKeyword}
+          onToggleSearch={toggleSearch}
+          onSearchChange={setSearchKeyword}
+        />
 
-        <div className="flex-1 overflow-y-auto px-6 py-6 lg:px-8">
+        <div
+          onDragEnter={handleConversationDragEnter}
+          onDragOver={handleConversationDragOver}
+          onDragLeave={handleConversationDragLeave}
+          onDrop={handleConversationDrop}
+          className={`relative flex-1 overflow-y-auto px-6 py-6 lg:px-8 ${
+            isConversationDragOver
+              ? "bg-[#fff8ec] ring-2 ring-inset ring-[#dcc9a8]"
+              : ""
+          }`}
+        >
+          {isConversationDragOver && (
+            <div className="pointer-events-none absolute inset-4 grid place-items-center rounded-2xl border-2 border-dashed border-[#c9a06a] bg-[#fffdf9]/90">
+              <p className="text-sm font-medium text-[#9a6c2b]">
+                Thả tài liệu vào đây để đính kèm
+              </p>
+            </div>
+          )}
           {!hasMessages && <ChatHero />}
           <Conversation
             messages={messages}
@@ -270,6 +377,7 @@ export const ChatView = () => {
             selectedCitation={selectedCitation}
             selectedMessageId={selectedMessageId}
             onSelectCitation={handleSelectCitation}
+            searchKeyword={searchKeyword}
           />
         </div>
       </ChatMain>

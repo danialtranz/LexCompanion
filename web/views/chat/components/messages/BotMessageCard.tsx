@@ -10,12 +10,14 @@ interface BotMessageCardProps {
   message: BotMessageType;
   selectedCitationId?: string;
   onSelectCitation?: (citation: ChatCitation) => void;
+  searchKeyword?: string;
 }
 
 export const BotMessageCard = ({
   message,
   selectedCitationId,
   onSelectCitation,
+  searchKeyword = "",
 }: BotMessageCardProps) => (
   <div className="flex items-start gap-3">
     <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#e8dcc8] bg-white shadow-sm">
@@ -51,11 +53,12 @@ export const BotMessageCard = ({
             citations={message.citations}
             selectedCitationId={selectedCitationId}
             onSelectCitation={onSelectCitation}
+            searchKeyword={searchKeyword}
             error={message.error}
           />
         </div>
 
-        {!message.error && <BotMessageActions />}
+        {!message.error && <BotMessageActions content={message.content} />}
       </div>
 
       {!message.error && message.citations.length > 0 && onSelectCitation && (
@@ -63,6 +66,7 @@ export const BotMessageCard = ({
           citations={message.citations}
           selectedCitationId={selectedCitationId}
           onSelectCitation={onSelectCitation}
+          searchKeyword={searchKeyword}
         />
       )}
     </div>

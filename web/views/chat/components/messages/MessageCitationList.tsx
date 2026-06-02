@@ -1,16 +1,19 @@
 import { BookMarked, ChevronRight } from "lucide-react";
 import type { ChatCitation } from "../../types";
+import { highlightText } from "./highlightText";
 
 interface MessageCitationListProps {
   citations: ChatCitation[];
   selectedCitationId?: string;
   onSelectCitation: (citation: ChatCitation) => void;
+  searchKeyword?: string;
 }
 
 export const MessageCitationList = ({
   citations,
   selectedCitationId,
   onSelectCitation,
+  searchKeyword = "",
 }: MessageCitationListProps) => {
   if (citations.length === 0) return null;
 
@@ -41,17 +44,17 @@ export const MessageCitationList = ({
                     : "border-[#ebe3d6] bg-white hover:border-[#dcc9a8] hover:bg-[#fffdf9]"
                 }`}
               >
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-[#e8c98a] to-[#c9a06a] text-sm font-bold text-white shadow-sm">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-linear-to-br from-[#e8c98a] to-[#c9a06a] text-sm font-bold text-white shadow-sm">
                   {citation.index}
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="line-clamp-2 text-sm font-medium leading-snug text-[#2c2620]">
                     <span className="text-[#9a6c2b]">[{citation.index}]</span>{" "}
-                    {citation.title}
+                    {highlightText(citation.title, searchKeyword)}
                   </span>
                   {citation.meta && (
                     <span className="mt-1 block line-clamp-1 text-xs text-[#8a8178]">
-                      {citation.meta}
+                      {highlightText(citation.meta, searchKeyword)}
                     </span>
                   )}
                 </span>

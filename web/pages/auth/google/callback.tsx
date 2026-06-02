@@ -48,7 +48,7 @@ export default function GoogleCallback() {
 
           if (errCode === 0) {
             // console.log("[Google Callback] Login thành công, redirect về /");
-            router.push("/admin-knowledge-base");
+            router.push("/chat");
           } else {
             // console.log(
             //   "[Google Callback] Login thất bại với errCode:",

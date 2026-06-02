@@ -1,5 +1,6 @@
 import { type ReactNode } from "react";
 import type { ChatCitation } from "../../types";
+import { highlightText } from "./highlightText";
 
 const IEEE_CITATION_RE = /\[(\d+)\]/g;
 
@@ -8,6 +9,7 @@ interface BotMessageContentProps {
   citations: ChatCitation[];
   selectedCitationId?: string;
   onSelectCitation?: (citation: ChatCitation) => void;
+  searchKeyword?: string;
 }
 
 function findCitationByIndex(
@@ -22,6 +24,7 @@ export function renderContentWithIeeeCitations({
   citations,
   selectedCitationId,
   onSelectCitation,
+  searchKeyword = "",
 }: BotMessageContentProps): ReactNode[] {
   const parts: ReactNode[] = [];
   let lastIndex = 0;
@@ -31,7 +34,9 @@ export function renderContentWithIeeeCitations({
 
   while ((match = re.exec(content)) !== null) {
     if (match.index > lastIndex) {
-      parts.push(content.slice(lastIndex, match.index));
+      parts.push(
+        highlightText(content.slice(lastIndex, match.index), searchKeyword),
+      );
     }
 
     const index = Number.parseInt(match[1], 10);
@@ -73,7 +78,7 @@ export function renderContentWithIeeeCitations({
   }
 
   if (lastIndex < content.length) {
-    parts.push(content.slice(lastIndex));
+    parts.push(highlightText(content.slice(lastIndex), searchKeyword));
   }
 
   return parts;
@@ -84,6 +89,7 @@ export const BotMessageContent = ({
   citations,
   selectedCitationId,
   onSelectCitation,
+  searchKeyword,
   error = false,
 }: BotMessageContentProps & { error?: boolean }) => (
   <div
@@ -96,6 +102,7 @@ export const BotMessageContent = ({
       citations,
       selectedCitationId,
       onSelectCitation,
+      searchKeyword,
     })}
   </div>
 );

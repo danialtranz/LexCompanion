@@ -59,7 +59,7 @@ export const GoogleSignInButton = ({
     } catch {
       onLoadingChange?.(false);
       toast.error("Đã xảy ra lỗi");
-      router.push("/login");
+      router.push("/sign-in");
     }
   };
 

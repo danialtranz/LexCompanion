@@ -9,7 +9,6 @@ from peewee import (
     BooleanField,
     CharField,
     DateTimeField,
-    FixedCharField,
     FloatField,
     ForeignKeyField,
     IntegerField,
@@ -63,7 +62,7 @@ class BaseModel(Model):
 
 
 class Users(BaseModel):
-    id = FixedCharField(max_length=36, primary_key=True)
+    id = CharField(max_length=36, primary_key=True)
     email = TextField()
     username = TextField()
     password = TextField(null=True)
@@ -438,10 +437,80 @@ def _column_exists(table_name: str, column_name: str) -> bool:
     return row is not None
 
 
+def _column_data_type(table_name: str, column_name: str) -> str | None:
+    row = db.execute_sql(
+        """
+        SELECT data_type
+        FROM information_schema.columns
+        WHERE table_schema = 'public'
+          AND table_name = %s
+          AND column_name = %s
+        LIMIT 1
+        """,
+        (table_name, column_name),
+    ).fetchone()
+    return row[0] if row else None
+
+
+def _migrate_users_id_to_charfield() -> None:
+    """
+    Chuẩn hóa users.id khỏi CHAR padding:
+    - Trim dữ liệu để loại trailing spaces.
+    - Chặn trường hợp trim gây trùng khóa.
+    - Đổi kiểu cột users.id sang VARCHAR(36).
+    """
+    users_table = Users._meta.table_name
+    if not _column_exists(users_table, "id"):
+        return
+
+    # Nếu đã là varchar thì chỉ cần đảm bảo dữ liệu sạch ở các cột user_id liên quan.
+    data_type = _column_data_type(users_table, "id")
+
+    duplicate_trimmed = db.execute_sql(
+        f"""
+        SELECT TRIM(id) AS trimmed_id, COUNT(*) AS c
+        FROM {users_table}
+        GROUP BY TRIM(id)
+        HAVING COUNT(*) > 1
+        LIMIT 1
+        """
+    ).fetchone()
+    if duplicate_trimmed:
+        raise RuntimeError(
+            f"Cannot migrate users.id: trimmed duplicate key detected for {duplicate_trimmed[0]!r}"
+        )
+
+    db.execute_sql(f"UPDATE {users_table} SET id = TRIM(id) WHERE id <> TRIM(id)")
+
+    # Đồng bộ tất cả cột user_id đang dùng trong hệ thống hiện tại.
+    for table_name, column_name in [
+        (UserTenant._meta.table_name, "user_id"),
+        (ChatSession._meta.table_name, "user_id"),
+        (ChatMessage._meta.table_name, "user_id"),
+    ]:
+        if _column_exists(table_name, column_name):
+            db.execute_sql(
+                f"""
+                UPDATE {table_name}
+                SET {column_name} = TRIM({column_name})
+                WHERE {column_name} IS NOT NULL
+                  AND {column_name} <> TRIM({column_name})
+                """
+            )
+
+    if data_type == "character":
+        db.execute_sql(
+            f"""
+            ALTER TABLE {users_table}
+            ALTER COLUMN id TYPE VARCHAR(36)
+            """
+        )
+
+
 def _build_migration_ops(migrator: PostgresqlMigrator):
     tables_columns = {
         Users._meta.table_name: {
-            "id": lambda: FixedCharField(max_length=36, primary_key=True),
+            "id": lambda: CharField(max_length=36, primary_key=True),
             "email": lambda: TextField(),
             "username": lambda: TextField(),
             "password": lambda: TextField(null=True),
@@ -683,6 +752,7 @@ def run_migration() -> None:
             ],
             safe=True,
         )
+        _migrate_users_id_to_charfield()
         _ensure_chat_messages_constraints()
         migration_ops = _build_migration_ops(PostgresqlMigrator(db))
         if migration_ops:
