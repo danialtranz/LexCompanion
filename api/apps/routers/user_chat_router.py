@@ -5,6 +5,7 @@ from api.apps.controllers.chat_controller import (
     delete_user_chat_session,
     get_user_chat_session_messages,
     list_user_chat_sessions,
+    user_chat_orchestrated,
     upload_user_file,
 )
 from api.apps.controllers.doc_controller import admin_doc_retrieval
@@ -67,6 +68,30 @@ def user_chat_route(
     ref = payload.reference
     fields = payload.field_weights.fields if payload.field_weights else None
     return admin_doc_retrieval(
+        user=user,
+        request=request,
+        query=payload.query,
+        session_id=payload.session_id,
+        candidate_size=payload.candidate_size,
+        similarity_threshold=payload.similarity_threshold,
+        final_size=payload.final_size,
+        keyword_weight=payload.keyword_weight,
+        field_weights=fields,
+        topic_ids=ref.topic_ids if ref else None,
+        subject_ids=ref.subject_ids if ref else None,
+        doc_ids=ref.doc_ids if ref else None,
+    )
+
+
+@router.post("/user_chat")
+def user_chat_orchestrated_route(
+    user: CurrentUser,
+    request: Request,
+    payload: UserChatRequest = Body(...),
+):
+    ref = payload.reference
+    fields = payload.field_weights.fields if payload.field_weights else None
+    return user_chat_orchestrated(
         user=user,
         request=request,
         query=payload.query,

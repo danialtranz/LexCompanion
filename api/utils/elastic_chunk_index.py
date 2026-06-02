@@ -319,12 +319,30 @@ def strip_vector_fields(data: dict[str, Any] | None) -> dict[str, Any]:
     return {k: v for k, v in data.items() if k not in _VECTOR_FIELD_NAMES}
 
 
+def normalize_score_0_1(score: Any) -> float | None:
+    """
+    Chuẩn hóa score về [0, 1] theo hàm đơn điệu:
+      s <= 0 -> 0
+      s > 0  -> s / (1 + s)
+    Giữ được thứ tự xếp hạng, tránh mọi giá trị > 1.
+    """
+    if score is None:
+        return None
+    try:
+        s = float(score)
+    except (TypeError, ValueError):
+        return None
+    if s <= 0:
+        return 0.0
+    return round(s / (1.0 + s), 6)
+
+
 def hit_to_api_chunk(hit: dict[str, Any], *, include_rerank: bool = False) -> dict[str, Any]:
     """Chuẩn hóa hit ES/rerank thành object phẳng cho response API (không vector)."""
     source = strip_vector_fields(dict(hit.get("_source") or {}))
     out: dict[str, Any] = {
         "chunk_id": hit.get("_id") or source.get("article_id"),
-        "score": hit.get("_score"),
+        "score": normalize_score_0_1(hit.get("_score")),
     }
     rerank_score = hit.get("rerank_score")
     if rerank_score is None:
@@ -467,7 +485,7 @@ class LexChunkSearch:
             formatted.append(
                 {
                     "_id": hit.get("_id"),
-                    "_score": hit.get("_score"),
+                    "_score": normalize_score_0_1(hit.get("_score")),
                     "_source": source,
                     "article_id": source.get("article_id"),
                     "topic_id": source.get("topic_id"),
@@ -618,7 +636,7 @@ class LexChunkSearch:
             formatted.append(
                 {
                     "_id": hit.get("_id"),
-                    "_score": hit.get("_score"),
+                    "_score": normalize_score_0_1(hit.get("_score")),
                     "_source": source,
                     "document_id": source.get("document_id"),
                     "doc_title": source.get("doc_title"),

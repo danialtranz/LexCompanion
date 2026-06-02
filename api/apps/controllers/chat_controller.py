@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+from typing import Any
+
+from fastapi import Request
 from fastapi import UploadFile
 
+from api.apps.services.orchestration import ChatOrchestratorInput, run_chat_orchestrator
 from api.apps.services.chat_service import ChatMessageService, ChatSessionService
 from api.apps.services.user_document_service import process_user_file_upload
 from api.db.models import ChatMessage, ChatSession, Users
@@ -177,4 +181,69 @@ async def upload_user_file(
         )
     except Exception as e:
         logger.error("upload_user_file error: {}", e)
+        return {"code": 500, "msg": str(e), "data": None}
+
+
+def user_chat_orchestrated(
+    *,
+    user: Users,
+    request: Request,
+    query: str,
+    session_id: str | None = None,
+    candidate_size: int = 100,
+    similarity_threshold: float = 0.5,
+    final_size: int = 5,
+    keyword_weight: float = 0.3,
+    field_weights: list[str] | None = None,
+    topic_ids: list[str] | None = None,
+    subject_ids: list[str] | None = None,
+    doc_ids: list[str] | None = None,
+) -> dict[str, Any]:
+    try:
+        query = (query or "").strip()
+        if not query:
+            return {"code": 400, "msg": "query is required", "data": None}
+        persist_session_id = _normalize_session_id(session_id)
+        reranker = getattr(request.app.state, "reranker", None)
+
+        payload = run_chat_orchestrator(
+            ChatOrchestratorInput(
+                query=query,
+                session_id=persist_session_id,
+                user_id=_normalize_user_id(user.id),
+                candidate_size=candidate_size,
+                similarity_threshold=similarity_threshold,
+                final_size=final_size,
+                keyword_weight=keyword_weight,
+                field_weights=field_weights,
+                topic_ids=topic_ids or None,
+                subject_ids=subject_ids or None,
+                doc_ids=doc_ids or None,
+                reranker=reranker,
+            )
+        )
+        if not payload.get("answer"):
+            return {
+                "code": 502,
+                "msg": "LLM did not return an answer",
+                "data": payload,
+            }
+
+        if persist_session_id:
+            ChatSessionService.save_retrieval_exchange(
+                session_id=persist_session_id,
+                user=user,
+                query=query,
+                answer=payload["answer"],
+                references=payload.get("reference"),
+            )
+        return {"code": 200, "msg": "OK", "data": payload}
+    except PermissionError as e:
+        logger.warning("user_chat_orchestrated session denied: {}", e)
+        return {"code": 403, "msg": str(e), "data": None}
+    except ValueError as e:
+        logger.error("user_chat_orchestrated validation error: {}", e)
+        return {"code": 400, "msg": str(e), "data": None}
+    except Exception as e:
+        logger.error("user_chat_orchestrated error: {}", e)
         return {"code": 500, "msg": str(e), "data": None}
