@@ -244,6 +244,49 @@ class LLMProvider:
             logger.error(f"Error in chat_text: {e}")
             return None
 
+    def chat_text_stream(
+        self,
+        dialogue: list[dict],
+        *,
+        system_prompt: str | None = None,
+        **kwargs,
+    ):
+        """Yield text deltas from OpenAI streaming chat completion."""
+        try:
+            dialogue = self.normalize_dialogue(dialogue)
+            messages: list[dict] = []
+            if system_prompt:
+                messages.append({"role": "system", "content": system_prompt})
+            messages.extend(dialogue)
+
+            request_params: dict = {
+                "model": kwargs.get("model") or self.model_name,
+                "messages": messages,
+                "stream": True,
+            }
+            llm_options = kwargs.get("llm_options", {}) or {}
+            for key in [
+                "max_tokens",
+                "temperature",
+                "top_p",
+                "frequency_penalty",
+                "presence_penalty",
+            ]:
+                value = kwargs.get(key, llm_options.get(key, getattr(self, key, None)))
+                if value is not None:
+                    request_params[key] = value
+
+            stream = self.client.chat.completions.create(**request_params)
+            for chunk in stream:
+                if not chunk.choices:
+                    continue
+                delta = chunk.choices[0].delta
+                if delta and delta.content:
+                    yield delta.content
+        except Exception as e:
+            logger.error(f"Error in chat_text_stream: {e}")
+            return
+
 
 if __name__ == "__main__":
     llm_client = LLMProvider(config)

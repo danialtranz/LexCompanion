@@ -8,30 +8,40 @@ import httpx
 
 _TAVILY_SEARCH_URL = "https://api.tavily.com/search"
 _DEFAULT_TIMEOUT_SECONDS = float(os.getenv("TAVILY_TIMEOUT_SECONDS", "15"))
+_SIMILARITY_THRESHOLD_TAVILY = float(
+    os.getenv("SIMILARITY_THRESHOLD_TAVILY", "0.7")
+)
 
 
 def _normalize_tavily_results(raw_results: list[dict[str, Any]] | None) -> list[dict[str, Any]]:
+    threshold = _SIMILARITY_THRESHOLD_TAVILY
     results: list[dict[str, Any]] = []
     for item in raw_results or []:
         if not isinstance(item, dict):
+            continue
+        try:
+            score = float(item.get("score"))
+        except (TypeError, ValueError):
+            continue
+        if score <= threshold:
             continue
         results.append(
             {
                 "title": item.get("title"),
                 "url": item.get("url"),
                 "content": item.get("content"),
-                "score": item.get("score"),
+                "score": score,
                 "published_date": item.get("published_date"),
             }
         )
     return results
 
 
-def run_web_search(*, query: str, limit: int = 3, **_: Any) -> dict[str, Any]:
+def run_web_search(*, query: str, limit: int = 2, **_: Any) -> dict[str, Any]:
     """Search web via Tavily API; expects TAVILY_API_KEY in environment."""
     api_key = (os.getenv("TAVILY_API_KEY") or "").strip()
     q = (query or "").strip()
-    top_k = max(1, min(int(limit), 10))
+    top_k = max(1, min(int(limit), 2))
 
     if not q:
         return {
@@ -74,6 +84,7 @@ def run_web_search(*, query: str, limit: int = 3, **_: Any) -> dict[str, Any]:
         "provider": "tavily",
         "query": q,
         "results": results,
+        "similarity_threshold_tavily": _SIMILARITY_THRESHOLD_TAVILY,
         "answer": data.get("answer"),
         "response_time": data.get("response_time"),
     }

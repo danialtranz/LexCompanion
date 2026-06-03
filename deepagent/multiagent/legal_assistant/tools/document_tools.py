@@ -4,9 +4,7 @@ from typing import Any
 
 
 def build_basic_document_draft(*, query: str, doc_type: str = "general", **_: Any) -> dict[str, Any]:
-    """
-    Placeholder document tool cho intent task_execution.
-    """
+    """Legacy helper; contract fill dùng task_execution graph + contract_tools."""
     return {
         "doc_type": doc_type,
         "title": f"Draft - {doc_type}",

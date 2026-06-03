@@ -8,4 +8,5 @@ INTENT_ALLOWED_TOOLS: dict[IntentType, list[str]] = {
     "task_execution": ["document_tools", "legal_retrieval"],
     "problem_solving": ["legal_retrieval", "calculators"],
     "exploration": ["legal_retrieval", "web_search", "calculators"],
+    "communication_normal": [],
 }

@@ -24,6 +24,35 @@ class LegalTopicService(CommonService):
             return None
         return cls.get_or_none(topic_id=topic_id)
 
+    @classmethod
+    @DB.connection_context()
+    def load_catalog_grouped_by_title_en(cls) -> dict[str, dict]:
+        """Nhóm legal_topics theo topic_title_en; gom topic_note và topic_ids."""
+        grouped: dict[str, dict] = {}
+        rows = list(
+            cls.model.select().order_by(cls.model.topic_number.asc(), cls.model.id.asc())
+        )
+        for row in rows:
+            title_en = (row.topic_title_en or "").strip() or "_unknown_"
+            bucket = grouped.setdefault(
+                title_en,
+                {
+                    "topic_title_en": title_en,
+                    "topic_title_vi": (row.topic_title_vi or "").strip(),
+                    "topic_notes": [],
+                    "topic_ids": [],
+                },
+            )
+            if not bucket.get("topic_title_vi") and row.topic_title_vi:
+                bucket["topic_title_vi"] = (row.topic_title_vi or "").strip()
+            note = (row.topic_note or "").strip()
+            if note and note not in bucket["topic_notes"]:
+                bucket["topic_notes"].append(note)
+            topic_id = (row.topic_id or "").strip()
+            if topic_id and topic_id not in bucket["topic_ids"]:
+                bucket["topic_ids"].append(topic_id)
+        return grouped
+
 
 class LegalSubjectService(CommonService):
     model = LegalSubject
@@ -35,6 +64,30 @@ class LegalSubjectService(CommonService):
         if not subject_id:
             return None
         return cls.get_or_none(subject_id=subject_id)
+
+    @classmethod
+    @DB.connection_context()
+    def load_subjects_grouped_by_topic_id(cls) -> dict[str, list[dict[str, str]]]:
+        """subject_title (sub_title) theo topic_id từ legal_subjects."""
+        grouped: dict[str, list[dict[str, str]]] = {}
+        rows = list(
+            cls.model.select().order_by(
+                cls.model.subject_number.asc(), cls.model.id.asc()
+            )
+        )
+        for row in rows:
+            topic_id = (row.topic_id or "").strip()
+            if not topic_id:
+                continue
+            title = (row.subject_title or "").strip()
+            if not title:
+                continue
+            subject_id = (row.subject_id or "").strip()
+            items = grouped.setdefault(topic_id, [])
+            if any(s.get("subject_id") == subject_id for s in items):
+                continue
+            items.append({"subject_id": subject_id, "subject_title": title})
+        return grouped
 
 
 class LegalTreeNodeService(CommonService):

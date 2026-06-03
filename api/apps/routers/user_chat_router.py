@@ -1,5 +1,7 @@
+from typing import Any
+
 from fastapi import APIRouter, Body, File, Form, Query, Request, UploadFile
-from pydantic import Field
+from pydantic import BaseModel, Field
 
 from api.apps.controllers.chat_controller import (
     delete_user_chat_session,
@@ -19,6 +21,14 @@ class UserChatRequest(AdminRetrievalRequest):
     stream: bool = Field(
         False,
         description="Dự phòng streaming; hiện tại luôn trả JSON qua admin_doc_retrieval",
+    )
+    thread_id: str | None = Field(
+        None,
+        description="LangGraph checkpoint thread (mặc định user_id:session_id:task_execution)",
+    )
+    resume: dict[str, Any] | None = Field(
+        None,
+        description="HITL resume payload: {action, payload} để tiếp tục từ checkpoint",
     )
 
 
@@ -104,4 +114,6 @@ def user_chat_orchestrated_route(
         topic_ids=ref.topic_ids if ref else None,
         subject_ids=ref.subject_ids if ref else None,
         doc_ids=ref.doc_ids if ref else None,
+        thread_id=payload.thread_id,
+        resume=payload.resume,
     )

@@ -9,6 +9,7 @@ IntentType = Literal[
     "task_execution",
     "problem_solving",
     "exploration",
+    "communication_normal",
 ]
 
 
@@ -23,6 +24,7 @@ class RoutingDecision:
 @dataclass(slots=True)
 class ChatOrchestratorInput:
     query: str
+    chat_history: list[dict[str, Any]] | None = None
     session_id: str | None = None
     user_id: str | None = None
     candidate_size: int = 100
@@ -34,3 +36,5 @@ class ChatOrchestratorInput:
     subject_ids: list[str] | None = None
     doc_ids: list[str] | None = None
     reranker: Any | None = None
+    thread_id: str | None = None
+    resume: dict[str, Any] | None = None

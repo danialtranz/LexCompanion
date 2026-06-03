@@ -8,6 +8,7 @@ IntentType = Literal[
     "task_execution",
     "problem_solving",
     "exploration",
+    "communication_normal",
 ]
 
 
@@ -31,12 +32,23 @@ class LegalAssistantState(TypedDict, total=False):
     # Retrieval / references
     retrieval_payload: dict[str, Any]
     citations: list[dict[str, Any]]
-    rewritten_query: str
+    resolved_user_request: str
+    intent_resolution_reason: str
+    rag_search_queries: list[str]
+    rag_matched_topic_ids: list[str]
+    rag_requery_reason: str
     rag_iteration: int
     retrieval_attempts: list[dict[str, Any]]
     is_context_sufficient: bool
     insufficiency_reason: str
     query_expansion_hint: str
+    needs_user_clarification: bool
+    missing_facts: list[str]
+    clarification_questions: list[str]
+    partial_answer_preface: str
+    hitl_assessment_reason: str
+    hitl_used: bool
+    reason_phase: Literal["rag", "web"]
     web_search_used: bool
     web_results: list[dict[str, Any]]
 
@@ -45,6 +57,24 @@ class LegalAssistantState(TypedDict, total=False):
     task_checklist: list[str]
     problem_plan: list[str]
     exploration_options: list[dict[str, Any]]
+
+    # Contract form fill (task_execution)
+    template_document_id: str | None
+    template_suffix: str | None
+    template_markdown: str | None
+    layout_items: list[dict[str, Any]]
+    form_schema: list[dict[str, Any]]
+    filled_values: dict[str, str]
+    draft_version: int
+    draft_object_key: str | None
+    draft_output_suffix: str | None
+    form_hitl: dict[str, Any]
+    answer_mode: str | None
+    contract_kb_id: str | None
+    contract_tenant_id: str | None
+    contract_file_location: str | None
+    session_uploads: list[dict[str, Any]]
+    thread_id: str | None
 
     # Standard output
     response: str | None

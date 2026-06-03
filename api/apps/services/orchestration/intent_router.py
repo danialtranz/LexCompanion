@@ -13,6 +13,7 @@ logger = setup_logging()
 _ROUTER_SYSTEM_PROMPT = """Bạn là bộ định tuyến intent cho chatbot pháp luật.
 
 Phân loại câu hỏi người dùng vào ĐÚNG 1 intent:
+- communication_normal: chào hỏi, cảm ơn, xã giao; hỏi không liên quan pháp luật; hỏi chung chung kiểu "bạn giúp gì được", "bạn là ai" mà chưa có câu hỏi pháp lý cụ thể
 - information: hỏi luật, hỏi quy định, hỏi điều khoản
 - decision: hỏi nên làm gì, phải trả bao nhiêu, chọn phương án
 - task_execution: yêu cầu tạo/sinh tài liệu, đơn từ, mẫu văn bản
@@ -21,22 +22,45 @@ Phân loại câu hỏi người dùng vào ĐÚNG 1 intent:
 
 Bạn PHẢI trả về đúng một JSON hợp lệ (không markdown, không giải thích):
 {
-  "intent": "information|decision|task_execution|problem_solving|exploration",
+  "intent": "communication_normal|information|decision|task_execution|problem_solving|exploration",
   "confidence": 0.0,
   "reason": "..."
 }
 
 Ràng buộc:
 - confidence trong [0, 1]
-- Nếu không chắc chắn, ưu tiên "information"
+- Chỉ chào một tiếng ("hi", "chào", "hello") hoặc hội thoại xã giao thuần túy -> communication_normal, KHÔNG information
+- Nếu không chắc chắn nhưng câu hỏi mang tính pháp lý cụ thể -> information
 """
 _VALID_INTENTS = {
+    "communication_normal",
     "information",
     "decision",
     "task_execution",
     "problem_solving",
     "exploration",
 }
+_GREETING_EXACT = frozenset(
+    {
+        "hi",
+        "hello",
+        "hey",
+        "chào",
+        "chao",
+        "xin chào",
+        "xin chao",
+        "alo",
+        "hế lô",
+        "helo",
+        "cảm ơn",
+        "cam on",
+        "thanks",
+        "thank you",
+        "ok",
+        "oke",
+        "okay",
+    }
+)
 _JSON_FENCE_RE = re.compile(r"^```(?:json)?\s*|\s*```$", re.MULTILINE)
 
 _llm: LLMProvider | None = None
@@ -91,12 +115,46 @@ def _parse_router_response(raw: str | None) -> RoutingDecision:
     )
 
 
+def _quick_communication_route(query: str) -> RoutingDecision | None:
+    """Fast path: tránh gọi LLM + RAG cho chào hỏi/xã giao rõ ràng."""
+    q = (query or "").strip().lower()
+    if not q:
+        return None
+    normalized = re.sub(r"[^\w\sàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]", " ", q)
+    normalized = re.sub(r"\s+", " ", normalized).strip()
+    if normalized in _GREETING_EXACT:
+        return RoutingDecision(
+            intent="communication_normal",
+            confidence=0.99,
+            reason="exact greeting/small-talk match",
+            metadata={"router_version": "v1-llm", "fast_path": True},
+        )
+    if len(normalized) <= 12 and normalized.split()[0] in _GREETING_EXACT:
+        return RoutingDecision(
+            intent="communication_normal",
+            confidence=0.95,
+            reason="short greeting prefix",
+            metadata={"router_version": "v1-llm", "fast_path": True},
+        )
+    return None
+
+
 def route_intent(
     *,
     query: str,
     session_id: str | None = None,
     user_id: str | None = None,
 ) -> RoutingDecision:
+    quick = _quick_communication_route(query)
+    if quick is not None:
+        logger.info(
+            "intent_router: intent={} confidence={} reason={} (fast_path)",
+            quick.intent,
+            quick.confidence,
+            quick.reason,
+        )
+        return quick
+
     user_message = (
         f"query: {query}\n"
         f"session_id: {session_id or ''}\n"

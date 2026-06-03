@@ -7,6 +7,7 @@ from fastapi import UploadFile
 
 from api.apps.services.orchestration import ChatOrchestratorInput, run_chat_orchestrator
 from api.apps.services.chat_service import ChatMessageService, ChatSessionService
+from deepagent.core.query_rewriting.rewrite import understand_user_true_intent
 from api.apps.services.user_document_service import process_user_file_upload
 from api.db.models import ChatMessage, ChatSession, Users
 from api.utils.logger import setup_logging
@@ -40,6 +41,29 @@ def _session_to_dict(row: ChatSession) -> dict:
         "created_at": row.created_at.isoformat() if row.created_at else None,
         "updated_at": row.updated_at.isoformat() if row.updated_at else None,
     }
+
+
+def _messages_to_chat_history(messages: list[ChatMessage]) -> list[dict[str, Any]]:
+    history: list[dict[str, Any]] = []
+    for row in messages:
+        content = (row.content or "").strip()
+        if content:
+            history.append({"role": row.role, "content": content})
+    return history
+
+
+def _load_chat_history(
+    *,
+    session_id: str | None,
+    user_id: str | None,
+) -> list[dict[str, Any]]:
+    if not session_id or not user_id:
+        return []
+    messages = ChatMessageService.list_by_session_and_user(
+        session_id=session_id,
+        user_id=user_id,
+    )
+    return _messages_to_chat_history(messages)
 
 
 def _message_to_dict(row: ChatMessage) -> dict:
@@ -198,19 +222,40 @@ def user_chat_orchestrated(
     topic_ids: list[str] | None = None,
     subject_ids: list[str] | None = None,
     doc_ids: list[str] | None = None,
+    thread_id: str | None = None,
+    resume: dict | None = None,
 ) -> dict[str, Any]:
     try:
-        query = (query or "").strip()
-        if not query:
+        raw_query = (query or "").strip()
+        if not raw_query:
             return {"code": 400, "msg": "query is required", "data": None}
         persist_session_id = _normalize_session_id(session_id)
+        user_id = _normalize_user_id(user.id)
+        chat_history = _load_chat_history(session_id=persist_session_id, user_id=user_id)
+        orchestrator_query, intent_reason = understand_user_true_intent(
+            chat_history, raw_query
+        )
+        if orchestrator_query != raw_query:
+            logger.info(
+                "user_chat_orchestrated: resolved intent session_id={} reason={}",
+                persist_session_id,
+                intent_reason,
+            )
         reranker = getattr(request.app.state, "reranker", None)
+
+        effective_thread_id = thread_id
+        if not effective_thread_id and persist_session_id:
+            session = ChatSessionService.get_session(persist_session_id)
+            if session and session.user_id == user_id:
+                hitl_cp = (session.metadata or {}).get("hitl_checkpoint") or {}
+                effective_thread_id = hitl_cp.get("thread_id")
 
         payload = run_chat_orchestrator(
             ChatOrchestratorInput(
-                query=query,
+                query=orchestrator_query,
+                chat_history=chat_history,
                 session_id=persist_session_id,
-                user_id=_normalize_user_id(user.id),
+                user_id=user_id,
                 candidate_size=candidate_size,
                 similarity_threshold=similarity_threshold,
                 final_size=final_size,
@@ -220,9 +265,25 @@ def user_chat_orchestrated(
                 subject_ids=subject_ids or None,
                 doc_ids=doc_ids or None,
                 reranker=reranker,
+                thread_id=effective_thread_id,
+                resume=resume,
             )
         )
-        if not payload.get("answer"):
+
+        status = payload.get("status")
+        if status == "waiting_human":
+            if persist_session_id:
+                ChatSessionService.save_retrieval_exchange(
+                    session_id=persist_session_id,
+                    user=user,
+                    query=raw_query,
+                    answer=payload.get("message") or "",
+                    references=[],
+                )
+            return {"code": 200, "msg": "OK", "data": payload}
+
+        answer_text = payload.get("answer") or payload.get("message")
+        if not answer_text:
             return {
                 "code": 502,
                 "msg": "LLM did not return an answer",
@@ -233,8 +294,8 @@ def user_chat_orchestrated(
             ChatSessionService.save_retrieval_exchange(
                 session_id=persist_session_id,
                 user=user,
-                query=query,
-                answer=payload["answer"],
+                query=raw_query,
+                answer=answer_text,
                 references=payload.get("reference"),
             )
         return {"code": 200, "msg": "OK", "data": payload}
