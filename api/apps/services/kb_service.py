@@ -18,7 +18,7 @@ class KnowledgebaseService(CommonService):
         return (
             cls.model.select()
             .where(
-                (cls.model.created_by == uid)
+                (cls.model.created_by == uid.strip())
                 & (cls.model.permission == "me")
                 & (cls.model.status == "1")
             )

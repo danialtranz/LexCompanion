@@ -10,7 +10,6 @@ import { UploadBox } from "./UploadBox";
 
 type KnowledgeBasePanelProps = {
   kb_id?: string | null;
-  sessionId?: string | null;
   onClose: () => void;
   onUploadSuccess?: (data: UploadUserDocumentData) => void;
 };
@@ -55,10 +54,7 @@ export const KnowledgeBasePanel = ({
     </div>
 
     <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-5 py-5">
-      <UploadBox
-        sessionId={sessionId}
-        onUploadSuccess={handleUploadSuccess}
-      />
+      <UploadBox onUploadSuccess={handleUploadSuccess} />
       <FileTable kb_id={kb_id} />
     </div>
     </PanelRight>

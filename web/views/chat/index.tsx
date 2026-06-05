@@ -472,7 +472,6 @@ export const ChatView = () => {
       return (
         <KnowledgeBasePanel
           kb_id={knowledgeKbId}
-          sessionId={chatSessionId}
           onClose={closeRightPanel}
           onUploadSuccess={handleUploadSuccess}
         />

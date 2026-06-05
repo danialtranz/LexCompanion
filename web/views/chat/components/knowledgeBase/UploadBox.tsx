@@ -12,7 +12,6 @@ const ACCEPT = ".pdf,.docx,.jpg,.jpeg,.png";
 const MAX_BYTES = 50 * 1024 * 1024;
 
 type UploadBoxProps = {
-  sessionId?: string | null;
   onUploadSuccess?: (data: UploadUserDocumentData) => void;
   disabled?: boolean;
 };
@@ -31,7 +30,6 @@ function formatBytes(bytes: number): string {
 }
 
 export const UploadBox = ({
-  sessionId = null,
   onUploadSuccess,
   disabled = false,
 }: UploadBoxProps) => {
@@ -52,7 +50,7 @@ export const UploadBox = ({
           continue;
         }
         try {
-          const res = await upload({ file, session_id: sessionId });
+          const res = await upload({ file });
           if (!isUploadOk(res.code) || !res.data) {
             toast.error(res.msg || "Upload thất bại");
             continue;
@@ -65,7 +63,7 @@ export const UploadBox = ({
         }
       }
     },
-    [disabled, loading, onUploadSuccess, sessionId, upload],
+    [disabled, loading, onUploadSuccess, upload],
   );
 
   const onDragOver = (e: DragEvent) => {

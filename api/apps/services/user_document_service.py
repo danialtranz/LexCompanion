@@ -122,7 +122,7 @@ async def process_user_file_upload(
 
     kb = KnowledgebaseService.resolve_kb_for_me_upload(user.id)
     ## tao fake 1 row kb va lu vao luon trong db
-    kb=None
+    ## kt tra kb co none hay khong
     if not kb:
         kb = KnowledgebaseService.save(
         id=get_uuid(),
