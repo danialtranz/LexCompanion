@@ -5,6 +5,7 @@ from typing import Any
 from fastapi.responses import StreamingResponse
 
 from api.apps.controllers.chat_controller import _load_chat_history, _normalize_session_id, _normalize_user_id
+from api.apps.services.contract_draft_session import sync_contract_draft_from_envelope
 from api.apps.services.contract_fill_service import run_contract_fill, stream_contract_fill
 from api.db.models import Users
 from api.utils.logger import setup_logging
@@ -42,6 +43,12 @@ def contract_fill(
             thread_id=thread_id,
             resume=resume,
         )
+        if persist_session_id and payload.get("ui_template") == "task_execution":
+            sync_contract_draft_from_envelope(
+                session_id=persist_session_id,
+                user_id=user_id,
+                envelope=payload,
+            )
         return {"code": 200, "msg": "OK", "data": payload}
     except PermissionError as e:
         return {"code": 403, "msg": str(e), "data": None}

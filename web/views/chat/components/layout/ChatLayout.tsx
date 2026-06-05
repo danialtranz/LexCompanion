@@ -11,9 +11,21 @@ interface ChatLayoutProps {
   onToggleHistory?: () => void;
   knowledgeBaseActive?: boolean;
   historyActive?: boolean;
+  /** Cột chat cố định ~380px; panel văn bản chiếm phần còn lại bên phải. */
+  liveDocumentLayout?: boolean;
 }
 
-function buildGridClass(historyOpen: boolean, hasRightPanel: boolean): string {
+function buildGridClass(
+  historyOpen: boolean,
+  hasRightPanel: boolean,
+  liveDocumentLayout: boolean,
+): string {
+  if (liveDocumentLayout && hasRightPanel) {
+    if (historyOpen) {
+      return "lg:grid-cols-[240px_320px_var(--chat-live-width)_10px_minmax(0,1fr)]";
+    }
+    return "lg:grid-cols-[240px_var(--chat-live-width)_10px_minmax(0,1fr)]";
+  }
   if (historyOpen && hasRightPanel) {
     return "lg:grid-cols-[240px_320px_minmax(0,1fr)_10px_var(--chat-right-width)]";
   }
@@ -38,6 +50,18 @@ function clampRightPanelWidth(
   return Math.min(Math.max(width, minWidth), maxWidth);
 }
 
+function clampLiveChatWidth(
+  width: number,
+  historyOpen: boolean,
+  viewportWidth: number,
+): number {
+  const minWidth = 300;
+  const maxWidth = 480;
+  const leftReserved = (historyOpen ? 240 + 320 : 240) + 360;
+  const maxByViewport = viewportWidth - leftReserved;
+  return Math.min(Math.max(width, minWidth), Math.min(maxWidth, maxByViewport));
+}
+
 export const ChatLayout = ({
   children,
   panelRight,
@@ -48,15 +72,28 @@ export const ChatLayout = ({
   onToggleHistory,
   knowledgeBaseActive = false,
   historyActive = false,
+  liveDocumentLayout = false,
 }: ChatLayoutProps) => {
   const hasRightPanel = Boolean(panelRight);
   const [rightPanelWidth, setRightPanelWidth] = useState(400);
+  const [liveChatWidth, setLiveChatWidth] = useState(380);
   const [isResizing, setIsResizing] = useState(false);
 
   useEffect(() => {
     if (!isResizing) return;
 
     const onMouseMove = (event: MouseEvent) => {
+      if (liveDocumentLayout) {
+        const sidebar = 240;
+        const history = historyOpen ? 320 : 0;
+        const next = clampLiveChatWidth(
+          event.clientX - sidebar - history,
+          historyOpen,
+          window.innerWidth,
+        );
+        setLiveChatWidth(next);
+        return;
+      }
       const next = clampRightPanelWidth(
         window.innerWidth - event.clientX,
         historyOpen,
@@ -77,14 +114,15 @@ export const ChatLayout = ({
       document.body.style.cursor = "";
       document.body.style.userSelect = "";
     };
-  }, [historyOpen, isResizing]);
+  }, [historyOpen, isResizing, liveDocumentLayout]);
 
   const mainStyle = useMemo(
     () =>
       ({
         "--chat-right-width": `${rightPanelWidth}px`,
+        "--chat-live-width": `${liveChatWidth}px`,
       }) as CSSProperties,
-    [rightPanelWidth],
+    [rightPanelWidth, liveChatWidth],
   );
 
   return (
@@ -93,6 +131,7 @@ export const ChatLayout = ({
       className={`grid min-h-screen grid-cols-1 bg-[#faf7f2] ${buildGridClass(
         historyOpen,
         hasRightPanel,
+        liveDocumentLayout,
       )}`}
     >
       <ChatSidebar

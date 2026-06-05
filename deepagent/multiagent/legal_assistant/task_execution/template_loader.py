@@ -41,12 +41,33 @@ def load_template_into_state(
         tenant_id=file_row.tenant_id,
         location=file_row.location,
     )
+    if suffix == ".docx":
+        return {
+            "template_document_id": document_id,
+            "template_suffix": suffix,
+            "template_mode": "docx_native",
+            "template_markdown": "",
+            "layout_items": [],
+            "structured_blocks": [],
+            "hitl_groups": [],
+            "working_docx_bytes": body,
+            "contract_tenant_id": file_row.tenant_id,
+            "contract_kb_id": doc.kb_id,
+            "contract_file_location": file_row.location,
+            "_template_bytes": body,
+            "doc_ids": [document_id],
+        }
+
     parsed = parse_template_bytes(body, suffix=suffix)
     return {
         "template_document_id": document_id,
         "template_suffix": suffix,
+        "template_mode": "markdown_reference",
         "template_markdown": parsed.markdown,
         "layout_items": layout_items_to_dicts(parsed.layout_items),
+        "structured_blocks": [],
+        "hitl_groups": [],
+        "working_docx_bytes": None,
         "contract_tenant_id": file_row.tenant_id,
         "contract_kb_id": doc.kb_id,
         "contract_file_location": file_row.location,

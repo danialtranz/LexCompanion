@@ -1,0 +1,55 @@
+.root {
+  width: 100%;
+  min-width: 0;
+  min-height: 280px;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+.bare {
+  width: 100%;
+  min-width: 0;
+  min-height: 280px;
+  overflow-x: auto;
+  overflow-y: visible;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.styleHost {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bodyHost {
+  width: 100%;
+  min-width: 0;
+}
+
+.root :global(.docx-wrapper),
+.bare :global(.docx-wrapper) {
+  margin: 0 auto;
+  background: transparent;
+  box-shadow: none;
+}
+
+.root :global(.docx-wrapper > section.docx),
+.bare :global(.docx-wrapper > section.docx) {
+  margin-bottom: 0;
+}
+
+.status {
+  margin: 0.75rem 0 0;
+  font-size: 13px;
+  color: #8a8178;
+}
+
+.error {
+  margin: 0.75rem 0 0;
+  font-size: 13px;
+  color: #b42318;
+}

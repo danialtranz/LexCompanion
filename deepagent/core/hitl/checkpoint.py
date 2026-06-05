@@ -77,15 +77,36 @@ def format_graph_invoke_result(
     if interrupts:
         first = interrupts[0] if isinstance(interrupts, (list, tuple)) else interrupts
         core = _interrupt_value(first)
-        return {
+        hitl = core.get("hitl") or {}
+        envelope: dict[str, Any] = {
             "status": HITL_STATUS_WAITING,
             "message": core.get("message") or "",
-            "hitl": core.get("hitl") or {},
+            "hitl": hitl,
             "resume": core.get("resume") or {},
             "thread_id": thread_id,
             "query": result.get("user_query"),
             "answer_mode": result.get("answer_mode"),
         }
+        preview = (
+            core.get("draft_preview_markdown")
+            or hitl.get("draft_preview_markdown")
+            or result.get("draft_preview_markdown")
+        )
+        if preview:
+            envelope["draft_preview_markdown"] = preview
+        filled = result.get("filled_values") or hitl.get("filled_values")
+        if filled:
+            envelope["filled_values"] = filled
+        for key in (
+            "draft_object_key",
+            "draft_version",
+            "draft_output_suffix",
+            "contract_tenant_id",
+            "template_document_id",
+        ):
+            if result.get(key):
+                envelope[key] = result[key]
+        return envelope
 
     output = result.get("output") if isinstance(result.get("output"), dict) else {}
     message = (
@@ -109,6 +130,12 @@ def format_graph_invoke_result(
             "draft_version": result.get("draft_version") or output.get("draft_version"),
             "draft_object_key": result.get("draft_object_key")
             or output.get("draft_object_key"),
+            "draft_preview_markdown": result.get("draft_preview_markdown")
+            or output.get("draft_preview_markdown"),
+            "draft_output_suffix": result.get("draft_output_suffix")
+            or output.get("draft_output_suffix"),
+            "contract_tenant_id": result.get("contract_tenant_id")
+            or output.get("contract_tenant_id"),
         },
     )
     return envelope

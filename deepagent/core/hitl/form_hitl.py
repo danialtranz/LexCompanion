@@ -13,33 +13,40 @@ logger = setup_logging().bind(tag="form_hitl")
 _JSON_FENCE_RE = re.compile(r"^```(?:json)?\s*|\s*```$", re.MULTILINE)
 _llm: LLMProvider | None = None
 
-_FORM_HITL_PROMPT = """Bạn đánh giá tiến độ điền mẫu hợp đồng/văn bản.
+_FORM_HITL_PROMPT = """Bạn hỗ trợ điền mẫu văn bản pháp lý theo thông tin user cung cấp.
 
-Input: danh sách field (id, label, required, giá trị hiện tại), câu hỏi/yêu cầu mới của user, lịch sử chat ngắn.
+Input:
+- Danh sách field cần điền (id, label, required, giá trị hiện tại).
+- Tin nhắn mới nhất của user.
+- Đoạn trích văn bản mẫu đang xử lý (nếu có).
 
-Nhiệm vụ:
-1) Xác định field nào user vừa cung cấp giá trị (cập nhật vào proposed_values).
-2) Field required nào vẫn thiếu (missing_field_ids).
-3) Có cần hỏi user thêm không (needs_user_clarification).
-4) Viết 1-3 câu hỏi cụ thể (clarification_questions) — chỉ hỏi field còn thiếu, ưu tiên cùng nhóm (ví dụ thông tin Bên A).
-5) partial_answer_preface: tóm tắt ngắn đã điền được gì.
+Nhiệm vụ — QUAN TRỌNG:
+1) proposed_values: Map trực tiếp text user vừa nói sang đúng field_id tương ứng.
+   - KHÔNG được tự bịa, suy luận, hay thêm giá trị user không nêu.
+   - KHÔNG kiểm tra tính hợp lệ, logic, hay hợp lý của giá trị — chấp nhận bất kỳ thứ gì user nhập.
+   - Ưu tiên khớp theo label field; bám sát nội dung văn bản mẫu để hiểu ngữ cảnh.
+2) missing_field_ids: Liệt kê field required còn trống sau khi cập nhật proposed_values.
+3) needs_user_clarification: true khi còn required field chưa có giá trị.
+4) clarification_questions: Hỏi ngắn gọn từng field còn thiếu — chỉ hỏi, không giải thích thêm.
+5) partial_answer_preface: Xác nhận đã ghi nhận thông tin nào từ user (1 câu).
 
 Trả về JSON:
 {
   "needs_user_clarification": true,
   "missing_field_ids": ["..."],
   "missing_facts": ["nhãn field thiếu"],
-  "clarification_questions": ["..."],
-  "partial_answer_preface": "...",
-  "proposed_values": {"field_id": "giá trị"},
+  "clarification_questions": ["Vui lòng cho biết <label>?"],
+  "partial_answer_preface": "Đã ghi nhận: ...",
+  "proposed_values": {"field_id": "giá trị nguyên văn user nói"},
   "assessment_reason": "...",
   "is_complete": false
 }
 
-Quy tắc:
-- is_complete=true chỉ khi mọi field required đã có giá trị hợp lệ (không rỗng).
-- needs_user_clarification=true khi còn required thiếu.
-- proposed_values: chỉ field user vừa nêu rõ trong tin nhắn mới; không đoán.
+Nguyên tắc tuyệt đối:
+- KHÔNG bịa giá trị. Nếu user chưa cung cấp → để trống, đừng đưa vào proposed_values.
+- KHÔNG validate hay nhận xét nội dung (vd: "tên này không hợp lệ", "ngày sai").
+- BỎ QUA field ngày/tháng/năm — không hỏi, không map proposed_values cho các ô đó.
+- is_complete=true chỉ khi tất cả field required đã có giá trị (không rỗng).
 - Tiếng Việt.
 """
 
@@ -81,7 +88,11 @@ def _format_fields_summary(form_schema: list[dict[str, Any]]) -> str:
         req = "required" if f.get("required") else "optional"
         val = (f.get("value") or "").strip()
         status = "filled" if val else "empty"
-        lines.append(f"- {fid} ({label}) [{req}] [{status}]: {val or '(trống)'}")
+        slot = f.get("slot_index")
+        slot_hint = f" slot={slot}" if slot is not None else ""
+        lines.append(
+            f"- {fid} ({label}){slot_hint} [{req}] [{status}]: {val or '(trống)'}"
+        )
     return "\n".join(lines) if lines else "(không có field)"
 
 
@@ -91,6 +102,7 @@ def assess_form_for_hitl(
     form_schema: list[dict[str, Any]],
     filled_values: dict[str, str],
     chat_history: list[dict[str, Any]] | None = None,
+    document_excerpt: str | None = None,
 ) -> FormHitlAssessment:
     """Đánh giá field thiếu và trích giá trị mới từ tin nhắn user."""
     schema_for_llm = []
@@ -116,6 +128,12 @@ def assess_form_for_hitl(
         f"Tin nhắn mới của user:\n{user_message.strip()}\n\n"
         f"Các field:\n{_format_fields_summary(schema_for_llm)}\n"
     )
+    excerpt = (document_excerpt or "").strip()
+    if excerpt:
+        user_content += (
+            f"\nĐoạn văn bản mẫu đang xử lý (chỉ điền field thuộc đoạn này):\n"
+            f"{excerpt[:8000]}\n"
+        )
     if history_lines:
         user_content += "\nLịch sử chat gần đây:\n" + "\n".join(history_lines)
 

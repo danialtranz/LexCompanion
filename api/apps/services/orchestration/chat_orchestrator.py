@@ -16,7 +16,7 @@ from deepagent.multiagent.legal_assistant.task_execution.session_documents impor
 )
 
 from .intent_router import route_intent
-from .schemas import ChatOrchestratorInput
+from .schemas import ChatOrchestratorInput, RoutingDecision
 
 logger = setup_logging()
 
@@ -44,17 +44,28 @@ def _persist_hitl_checkpoint_meta(
     session.save()
 
 
-@DB.connection_context()
-def run_chat_orchestrator(payload: ChatOrchestratorInput) -> dict[str, Any]:
-    decision = route_intent(
+def _resolve_routing_decision(payload: ChatOrchestratorInput) -> RoutingDecision:
+    if (payload.ui_template or "").strip() == "task_execution":
+        return RoutingDecision(
+            intent="task_execution",
+            confidence=1.0,
+            reason="client_ui_template",
+        )
+    return route_intent(
         query=payload.query,
         session_id=payload.session_id,
         user_id=payload.user_id,
     )
+
+
+@DB.connection_context()
+def run_chat_orchestrator(payload: ChatOrchestratorInput) -> dict[str, Any]:
+    decision = _resolve_routing_decision(payload)
     logger.info(
-        "chat_orchestrator: intent={} confidence={} query_len={}",
+        "chat_orchestrator: intent={} confidence={} ui_template={} query_len={}",
         decision.intent,
         decision.confidence,
+        payload.ui_template,
         len(payload.query or ""),
     )
 
@@ -99,6 +110,7 @@ def run_chat_orchestrator(payload: ChatOrchestratorInput) -> dict[str, Any]:
             resume=payload.resume,
             query_fallback=payload.query,
         )
+        envelope["ui_template"] = "task_execution"
         if payload.session_id and payload.user_id:
             _persist_hitl_checkpoint_meta(
                 session_id=payload.session_id,

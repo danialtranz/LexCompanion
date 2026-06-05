@@ -61,13 +61,21 @@ class LegalAssistantState(TypedDict, total=False):
     # Contract form fill (task_execution)
     template_document_id: str | None
     template_suffix: str | None
+    template_mode: Literal["docx_native", "markdown_reference"] | None
     template_markdown: str | None
     layout_items: list[dict[str, Any]]
+    structured_blocks: list[dict[str, Any]]
+    hitl_groups: list[dict[str, Any]]
+    working_docx_bytes: bytes | None
     form_schema: list[dict[str, Any]]
     filled_values: dict[str, str]
+    template_chunks: list[str]
+    current_chunk_index: int
+    field_chunk_index: dict[str, int]
     draft_version: int
     draft_object_key: str | None
     draft_output_suffix: str | None
+    draft_preview_markdown: str | None
     form_hitl: dict[str, Any]
     answer_mode: str | None
     contract_kb_id: str | None

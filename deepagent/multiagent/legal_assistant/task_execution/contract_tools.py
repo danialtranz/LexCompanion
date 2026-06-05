@@ -158,53 +158,11 @@ def extract_form_fields(
 
 
 def apply_values_to_docx(body: bytes, filled_values: dict[str, str], form_schema: list[dict]) -> bytes:
-    from docx import Document
+    from deepagent.multiagent.legal_assistant.task_execution.apply_field_strategies import (
+        apply_field_strategies,
+    )
 
-    doc = Document(io.BytesIO(body))
-    id_to_field = {str(f.get("id") or ""): f for f in form_schema}
-
-    for para in doc.paragraphs:
-        text = para.text
-        if not text:
-            continue
-        new_text = text
-        for fid, value in filled_values.items():
-            if not value:
-                continue
-            placeholder = "{{" + fid + "}}"
-            if placeholder in new_text:
-                new_text = new_text.replace(placeholder, value)
-            field = id_to_field.get(fid) or {}
-            anchor = str(field.get("anchor_text") or "").strip()
-            if anchor and anchor in new_text and detect_placeholder_in_text(new_text):
-                new_text = _DOTS_RE.sub(value, new_text, count=1)
-        if new_text != text:
-            para.text = new_text
-
-    for table in doc.tables:
-        for row in table.rows:
-            for cell in row.cells:
-                for para in cell.paragraphs:
-                    text = para.text
-                    if not text:
-                        continue
-                    new_text = text
-                    for fid, value in filled_values.items():
-                        if not value:
-                            continue
-                        placeholder = "{{" + fid + "}}"
-                        if placeholder in new_text:
-                            new_text = new_text.replace(placeholder, value)
-                        field = id_to_field.get(fid) or {}
-                        anchor = str(field.get("anchor_text") or "").strip()
-                        if anchor and anchor in new_text and detect_placeholder_in_text(new_text):
-                            new_text = _DOTS_RE.sub(value, new_text, count=1)
-                    if new_text != text:
-                        para.text = new_text
-
-    out = io.BytesIO()
-    doc.save(out)
-    return out.getvalue()
+    return apply_field_strategies(body, filled_values, form_schema)
 
 
 def apply_values_to_image(
@@ -378,12 +336,21 @@ def render_filled_document(
     filled_values: dict[str, str],
     form_schema: list[dict],
     template_markdown: str | None = None,
+    template_mode: str | None = None,
 ) -> tuple[bytes, str]:
     """
-    Luôn xuất DOCX soạn mới. ``body``/``suffix`` chỉ phản ánh mẫu tham chiếu (parse đã xong).
+    DOCX native: patch file gốc theo strategy.
+    Markdown/PDF/ảnh: soạn DOCX mới từ markdown tham chiếu.
     """
-    del body  # file gốc không patch — chỉ dùng markdown đã trích
+    from deepagent.multiagent.legal_assistant.task_execution.apply_field_strategies import (
+        apply_field_strategies,
+    )
+
     suf = (suffix or "").lower()
+    mode = (template_mode or "").strip().lower()
+    if (mode == "docx_native" or suf == DOCX_SUFFIX) and body:
+        return apply_field_strategies(body, filled_values, form_schema), ".docx"
+
     md = (template_markdown or "").strip()
     if not md:
         logger.warning(

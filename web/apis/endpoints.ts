@@ -21,9 +21,19 @@ const api = {
   adminDocRetrievalUrl: `${api_host}/v1/admin/doc/retrieval`,
   /** User chat sessions */
   userChatUrl: `${api_host}/v1/user/chat`,
+  /** POST — orchestrated user chat (intent + LangGraph task_execution) */
+  userUserChatUrl: `${api_host}/v1/user/user_chat`,
   userChatSessionsUrl: `${api_host}/v1/user/sessions`,
   userChatSessionUrl: `${api_host}/v1/user/session`,
   /** POST multipart — user upload file (PDF/DOCX/ảnh) gắn session tùy chọn */
   userUploadUrl: `${api_host}/v1/user/upload`,
+  /** GET — markdown preview bản nháp đã điền (theo session) */
+  userContractDraftPreviewUrl: `${api_host}/v1/user/contract/draft/preview`,
+  /** GET — HTML preview từ DOCX nháp MinIO (theo session) */
+  userContractDraftPreviewHtmlUrl: `${api_host}/v1/user/contract/draft/preview/html`,
+  /** GET — DOCX nháp binary từ MinIO (inline, FE render trực tiếp) */
+  userContractDraftPreviewBinaryUrl: `${api_host}/v1/user/contract/draft/preview/binary`,
+  userContractDraftVersionsUrl: `${api_host}/v1/user/contract/draft/versions`,
+  userContractDraftDownloadUrl: `${api_host}/v1/user/contract/draft`,
 };
 export default api;

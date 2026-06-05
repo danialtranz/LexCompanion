@@ -3,7 +3,13 @@ from pydantic import BaseModel, Field
 
 from fastapi import Query
 
-from api.apps.controllers.contract_draft_controller import stream_contract_draft
+from api.apps.controllers.contract_draft_controller import (
+    fetch_contract_draft_preview,
+    fetch_contract_draft_preview_html,
+    fetch_contract_draft_versions,
+    stream_contract_draft,
+    stream_contract_draft_preview_binary,
+)
 from api.apps.controllers.contract_fill_controller import contract_fill, contract_fill_stream
 from api.apps.middleware.jwt_auth import CurrentUser
 
@@ -43,9 +49,71 @@ def contract_fill_route(user: CurrentUser, payload: ContractFillRequest = Body(.
     )
 
 
+@router.get("/contract/draft/preview")
+def contract_draft_preview_route(
+    user: CurrentUser,
+    session_id: str = Query(..., description="Chat session id"),
+):
+    return fetch_contract_draft_preview(user=user, session_id=session_id)
+
+
+@router.get("/contract/draft/versions")
+def contract_draft_versions_route(
+    user: CurrentUser,
+    session_id: str = Query(..., description="Chat session id"),
+):
+    """Danh sách các phiên bản DOCX nháp đã lưu trên MinIO."""
+    return fetch_contract_draft_versions(user=user, session_id=session_id)
+
+
+@router.get("/contract/draft/preview/binary")
+def contract_draft_preview_binary_route(
+    user: CurrentUser,
+    session_id: str = Query(..., description="Chat session id"),
+    version: int | None = Query(
+        None,
+        ge=1,
+        description="Phiên bản cụ thể; bỏ trống = mới nhất",
+    ),
+):
+    """DOCX nháp từ MinIO — binary inline cho preview phía client."""
+    return stream_contract_draft_preview_binary(
+        user=user,
+        session_id=session_id,
+        version=version,
+    )
+
+
+@router.get("/contract/draft/preview/html")
+def contract_draft_preview_html_route(
+    user: CurrentUser,
+    session_id: str = Query(..., description="Chat session id"),
+    version: int | None = Query(
+        None,
+        ge=1,
+        description="Phiên bản cụ thể; bỏ trống = mới nhất",
+    ),
+):
+    """Preview HTML từ DOCX nháp trên MinIO (đúng bản đã lưu)."""
+    return fetch_contract_draft_preview_html(
+        user=user,
+        session_id=session_id,
+        version=version,
+    )
+
+
 @router.get("/contract/draft")
 def contract_draft_download_route(
     user: CurrentUser,
     session_id: str = Query(..., description="Session id with contract_fill metadata"),
+    version: int | None = Query(
+        None,
+        ge=1,
+        description="Phiên bản cụ thể; bỏ trống = mới nhất",
+    ),
 ):
-    return stream_contract_draft(user=user, session_id=session_id)
+    return stream_contract_draft(
+        user=user,
+        session_id=session_id,
+        version=version,
+    )

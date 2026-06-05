@@ -30,6 +30,10 @@ class UserChatRequest(AdminRetrievalRequest):
         None,
         description="HITL resume payload: {action, payload} để tiếp tục từ checkpoint",
     )
+    ui_template: str | None = Field(
+        None,
+        description='Khi "task_execution": bỏ qua intent routing, chạy thẳng graph soạn văn bản',
+    )
 
 
 @router.delete("/chat")
@@ -116,4 +120,5 @@ def user_chat_orchestrated_route(
         doc_ids=ref.doc_ids if ref else None,
         thread_id=payload.thread_id,
         resume=payload.resume,
+        ui_template=payload.ui_template,
     )

@@ -6,7 +6,7 @@ interface ChatMainProps {
 }
 
 export const ChatMain = ({ children, footer }: ChatMainProps) => (
-  <section className="flex min-h-screen min-w-0 flex-col bg-[#faf7f2]">
+  <section className="flex min-h-screen min-w-0 w-full flex-col overflow-hidden bg-[#faf7f2]">
     {children}
     {footer}
   </section>

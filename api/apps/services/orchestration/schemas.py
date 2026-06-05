@@ -38,3 +38,4 @@ class ChatOrchestratorInput:
     reranker: Any | None = None
     thread_id: str | None = None
     resume: dict[str, Any] | None = None
+    ui_template: str | None = None

@@ -5,6 +5,7 @@ from typing import Any
 from fastapi import Request
 from fastapi import UploadFile
 
+from api.apps.services.contract_draft_session import sync_contract_draft_from_envelope
 from api.apps.services.orchestration import ChatOrchestratorInput, run_chat_orchestrator
 from api.apps.services.chat_service import ChatMessageService, ChatSessionService
 from deepagent.core.query_rewriting.rewrite import understand_user_true_intent
@@ -224,6 +225,7 @@ def user_chat_orchestrated(
     doc_ids: list[str] | None = None,
     thread_id: str | None = None,
     resume: dict | None = None,
+    ui_template: str | None = None,
 ) -> dict[str, Any]:
     try:
         raw_query = (query or "").strip()
@@ -232,15 +234,19 @@ def user_chat_orchestrated(
         persist_session_id = _normalize_session_id(session_id)
         user_id = _normalize_user_id(user.id)
         chat_history = _load_chat_history(session_id=persist_session_id, user_id=user_id)
-        orchestrator_query, intent_reason = understand_user_true_intent(
-            chat_history, raw_query
-        )
-        if orchestrator_query != raw_query:
-            logger.info(
-                "user_chat_orchestrated: resolved intent session_id={} reason={}",
-                persist_session_id,
-                intent_reason,
+        force_task_execution = (ui_template or "").strip() == "task_execution"
+        if force_task_execution:
+            orchestrator_query = raw_query
+        else:
+            orchestrator_query, intent_reason = understand_user_true_intent(
+                chat_history, raw_query
             )
+            if orchestrator_query != raw_query:
+                logger.info(
+                    "user_chat_orchestrated: resolved intent session_id={} reason={}",
+                    persist_session_id,
+                    intent_reason,
+                )
         reranker = getattr(request.app.state, "reranker", None)
 
         effective_thread_id = thread_id
@@ -267,8 +273,16 @@ def user_chat_orchestrated(
                 reranker=reranker,
                 thread_id=effective_thread_id,
                 resume=resume,
+                ui_template=ui_template,
             )
         )
+
+        if persist_session_id and payload.get("ui_template") == "task_execution":
+            sync_contract_draft_from_envelope(
+                session_id=persist_session_id,
+                user_id=user_id,
+                envelope=payload,
+            )
 
         status = payload.get("status")
         if status == "waiting_human":
