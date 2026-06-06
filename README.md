@@ -1,6 +1,14 @@
-# Lex Companion
+<p align="center">
+  <img src="web/public/images/icons/lex-companion-logo.png" alt="Lex Companion Logo" width="220" />
+</p>
 
-**Lex Companion** is a production-grade Vietnamese Legal AI Assistant that delivers citation-backed legal answers, research, and document generation through intent-aware LangGraph agents and hybrid Elasticsearch retrieval.
+<h1 align="center">Lex Companion</h1>
+
+<p align="center">
+  <strong>Trợ lý pháp lý AI · Luật Việt Nam</strong>
+</p>
+
+**Lex Companion** is an agentic AI legal companion for Vietnam that helps individuals and businesses understand regulations, research legal issues, evaluate options, and generate legal documents through specialized legal agents grounded in authoritative legal sources.
 
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-green.svg)](https://fastapi.tiangolo.com/)
@@ -11,13 +19,18 @@
 
 ## Project Overview
 
-Lex Companion helps legal professionals and citizens navigate Vietnamese law by combining:
+Navigating Vietnamese law often requires searching across thousands of legal provisions, understanding relationships between regulations, and translating legal language into practical actions.
 
-- **Retrieval-Augmented Generation (RAG)** over the Pháp điển legal codex (~64k articles)
-- **Hybrid search** (keyword + semantic vectors + reranking) in Elasticsearch
-- **Multi-intent agent workflows** powered by LangGraph
-- **Citation-based responses** with inline `[n]` references and IEEE-style source lists
-- **Contract document generation** with human-in-the-loop (HITL) form filling
+Lex Companion acts as an AI legal companion that assists users throughout this process. Instead of functioning as a traditional chatbot, it coordinates specialized legal agents capable of legal research, information retrieval, document drafting, decision support, and problem-solving.
+
+Core capabilities include:
+
+- **Agentic legal workflows** powered by intent-specific LangGraph agents
+- **Grounded legal reasoning** over the Vietnamese Pháp điển legal codex (~64k articles)
+- **Hybrid retrieval architecture** combining keyword search, semantic search, and reranking
+- **Citation-backed responses** with transparent references to legal sources
+- **Human-in-the-loop document generation** for contracts and legal forms
+- **Session-based knowledge augmentation** through user-provided documents
 
 For detailed architecture documentation, see **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**.
 
@@ -25,18 +38,18 @@ For detailed architecture documentation, see **[docs/ARCHITECTURE.md](docs/ARCHI
 
 ## Features
 
-| Feature | Description |
-|---------|-------------|
-| **Legal Q&A** | Ask questions about Vietnamese law; get answers grounded in Pháp điển articles |
-| **Legal Research** | Multi-query RAG with ontology-aware query expansion and retry |
-| **Hybrid Search** | Elasticsearch keyword + KNN vector fusion with BGE reranking |
-| **Citation Tracking** | Every factual claim links to `[n]` inline citations and a reference panel |
-| **Intent Routing** | 6 specialized agent workflows: information, decision, problem-solving, exploration, task execution, communication |
-| **Document Generation** | Contract template selection, form fill, and DOCX output with HITL checkpoints |
-| **User Knowledge Base** | Upload personal documents for session-scoped retrieval |
-| **Legal Corpus Visualization** | Interactive graph of topics, subjects, and articles (admin) |
-| **Web Fallback** | Tavily web search when legal corpus context is insufficient |
-| **i18n** | Vietnamese and English UI |
+| Feature                        | Description                                                                                                       |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| **Legal Q&A**                  | Ask questions about Vietnamese law; get answers grounded in Pháp điển articles                                    |
+| **Legal Research**             | Multi-query RAG with ontology-aware query expansion and retry                                                     |
+| **Hybrid Search**              | Elasticsearch keyword + KNN vector fusion with BGE reranking                                                      |
+| **Citation Tracking**          | Every factual claim links to `[n]` inline citations and a reference panel                                         |
+| **Intent Routing**             | 6 specialized agent workflows: information, decision, problem-solving, exploration, task execution, communication |
+| **Document Generation**        | Contract template selection, form fill, and DOCX output with HITL checkpoints                                     |
+| **User Knowledge Base**        | Upload personal documents for session-scoped retrieval                                                            |
+| **Legal Corpus Visualization** | Interactive graph of topics, subjects, and articles (admin)                                                       |
+| **Web Fallback**               | Tavily web search when legal corpus context is insufficient                                                       |
+| **i18n**                       | Vietnamese and English UI                                                                                         |
 
 ---
 
@@ -83,18 +96,18 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for complete diagrams covering 
 
 ## Technology Stack
 
-| Layer | Technologies |
-|-------|-------------|
-| **Frontend** | Next.js 16, React 19, TanStack Query, Tailwind CSS 4 |
-| **Backend** | FastAPI, Uvicorn, Peewee ORM, Pydantic v2 |
-| **AI/Agents** | LangGraph, LangChain, FlagEmbedding |
-| **Search** | Elasticsearch 8.13 (hybrid keyword + KNN) |
-| **Embedding** | AITeamVN/Vietnamese_Embedding_v2 (1024 dims) |
-| **Reranking** | BAAI/bge-reranker-v2-m3 |
-| **LLM** | OpenAI-compatible API |
-| **Document Processing** | Docling, PyMuPDF, python-docx |
-| **Storage** | PostgreSQL, MinIO, Redis |
-| **Package Management** | [uv](https://docs.astral.sh/uv/) (Python), npm (Frontend) |
+| Layer                   | Technologies                                              |
+| ----------------------- | --------------------------------------------------------- |
+| **Frontend**            | Next.js 16, React 19, TanStack Query, Tailwind CSS 4      |
+| **Backend**             | FastAPI, Uvicorn, Peewee ORM, Pydantic v2                 |
+| **AI/Agents**           | LangGraph, LangChain, FlagEmbedding                       |
+| **Search**              | Elasticsearch 8.13 (hybrid keyword + KNN)                 |
+| **Embedding**           | AITeamVN/Vietnamese_Embedding_v2 (1024 dims)              |
+| **Reranking**           | BAAI/bge-reranker-v2-m3                                   |
+| **LLM**                 | OpenAI-compatible API                                     |
+| **Document Processing** | Docling, PyMuPDF, python-docx                             |
+| **Storage**             | PostgreSQL, MinIO, Redis                                  |
+| **Package Management**  | [uv](https://docs.astral.sh/uv/) (Python), npm (Frontend) |
 
 ---
 
@@ -102,12 +115,12 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for complete diagrams covering 
 
 ### Prerequisites
 
-| Component | Version |
-|-----------|---------|
-| Python | 3.12+ |
-| [uv](https://docs.astral.sh/uv/getting-started/installation/) | Latest |
-| Docker | For infrastructure services |
-| Node.js | 20+ (for frontend) |
+| Component                                                     | Version                     |
+| ------------------------------------------------------------- | --------------------------- |
+| Python                                                        | 3.12+                       |
+| [uv](https://docs.astral.sh/uv/getting-started/installation/) | Latest                      |
+| Docker                                                        | For infrastructure services |
+| Node.js                                                       | 20+ (for frontend)          |
 
 ### 1. Clone and configure
 
@@ -127,22 +140,24 @@ sudo sysctl -w vm.max_map_count=262144
 docker compose -f docker/docker-compose.yml up -d --build
 ```
 
-| Service | URL |
-|---------|-----|
-| Web UI | http://localhost:3005 |
-| API | http://localhost:6000 |
+| Service  | URL                        |
+| -------- | -------------------------- |
+| Web UI   | http://localhost:3005      |
+| API      | http://localhost:6000      |
 | API Docs | http://localhost:6000/docs |
-| Kibana | http://localhost:5602 |
+| Kibana   | http://localhost:5602      |
 
 ### 3. Or run locally (development)
 
 **Infrastructure** (Postgres, MinIO, Redis, Elasticsearch):
+
 ```bash
 # See api/deployment.readme.md and
 # model_serving/retrievers/elastic_search/deployment.readme.md
 ```
 
 **Backend:**
+
 ```bash
 uv venv --python 3.12
 uv sync
@@ -151,6 +166,7 @@ uv run --env-file .env python -m api.lex_companion_server
 ```
 
 **Frontend:**
+
 ```bash
 cd web
 npm install
@@ -347,16 +363,16 @@ docker compose -f docker/docker-compose.yml up -d --build
 
 Services and ports:
 
-| Service | Host Port | Purpose |
-|---------|-----------|---------|
-| PostgreSQL | 5445 | Relational database |
-| MinIO | 6503/6504 | Object storage |
-| Redis | 6376 | Task queue |
-| Elasticsearch | 6505 | Search + vectors |
-| Kibana | 5602 | ES management UI |
-| Embedding | 6502 | Vietnamese embedding model |
-| API | 6000 | FastAPI backend |
-| Web | 3005 | Next.js frontend |
+| Service       | Host Port | Purpose                    |
+| ------------- | --------- | -------------------------- |
+| PostgreSQL    | 5445      | Relational database        |
+| MinIO         | 6503/6504 | Object storage             |
+| Redis         | 6376      | Task queue                 |
+| Elasticsearch | 6505      | Search + vectors           |
+| Kibana        | 5602      | ES management UI           |
+| Embedding     | 6502      | Vietnamese embedding model |
+| API           | 6000      | FastAPI backend            |
+| Web           | 3005      | Next.js frontend           |
 
 ### Production considerations
 
@@ -372,13 +388,13 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#deployment-architecture) for net
 
 ## API Overview
 
-| Domain | Prefix | Key Endpoints |
-|--------|--------|---------------|
-| Auth | `/v1/user` | `POST /oAuth-login` |
-| Chat | `/v1/user` | `POST /user_chat`, `GET /sessions`, `GET /session` |
-| Contract | `/v1/user` | `POST /contract/fill`, `GET /contract/draft/*` |
-| Documents | `/v1` | `POST /doc/upload`, `GET /docs`, `POST /doc/run` |
-| Admin | `/v1/admin` | `POST /doc/retrieval`, `POST /doc/upload`, `GET /doc/topic` |
+| Domain    | Prefix      | Key Endpoints                                               |
+| --------- | ----------- | ----------------------------------------------------------- |
+| Auth      | `/v1/user`  | `POST /oAuth-login`                                         |
+| Chat      | `/v1/user`  | `POST /user_chat`, `GET /sessions`, `GET /session`          |
+| Contract  | `/v1/user`  | `POST /contract/fill`, `GET /contract/draft/*`              |
+| Documents | `/v1`       | `POST /doc/upload`, `GET /docs`, `POST /doc/run`            |
+| Admin     | `/v1/admin` | `POST /doc/retrieval`, `POST /doc/upload`, `GET /doc/topic` |
 
 Full API documentation with inputs/outputs: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#api-documentation)
 
@@ -415,9 +431,42 @@ Maintained by project contributors.
 
 ## Documentation
 
-| Document | Description |
-|----------|-------------|
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Full technical architecture (agents, RAG, database, deployment) |
-| [api/deployment.readme.md](api/deployment.readme.md) | Manual Docker run for Postgres/MinIO/Redis |
-| [api_creating_instruction.md](api_creating_instruction.md) | API development conventions |
-| [model_serving/retrievers/elastic_search/deployment.readme.md](model_serving/retrievers/elastic_search/deployment.readme.md) | Elasticsearch setup |
+| Document                                                                                                                     | Description                                                     |
+| ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)                                                                                 | Full technical architecture (agents, RAG, database, deployment) |
+| [api/deployment.readme.md](api/deployment.readme.md)                                                                         | Manual Docker run for Postgres/MinIO/Redis                      |
+| [api_creating_instruction.md](api_creating_instruction.md)                                                                   | API development conventions                                     |
+| [model_serving/retrievers/elastic_search/deployment.readme.md](model_serving/retrievers/elastic_search/deployment.readme.md) | Elasticsearch setup                                             |
+
+---
+
+## Acknowledgements
+
+Lex Companion would not be possible without the open legal data shared by the community.
+
+We are grateful to **[tmquan/phapdien-moj-gov-vn](https://huggingface.co/datasets/tmquan/phapdien-moj-gov-vn)** on Hugging Face for publishing the Vietnamese legal codex (Pháp điển) dataset sourced from the Ministry of Justice. This project uses multiple configs from that dataset — including [tree_nodes](https://huggingface.co/datasets/tmquan/phapdien-moj-gov-vn/viewer/tree_nodes), articles, subjects, and ontology metadata — as the foundation of our legal knowledge base, Elasticsearch indexing pipeline, and citation-backed retrieval.
+
+Thank you to the maintainers and contributors of that dataset for making structured Vietnamese legal knowledge openly available.
+
+---
+
+## Roadmap & Future Improvements
+
+Lex Companion is actively evolving toward a **full agentic legal assistant for Vietnam**. The core RAG and information-intent workflows are in place; several specialized agents still need to be built out.
+
+### Agent completion
+
+| Agent               | Path                                                    | Current state                                                   | Target                                                                                                                                          |
+| ------------------- | ------------------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Decision**        | `deepagent/multiagent/legal_assistant/decision/`        | Single-node flow: retrieval + placeholder options and estimates | Multi-step decision reasoning — risk analysis, option comparison, consequence mapping, and structured recommendations grounded in retrieved law |
+| **Problem solving** | `deepagent/multiagent/legal_assistant/problem_solving/` | Single-node flow: retrieval + static strategy template          | Dynamic legal problem decomposition — step-by-step action plans, milestone tracking, and iterative clarification when facts are incomplete      |
+
+Other areas on the roadmap:
+
+- **Exploration agent** — richer open-ended legal research with web + corpus fusion
+- **Persistent HITL checkpointing** — Redis/Postgres checkpointer for reliable contract-fill resume across restarts
+- **User document ingestion** — complete Docling parse pipeline for uploaded KB documents
+- **Calculator tools** — real fine/penalty estimation logic (currently placeholder)
+- **CI/CD & production hardening** — automated testing, deployment pipelines, and observability
+
+Contributions toward any of these areas are welcome — see [Contributing](#contributing) above.
