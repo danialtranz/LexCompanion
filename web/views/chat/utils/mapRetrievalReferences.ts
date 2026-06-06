@@ -1,4 +1,5 @@
 import type { RetrievalReferenceItem } from "@/hooks/useChatHook";
+import { translate as t } from "@/locale/translate";
 import type { ChatCitation } from "../types";
 
 function buildCitationTitle(ref: RetrievalReferenceItem): string {
@@ -7,7 +8,7 @@ function buildCitationTitle(ref: RetrievalReferenceItem): string {
     ref.subject_title ||
     ref.topic_title ||
     ref.ieee?.replace(/^\[\d+\]\s*/, "") ||
-    `Nguồn [${ref.index}]`
+    t("chat.citation.sourceFallback", { index: ref.index })
   );
 }
 

@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState } from "react";
 import { Upload, X } from "lucide-react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import {
   useUploadDocument,
   type UploadDocumentData,
@@ -28,6 +29,7 @@ export function UploadDocumentModal({
   onUploadSuccess,
   kb_id = null,
 }: UploadDocumentModalProps) {
+  const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const { upload, loading: uploading } = useUploadDocument();
@@ -42,7 +44,7 @@ export function UploadDocumentModal({
         for (const file of files) {
           const res = await upload({ file, kb_id });
           if (!isUploadOk(res.code) || !res.data) {
-            throw new Error(res.msg || "Upload failed");
+            throw new Error(res.msg || t("knowledgeBase.uploadModal.uploadFailed"));
           }
           onUploadSuccess?.(res.data);
         }
@@ -52,20 +54,25 @@ export function UploadDocumentModal({
         await toast.promise(run(), {
           loading:
             files.length > 1
-              ? `Uploading ${files.length} files…`
-              : "Uploading…",
+              ? t("knowledgeBase.uploadModal.uploadingMultiple", {
+                  count: files.length,
+                })
+              : t("knowledgeBase.uploadModal.uploading"),
           success:
             files.length > 1
-              ? `${files.length} files uploaded`
-              : "File uploaded",
-          error: (err: Error) => err.message || "Upload failed",
+              ? t("knowledgeBase.uploadModal.filesUploaded", {
+                  count: files.length,
+                })
+              : t("knowledgeBase.uploadModal.fileUploaded"),
+          error: (err: Error) =>
+            err.message || t("knowledgeBase.uploadModal.uploadFailed"),
         });
         onOpenChange(false);
       } catch {
         /* toast.promise already showed error */
       }
     },
-    [upload, kb_id, onUploadSuccess, onOpenChange],
+    [upload, kb_id, onUploadSuccess, onOpenChange, t],
   );
 
   if (!open) return null;
@@ -80,7 +87,7 @@ export function UploadDocumentModal({
       <button
         type="button"
         className="absolute inset-0 z-0 bg-stone-900/25 backdrop-blur-sm transition-opacity"
-        aria-label="Close"
+        aria-label={t("common.close")}
         onClick={() => !uploading && onOpenChange(false)}
       />
       <div className="relative z-10 w-full max-w-lg">
@@ -91,11 +98,10 @@ export function UploadDocumentModal({
                 id="upload-doc-title"
                 className="text-lg font-semibold tracking-tight text-stone-900"
               >
-                Upload documents
+                {t("knowledgeBase.uploadModal.title")}
               </h2>
               <p className="mt-1 text-sm text-stone-500">
-                Drag files here or choose from your device. Supported: PDF, Word,
-                text, and spreadsheets.
+                {t("knowledgeBase.uploadModal.description")}
               </p>
             </div>
             <button
@@ -103,7 +109,7 @@ export function UploadDocumentModal({
               disabled={uploading}
               onClick={() => onOpenChange(false)}
               className="shrink-0 rounded-lg p-2 text-stone-400 transition hover:bg-stone-100 hover:text-stone-700 disabled:opacity-40"
-              aria-label="Close dialog"
+              aria-label={t("common.closeDialog")}
             >
               <X className="h-5 w-5" />
             </button>
@@ -144,16 +150,18 @@ export function UploadDocumentModal({
                 <Upload className="h-7 w-7" strokeWidth={1.75} />
               </div>
               <p className="text-sm font-medium text-stone-800">
-                {uploading ? "Uploading…" : "Drop files to upload"}
+                {uploading
+                  ? t("knowledgeBase.uploadModal.uploading")
+                  : t("knowledgeBase.uploadModal.dropFiles")}
               </p>
-              <p className="mt-1 text-xs text-stone-500">or</p>
+              <p className="mt-1 text-xs text-stone-500">{t("common.or")}</p>
               <button
                 type="button"
                 disabled={uploading}
                 onClick={() => inputRef.current?.click()}
                 className="mt-4 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-violet-500/25 transition hover:from-violet-500 hover:to-fuchsia-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Browse files
+                {t("knowledgeBase.uploadModal.browseFiles")}
               </button>
               <input
                 ref={inputRef}

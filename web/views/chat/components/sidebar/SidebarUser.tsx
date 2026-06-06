@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { LogOut } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { getToken, logout } from "@/utils/tokenManager";
 
 type StoredUserInfo = {
@@ -46,6 +47,7 @@ function avatarInitial(user: StoredUserInfo): string {
 }
 
 export const SidebarUser = () => {
+  const { t } = useTranslation();
   const [user, setUser] = useState<StoredUserInfo | null>(null);
   const [avatarError, setAvatarError] = useState(false);
 
@@ -58,7 +60,8 @@ export const SidebarUser = () => {
   }, []);
 
   const showAvatarImage = Boolean(user?.picture) && !avatarError;
-  const displayLabel = user?.name?.trim() || user?.email?.trim() || "Người dùng";
+  const displayLabel =
+    user?.name?.trim() || user?.email?.trim() || t("chat.sidebar.defaultUser");
   const email = user?.email?.trim() ?? "";
 
   return (
@@ -84,20 +87,20 @@ export const SidebarUser = () => {
           className="block truncate text-xs font-semibold text-[#2c2620]"
           title={user ? displayLabel : undefined}
         >
-          {user ? truncateName(displayLabel) : "Khách"}
+          {user ? truncateName(displayLabel) : t("chat.sidebar.guest")}
         </b>
         <span
           className="block truncate text-[10px] text-[#8a8178]"
           title={email || undefined}
         >
-          {user ? email || "—" : "Chưa đăng nhập"}
+          {user ? email || "—" : t("common.notLoggedIn")}
         </span>
       </div>
       <button
         type="button"
         onClick={handleLogout}
-        aria-label="Đăng xuất"
-        title="Đăng xuất"
+        aria-label={t("chat.sidebar.logout")}
+        title={t("chat.sidebar.logout")}
         className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border-0 bg-transparent text-[#8a8178] transition-colors hover:bg-[#faf5ec] hover:text-[#9a6c2b] cursor-pointer"
       >
         <LogOut className="h-4 w-4" strokeWidth={2} />

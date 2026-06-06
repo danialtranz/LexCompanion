@@ -1,6 +1,7 @@
 "use client";
 
 import { Loader2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { ChatMessage } from "./types";
 
 export function ChatContent({
@@ -12,6 +13,8 @@ export function ChatContent({
   loading: boolean;
   isDark: boolean;
 }) {
+  const { t } = useTranslation();
+
   if (messages.length === 0 && !loading) {
     return (
       <div
@@ -19,9 +22,9 @@ export function ChatContent({
           isDark ? "text-slate-400" : "text-slate-500"
         }`}
       >
-        <p className="font-medium">Hỏi về nội dung pháp điển</p>
+        <p className="font-medium">{t("corpus.chat.emptyTitle")}</p>
         <p className="mt-1 text-xs opacity-80">
-          Câu trả lời kèm trích dẫn [1], [2]… và danh sách nguồn bên dưới.
+          {t("corpus.chat.emptyHint")}
         </p>
       </div>
     );
@@ -70,7 +73,7 @@ export function ChatContent({
       {loading && (
         <div className="flex items-center gap-2 text-sm text-emerald-600">
           <Loader2 className="h-4 w-4 animate-spin" />
-          Đang tra cứu và tổng hợp câu trả lời…
+          {t("corpus.chat.loading")}
         </div>
       )}
     </div>

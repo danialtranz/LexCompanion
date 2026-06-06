@@ -1,11 +1,15 @@
+"use client";
+
+import { useTranslation } from "react-i18next";
 import { NODE_COLOR, SELECTED_TOPIC_COLOR } from "../constants";
 
 export function LegendCard({ isDark }: { isDark: boolean }) {
+  const { t } = useTranslation();
   const items = [
-    { label: "Topic", color: NODE_COLOR.topic },
-    { label: "Subject", color: NODE_COLOR.subject },
-    { label: "Điều -->", color: NODE_COLOR.article },
-    { label: "Selected", color: SELECTED_TOPIC_COLOR, ring: true },
+    { label: t("common.topic"), color: NODE_COLOR.topic },
+    { label: t("common.subject"), color: NODE_COLOR.subject },
+    { label: t("corpus.legend.article"), color: NODE_COLOR.article },
+    { label: t("common.selected"), color: SELECTED_TOPIC_COLOR, ring: true },
   ];
 
   return (
@@ -21,7 +25,7 @@ export function LegendCard({ isDark }: { isDark: boolean }) {
           isDark ? "text-slate-400" : "text-slate-500"
         }`}
       >
-        Chú thích
+        {t("corpus.legend.title")}
       </p>
       <div className="space-y-2">
         {items.map((item) => (

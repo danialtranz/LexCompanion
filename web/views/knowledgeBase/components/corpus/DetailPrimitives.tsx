@@ -1,5 +1,8 @@
+"use client";
+
 import { Hash, type LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import type { NodeType } from "./types";
 
 export function StatCard({
@@ -55,12 +58,17 @@ export function DetailRow({
 }
 
 export function NodeTypeBadge({ type }: { type: NodeType }) {
+  const { t } = useTranslation();
   const styles = {
     topic: "bg-emerald-100 text-emerald-800",
     subject: "bg-sky-100 text-sky-800",
     article: "bg-violet-100 text-violet-800",
   };
-  const labels = { topic: "Topic", subject: "Subject", article: "Article" };
+  const labels = {
+    topic: t("common.topic"),
+    subject: t("common.subject"),
+    article: t("common.article"),
+  };
 
   return (
     <span

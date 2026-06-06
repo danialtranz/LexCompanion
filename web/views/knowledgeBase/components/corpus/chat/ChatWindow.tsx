@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useChatRetrieval } from "@/hooks/useChatHook";
 import { ChatContent } from "./ChatContent";
 import { ChatInput } from "./ChatInput";
@@ -18,6 +19,7 @@ export function ChatWindow({
   isDragOver: boolean;
   isDark: boolean;
 }) {
+  const { t } = useTranslation();
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const { retrieve, loading } = useChatRetrieval();
@@ -67,7 +69,7 @@ export function ChatWindow({
           {
             id: `e-${Date.now()}`,
             role: "assistant",
-            content: res.msg || "Không nhận được câu trả lời từ hệ thống.",
+            content: res.msg || t("corpus.chat.noAnswer"),
             error: res.msg,
           },
         ]);
@@ -78,21 +80,25 @@ export function ChatWindow({
         {
           id: `e-${Date.now()}`,
           role: "assistant",
-          content: "Đã xảy ra lỗi khi gọi API tra cứu.",
+          content: t("corpus.chat.apiError"),
           error: "network",
         },
       ]);
     }
-  }, [input, loading, retrieve, subjectIds, topicIds]);
+  }, [input, loading, retrieve, subjectIds, topicIds, t]);
 
   const filterSummary = hasReferences
     ? [
-        topics.length > 0 ? `${topics.length} topic` : null,
-        subjects.length > 0 ? `${subjects.length} subject` : null,
+        topics.length > 0
+          ? t("corpus.chat.topicCount", { count: topics.length })
+          : null,
+        subjects.length > 0
+          ? t("corpus.chat.subjectCount", { count: subjects.length })
+          : null,
       ]
         .filter(Boolean)
         .join(" · ")
-    : "Toàn bộ pháp điển";
+    : t("corpus.chat.fullCorpus");
 
   return (
     <div
@@ -112,13 +118,13 @@ export function ChatWindow({
           isDark ? "border-slate-700 bg-slate-800/50" : "border-slate-100 bg-slate-50/80"
         }`}
       >
-        <h3 className="text-sm font-bold">Tra cứu AI</h3>
+        <h3 className="text-sm font-bold">{t("corpus.chat.title")}</h3>
         <p
           className={`text-[11px] ${isDark ? "text-slate-400" : "text-slate-500"}`}
         >
           {isDragOver
-            ? "Thả node vào đây để thêm bộ lọc"
-            : `Phạm vi: ${filterSummary}`}
+            ? t("corpus.chat.dropHint")
+            : t("corpus.chat.scope", { scope: filterSummary })}
         </p>
       </div>
 
@@ -132,7 +138,7 @@ export function ChatWindow({
             isDark ? "text-slate-500" : "text-slate-400"
           }`}
         >
-          Bộ lọc tra cứu
+          {t("corpus.chat.filterTitle")}
         </p>
         <ChatReferenceChips
           topics={topics}

@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState, type DragEvent } from "react";
 import { CloudUpload, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import {
   useUploadUserDocument,
   type UploadUserDocumentData,
@@ -33,6 +34,7 @@ export const UploadBox = ({
   onUploadSuccess,
   disabled = false,
 }: UploadBoxProps) => {
+  const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const { upload, loading } = useUploadUserDocument();
@@ -46,24 +48,27 @@ export const UploadBox = ({
 
       for (const file of files) {
         if (file.size > MAX_BYTES) {
-          toast.error(`${file.name}: vượt quá 50MB`);
+          toast.error(t("chat.input.fileTooLarge", { name: file.name }));
           continue;
         }
         try {
           const res = await upload({ file });
           if (!isUploadOk(res.code) || !res.data) {
-            toast.error(res.msg || "Upload thất bại");
+            toast.error(res.msg || t("chat.input.uploadFailed"));
             continue;
           }
           onUploadSuccess?.(res.data);
-          toast.success(`Đã tải lên: ${res.data.name}`);
+          toast.success(
+            t("chat.input.uploadSuccess", { name: res.data.name }),
+          );
         } catch (err) {
-          const msg = err instanceof Error ? err.message : "Upload thất bại";
+          const msg =
+            err instanceof Error ? err.message : t("chat.input.uploadFailed");
           toast.error(msg);
         }
       }
     },
-    [disabled, loading, onUploadSuccess, upload],
+    [disabled, loading, onUploadSuccess, upload, t],
   );
 
   const onDragOver = (e: DragEvent) => {
@@ -118,15 +123,19 @@ export const UploadBox = ({
         )}
       </div>
 
-      <p className="m-0 text-[15px] font-bold text-[#5c3d1e]">Upload tài liệu</p>
+      <p className="m-0 text-[15px] font-bold text-[#5c3d1e]">
+        {t("chat.knowledgeBase.uploadTitle")}
+      </p>
       <p className="mt-1.5 m-0 text-sm text-[#6b635a]">
-        Kéo &amp; thả file vào đây hoặc{" "}
+        {t("chat.knowledgeBase.uploadHint")}{" "}
         <span className="font-semibold text-[#9a6c2b] underline-offset-2 hover:underline">
-          chọn file
+          {t("chat.knowledgeBase.selectFile")}
         </span>
       </p>
       <p className="mt-3 m-0 text-xs text-[#8a8178]">
-        Hỗ trợ: PDF, DOCX, JPG, PNG (Tối đa {formatBytes(MAX_BYTES)})
+        {t("chat.knowledgeBase.supportedFormats", {
+          maxSize: formatBytes(MAX_BYTES),
+        })}
       </p>
     </div>
   );

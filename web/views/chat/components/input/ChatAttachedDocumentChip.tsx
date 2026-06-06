@@ -1,6 +1,7 @@
 "use client";
 
 import { FileText, Image as ImageIcon, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { ChatAttachedDocument } from "@/views/chat/utils/chatDocumentDrag";
 
 type ChatAttachedDocumentChipProps = {
@@ -36,7 +37,10 @@ export const ChatAttachedDocumentChip = ({
   doc,
   onRemove,
   disabled = false,
-}: ChatAttachedDocumentChipProps) => (
+}: ChatAttachedDocumentChipProps) => {
+  const { t } = useTranslation();
+
+  return (
   <div className="relative flex min-w-[148px] max-w-[240px] items-center gap-2.5 rounded-xl border border-[#ebe3d6] bg-[#faf7f2] py-2 pl-2.5 pr-9">
     <ChipIcon type={doc.type} />
     <div className="min-w-0 flex-1">
@@ -50,11 +54,12 @@ export const ChatAttachedDocumentChip = ({
     <button
       type="button"
       disabled={disabled}
-      aria-label={`Gỡ ${doc.name} khỏi tin nhắn`}
+      aria-label={t("chat.input.removeAttachment", { name: doc.name })}
       onClick={onRemove}
       className="absolute right-1.5 top-1.5 grid h-6 w-6 place-items-center rounded-full border-0 bg-[#f5efe4] text-[#8a8178] transition-colors hover:bg-[#ebe3d6] hover:text-[#2c2620] disabled:opacity-40 cursor-pointer"
     >
       <X className="h-3.5 w-3.5" strokeWidth={2.5} />
     </button>
   </div>
-);
+  );
+};

@@ -1,4 +1,5 @@
 import type { ChatSessionItem } from "@/hooks/useChatHook";
+import { translate as t } from "@/locale/translate";
 import type { MessageHistoryItem } from "../components/ChatHistory/types";
 
 function sessionSnippet(session: ChatSessionItem): string {
@@ -10,14 +11,14 @@ function sessionSnippet(session: ChatSessionItem): string {
   if (preview) return preview;
   const title = session.title?.trim();
   if (title) return title;
-  return "Mở để xem chi tiết cuộc trò chuyện";
+  return t("chat.history.openToViewDetails");
 }
 
 export function mapSessionToHistoryItem(
   session: ChatSessionItem,
 ): MessageHistoryItem {
   const title =
-    session.title?.trim() || "Cuộc trò chuyện không có tiêu đề";
+    session.title?.trim() || t("chat.history.untitledConversation");
   return {
     id: session.id,
     title,

@@ -25,6 +25,7 @@ import {
   useContractDraftVersions,
 } from "@/hooks/useContractDraftVersions";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { useUserConversation } from "@/hooks/useUserConversation";
 import { downloadContractDraft } from "./utils/downloadContractDraft";
 import { ChatHistory } from "./components/ChatHistory";
@@ -80,6 +81,7 @@ function createChatSessionId(): string {
 }
 
 export const ChatView = () => {
+  const { t } = useTranslation();
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [selectedCitation, setSelectedCitation] = useState<ChatCitation | null>(
@@ -537,7 +539,7 @@ export const ChatView = () => {
     const userMessage: UserMessage = {
       id: `user-${Date.now()}`,
       type: "user",
-      content: text || "(Tài liệu đính kèm)",
+      content: text || t("chat.messages.attachedDocumentsOnly"),
       time: formatChatTime(),
     };
 
@@ -552,7 +554,7 @@ export const ChatView = () => {
       setDocumentPanel({
         plainText: "",
         streaming: true,
-        statusLabel: "Agent đang soạn…",
+        statusLabel: t("chat.messages.agentDrafting"),
         templateDocumentId: docIds[0],
       });
     }
@@ -560,7 +562,7 @@ export const ChatView = () => {
     try {
       const res = await converse(
         withTaskExecutionPayload({
-          query: text || "Tóm tắt và trả lời dựa trên tài liệu đính kèm.",
+          query: text || t("chat.messages.summarizeAttachedQuery"),
           session_id: chatSessionId,
           reference: docIds.length > 0 ? { doc_ids: docIds } : undefined,
         }),
@@ -569,7 +571,7 @@ export const ChatView = () => {
     } catch {
       setMessages((prev) => [
         ...prev,
-        errorBotMessage("Đã xảy ra lỗi khi gọi API tra cứu. Vui lòng thử lại."),
+        errorBotMessage(t("chat.messages.apiError")),
       ]);
     }
   }, [
@@ -582,6 +584,7 @@ export const ChatView = () => {
     rightPanel,
     applyApiResponse,
     withTaskExecutionPayload,
+    t,
   ]);
 
   const handleFormFillSubmit = useCallback(
@@ -599,7 +602,7 @@ export const ChatView = () => {
       try {
         const res = await converse(
           withTaskExecutionPayload({
-            query: text || "Tiếp tục điền mẫu",
+            query: text || t("chat.messages.continueFormFill"),
             session_id: chatSessionId,
             thread_id: formFill.threadId,
             resume: {
@@ -625,9 +628,7 @@ export const ChatView = () => {
       } catch {
         setMessages((prev) => [
           ...prev,
-          errorBotMessage(
-            "Không gửi được thông tin điền mẫu. Vui lòng thử lại.",
-          ),
+          errorBotMessage(t("chat.messages.formFillSubmitError")),
         ]);
       }
     },
@@ -638,6 +639,7 @@ export const ChatView = () => {
       converse,
       applyApiResponse,
       withTaskExecutionPayload,
+      t,
     ],
   );
 
@@ -664,7 +666,7 @@ export const ChatView = () => {
       try {
         const res = await converse(
           withTaskExecutionPayload({
-            query: "Hủy điền mẫu",
+            query: t("chat.messages.cancelFormFill"),
             session_id: chatSessionId,
             thread_id: formFill.threadId,
             resume: { action: "reject", payload: {} },
@@ -674,7 +676,7 @@ export const ChatView = () => {
       } catch {
         setMessages((prev) => [
           ...prev,
-          errorBotMessage("Không hủy được phiên điền mẫu."),
+          errorBotMessage(t("chat.messages.formFillCancelError")),
         ]);
       }
     },
@@ -685,6 +687,7 @@ export const ChatView = () => {
       converse,
       applyApiResponse,
       withTaskExecutionPayload,
+      t,
     ],
   );
 
@@ -696,8 +699,8 @@ export const ChatView = () => {
     <ChatFooter variant={liveMode ? "live" : "default"}>
       {chatInputBlockedByForm && (
         <p className="mb-2 text-center text-xs text-[#9a6c2b]">
-          Vui lòng điền form trong tin nhắn LawBot phía trên, rồi bấm{" "}
-          <strong>Gửi thông tin</strong>.
+          {t("chat.input.formBlockedHint")}{" "}
+          <strong>{t("chat.input.formBlockedSubmit")}</strong>.
         </p>
       )}
       <ChatInputBox
@@ -715,7 +718,7 @@ export const ChatView = () => {
         variant={liveMode ? "live" : "default"}
         placeholder={
           chatInputBlockedByForm
-            ? "Hoàn thành form điền mẫu phía trên để tiếp tục chat…"
+            ? t("chat.input.formBlockedPlaceholder")
             : undefined
         }
       />
@@ -761,7 +764,7 @@ export const ChatView = () => {
               {isConversationDragOver && (
                 <div className="pointer-events-none absolute inset-3 grid place-items-center rounded-xl border-2 border-dashed border-[#c9a06a] bg-[#fffdf9]/90">
                   <p className="text-xs font-medium text-[#9a6c2b]">
-                    Thả tài liệu vào đây để đính kèm
+                    {t("chat.messages.dropDocument")}
                   </p>
                 </div>
               )}
@@ -805,7 +808,7 @@ export const ChatView = () => {
               {isConversationDragOver && (
                 <div className="pointer-events-none absolute inset-4 grid place-items-center rounded-2xl border-2 border-dashed border-[#c9a06a] bg-[#fffdf9]/90">
                   <p className="text-sm font-medium text-[#9a6c2b]">
-                    Thả tài liệu vào đây để đính kèm
+                    {t("chat.messages.dropDocument")}
                   </p>
                 </div>
               )}

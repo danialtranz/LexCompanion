@@ -1,17 +1,17 @@
 export interface NavItem {
   id: string;
-  label: string;
+  labelKey: string;
   href: string;
 }
 
 export const CHAT_NAV_ITEMS: NavItem[] = [
-  { id: "chat", label: "Trò chuyện", href: "/chat" },
-  { id: "legal-docs", label: "Tài liệu của tôi", href: "#" },
-  { id: "history", label: "Lịch sử hội thoại", href: "#" },
+  { id: "chat", labelKey: "chat.nav.chat", href: "/chat" },
+  { id: "legal-docs", labelKey: "chat.nav.legalDocs", href: "#" },
+  { id: "history", labelKey: "chat.nav.history", href: "#" },
   {
     id: "data-visualize",
-    label: "Trực quan hóa dữ liệu",
+    labelKey: "chat.nav.dataVisualize",
     href: "/data-visualization",
   },
-  { id: "settings", label: "Cài đặt", href: "#" },
+  { id: "settings", labelKey: "chat.nav.settings", href: "#" },
 ];

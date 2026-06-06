@@ -1,4 +1,7 @@
+"use client";
+
 import { type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import type { ChatCitation } from "../../types";
 import { highlightText } from "./highlightText";
 
@@ -25,7 +28,10 @@ export function renderContentWithIeeeCitations({
   selectedCitationId,
   onSelectCitation,
   searchKeyword = "",
-}: BotMessageContentProps): ReactNode[] {
+  t,
+}: BotMessageContentProps & {
+  t: (key: string, options?: Record<string, unknown>) => string;
+}): ReactNode[] {
   const parts: ReactNode[] = [];
   let lastIndex = 0;
   let match: RegExpExecArray | null;
@@ -55,7 +61,10 @@ export function renderContentWithIeeeCitations({
               : "bg-[#f5e6cc] text-[#9a6c2b] hover:bg-[#edd9b0]"
           }`}
           title={citation.title}
-          aria-label={`Xem trích dẫn [${index}]: ${citation.title}`}
+          aria-label={t("chat.messages.viewCitation", {
+            index,
+            title: citation.title,
+          })}
           aria-current={isSelected ? "true" : undefined}
         >
           [{index}]
@@ -91,18 +100,23 @@ export const BotMessageContent = ({
   onSelectCitation,
   searchKeyword,
   error = false,
-}: BotMessageContentProps & { error?: boolean }) => (
-  <div
-    className={`whitespace-pre-wrap text-sm leading-[1.8] ${
-      error ? "text-[#7a3030]" : "text-[#2c2620]"
-    }`}
-  >
-    {renderContentWithIeeeCitations({
-      content,
-      citations,
-      selectedCitationId,
-      onSelectCitation,
-      searchKeyword,
-    })}
-  </div>
-);
+}: BotMessageContentProps & { error?: boolean }) => {
+  const { t } = useTranslation();
+
+  return (
+    <div
+      className={`whitespace-pre-wrap text-sm leading-[1.8] ${
+        error ? "text-[#7a3030]" : "text-[#2c2620]"
+      }`}
+    >
+      {renderContentWithIeeeCitations({
+        content,
+        citations,
+        selectedCitationId,
+        onSelectCitation,
+        searchKeyword,
+        t,
+      })}
+    </div>
+  );
+};

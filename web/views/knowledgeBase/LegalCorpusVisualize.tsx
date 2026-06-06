@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { DragToChatGhost } from "./components/corpus/chat/DragToChatGhost";
 import type { ChatReferenceItem } from "./components/corpus/chat/types";
 import { useChatReferences } from "./components/corpus/chat/useChatReferences";
@@ -11,6 +12,7 @@ import { LegalCorpusGraphPanel } from "./components/corpus/LegalCorpusGraphPanel
 import { useCorpusGraph } from "./components/corpus/useCorpusGraph";
 
 export function LegalCorpusVisualize() {
+  const { t } = useTranslation();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const chatRefs = useChatReferences();
 
@@ -95,7 +97,7 @@ export function LegalCorpusVisualize() {
                 : "border-slate-200 bg-white text-slate-700"
             }`}
           >
-            Mở chi tiết
+            {t("corpus.openDetails")}
           </button>
         )}
       </div>

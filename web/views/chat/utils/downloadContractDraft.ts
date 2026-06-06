@@ -1,4 +1,5 @@
 import api from "@/apis/endpoints";
+import { translate as t } from "@/locale/translate";
 import { getToken } from "@/utils/tokenManager";
 
 /**
@@ -9,7 +10,7 @@ export async function downloadContractDraft(params: {
   version?: number;
 }): Promise<void> {
   const token = getToken();
-  if (!token) throw new Error("Chưa đăng nhập");
+  if (!token) throw new Error(t("common.notLoggedIn"));
 
   const search = new URLSearchParams({ session_id: params.sessionId });
   if (params.version != null && params.version > 0) {
@@ -19,7 +20,7 @@ export async function downloadContractDraft(params: {
   const res = await fetch(`${api.userContractDraftDownloadUrl}?${search}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
-  if (!res.ok) throw new Error("Không tải được bản nháp");
+  if (!res.ok) throw new Error(t("chat.draft.downloadFailed"));
 
   const blob = await res.blob();
   const disposition = res.headers.get("Content-Disposition") ?? "";

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import styles from "./DocxBlobPreview.module.css";
 
 export type DocxBlobPreviewProps = {
@@ -33,6 +34,7 @@ export const DocxBlobPreview = ({
   className = "",
   bare = false,
 }: DocxBlobPreviewProps) => {
+  const { t } = useTranslation();
   const bodyRef = useRef<HTMLDivElement>(null);
   const styleRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(false);
@@ -65,7 +67,7 @@ export const DocxBlobPreview = ({
       } catch (e) {
         if (!cancelled) {
           setError(
-            e instanceof Error ? e.message : "Không đọc được file DOCX",
+            e instanceof Error ? e.message : t("chat.draft.docxReadError"),
           );
           setLoading(false);
         }
@@ -75,7 +77,7 @@ export const DocxBlobPreview = ({
     return () => {
       cancelled = true;
     };
-  }, [blob]);
+  }, [blob, t]);
 
   const shellClass = bare ? styles.bare : styles.root;
 
@@ -84,7 +86,7 @@ export const DocxBlobPreview = ({
       <div ref={styleRef} className={styles.styleHost} aria-hidden />
       <div ref={bodyRef} className={styles.bodyHost} />
       {loading ? (
-        <p className={styles.status}>Đang render bản nháp…</p>
+        <p className={styles.status}>{t("chat.draft.renderingDraft")}</p>
       ) : null}
       {error ? <p className={styles.error}>{error}</p> : null}
     </div>

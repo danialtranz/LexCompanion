@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, Download, FileText, Loader2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import {
   useAdminLegalTopicDetail,
   type AdminLegalTopicDetail,
@@ -25,6 +26,7 @@ export function TopicDetailPanel({
   onAddToChatFilter: () => void;
   isDark?: boolean;
 }) {
+  const { t } = useTranslation();
   const { data: envelope, isPending } = useAdminLegalTopicDetail(topicId);
   const detail =
     envelope?.code === 200
@@ -35,7 +37,7 @@ export function TopicDetailPanel({
     return (
       <div className="flex items-center gap-2 text-sm text-slate-500">
         <Loader2 className="h-4 w-4 animate-spin" />
-        Đang tải topic…
+        {t("corpus.detail.loadingTopic")}
       </div>
     );
   }
@@ -43,7 +45,7 @@ export function TopicDetailPanel({
   if (envelope && envelope.code !== 200) {
     return (
       <p className="text-sm text-rose-600">
-        {envelope.msg || "Không tải được topic"}
+        {envelope.msg || t("corpus.detail.loadTopicFailed")}
       </p>
     );
   }
@@ -76,25 +78,25 @@ export function TopicDetailPanel({
 
       <div className="mt-4 grid grid-cols-3 gap-2">
         <StatCard
-          label="Số điều"
+          label={t("corpus.detail.statArticles")}
           value={detail?.article_count?.toLocaleString("vi-VN")}
           tone="emerald"
         />
         <StatCard
-          label="Số đề mục"
+          label={t("corpus.detail.statSections")}
           value={detail?.demuc_count?.toLocaleString("vi-VN")}
           tone="sky"
         />
-        <StatCard label="Độ sâu" value={depth} tone="violet" />
+        <StatCard label={t("corpus.detail.statDepth")} value={depth} tone="violet" />
       </div>
 
       <dl className="mt-4">
         <DetailRow
           icon={FileText}
-          label="Tiêu đề (EN)"
+          label={t("corpus.detail.titleEn")}
           value={detail?.topic_title_en}
         />
-        <DetailRow icon={FileText} label="Ghi chú" value={detail?.topic_note} />
+        <DetailRow icon={FileText} label={t("corpus.detail.note")} value={detail?.topic_note} />
       </dl>
 
       <div className="mt-auto space-y-2 pt-6">
@@ -110,7 +112,9 @@ export function TopicDetailPanel({
           onClick={onExpandSubjects}
           className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700"
         >
-          {isExpanded ? "Subject đang hiển thị" : "Xem các subject"}
+          {isExpanded
+            ? t("corpus.detail.subjectsVisible")
+            : t("corpus.detail.viewSubjects")}
           <ArrowRight className="h-4 w-4" />
         </button>
         <button
@@ -119,7 +123,7 @@ export function TopicDetailPanel({
           className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
         >
           <Download className="h-4 w-4" />
-          Xuất dữ liệu
+          {t("corpus.detail.exportData")}
         </button>
       </div>
     </div>

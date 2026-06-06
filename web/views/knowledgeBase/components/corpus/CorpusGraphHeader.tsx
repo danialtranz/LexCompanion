@@ -7,6 +7,7 @@ import {
   Search,
   Sun,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { SEARCH_COLOR_CONTAINS, SEARCH_COLOR_PREFIX } from "./constants";
 import { GraphControlButton } from "./graph/GraphControlButton";
 import type { useCorpusGraph } from "./useCorpusGraph";
@@ -20,6 +21,7 @@ export function CorpusGraphHeader({
   graph: CorpusGraph;
   isFullscreen: boolean;
 }) {
+  const { t } = useTranslation();
   const {
     searchRef,
     isDark,
@@ -46,12 +48,12 @@ export function CorpusGraphHeader({
     >
       <div className="shrink-0">
         <h2 className="text-lg font-bold tracking-tight sm:text-xl">
-          Khám phá Pháp điển
+          {t("corpus.header.title")}
         </h2>
         <p
           className={`text-xs sm:text-sm ${isDark ? "text-slate-400" : "text-slate-500"}`}
         >
-          Trực quan hóa văn bản luật
+          {t("corpus.header.subtitle")}
         </p>
       </div>
 
@@ -82,7 +84,7 @@ export function CorpusGraphHeader({
               setSearchOpen(false);
             }
           }}
-          placeholder="Tìm theo title đang hiển thị…"
+          placeholder={t("corpus.header.searchPlaceholder")}
           className={`w-full rounded-xl border py-2.5 pl-10 text-sm outline-none transition focus:ring-2 focus:ring-emerald-500/30 ${
             trimmedSearch ? "pr-24" : "pr-16"
           } ${
@@ -103,7 +105,7 @@ export function CorpusGraphHeader({
                   : "bg-slate-200 text-slate-500"
             }`}
           >
-            {searchMatches.length} kết quả
+            {t("corpus.header.resultsCount", { count: searchMatches.length })}
           </span>
         ) : (
           <kbd
@@ -131,7 +133,7 @@ export function CorpusGraphHeader({
                   isDark ? "text-slate-400" : "text-slate-500"
                 }`}
               >
-                Không tìm thấy title nào khớp trên đồ thị.
+                {t("corpus.header.noResults")}
               </p>
             ) : (
               searchMatches.map((match) => (
@@ -166,8 +168,8 @@ export function CorpusGraphHeader({
                     >
                       {match.nodeType}
                       {match.kind === "prefix"
-                        ? " • bắt đầu bằng"
-                        : " • chứa từ khóa"}
+                        ? t("corpus.header.matchPrefix")
+                        : t("corpus.header.matchContains")}
                     </span>
                   </span>
                 </button>
@@ -179,14 +181,18 @@ export function CorpusGraphHeader({
 
       <div className="flex shrink-0 items-center justify-end gap-2">
         <GraphControlButton
-          title={is3D ? "Chế độ 2D" : "Chế độ 3D"}
+          title={is3D ? t("corpus.header.mode2d") : t("corpus.header.mode3d")}
           onClick={() => setIs3D((prev) => !prev)}
           active={is3D}
         >
           <Box className="h-4 w-4" />
         </GraphControlButton>
         <GraphControlButton
-          title={isFullscreen ? "Thoát toàn màn hình" : "Toàn màn hình"}
+          title={
+            isFullscreen
+              ? t("corpus.header.exitFullscreen")
+              : t("corpus.header.fullscreen")
+          }
           onClick={() => void toggleFullscreen()}
         >
           {isFullscreen ? (
@@ -196,7 +202,9 @@ export function CorpusGraphHeader({
           )}
         </GraphControlButton>
         <GraphControlButton
-          title={isDark ? "Giao diện sáng" : "Giao diện tối"}
+          title={
+            isDark ? t("corpus.header.lightTheme") : t("corpus.header.darkTheme")
+          }
           onClick={() => setIsDark((prev) => !prev)}
         >
           <Sun className="h-4 w-4" />

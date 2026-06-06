@@ -1,6 +1,7 @@
 import { darkTheme, lightTheme } from "reagraph";
 import type { GraphEdge } from "reagraph";
 import type { LegalTreeNodeItem } from "@/hooks/useDocumentHook";
+import { translate } from "@/locale/translate";
 import {
   DIMMED_EDGE_COLOR,
   NODE_COLOR,
@@ -88,7 +89,9 @@ function topicSubLabel(graph: GraphState, topicNodeId: string): string | undefin
     .map((edge) => edge.target);
   if (subjectIds.length === 0) return undefined;
 
-  return `${subjectIds.length.toLocaleString("vi-VN")} subject`;
+  return translate("corpus.graph.subjectCount", {
+    count: subjectIds.length.toLocaleString("vi-VN"),
+  });
 }
 
 export function enrichGraphLabels(graph: GraphState): GraphState {

@@ -1,4 +1,7 @@
+"use client";
+
 import { BookMarked, ChevronRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { ChatCitation } from "../../types";
 import { highlightText } from "./highlightText";
 
@@ -15,6 +18,8 @@ export const MessageCitationList = ({
   onSelectCitation,
   searchKeyword = "",
 }: MessageCitationListProps) => {
+  const { t } = useTranslation();
+
   if (citations.length === 0) return null;
 
   return (
@@ -22,9 +27,9 @@ export const MessageCitationList = ({
       <div className="mb-2.5 flex items-center gap-2 text-xs text-[#8a8178]">
         <BookMarked className="h-3.5 w-3.5 shrink-0 text-[#9a6c2b]" strokeWidth={2} />
         <span>
-          Phản hồi dựa trên{" "}
+          {t("chat.messages.responseBasedOn")}{" "}
           <span className="font-semibold text-[#5c554d]">
-            {citations.length} nguồn trích dẫn
+            {t("chat.messages.citationCount", { count: citations.length })}
           </span>
         </span>
       </div>

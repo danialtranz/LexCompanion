@@ -1,6 +1,7 @@
 "use client";
 
 import { Filter } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { NODE_COLOR } from "../constants";
 
 export function AddToChatFilterButton({
@@ -16,8 +17,10 @@ export function AddToChatFilterButton({
   onAdd: () => void;
   isDark?: boolean;
 }) {
+  const { t } = useTranslation();
   const color = nodeType === "topic" ? NODE_COLOR.topic : NODE_COLOR.subject;
-  const typeLabel = nodeType === "topic" ? "Topic" : "Subject";
+  const typeLabel =
+    nodeType === "topic" ? t("common.topic") : t("common.subject");
 
   if (isAdded) {
     return (
@@ -30,7 +33,7 @@ export function AddToChatFilterButton({
         style={{ borderLeftWidth: 4, borderLeftColor: color }}
       >
         <Filter className="h-4 w-4 shrink-0 opacity-70" />
-        Đã có trong bộ lọc tra cứu
+        {t("corpus.chat.alreadyInFilter")}
       </p>
     );
   }
@@ -47,10 +50,10 @@ export function AddToChatFilterButton({
         borderLeftWidth: 4,
         borderLeftColor: color,
       }}
-      title={`Thêm ${typeLabel} "${label}" vào bộ lọc chat`}
+      title={t("corpus.chat.addToFilterTitle", { type: typeLabel, label })}
     >
       <Filter className="h-4 w-4" />
-      Thêm vào bộ lọc tra cứu
+      {t("corpus.chat.addToFilter")}
     </button>
   );
 }

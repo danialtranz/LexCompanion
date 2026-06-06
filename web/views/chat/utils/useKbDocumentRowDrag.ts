@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, type DragEvent } from "react";
+import { useTranslation } from "react-i18next";
 import type { DocumentListItem } from "@/hooks/useDocumentHook";
 import {
   CHAT_DOCUMENT_DRAG_MIME,
@@ -14,6 +15,7 @@ export function isDocumentReadyForChatDrag(item: DocumentListItem): boolean {
 }
 
 export function useKbDocumentRowDrag(item: DocumentListItem) {
+  const { t } = useTranslation();
   const ready = isDocumentReadyForChatDrag(item);
 
   const onDragStart = useCallback(
@@ -37,7 +39,7 @@ export function useKbDocumentRowDrag(item: DocumentListItem) {
     draggable: ready,
     onDragStart,
     title: ready
-      ? "Kéo vào ô chat để đính kèm tài liệu"
-      : "Chờ xử lý xong mới kéo được",
+      ? t("chat.knowledgeBase.dragReady")
+      : t("chat.knowledgeBase.dragWaitProcessing"),
   };
 }

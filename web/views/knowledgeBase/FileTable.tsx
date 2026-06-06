@@ -4,7 +4,9 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { Eye, Loader2, Search, Trash2, X } from "lucide-react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { api_host } from "@/apis/endpoints";
+import { translate } from "@/locale/translate";
 import { getToken } from "@/utils/tokenManager";
 import {
   useDeleteDocument,
@@ -41,9 +43,12 @@ function formatCreateDate(iso: string | null): string {
 }
 
 function RunControl({ run, onRun }: { run: string; onRun: () => void }) {
+  const { t } = useTranslation();
   if (run === "1") {
     return (
-      <span className="text-sm font-medium text-emerald-700">Thành công</span>
+      <span className="text-sm font-medium text-emerald-700">
+        {t("common.success")}
+      </span>
     );
   }
   if (run === "0") {
@@ -53,11 +58,13 @@ function RunControl({ run, onRun }: { run: string; onRun: () => void }) {
         onClick={onRun}
         className="shrink-0 rounded-lg border border-violet-300 bg-violet-50 px-3 py-1.5 text-xs font-semibold text-violet-800 transition hover:bg-violet-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
       >
-        Chạy
+        {t("common.run")}
       </button>
     );
   }
-  return <span className="text-sm font-medium text-rose-600">failed</span>;
+  return (
+    <span className="text-sm font-medium text-rose-600">{t("common.failed")}</span>
+  );
 }
 
 function canEmbedInIframe(fileType: string): boolean {
@@ -132,6 +139,7 @@ function DocumentTableRow({
   onPreview: () => void;
   onDelete: () => void;
 }) {
+  const { t } = useTranslation();
   const { draggable, onDragStart, title, ready } = useKbDocumentRowDrag(row);
 
   return (
@@ -166,8 +174,8 @@ function DocumentTableRow({
             type="button"
             onClick={onPreview}
             className="inline-flex shrink-0 items-center justify-center rounded-lg border border-stone-200 bg-white p-2 text-stone-500 transition hover:border-sky-200 hover:bg-sky-50 hover:text-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
-            title="Xem trước"
-            aria-label={`Xem ${row.name}`}
+            title={t("common.preview")}
+            aria-label={t("common.viewNamed", { name: row.name })}
           >
             <Eye className="h-4 w-4" strokeWidth={1.75} />
           </button>
@@ -176,8 +184,8 @@ function DocumentTableRow({
             disabled={deletingId === row.id}
             onClick={onDelete}
             className="inline-flex shrink-0 items-center justify-center rounded-lg border border-stone-200 bg-white p-2 text-stone-500 transition hover:border-rose-200 hover:bg-rose-50 hover:text-rose-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 disabled:opacity-50"
-            title="Xóa"
-            aria-label={`Xóa ${row.name}`}
+            title={t("common.delete")}
+            aria-label={t("common.deleteNamed", { name: row.name })}
           >
             {deletingId === row.id ? (
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -194,7 +202,7 @@ function DocumentTableRow({
 async function openDocumentBlobInNewTab(docId: string): Promise<void> {
   const token = getToken();
   if (!token) {
-    toast.error("Chưa đăng nhập");
+    toast.error(translate("common.notLoggedIn"));
     return;
   }
   const params = new URLSearchParams({ doc_id: docId });
@@ -202,7 +210,7 @@ async function openDocumentBlobInNewTab(docId: string): Promise<void> {
     headers: { Authorization: `Bearer ${token}` },
   });
   if (!res.ok) {
-    toast.error("Không tải được tài liệu");
+    toast.error(translate("knowledgeBase.fileTable.loadDocFailedToast"));
     return;
   }
   const blob = await res.blob();
@@ -217,6 +225,7 @@ export function FileTable({
   hideHeader = false,
   onRefetchReady,
 }: FileTableProps) {
+  const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [runningId, setRunningId] = useState<string | null>(null);
@@ -255,41 +264,44 @@ export function FileTable({
       try {
         const res = await runDocument(item.id);
         if (res.code === 0) {
-          toast.success(`Đã đưa vào hàng đợi parse: ${item.name}`);
+          toast.success(
+            t("knowledgeBase.fileTable.queuedParse", { name: item.name }),
+          );
           await refetch();
         } else {
-          toast.error(res.msg || "Không chạy được tài liệu");
+          toast.error(res.msg || t("knowledgeBase.fileTable.runFailed"));
         }
       } catch {
-        toast.error("Không chạy được tài liệu");
+        toast.error(t("knowledgeBase.fileTable.runFailed"));
       } finally {
         setRunningId(null);
       }
     },
-    [runDocument, refetch],
+    [runDocument, refetch, t],
   );
 
   const handleDelete = useCallback(
     async (docId: string, name: string) => {
-      if (!window.confirm(`Xóa tài liệu "${name}"?`)) return;
+      if (!window.confirm(t("knowledgeBase.fileTable.deleteConfirm", { name })))
+        return;
       setDeletingId(docId);
       try {
         const code = await deleteDocument(docId);
         if (code === 0) {
-          toast.success("Đã xóa tài liệu");
+          toast.success(t("knowledgeBase.fileTable.deleted"));
           if (items.length === 1 && page > 1) {
             setPage((p) => Math.max(1, p - 1));
           }
         } else {
-          toast.error("Không xóa được tài liệu");
+          toast.error(t("knowledgeBase.fileTable.deleteFailed"));
         }
       } catch {
-        toast.error("Không xóa được tài liệu");
+        toast.error(t("knowledgeBase.fileTable.deleteFailed"));
       } finally {
         setDeletingId(null);
       }
     },
-    [deleteDocument, items.length, page],
+    [deleteDocument, items.length, page, t],
   );
 
   const rangeLabel = useMemo(() => {
@@ -315,14 +327,14 @@ export function FileTable({
       {!hideHeader && (
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <h2 className="text-xl font-bold tracking-tight text-stone-900 sm:text-2xl">
-            Uploaded
+            {t("knowledgeBase.uploaded")}
           </h2>
           <button
             type="button"
             onClick={() => void refetch()}
             className="self-start text-sm font-medium text-violet-700 hover:underline sm:self-auto"
           >
-            Làm mới
+            {t("common.refresh")}
           </button>
         </div>
       )}
@@ -331,13 +343,14 @@ export function FileTable({
         {isPending && items.length === 0 ? (
           <div className="flex min-h-[200px] items-center justify-center gap-2 py-16 text-stone-500">
             <Loader2 className="h-6 w-6 animate-spin" />
-            <span>Đang tải…</span>
+            <span>{t("knowledgeBase.fileTable.loading")}</span>
           </div>
         ) : loadError ? (
           <div className="px-4 py-12 text-center text-sm text-rose-600">
             {envelope && envelope.code !== 0
-              ? envelope.msg || "Không tải được danh sách"
-              : (error as Error)?.message || "Không tải được danh sách"}
+              ? envelope.msg || t("knowledgeBase.fileTable.loadListFailed")
+              : (error as Error)?.message ||
+                t("knowledgeBase.fileTable.loadListFailed")}
           </div>
         ) : empty ? (
           <div className="flex min-h-[240px] flex-col items-center justify-center px-4 py-16 text-center sm:min-h-[280px]">
@@ -345,10 +358,10 @@ export function FileTable({
               <Search className="h-10 w-10 stroke-[1.25]" />
             </div>
             <p className="text-sm font-medium text-stone-500">
-              Chưa có dữ liệu
+              {t("knowledgeBase.fileTable.emptyTitle")}
             </p>
             <p className="mt-1 max-w-xs text-xs text-stone-400">
-              Tải tài liệu lên để hiển thị tại đây.
+              {t("knowledgeBase.fileTable.emptyHint")}
             </p>
           </div>
         ) : (
@@ -357,12 +370,12 @@ export function FileTable({
               <table className="w-full min-w-[880px] text-left text-sm">
                 <thead>
                   <tr className="border-b border-stone-200 bg-stone-50/90 text-xs font-semibold uppercase tracking-wide text-stone-500">
-                    <th className="px-3 py-3 sm:px-4">Name</th>
-                    <th className="px-3 py-3 sm:px-4">Type</th>
-                    <th className="px-3 py-3 sm:px-4">Size</th>
-                    <th className="px-3 py-3 sm:px-4">Create date</th>
+                    <th className="px-3 py-3 sm:px-4">{t("common.name")}</th>
+                    <th className="px-3 py-3 sm:px-4">{t("common.type")}</th>
+                    <th className="px-3 py-3 sm:px-4">{t("common.size")}</th>
+                    <th className="px-3 py-3 sm:px-4">{t("common.createDate")}</th>
                     <th className="px-3 py-3 text-right sm:px-4">
-                      Xem / Run / Xóa
+                      {t("knowledgeBase.fileTable.actions")}
                     </th>
                   </tr>
                 </thead>
@@ -391,7 +404,8 @@ export function FileTable({
             {total > 0 && (
               <div className="flex flex-col gap-3 border-t border-stone-100 bg-stone-50/50 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-xs text-stone-600 sm:text-sm">
-                  Hiển thị <span className="font-medium">{rangeLabel}</span>
+                  {t("knowledgeBase.fileTable.showing")}{" "}
+                  <span className="font-medium">{rangeLabel}</span>
                 </p>
                 <div className="flex flex-wrap items-center gap-2">
                   <button
@@ -400,10 +414,13 @@ export function FileTable({
                     onClick={() => setPage((p) => Math.max(1, p - 1))}
                     className="rounded-lg border border-stone-200 bg-white px-3 py-1.5 text-xs font-medium text-stone-700 transition hover:bg-stone-50 disabled:cursor-not-allowed disabled:opacity-40"
                   >
-                    Trước
+                    {t("common.previous")}
                   </button>
                   <span className="text-xs text-stone-600">
-                    Trang {page} / {totalPages}
+                    {t("knowledgeBase.fileTable.page", {
+                      page,
+                      totalPages,
+                    })}
                   </span>
                   <button
                     type="button"
@@ -411,7 +428,7 @@ export function FileTable({
                     onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                     className="rounded-lg border border-stone-200 bg-white px-3 py-1.5 text-xs font-medium text-stone-700 transition hover:bg-stone-50 disabled:cursor-not-allowed disabled:opacity-40"
                   >
-                    Sau
+                    {t("common.next")}
                   </button>
                 </div>
               </div>
@@ -432,7 +449,7 @@ export function FileTable({
             <button
               type="button"
               className="absolute inset-0 z-0 bg-stone-900/40 backdrop-blur-sm"
-              aria-label="Đóng"
+              aria-label={t("common.close")}
               onClick={closePreview}
             />
             <div
@@ -444,13 +461,15 @@ export function FileTable({
                   id="doc-preview-title"
                   className="min-w-0 truncate text-base font-semibold text-stone-900"
                 >
-                  Xem: {preview.name}
+                  {t("knowledgeBase.fileTable.previewTitle", {
+                    name: preview.name,
+                  })}
                 </h3>
                 <button
                   type="button"
                   onClick={closePreview}
                   className="shrink-0 rounded-lg p-2 text-stone-400 transition hover:bg-stone-100 hover:text-stone-800"
-                  aria-label="Đóng"
+                  aria-label={t("common.close")}
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -461,7 +480,7 @@ export function FileTable({
                   (blobLoading ? (
                     <div className="flex h-[70vh] max-h-[min(85vh,800px)] items-center justify-center gap-2 text-stone-500">
                       <Loader2 className="h-8 w-8 animate-spin" />
-                      <span>Đang tải nội dung…</span>
+                      <span>{t("knowledgeBase.fileTable.loadingContent")}</span>
                     </div>
                   ) : displayUrl ? (
                     <iframe
@@ -472,8 +491,7 @@ export function FileTable({
                   ) : fetchFailed ? (
                     <div className="flex h-[70vh] max-h-[min(85vh,800px)] flex-col items-center justify-center gap-3 px-6 text-center">
                       <p className="text-sm text-stone-600">
-                        Không tải được tài liệu. Kiểm tra đăng nhập hoặc thử lại
-                        sau.
+                        {t("knowledgeBase.fileTable.loadDocFailed")}
                       </p>
                       <button
                         type="button"
@@ -482,7 +500,7 @@ export function FileTable({
                         }
                         className="rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:from-violet-500 hover:to-fuchsia-500"
                       >
-                        Thử mở trong tab mới
+                        {t("knowledgeBase.fileTable.tryOpenNewTab")}
                       </button>
                     </div>
                   ) : null)}
@@ -490,19 +508,18 @@ export function FileTable({
                 {!canEmbedInIframe(preview.type) && (
                   <div className="flex h-[70vh] max-h-[min(85vh,800px)] flex-col items-center justify-center gap-4 px-6 text-center">
                     <p className="text-sm text-stone-600">
-                      Định dạng này không nhúng trực tiếp. Mở trong tab mới để
-                      xem (hoặc dùng ứng dụng mặc định).
+                      {t("knowledgeBase.fileTable.embedNotSupported")}
                     </p>
                     <button
                       type="button"
                       onClick={() =>
                         void openDocumentBlobInNewTab(preview.id).catch(() =>
-                          toast.error("Không mở được tài liệu"),
+                          toast.error(t("knowledgeBase.fileTable.openDocFailed")),
                         )
                       }
                       className="rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:from-violet-500 hover:to-fuchsia-500"
                     >
-                      Xem trong tab mới
+                      {t("knowledgeBase.fileTable.viewInNewTab")}
                     </button>
                   </div>
                 )}

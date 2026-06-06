@@ -2,6 +2,7 @@
 
 import { Loader2, Send } from "lucide-react";
 import type { KeyboardEvent } from "react";
+import { useTranslation } from "react-i18next";
 
 export function ChatInput({
   value,
@@ -18,6 +19,8 @@ export function ChatInput({
   disabled?: boolean;
   isDark: boolean;
 }) {
+  const { t } = useTranslation();
+
   const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
@@ -38,7 +41,7 @@ export function ChatInput({
           onKeyDown={handleKeyDown}
           disabled={disabled || loading}
           rows={2}
-          placeholder="Nhập câu hỏi pháp lý…"
+          placeholder={t("corpus.chat.placeholder")}
           className={`min-h-[44px] flex-1 resize-none rounded-xl border px-3 py-2 text-sm outline-none transition focus:ring-2 focus:ring-emerald-500/30 ${
             isDark
               ? "border-slate-700 bg-slate-800 text-slate-100 placeholder:text-slate-500"
@@ -50,7 +53,7 @@ export function ChatInput({
           onClick={onSend}
           disabled={disabled || loading || !value.trim()}
           className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-600 text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-50"
-          aria-label="Gửi"
+          aria-label={t("common.send")}
         >
           {loading ? (
             <Loader2 className="h-4 w-4 animate-spin" />

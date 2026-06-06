@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import { Loader2, SendHorizontal } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { UploadUserDocumentData } from "@/hooks/useDocumentHook";
 import {
   CHAT_DROP_ZONE_ATTR,
@@ -49,6 +50,7 @@ export const ChatInputBox = ({
   onRemoveAttachedDocument,
   variant = "default",
 }: ChatInputBoxProps) => {
+  const { t } = useTranslation();
   const [isDragOver, setIsDragOver] = useState(false);
   const isDisabled = disabled || loading;
   const hasAttachments = attachedDocuments.length > 0;
@@ -70,12 +72,14 @@ export const ChatInputBox = ({
     }
   };
 
-  const defaultPlaceholder =
-    hasAttachments
-      ? "Hỏi về tài liệu đã gắn hoặc nhập câu hỏi khác..."
-      : "Nhập câu hỏi của bạn về pháp luật...";
+  const defaultPlaceholder = hasAttachments
+    ? t("chat.input.placeholderWithAttachments")
+    : t("chat.input.placeholder");
   const resolvedPlaceholder =
-    placeholder ?? (variant === "live" ? "Nhập yêu cầu của bạn..." : defaultPlaceholder);
+    placeholder ??
+    (variant === "live"
+      ? t("chat.input.placeholderLive")
+      : defaultPlaceholder);
 
   const handleDragEnter = useCallback((event: DragEvent) => {
     if (!isChatDocumentDragEvent(event)) return;
@@ -180,7 +184,7 @@ export const ChatInputBox = ({
         <button
           type="submit"
           disabled={isDisabled || !canSend}
-          aria-label="Gửi tin nhắn"
+          aria-label={t("chat.input.sendMessage")}
           className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl border-0 text-white transition-transform hover:-translate-y-px cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 ${
             isLive
               ? "bg-gradient-to-br from-[#5cb87a] to-[#2d7a4a] shadow-[0_4px_12px_rgba(45,122,74,0.35)]"

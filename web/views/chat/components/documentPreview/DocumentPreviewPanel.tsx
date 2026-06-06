@@ -1,6 +1,7 @@
 "use client";
 
 import { FileText, Loader2, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { PanelRight } from "../panelRight/PanelRight";
 import type { ContractDraftVersionItem } from "@/hooks/useContractDraftVersions";
 import { DocxBlobPreview } from "./DocxBlobPreview";
@@ -48,6 +49,7 @@ export const DocumentPreviewPanel = ({
   onDownloadVersion,
   downloadingVersion = null,
 }: DocumentPreviewPanelProps) => {
+  const { t } = useTranslation();
   const showVersionBar = liveMode && Boolean(onSelectVersion);
   const displayedText = useTypewriterText(plainText, {
     enabled: streaming && !useMinioPreview,
@@ -59,14 +61,17 @@ export const DocumentPreviewPanel = ({
 
   const progress =
     chunkTotal != null && chunkTotal > 0 && chunkCurrent != null
-      ? `Đoạn ${chunkCurrent + 1}/${chunkTotal}`
+      ? t("chat.draft.chunkProgress", {
+          current: chunkCurrent + 1,
+          total: chunkTotal,
+        })
       : null;
 
   const fallbackPlaceholder = (() => {
     if (useMinioPreview && previewBlobLoading) {
-      return "Đang tải văn bản…";
+      return t("chat.draft.loadingDocument");
     }
-    return "Chưa có nội dung bản nháp…";
+    return t("chat.draft.noDraftContent");
   })();
 
   const documentBody = useBlobPreview ? (
@@ -104,7 +109,7 @@ export const DocumentPreviewPanel = ({
           <div className="min-w-0 flex-1 overflow-hidden">
             <div className="flex min-w-0 items-center gap-2">
               <h2 className="m-0 shrink-0 text-sm font-semibold whitespace-nowrap text-[#2c2620]">
-                Bản nháp văn bản
+                {t("chat.draft.title")}
               </h2>
               {liveMode && (
                 <span className="inline-flex items-center gap-1 rounded-full border border-[#b8e0c8] bg-[#edf8f1] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[#2d7a4a]">
@@ -112,13 +117,13 @@ export const DocumentPreviewPanel = ({
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#3cb371] opacity-60" />
                     <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#3cb371]" />
                   </span>
-                  Live
+                  {t("common.live")}
                 </span>
               )}
             </div>
             {(liveMode && streaming) || progress || statusLabel ? (
               <p className="m-0 truncate text-xs text-[#8a8178]">
-                {liveMode && streaming ? "AI đang chỉnh sửa" : null}
+                {liveMode && streaming ? t("chat.draft.aiEditing") : null}
                 {liveMode && streaming && (progress || statusLabel) ? " · " : null}
                 {progress}
                 {progress && statusLabel ? " · " : ""}
@@ -137,17 +142,17 @@ export const DocumentPreviewPanel = ({
             {onDownloadVersion && latestVersion != null && latestVersion > 0 ? (
               <button
                 type="button"
-                aria-label="Tải bản nháp DOCX mới nhất"
+                aria-label={t("chat.draft.downloadLatestDocx")}
                 onClick={() => onDownloadVersion(latestVersion)}
                 className="cursor-pointer rounded-lg border border-[#ebe3d6] bg-white px-2.5 py-1.5 text-[11px] font-medium text-[#9a6c2b] transition-colors hover:bg-[#faf5ec]"
               >
-                Tải DOCX
+                {t("chat.draft.downloadDocx")}
               </button>
             ) : null}
             {onClose ? (
               <button
                 type="button"
-                aria-label="Đóng panel bản nháp"
+                aria-label={t("chat.draft.closePanel")}
                 onClick={onClose}
                 className="grid h-8 w-8 shrink-0 cursor-pointer place-items-center rounded-lg border-0 bg-transparent text-[#8a8178] transition-colors hover:bg-[#faf5ec] hover:text-[#2c2620]"
               >

@@ -1,5 +1,8 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const GoogleIcon = () => (
   <svg className="h-[18px] w-[18px]" viewBox="0 0 24 24" aria-hidden>
@@ -32,6 +35,7 @@ export const GoogleSignInButton = ({
   onLoadingChange,
 }: GoogleSignInButtonProps) => {
   const router = useRouter();
+  const { t } = useTranslation();
 
   const handleGoogleLogin = async () => {
     try {
@@ -58,7 +62,7 @@ export const GoogleSignInButton = ({
       }
     } catch {
       onLoadingChange?.(false);
-      toast.error("Đã xảy ra lỗi");
+      toast.error(t("common.errorOccurred"));
       router.push("/sign-in");
     }
   };
@@ -71,7 +75,7 @@ export const GoogleSignInButton = ({
       className="flex h-[54px] items-center justify-center gap-2.5 rounded-[10px] border border-[#eee4d7] bg-white text-[15px] font-medium text-[#3c362f] cursor-pointer transition-all hover:border-[#ead6b4] hover:bg-[#fffaf2] hover:shadow-[0_4px_14px_rgba(84,59,28,0.06)] disabled:cursor-not-allowed disabled:opacity-50"
     >
       <GoogleIcon />
-      Google
+      {t("signIn.google")}
     </button>
   );
 };

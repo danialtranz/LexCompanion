@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FolderOpen, HardDriveUpload, Loader2, Paperclip } from "lucide-react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import {
   useUploadUserDocument,
   type UploadUserDocumentData,
@@ -28,6 +29,7 @@ export const ChatAttachDropup = ({
   onOpenKnowledgeBase,
   onUploadSuccess,
 }: ChatAttachDropupProps) => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -61,24 +63,27 @@ export const ChatAttachDropup = ({
 
       for (const file of Array.from(fileList)) {
         if (file.size > MAX_BYTES) {
-          toast.error(`${file.name}: vượt quá 50MB`);
+          toast.error(t("chat.input.fileTooLarge", { name: file.name }));
           continue;
         }
         try {
           const res = await upload({ file, session_id: sessionId });
           if (!isUploadOk(res.code) || !res.data) {
-            toast.error(res.msg || "Upload thất bại");
+            toast.error(res.msg || t("chat.input.uploadFailed"));
             continue;
           }
           onUploadSuccess?.(res.data);
-          toast.success(`Đã tải lên: ${res.data.name}`);
+          toast.success(
+            t("chat.input.uploadSuccess", { name: res.data.name }),
+          );
         } catch (err) {
-          const msg = err instanceof Error ? err.message : "Upload thất bại";
+          const msg =
+            err instanceof Error ? err.message : t("chat.input.uploadFailed");
           toast.error(msg);
         }
       }
     },
-    [isDisabled, onUploadSuccess, sessionId, upload],
+    [isDisabled, onUploadSuccess, sessionId, upload, t],
   );
 
   const openFilePicker = () => {
@@ -107,7 +112,7 @@ export const ChatAttachDropup = ({
 
       <button
         type="button"
-        aria-label="Đính kèm tài liệu"
+        aria-label={t("chat.input.attachDocument")}
         aria-expanded={open}
         aria-haspopup="menu"
         disabled={isDisabled}
@@ -135,7 +140,7 @@ export const ChatAttachDropup = ({
             <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[#f5e6cc] text-[#9a6c2b]">
               <HardDriveUpload className="h-4 w-4" strokeWidth={2} />
             </span>
-            <span className="font-medium">Tải lên từ máy tính</span>
+            <span className="font-medium">{t("chat.input.uploadFromComputer")}</span>
           </button>
           <button
             type="button"
@@ -146,7 +151,7 @@ export const ChatAttachDropup = ({
             <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[#eef4fc] text-[#4a7fc1]">
               <FolderOpen className="h-4 w-4" strokeWidth={2} />
             </span>
-            <span className="font-medium">Tài liệu của tôi</span>
+            <span className="font-medium">{t("chat.input.myDocuments")}</span>
           </button>
         </div>
       )}

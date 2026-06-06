@@ -1,6 +1,7 @@
 "use client";
 
 import { Loader2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 type DeleteDocumentConfirmModalProps = {
   open: boolean;
@@ -17,6 +18,8 @@ export const DeleteDocumentConfirmModal = ({
   onConfirm,
   onCancel,
 }: DeleteDocumentConfirmModalProps) => {
+  const { t } = useTranslation();
+
   if (!open) return null;
 
   return (
@@ -29,7 +32,7 @@ export const DeleteDocumentConfirmModal = ({
       <button
         type="button"
         className="absolute inset-0 bg-[#2c2620]/30 backdrop-blur-[2px]"
-        aria-label="Đóng"
+        aria-label={t("common.close")}
         disabled={loading}
         onClick={onCancel}
       />
@@ -39,12 +42,10 @@ export const DeleteDocumentConfirmModal = ({
             id="delete-doc-title"
             className="m-0 text-base font-bold text-[#2c2620]"
           >
-            Xóa tài liệu?
+            {t("chat.knowledgeBase.deleteConfirmTitle")}
           </h2>
           <p className="mt-2 m-0 text-sm text-[#6b635a]">
-            Bạn có chắc muốn xóa{" "}
-            <span className="font-medium text-[#2c2620]">&quot;{fileName}&quot;</span>
-            ? Hành động này không thể hoàn tác.
+            {t("chat.knowledgeBase.deleteConfirmBody", { name: fileName })}
           </p>
         </div>
         <div className="flex justify-end gap-2 px-5 py-4">
@@ -54,7 +55,7 @@ export const DeleteDocumentConfirmModal = ({
             onClick={onCancel}
             className="rounded-xl border border-[#ebe3d6] bg-[#faf7f2] px-4 py-2 text-sm font-medium text-[#6b635a] transition-colors hover:border-[#dcc9a8] hover:bg-[#f5efe4] disabled:opacity-60 cursor-pointer"
           >
-            Không
+            {t("common.no")}
           </button>
           <button
             type="button"
@@ -65,10 +66,10 @@ export const DeleteDocumentConfirmModal = ({
             {loading ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" strokeWidth={2} />
-                Đang xóa…
+                {t("common.deleting")}
               </>
             ) : (
-              "Có"
+              t("common.yes")
             )}
           </button>
         </div>

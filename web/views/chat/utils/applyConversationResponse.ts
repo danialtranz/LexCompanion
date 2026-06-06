@@ -1,5 +1,6 @@
 import type { ApiEnvelope } from "@/hooks/useDocumentHook";
 import type { UserConversationData } from "@/hooks/useUserConversation";
+import { translate as t } from "@/locale/translate";
 import type { BotMessage } from "../types";
 import { formatChatTime } from "./formatChatTime";
 import { buildMessageFormFill } from "./formFillHitl";
@@ -44,12 +45,12 @@ export function parseConversationResult(
     return {
       bot: null,
       error: errorBotMessage(
-        res.msg || "Không nhận được câu trả lời từ hệ thống.",
+        res.msg || t("chat.messages.noSystemResponse"),
       ),
     };
   }
   return {
     bot: null,
-    error: errorBotMessage(res.msg || "Không nhận được câu trả lời từ hệ thống."),
+    error: errorBotMessage(res.msg || t("chat.messages.noSystemResponse")),
   };
 }

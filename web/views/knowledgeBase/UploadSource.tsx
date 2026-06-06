@@ -3,20 +3,17 @@
 import { FormEvent, useMemo, useState } from "react";
 import { FileText, Link2, Mic, Video } from "lucide-react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { useUploadDocumentViaUrl } from "@/hooks/useDocumentHook";
-
-const UNSUPPORTED_MSG =
-  "Tính năng này tạm thời chưa được hỗ trợ. Hiện chỉ có thể tải tài liệu.";
 
 type UploadSourceProps = {
   onOpenDocumentModal: () => void;
   kb_id?: string | null;
 };
 
-const cards = [
+const cardConfigs = [
   {
     id: "documents" as const,
-    label: "Documents",
     icon: FileText,
     iconWrap: "from-violet-500 to-purple-600",
     glow: "bg-violet-400/35",
@@ -24,7 +21,6 @@ const cards = [
   },
   {
     id: "social" as const,
-    label: "Social link",
     icon: Link2,
     iconWrap: "from-emerald-500 to-teal-600",
     glow: "bg-emerald-400/35",
@@ -32,7 +28,6 @@ const cards = [
   },
   {
     id: "audio" as const,
-    label: "Upload audio",
     icon: Mic,
     iconWrap: "from-sky-500 to-blue-600",
     glow: "bg-sky-400/35",
@@ -40,7 +35,6 @@ const cards = [
   },
   {
     id: "video" as const,
-    label: "Upload video",
     icon: Video,
     iconWrap: "from-orange-500 to-rose-600",
     glow: "bg-orange-400/35",
@@ -76,10 +70,18 @@ async function probeUrlReachable(url: string): Promise<boolean> {
 }
 
 export function UploadSource({ onOpenDocumentModal, kb_id = null }: UploadSourceProps) {
+  const { t } = useTranslation();
   const [urlModalOpen, setUrlModalOpen] = useState(false);
   const [urlValue, setUrlValue] = useState("");
   const [docName, setDocName] = useState("");
   const { uploadDocumentViaUrl, loading } = useUploadDocumentViaUrl();
+
+  const cardLabels = {
+    documents: t("knowledgeBase.upload.cardDocuments"),
+    social: t("knowledgeBase.upload.cardSocial"),
+    audio: t("knowledgeBase.upload.cardAudio"),
+    video: t("knowledgeBase.upload.cardVideo"),
+  };
 
   const submitDisabled = useMemo(
     () => !urlValue.trim() || !docName.trim() || loading,
@@ -91,28 +93,28 @@ export function UploadSource({ onOpenDocumentModal, kb_id = null }: UploadSource
     const url = urlValue.trim();
     const name = docName.trim();
     if (!url) {
-      toast.error("URL không được để trống");
+      toast.error(t("knowledgeBase.upload.urlEmpty"));
       return;
     }
     if (!name) {
-      toast.error("Document name không được để trống");
+      toast.error(t("knowledgeBase.upload.nameEmpty"));
       return;
     }
     if (!isSnakeCase(name)) {
-      toast.error("Document name phải ở dạng snake_case (vd: nghi_dinh_168_2025)");
+      toast.error(t("knowledgeBase.upload.nameSnakeCase"));
       return;
     }
 
     try {
       new URL(url);
     } catch {
-      toast.error("URL không hợp lệ");
+      toast.error(t("knowledgeBase.upload.urlInvalid"));
       return;
     }
 
     const reachable = await probeUrlReachable(url);
     if (!reachable) {
-      toast.error("Không truy cập được URL này. Vui lòng kiểm tra lại.");
+      toast.error(t("knowledgeBase.upload.urlUnreachable"));
       return;
     }
 
@@ -124,13 +126,13 @@ export function UploadSource({ onOpenDocumentModal, kb_id = null }: UploadSource
           kb_id,
         }),
         {
-          loading: "Đang tải nội dung từ URL…",
-          success: "Upload từ URL thành công",
-          error: "Upload từ URL thất bại",
+          loading: t("knowledgeBase.upload.uploadingFromUrl"),
+          success: t("knowledgeBase.upload.uploadFromUrlSuccess"),
+          error: t("knowledgeBase.upload.uploadFromUrlFailed"),
         },
       );
       if (!isUploadOk(res.code)) {
-        toast.error(res.msg || "Upload từ URL thất bại");
+        toast.error(res.msg || t("knowledgeBase.upload.uploadFromUrlFailed"));
         return;
       }
       setUrlModalOpen(false);
@@ -144,15 +146,14 @@ export function UploadSource({ onOpenDocumentModal, kb_id = null }: UploadSource
   return (
     <section className="w-full">
       <h1 className="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl">
-        Add knowledge
+        {t("knowledgeBase.addKnowledge")}
       </h1>
       <p className="mt-2 max-w-3xl text-sm leading-relaxed text-stone-600 sm:text-base">
-        Please upload a file to load knowledge into the agent and personalize
-        your interactive experience!
+        {t("knowledgeBase.addKnowledgeDescription")}
       </p>
 
       <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
-        {cards.map((card) => {
+        {cardConfigs.map((card) => {
           const Icon = card.icon;
           const isDocs = card.id === "documents";
           return (
@@ -165,7 +166,7 @@ export function UploadSource({ onOpenDocumentModal, kb_id = null }: UploadSource
                 } else if (card.id === "social") {
                   setUrlModalOpen(true);
                 } else {
-                  toast(UNSUPPORTED_MSG);
+                  toast(t("knowledgeBase.upload.unsupported"));
                 }
               }}
               className="group relative flex flex-col items-center overflow-hidden rounded-2xl border border-stone-200/90 bg-white/70 p-5 text-center shadow-sm ring-1 ring-stone-100/80 transition hover:-translate-y-0.5 hover:border-stone-300 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2"
@@ -190,7 +191,7 @@ export function UploadSource({ onOpenDocumentModal, kb_id = null }: UploadSource
                 </div>
               </div>
               <span className="relative text-sm font-semibold text-stone-800">
-                {card.label}
+                {cardLabels[card.id]}
               </span>
             </button>
           );
@@ -207,7 +208,7 @@ export function UploadSource({ onOpenDocumentModal, kb_id = null }: UploadSource
           <button
             type="button"
             className="absolute inset-0 z-0 bg-stone-900/25 backdrop-blur-sm transition-opacity"
-            aria-label="Close"
+            aria-label={t("common.close")}
             onClick={() => !loading && setUrlModalOpen(false)}
           />
           <div className="relative z-10 w-full max-w-lg">
@@ -217,10 +218,10 @@ export function UploadSource({ onOpenDocumentModal, kb_id = null }: UploadSource
                   id="upload-url-title"
                   className="text-lg font-semibold tracking-tight text-stone-900"
                 >
-                  Upload via social link
+                  {t("knowledgeBase.upload.urlModalTitle")}
                 </h2>
                 <p className="mt-1 text-sm text-stone-500">
-                  Nhập URL và tên tài liệu để hệ thống crawl nội dung.
+                  {t("knowledgeBase.upload.urlModalDescription")}
                 </p>
               </div>
               <form className="space-y-4 p-5 sm:p-6" onSubmit={onSubmitUrl}>
@@ -229,7 +230,7 @@ export function UploadSource({ onOpenDocumentModal, kb_id = null }: UploadSource
                     htmlFor="upload-url-input"
                     className="mb-1.5 block text-sm font-medium text-stone-700"
                   >
-                    URL
+                    {t("common.url")}
                   </label>
                   <input
                     id="upload-url-input"
@@ -247,20 +248,20 @@ export function UploadSource({ onOpenDocumentModal, kb_id = null }: UploadSource
                     htmlFor="upload-doc-name-input"
                     className="mb-1.5 block text-sm font-medium text-stone-700"
                   >
-                    Document name
+                    {t("knowledgeBase.upload.documentName")}
                   </label>
                   <input
                     id="upload-doc-name-input"
                     type="text"
                     value={docName}
                     onChange={(e) => setDocName(e.target.value)}
-                    placeholder="vd: nghi_dinh_168_2025"
+                    placeholder={t("knowledgeBase.upload.documentNamePlaceholder")}
                     disabled={loading}
                     required
                     className="w-full rounded-xl border border-stone-200 bg-white px-3 py-2.5 text-sm text-stone-900 outline-none transition focus:border-violet-400 focus:ring-2 focus:ring-violet-200"
                   />
                   <p className="mt-1 text-xs text-stone-500">
-                    Bắt buộc snake_case, ví dụ: nghi_dinh_168_2025
+                    {t("knowledgeBase.upload.documentNameHint")}
                   </p>
                 </div>
                 <div className="flex justify-end gap-2 pt-2">
@@ -270,14 +271,14 @@ export function UploadSource({ onOpenDocumentModal, kb_id = null }: UploadSource
                     onClick={() => setUrlModalOpen(false)}
                     className="rounded-xl border border-stone-200 bg-white px-4 py-2 text-sm font-medium text-stone-700 transition hover:bg-stone-50 disabled:opacity-60"
                   >
-                    Hủy
+                    {t("common.cancel")}
                   </button>
                   <button
                     type="submit"
                     disabled={submitDisabled}
                     className="rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:from-violet-500 hover:to-fuchsia-500 disabled:cursor-not-allowed disabled:opacity-60"
                   >
-                    {loading ? "Đang upload…" : "Upload"}
+                    {loading ? t("knowledgeBase.upload.uploading") : t("common.upload")}
                   </button>
                 </div>
               </form>

@@ -1,4 +1,7 @@
+"use client";
+
 import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { ChatSidebar } from "../sidebar/ChatSidebar";
 
 interface ChatLayoutProps {
@@ -74,6 +77,7 @@ export const ChatLayout = ({
   historyActive = false,
   liveDocumentLayout = false,
 }: ChatLayoutProps) => {
+  const { t } = useTranslation();
   const hasRightPanel = Boolean(panelRight);
   const [rightPanelWidth, setRightPanelWidth] = useState(400);
   const [liveChatWidth, setLiveChatWidth] = useState(380);
@@ -151,7 +155,7 @@ export const ChatLayout = ({
         >
           <button
             type="button"
-            aria-label="Kéo để thay đổi độ rộng panel"
+            aria-label={t("chat.layout.resizePanel")}
             onMouseDown={() => setIsResizing(true)}
             className="absolute inset-y-0 left-1/2 w-2 -translate-x-1/2 cursor-col-resize border-0 bg-transparent p-0"
           >

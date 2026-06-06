@@ -1,6 +1,7 @@
 "use client";
 
 import { X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { NODE_COLOR } from "../constants";
 import type { ChatReferenceItem } from "./types";
 
@@ -13,9 +14,11 @@ function ReferenceChip({
   onRemove: () => void;
   isDark: boolean;
 }) {
+  const { t } = useTranslation();
   const color =
     item.nodeType === "topic" ? NODE_COLOR.topic : NODE_COLOR.subject;
-  const typeLabel = item.nodeType === "topic" ? "Topic" : "Subject";
+  const typeLabel =
+    item.nodeType === "topic" ? t("common.topic") : t("common.subject");
 
   return (
     <span
@@ -42,7 +45,10 @@ function ReferenceChip({
             ? "text-slate-400 hover:bg-slate-700 hover:text-slate-200"
             : "text-slate-400 hover:bg-slate-100 hover:text-slate-700"
         }`}
-        aria-label={`Xóa ${typeLabel} ${item.label}`}
+        aria-label={t("corpus.chat.removeFilter", {
+          type: typeLabel,
+          label: item.label,
+        })}
       >
         <X className="h-3 w-3" />
       </button>
@@ -65,6 +71,8 @@ export function ChatReferenceChips({
   onClearAll: () => void;
   isDark: boolean;
 }) {
+  const { t } = useTranslation();
+
   if (topics.length === 0 && subjects.length === 0) {
     return (
       <p
@@ -72,8 +80,7 @@ export function ChatReferenceChips({
           isDark ? "text-slate-500" : "text-slate-400"
         }`}
       >
-        Giữ & kéo node Topic/Subject từ đồ thị vào đây, hoặc bấm &quot;Thêm vào
-        bộ lọc&quot; ở panel chi tiết.
+        {t("corpus.chat.filterEmpty")}
       </p>
     );
   }
@@ -105,7 +112,7 @@ export function ChatReferenceChips({
           isDark ? "text-slate-400 hover:text-slate-200" : "text-slate-500 hover:text-slate-700"
         }`}
       >
-        Xóa tất cả bộ lọc
+        {t("corpus.chat.clearAllFilters")}
       </button>
     </div>
   );

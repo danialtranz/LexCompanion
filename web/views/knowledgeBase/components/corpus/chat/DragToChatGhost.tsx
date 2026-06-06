@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "react-i18next";
 import { NODE_COLOR } from "../constants";
 import type { ChatReferenceItem } from "./types";
 
@@ -12,8 +13,11 @@ export function DragToChatGhost({
   x: number;
   y: number;
 }) {
+  const { t } = useTranslation();
   const color =
     item.nodeType === "topic" ? NODE_COLOR.topic : NODE_COLOR.subject;
+  const typeLabel =
+    item.nodeType === "topic" ? t("common.topic") : t("common.subject");
 
   return (
     <div
@@ -26,7 +30,7 @@ export function DragToChatGhost({
       }}
     >
       <span className="text-[10px] uppercase tracking-wide text-slate-500">
-        {item.nodeType}
+        {typeLabel}
       </span>
       <span className="truncate">{item.label}</span>
     </div>

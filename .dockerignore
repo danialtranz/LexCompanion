@@ -1,0 +1,9 @@
+.git
+**/.venv
+**/__pycache__
+**/.pytest_cache
+web/node_modules
+web/.next
+**/*.log
+model_serving/embeddings/vie_embedding_v2/.venv
+model_serving/retrievers/elastic_search/esdata

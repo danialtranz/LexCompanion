@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
@@ -8,6 +10,7 @@ import {
   Settings,
   type LucideIcon,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { CHAT_NAV_ITEMS } from "../../constants/navigation";
 
 const NAV_ICONS: Record<string, LucideIcon> = {
@@ -38,6 +41,7 @@ export const SidebarNav = ({
   knowledgeBaseActive = false,
   historyActive = false,
 }: SidebarNavProps) => {
+  const { t } = useTranslation();
   const router = useRouter();
 
   return (
@@ -64,7 +68,7 @@ export const SidebarNav = ({
               className={`${navItemClass(isActive)} border-0 bg-transparent text-left cursor-pointer`}
             >
               <Icon className="h-[18px] w-[18px] shrink-0" strokeWidth={1.75} />
-              {item.label}
+              {t(item.labelKey)}
             </button>
           );
         }
@@ -78,7 +82,7 @@ export const SidebarNav = ({
               className={`${navItemClass(isActive)} border-0 bg-transparent text-left cursor-pointer`}
             >
               <Icon className="h-[18px] w-[18px] shrink-0" strokeWidth={1.75} />
-              {item.label}
+              {t(item.labelKey)}
             </button>
           );
         }
@@ -90,7 +94,7 @@ export const SidebarNav = ({
             className={navItemClass(isActive)}
           >
             <Icon className="h-[18px] w-[18px] shrink-0" strokeWidth={1.75} />
-            {item.label}
+            {t(item.labelKey)}
           </Link>
         );
       })}

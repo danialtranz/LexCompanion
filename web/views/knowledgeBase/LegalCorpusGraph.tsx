@@ -2,17 +2,23 @@
 
 import dynamic from "next/dynamic";
 import { forwardRef } from "react";
+import { useTranslation } from "react-i18next";
 import type { GraphCanvasProps, GraphCanvasRef } from "reagraph";
+
+function GraphLoadingPlaceholder() {
+  const { t } = useTranslation();
+  return (
+    <div className="flex h-full min-h-[420px] items-center justify-center text-sm text-slate-500">
+      {t("corpus.loadingGraph")}
+    </div>
+  );
+}
 
 const GraphCanvasBase = dynamic(
   () => import("reagraph").then((mod) => mod.GraphCanvas),
   {
     ssr: false,
-    loading: () => (
-      <div className="flex h-full min-h-[420px] items-center justify-center text-sm text-slate-500">
-        Đang tải đồ thị…
-      </div>
-    ),
+    loading: () => <GraphLoadingPlaceholder />,
   },
 );
 

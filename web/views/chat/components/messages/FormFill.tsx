@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Loader2, SendHorizontal } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { MessageFormFill } from "../../types";
 import {
   buildFieldValuesSummary,
@@ -35,6 +36,7 @@ export const FormFill = ({
   onSubmit,
   onReject,
 }: FormFillProps) => {
+  const { t } = useTranslation();
   const fields = useMemo(() => getFieldsToFill(formFill), [formFill]);
   const { filled_values = {}, clarification_questions = [], actions } =
     formFill.hitl;
@@ -78,13 +80,16 @@ export const FormFill = ({
 
   const chunkHint =
     formFill.hitl.chunk_total != null && formFill.hitl.chunk_index != null
-      ? `Đoạn ${formFill.hitl.chunk_index + 1}/${formFill.hitl.chunk_total} · `
+      ? t("chat.formFill.chunkHint", {
+          current: formFill.hitl.chunk_index + 1,
+          total: formFill.hitl.chunk_total,
+        })
       : "";
 
   if (fields.length === 0) {
     return (
       <p className="m-0 text-sm text-[#8a8178]">
-        Không còn trường nào cần điền trong bước này.
+        {t("chat.formFill.noFields")}
       </p>
     );
   }
@@ -92,7 +97,8 @@ export const FormFill = ({
   return (
     <div className="mt-4 border-t border-[#f0e6d8] pt-4">
       <p className="m-0 text-xs font-semibold uppercase tracking-wide text-[#9a6c2b]">
-        {chunkHint}Điền thông tin vào mẫu
+        {chunkHint}
+        {t("chat.formFill.title")}
       </p>
 
       {clarification_questions.length > 0 && (
@@ -127,7 +133,7 @@ export const FormFill = ({
                 ) : (
                   <span className="font-normal text-[#a89f96]">
                     {" "}
-                    (tùy chọn)
+                    {t("chat.formFill.optional")}
                   </span>
                 )}
               </label>
@@ -159,7 +165,9 @@ export const FormFill = ({
 
       {missingRequired.length > 0 && (
         <p className="mt-2 m-0 text-xs text-[#b54545]">
-          Vui lòng điền {missingRequired.length} trường bắt buộc còn thiếu.
+          {t("chat.formFill.missingRequired", {
+            count: missingRequired.length,
+          })}
         </p>
       )}
 
@@ -171,7 +179,7 @@ export const FormFill = ({
             onClick={onReject}
             className="cursor-pointer rounded-lg border border-[#ebe3d6] bg-white px-3 py-1.5 text-xs font-medium text-[#8a8178] transition-colors hover:bg-[#faf5ec] disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Hủy
+            {t("chat.formFill.cancel")}
           </button>
         )}
         <button
@@ -186,7 +194,7 @@ export const FormFill = ({
           ) : (
             <SendHorizontal className="h-3.5 w-3.5" strokeWidth={2.5} />
           )}
-          Gửi thông tin
+          {t("chat.formFill.submit")}
         </button>
       </div>
     </div>

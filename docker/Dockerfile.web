@@ -1,0 +1,40 @@
+FROM node:20-alpine AS deps
+
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
+ARG NEXT_PUBLIC_API_SERVER=http://localhost:6000
+ARG NEXT_PUBLIC_GOOGLE_OAUTH2_CALLBACK=http://localhost:3005/auth/google/callback
+ARG NEXT_PUBLIC_GOOGLE_CLIENT_ID
+
+ENV NEXT_PUBLIC_API_SERVER=$NEXT_PUBLIC_API_SERVER
+ENV NEXT_PUBLIC_GOOGLE_OAUTH2_CALLBACK=$NEXT_PUBLIC_GOOGLE_OAUTH2_CALLBACK
+ENV NEXT_PUBLIC_GOOGLE_CLIENT_ID=$NEXT_PUBLIC_GOOGLE_CLIENT_ID
+
+RUN npm run build
+
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+ENV NODE_ENV=production
+
+RUN apk add --no-cache curl
+
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+
+EXPOSE 3004
+
+HEALTHCHECK --interval=30s --timeout=10s --retries=5 --start-period=60s \
+  CMD curl -fsS http://localhost:3004/ > /dev/null || exit 1
+
+CMD ["npm", "start", "--", "-p", "3004"]

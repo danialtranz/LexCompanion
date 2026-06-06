@@ -9,6 +9,7 @@ import {
   Trash2,
 } from "lucide-react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import {
   useDeleteDocument,
   useDocumentsList,
@@ -90,6 +91,7 @@ function FileTableRow({
   deleteLoading,
   onRequestDelete,
 }: FileTableRowProps) {
+  const { t } = useTranslation();
   const ready = isProcessingComplete(file.progress);
   const { draggable, onDragStart, title } = useKbDocumentRowDrag(file);
 
@@ -116,14 +118,17 @@ function FileTableRow({
         <p className="mt-0.5 m-0 text-xs text-[#8a8178]">
           {formatBytes(file.size)}
           {!ready && (
-            <span className="text-[#b5a99a]"> · Đang xử lý…</span>
+            <span className="text-[#b5a99a]">
+              {" "}
+              · {t("chat.knowledgeBase.processing")}
+            </span>
           )}
         </p>
       </div>
       <button
         type="button"
         disabled={!ready || deletingId === file.id || deleteLoading}
-        aria-label={`Xóa ${file.name}`}
+        aria-label={t("common.deleteNamed", { name: file.name })}
         onClick={onRequestDelete}
         className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border-0 bg-transparent text-[#8a8178] transition-colors enabled:cursor-pointer enabled:hover:bg-[#faf5ec] enabled:hover:text-[#c45c4a] disabled:cursor-not-allowed disabled:opacity-40"
       >
@@ -144,6 +149,7 @@ export const FileTable = ({
   onViewAll,
   maxVisible = 7,
 }: FileTableProps) => {
+  const { t } = useTranslation();
   const [pendingDelete, setPendingDelete] = useState<{
     id: string;
     name: string;
@@ -177,26 +183,26 @@ export const FileTable = ({
     try {
       const code = await deleteDocument(docId);
       if (code === 0) {
-        toast.success("Đã xóa tài liệu");
+        toast.success(t("chat.knowledgeBase.deleteSuccess"));
         setPendingDelete(null);
       } else {
-        toast.error("Không xóa được tài liệu");
+        toast.error(t("chat.knowledgeBase.deleteFailed"));
       }
     } catch {
-      toast.error("Không xóa được tài liệu");
+      toast.error(t("chat.knowledgeBase.deleteFailed"));
     } finally {
       setDeletingId(null);
     }
-  }, [deleteDocument, pendingDelete]);
+  }, [deleteDocument, pendingDelete, t]);
 
   return (
     <section className="mt-6 min-h-0 flex-1 flex flex-col">
       <div>
         <h3 className="m-0 text-sm font-bold text-[#2c2620]">
-          Tài liệu trong Knowledge Base
+          {t("chat.knowledgeBase.documentsTitle")}
         </h3>
         <p className="mt-1 m-0 text-xs text-[#8a8178]">
-          Kéo tài liệu đã xử lý xong vào ô chat để đính kèm.
+          {t("chat.knowledgeBase.dragHint")}
         </p>
       </div>
 
@@ -204,17 +210,17 @@ export const FileTable = ({
         {isPending && items.length === 0 ? (
           <li className="flex items-center justify-center gap-2 rounded-lg border border-dashed border-[#ebe3d6] bg-[#faf7f2] px-4 py-8 text-sm text-[#8a8178]">
             <Loader2 className="h-4 w-4 animate-spin" strokeWidth={2} />
-            Đang tải danh sách…
+            {t("chat.knowledgeBase.loadingList")}
           </li>
         ) : loadError ? (
           <li className="rounded-lg border border-dashed border-[#f0d4d0] bg-[#fdf8f7] px-4 py-8 text-center text-sm text-[#c45c4a]">
             {envelope && envelope.code !== 0
-              ? envelope.msg || "Không tải được danh sách"
-              : (error as Error)?.message || "Không tải được danh sách"}
+              ? envelope.msg || t("chat.knowledgeBase.loadListFailed")
+              : (error as Error)?.message || t("chat.knowledgeBase.loadListFailed")}
           </li>
         ) : visible.length === 0 ? (
           <li className="rounded-lg border border-dashed border-[#ebe3d6] bg-[#faf7f2] px-4 py-8 text-center text-sm text-[#8a8178]">
-            Chưa có tài liệu. Hãy upload file phía trên.
+            {t("chat.knowledgeBase.emptyList")}
           </li>
         ) : (
           visible.map((file) => (
@@ -237,7 +243,7 @@ export const FileTable = ({
           onClick={onViewAll}
           className="mt-4 flex w-full items-center justify-center gap-1 rounded-xl border border-[#ebe3d6] bg-[#faf7f2] py-2.5 text-sm font-medium text-[#6b635a] transition-colors hover:border-[#dcc9a8] hover:bg-[#f5efe4] cursor-pointer"
         >
-          Xem tất cả tài liệu ({total})
+          {t("chat.knowledgeBase.viewAllDocuments", { count: total })}
           <ChevronRight className="h-4 w-4" strokeWidth={2} />
         </button>
       )}

@@ -1,3 +1,6 @@
+import i18n from "@/locale/i18n";
+import { translate as t } from "@/locale/translate";
+
 /** Hiển thị thời gian cho thẻ lịch sử: 10:30, Hôm qua, hoặc dd/MM/yyyy */
 export function formatHistoryTimestamp(
   iso: string | null | undefined,
@@ -17,18 +20,20 @@ export function formatHistoryTimestamp(
     (startOfToday.getTime() - startOfDate.getTime()) / 86_400_000,
   );
 
+  const locale = i18n.language?.startsWith("en") ? "en-US" : "vi-VN";
+
   if (diffDays === 0) {
-    return date.toLocaleTimeString("vi-VN", {
+    return date.toLocaleTimeString(locale, {
       hour: "2-digit",
       minute: "2-digit",
       hour12: false,
     });
   }
-  if (diffDays === 1) return "Hôm qua";
+  if (diffDays === 1) return t("chat.history.yesterday");
   if (diffDays < 7) {
-    return date.toLocaleDateString("vi-VN", { weekday: "short" });
+    return date.toLocaleDateString(locale, { weekday: "short" });
   }
-  return date.toLocaleDateString("vi-VN", {
+  return date.toLocaleDateString(locale, {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",

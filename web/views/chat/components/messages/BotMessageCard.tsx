@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 import type { BotMessage as BotMessageType, ChatCitation } from "../../types";
 import { BotMessageActions } from "./BotMessageActions";
 import { BotMessageContent } from "./BotMessageContent";
@@ -33,6 +36,7 @@ export const BotMessageCard = ({
   onFormFillReject,
   variant = "default",
 }: BotMessageCardProps) => {
+  const { t } = useTranslation();
   const showFormFill =
     Boolean(message.formFill) &&
     !message.error &&
@@ -46,7 +50,7 @@ export const BotMessageCard = ({
           <div className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-[#b8e0c8] bg-[#edf8f1]">
             <Image
               src={LAWBOT_LOGO}
-              alt="LawBot"
+              alt={t("common.lawBot")}
               width={18}
               height={18}
               className="h-[18px] w-[18px] object-contain"
@@ -55,7 +59,7 @@ export const BotMessageCard = ({
           <span
             className={`text-xs font-semibold ${message.error ? "text-[#b54545]" : "text-[#2d7a4a]"}`}
           >
-            AI Pháp Lý
+            {t("chat.messages.aiLegal")}
           </span>
           <span className="ml-auto shrink-0 text-[10px] text-[#8a8178]">
             {message.time}
@@ -92,7 +96,7 @@ export const BotMessageCard = ({
           )}
           {message.formFill?.submitted && (
             <p className="mt-2 mb-0 text-xs text-[#8a8178]">
-              Đã gửi thông tin điền mẫu.
+              {t("chat.messages.formFillSubmitted")}
             </p>
           )}
         </div>
@@ -105,7 +109,7 @@ export const BotMessageCard = ({
       <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#e8dcc8] bg-white shadow-sm">
         <Image
           src={LAWBOT_LOGO}
-          alt="LawBot"
+          alt={t("common.lawBot")}
           width={24}
           height={24}
           className="h-6 w-6 object-contain"
@@ -124,7 +128,7 @@ export const BotMessageCard = ({
             <span
               className={`text-[13px] font-bold ${message.error ? "text-[#b54545]" : "text-[#9a6c2b]"}`}
             >
-              LawBot
+              {t("common.lawBot")}
             </span>
             <span className="shrink-0 text-xs text-[#8a8178]">
               {message.time}
@@ -163,7 +167,7 @@ export const BotMessageCard = ({
 
           {message.formFill?.submitted && (
             <p className="mt-3 mb-0 border-t border-[#f0e6d8] pt-3 text-xs text-[#8a8178]">
-              Đã gửi thông tin điền mẫu.
+              {t("chat.messages.formFillSubmitted")}
             </p>
           )}
         </div>

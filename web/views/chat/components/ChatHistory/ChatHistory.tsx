@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { ChevronDown, Loader2, Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useDeleteChatSession, useChatSessionsList } from "@/hooks/useChatHook";
 import { MOCK_CHAT_SESSIONS } from "../../constants/mockChatSessions";
 import { mapSessionToHistoryItem } from "../../utils/mapSessionToHistoryItem";
@@ -22,6 +23,7 @@ export const ChatHistory = ({
   onSelectSession,
   onDeleteSession,
 }: ChatHistoryProps) => {
+  const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [deletedIds, setDeletedIds] = useState<string[]>([]);
@@ -84,7 +86,7 @@ export const ChatHistory = ({
           className="flex min-w-0 items-center gap-1 border-0 bg-transparent p-0 text-[14px] font-semibold text-[#2c2620] cursor-pointer"
           aria-haspopup="listbox"
         >
-          <span className="truncate">Tất cả hội thoại</span>
+          <span className="truncate">{t("chat.history.allConversations")}</span>
           <ChevronDown
             className="h-4 w-4 shrink-0 text-[#8a8178]"
             strokeWidth={2}
@@ -97,7 +99,7 @@ export const ChatHistory = ({
           {isLoading && apiItems.length === 0 ? (
             <div className="flex items-center justify-center gap-2 py-12 text-[13px] text-[#8a8178]">
               <Loader2 className="h-4 w-4 animate-spin" />
-              Đang tải...
+              {t("common.loading")}
             </div>
           ) : (
             <ul className="grid gap-2.5">
@@ -129,7 +131,7 @@ export const ChatHistory = ({
               ) : (
                 <ChevronDown className="h-4 w-4" strokeWidth={2} />
               )}
-              Xem thêm
+              {t("chat.history.loadMore")}
             </button>
           </div>
         )}
@@ -137,7 +139,7 @@ export const ChatHistory = ({
       <DeleteSessionConfirmModal
         open={Boolean(pendingDelete)}
         loading={deleting}
-        sessionTitle={pendingDelete?.title || "Hội thoại"}
+        sessionTitle={pendingDelete?.title || t("chat.history.defaultSessionTitle")}
         onConfirm={handleConfirmDeleteSession}
         onCancel={() => {
           if (deleting) return;

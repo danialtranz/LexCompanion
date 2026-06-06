@@ -8,6 +8,7 @@ import {
   Plus,
   Target,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { InternalGraphNode } from "reagraph";
 import GraphCanvas from "../../LegalCorpusGraph";
 import {
@@ -36,6 +37,7 @@ export function LegalCorpusGraphPanel({
   onNodePointerOut?: (node: InternalGraphNode) => void;
   onGraphPointerDownCapture?: (event: ReactPointerEvent) => void;
 }) {
+  const { t } = useTranslation();
   const {
     graphRef,
     expanding,
@@ -64,7 +66,7 @@ export function LegalCorpusGraphPanel({
         <div className="relative z-[1] flex h-full min-h-[520px] items-center justify-center gap-2">
           <Loader2 className="h-6 w-6 animate-spin text-emerald-600" />
           <span className={isDark ? "text-slate-300" : "text-slate-600"}>
-            Đang tải chủ đề…
+            {t("corpus.graph.loadingTopics")}
           </span>
         </div>
       ) : topicsError ? (
@@ -77,7 +79,7 @@ export function LegalCorpusGraphPanel({
             isDark ? "text-slate-400" : "text-slate-500"
           }`}
         >
-          Chưa có dữ liệu để visualize.
+          {t("corpus.graph.noData")}
         </div>
       ) : (
         <div
@@ -109,16 +111,22 @@ export function LegalCorpusGraphPanel({
       )}
 
       <div className="absolute left-4 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-2">
-        <GraphControlButton title="Về tổng quan" onClick={handleCenterGraph}>
+        <GraphControlButton
+          title={t("corpus.graph.overview")}
+          onClick={handleCenterGraph}
+        >
           <Home className="h-4 w-4" />
         </GraphControlButton>
-        <GraphControlButton title="Căn giữa đồ thị" onClick={handleCenterGraph}>
+        <GraphControlButton
+          title={t("corpus.graph.centerGraph")}
+          onClick={handleCenterGraph}
+        >
           <Target className="h-4 w-4" />
         </GraphControlButton>
-        <GraphControlButton title="Phóng to" onClick={handleZoomIn}>
+        <GraphControlButton title={t("corpus.graph.zoomIn")} onClick={handleZoomIn}>
           <Plus className="h-4 w-4" />
         </GraphControlButton>
-        <GraphControlButton title="Thu nhỏ" onClick={handleZoomOut}>
+        <GraphControlButton title={t("corpus.graph.zoomOut")} onClick={handleZoomOut}>
           <Minus className="h-4 w-4" />
         </GraphControlButton>
       </div>
@@ -126,8 +134,8 @@ export function LegalCorpusGraphPanel({
       <div className="pointer-events-none absolute left-4 top-4 z-10 flex flex-wrap gap-2">
         {(
           [
-            ["Topic", NODE_COLOR.topic],
-            ["Subject", NODE_COLOR.subject],
+            [t("common.topic"), NODE_COLOR.topic],
+            [t("common.subject"), NODE_COLOR.subject],
           ] as const
         ).map(([label, color]) => (
           <span
@@ -152,7 +160,7 @@ export function LegalCorpusGraphPanel({
           }`}
         >
           <Loader2 className="h-3.5 w-3.5 animate-spin text-emerald-500" />
-          Đang mở rộng node…
+          {t("corpus.graph.expandingNode")}
         </div>
       )}
     </div>

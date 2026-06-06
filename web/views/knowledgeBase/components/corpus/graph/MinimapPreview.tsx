@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslation } from "react-i18next";
 import { NODE_COLOR } from "../constants";
 
 export function MinimapPreview({
@@ -7,6 +10,8 @@ export function MinimapPreview({
   imageUrl: string | null;
   isDark: boolean;
 }) {
+  const { t } = useTranslation();
+
   return (
     <div
       className={`pointer-events-none absolute bottom-4 left-44 z-10 hidden h-[88px] w-[120px] overflow-hidden rounded-xl border shadow-md backdrop-blur-sm sm:block ${
@@ -19,7 +24,7 @@ export function MinimapPreview({
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={imageUrl}
-          alt="Minimap"
+          alt={t("corpus.graph.minimapAlt")}
           className="h-full w-full object-cover opacity-90"
         />
       ) : (

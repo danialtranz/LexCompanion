@@ -1,4 +1,5 @@
 import type { UserConversationData } from "@/hooks/useUserConversation";
+import { translate as t } from "@/locale/translate";
 
 export type DocumentDraftPanelState = {
   plainText: string;
@@ -131,10 +132,10 @@ export function documentDraftFromResponse(
   const isWaiting = data.status === "waiting_human";
   const isCompleted = data.status === "completed";
   const statusLabel = isWaiting
-    ? "Đang chờ bạn bổ sung thông tin"
+    ? t("chat.draft.waitingForInput")
     : isCompleted
-      ? "Hoàn tất bản nháp"
-      : "Agent đang soạn…";
+      ? t("chat.draft.draftComplete")
+      : t("chat.messages.agentDrafting");
   const draftObjectKey = resolveDraftObjectKey(data);
   const draftVersion = resolveDraftVersion(data);
   const templateDocumentId = resolveTemplateDocumentId(data);
@@ -190,8 +191,10 @@ export function documentDraftFromPreviewApi(
       plainText: md,
       streaming: false,
       statusLabel: preview.draft_object_key
-        ? `Bản nháp v${preview.draft_version ?? ""}`
-        : "Bản nháp đã cập nhật",
+        ? t("chat.draft.draftVersion", {
+            version: preview.draft_version ?? "",
+          })
+        : t("chat.draft.draftUpdated"),
       draftVersion: preview.draft_version,
       templateDocumentId: preview.template_document_id || undefined,
       preferMinioHtml: Boolean(preview.draft_object_key),

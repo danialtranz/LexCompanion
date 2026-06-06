@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { Layers, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { AdminLegalArticleItem } from "@/hooks/useDocumentHook";
 import { ArticleDetailPanel } from "./ArticleDetailPanel";
 import { ChatWindow } from "./chat/ChatWindow";
@@ -30,6 +31,7 @@ export function CorpusDetailSidebar({
   isFullscreen: boolean;
   isDark: boolean;
 }) {
+  const { t } = useTranslation();
   const { selected, setSelected, isSelectedTopicExpanded, expandTopic } =
     graph;
 
@@ -56,7 +58,7 @@ export function CorpusDetailSidebar({
     const title =
       article.article_title ||
       article.article_anchor ||
-      `Điều ${article.id}`;
+      t("corpus.sidebar.articleFallback", { id: article.id });
     setSelected({
       nodeType: "article",
       entityId: String(article.id),
@@ -85,12 +87,11 @@ export function CorpusDetailSidebar({
         }`}
       >
         <div>
-          <h3 className="text-base font-bold">Chi tiết & tra cứu</h3>
+          <h3 className="text-base font-bold">{t("corpus.sidebar.title")}</h3>
           <p
             className={`mt-0.5 text-xs ${isDark ? "text-slate-400" : "text-slate-500"}`}
           >
-            Giữ & kéo Topic/Subject vào khu chat, hoặc bấm &quot;Thêm vào bộ
-            lọc&quot; bên dưới.
+            {t("corpus.sidebar.hint")}
           </p>
         </div>
         <button
@@ -101,7 +102,7 @@ export function CorpusDetailSidebar({
               ? "text-slate-400 hover:bg-slate-800 hover:text-slate-200"
               : "text-slate-400 hover:bg-slate-100 hover:text-slate-700"
           }`}
-          aria-label="Đóng panel"
+          aria-label={t("corpus.sidebar.closePanel")}
         >
           <X className="h-4 w-4" />
         </button>
@@ -116,12 +117,12 @@ export function CorpusDetailSidebar({
             <p
               className={`text-sm font-medium ${isDark ? "text-slate-300" : "text-slate-600"}`}
             >
-              Chọn một node trên đồ thị
+              {t("corpus.sidebar.selectNode")}
             </p>
             <p
               className={`mt-1 text-xs ${isDark ? "text-slate-500" : "text-slate-400"}`}
             >
-              để xem thông tin chi tiết
+              {t("corpus.sidebar.selectNodeHint")}
             </p>
           </div>
         ) : selected.nodeType === "topic" ? (

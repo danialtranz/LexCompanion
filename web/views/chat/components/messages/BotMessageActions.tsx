@@ -1,5 +1,8 @@
+"use client";
+
 import { Copy, ThumbsDown, ThumbsUp } from "lucide-react";
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 type BotMessageActionsProps = {
   content: string;
@@ -41,6 +44,7 @@ async function copyToClipboard(text: string) {
 }
 
 export const BotMessageActions = ({ content }: BotMessageActionsProps) => {
+  const { t } = useTranslation();
   const [feedback, setFeedback] = useState<FeedbackState>(null);
   const [copied, setCopied] = useState(false);
   const likeIconRef = useRef<SVGSVGElement | null>(null);
@@ -70,8 +74,8 @@ export const BotMessageActions = ({ content }: BotMessageActionsProps) => {
     <div className="mt-4 flex items-center gap-1 border-t border-[#f3ece2] pt-3">
       <button
         type="button"
-        aria-label="Sao chép"
-        title={copied ? "Đã sao chép" : "Sao chép"}
+        aria-label={t("chat.messages.copy")}
+        title={copied ? t("chat.messages.copied") : t("chat.messages.copy")}
         onClick={handleCopy}
         className={`grid h-8 w-8 place-items-center rounded-lg border-0 bg-transparent transition-colors cursor-pointer ${
           copied
@@ -83,7 +87,7 @@ export const BotMessageActions = ({ content }: BotMessageActionsProps) => {
       </button>
       <button
         type="button"
-        aria-label="Hữu ích"
+        aria-label={t("chat.messages.helpful")}
         onClick={handleLike}
         className={`grid h-8 w-8 place-items-center rounded-lg border-0 bg-transparent transition-colors cursor-pointer ${
           feedback === "like"
@@ -95,7 +99,7 @@ export const BotMessageActions = ({ content }: BotMessageActionsProps) => {
       </button>
       <button
         type="button"
-        aria-label="Không hữu ích"
+        aria-label={t("chat.messages.notHelpful")}
         onClick={handleDislike}
         className={`grid h-8 w-8 place-items-center rounded-lg border-0 bg-transparent transition-colors cursor-pointer ${
           feedback === "dislike"
@@ -112,7 +116,7 @@ export const BotMessageActions = ({ content }: BotMessageActionsProps) => {
             aria-live="polite"
             className="inline-flex h-8 items-center rounded-lg border border-[#e2c4a0] bg-[#fff7ea] px-2.5 text-xs font-medium text-[#9a6c2b]"
           >
-            Đã copy vào clipboard
+            {t("chat.messages.copiedToClipboard")}
           </div>
         )}
       </div>
