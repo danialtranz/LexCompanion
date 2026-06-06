@@ -2,6 +2,10 @@
 
 > **Lex Companion** is a Vietnamese Legal AI Assistant built on LangGraph, FastAPI, and Elasticsearch hybrid search. This document describes how the system actually works, inferred from the implementation.
 
+<p align="right">
+  <a href="ARCHITECTURE.vi.md">Tiếng Việt</a>
+</p>
+
 ---
 
 ## Table of Contents

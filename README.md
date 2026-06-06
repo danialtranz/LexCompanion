@@ -1,11 +1,15 @@
 <p align="center">
-  <img src="web/public/images/icons/lex-companion-logo.png" alt="Lex Companion Logo" width="220" />
+  <img src="web/public/images/icons/readmeavatar.png" alt="Lex Companion Logo" width="220" />
 </p>
 
 <h1 align="center">Lex Companion</h1>
 
 <p align="center">
   <strong>Trợ lý pháp lý AI · Luật Việt Nam</strong>
+</p>
+
+<p align="center">
+  <a href="README.vi.md">🇻🇳 Tiếng Việt</a> · 🇬🇧 English
 </p>
 
 **Lex Companion** is an agentic AI legal companion for Vietnam that helps individuals and businesses understand regulations, research legal issues, evaluate options, and generate legal documents through specialized legal agents grounded in authoritative legal sources.
@@ -32,7 +36,7 @@ Core capabilities include:
 - **Human-in-the-loop document generation** for contracts and legal forms
 - **Session-based knowledge augmentation** through user-provided documents
 
-For detailed architecture documentation, see **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**.
+For detailed architecture documentation, see **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** · [Tiếng Việt](docs/ARCHITECTURE.vi.md)
 
 ---
 
@@ -433,7 +437,8 @@ Maintained by project contributors.
 
 | Document                                                                                                                     | Description                                                     |
 | ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)                                                                                 | Full technical architecture (agents, RAG, database, deployment) |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)                                                                                 | Full technical architecture (English)                           |
+| [docs/ARCHITECTURE.vi.md](docs/ARCHITECTURE.vi.md)                                                                           | Kiến trúc kỹ thuật (Tiếng Việt)                                |
 | [api/deployment.readme.md](api/deployment.readme.md)                                                                         | Manual Docker run for Postgres/MinIO/Redis                      |
 | [api_creating_instruction.md](api_creating_instruction.md)                                                                   | API development conventions                                     |
 | [model_serving/retrievers/elastic_search/deployment.readme.md](model_serving/retrievers/elastic_search/deployment.readme.md) | Elasticsearch setup                                             |
