@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="web/public/images/icons/readmeavatar.png" alt="Lex Companion Logo" width="950" />
+  <img src="web/public/images/icons/readmeavatar.png" alt="Lex Companion Logo" width="1000" />
 </p>
 
 <h1 align="center">Lex Companion</h1>
 
 <p align="center">
-  <strong>Trợ lý pháp lý AI · Luật Việt Nam</strong>
+  <strong>Agentic Legal AI for Vietnam</strong>
 </p>
 
 <p align="center">
