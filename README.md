@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="web/public/images/icons/readmeavatar.png" alt="Lex Companion Logo" width="500" />
+  <img src="web/public/images/icons/readmeavatar.png" alt="Lex Companion Logo" width="950" />
 </p>
 
 <h1 align="center">Lex Companion</h1>

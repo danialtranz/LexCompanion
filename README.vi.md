@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="web/public/images/icons/readmeavatar.png" alt="Lex Companion Logo" width="220" />
+  <img src="web/public/images/icons/readmeavatar.png" alt="Lex Companion Logo" width="950" />
 </p>
 
 <h1 align="center">Lex Companion</h1>
@@ -42,18 +42,18 @@ Tài liệu kiến trúc chi tiết: **[docs/ARCHITECTURE.vi.md](docs/ARCHITECTU
 
 ## Tính năng
 
-| Tính năng | Mô tả |
-| --------- | ----- |
-| **Hỏi đáp pháp luật** | Đặt câu hỏi về luật Việt Nam; nhận câu trả lời dựa trên điều Pháp điển |
-| **Nghiên cứu pháp lý** | RAG đa truy vấn với mở rộng truy vấn theo ontology và retry |
-| **Tìm kiếm hybrid** | Elasticsearch keyword + KNN vector fusion với BGE reranking |
-| **Theo dõi trích dẫn** | Mỗi luận điểm liên kết tới trích dẫn `[n]` inline và panel tham chiếu |
-| **Định tuyến intent** | 6 luồng agent: information, decision, problem-solving, exploration, task execution, communication |
-| **Sinh văn bản** | Chọn mẫu hợp đồng, điền form, xuất DOCX với checkpoint HITL |
-| **Knowledge Base người dùng** | Upload tài liệu cá nhân để truy xuất trong phiên chat |
-| **Trực quan hóa corpus pháp luật** | Đồ thị tương tác chủ đề, đề mục, điều luật (admin) |
-| **Web fallback** | Tìm kiếm Tavily khi ngữ cảnh corpus pháp luật không đủ |
-| **i18n** | Giao diện tiếng Việt và tiếng Anh |
+| Tính năng                          | Mô tả                                                                                             |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------- |
+| **Hỏi đáp pháp luật**              | Đặt câu hỏi về luật Việt Nam; nhận câu trả lời dựa trên điều Pháp điển                            |
+| **Nghiên cứu pháp lý**             | RAG đa truy vấn với mở rộng truy vấn theo ontology và retry                                       |
+| **Tìm kiếm hybrid**                | Elasticsearch keyword + KNN vector fusion với BGE reranking                                       |
+| **Theo dõi trích dẫn**             | Mỗi luận điểm liên kết tới trích dẫn `[n]` inline và panel tham chiếu                             |
+| **Định tuyến intent**              | 6 luồng agent: information, decision, problem-solving, exploration, task execution, communication |
+| **Sinh văn bản**                   | Chọn mẫu hợp đồng, điền form, xuất DOCX với checkpoint HITL                                       |
+| **Knowledge Base người dùng**      | Upload tài liệu cá nhân để truy xuất trong phiên chat                                             |
+| **Trực quan hóa corpus pháp luật** | Đồ thị tương tác chủ đề, đề mục, điều luật (admin)                                                |
+| **Web fallback**                   | Tìm kiếm Tavily khi ngữ cảnh corpus pháp luật không đủ                                            |
+| **i18n**                           | Giao diện tiếng Việt và tiếng Anh                                                                 |
 
 ---
 
@@ -100,17 +100,17 @@ Xem [docs/ARCHITECTURE.vi.md](docs/ARCHITECTURE.vi.md) để biết sơ đồ đ
 
 ## Công nghệ sử dụng
 
-| Tầng | Công nghệ |
-| ---- | --------- |
-| **Frontend** | Next.js 16, React 19, TanStack Query, Tailwind CSS 4 |
-| **Backend** | FastAPI, Uvicorn, Peewee ORM, Pydantic v2 |
-| **AI/Agents** | LangGraph, LangChain, FlagEmbedding |
-| **Search** | Elasticsearch 8.13 (hybrid keyword + KNN) |
-| **Embedding** | AITeamVN/Vietnamese_Embedding_v2 (1024 dims) |
-| **Reranking** | BAAI/bge-reranker-v2-m3 |
-| **LLM** | OpenAI-compatible API |
-| **Xử lý tài liệu** | Docling, PyMuPDF, python-docx |
-| **Lưu trữ** | PostgreSQL, MinIO, Redis |
+| Tầng                | Công nghệ                                                 |
+| ------------------- | --------------------------------------------------------- |
+| **Frontend**        | Next.js 16, React 19, TanStack Query, Tailwind CSS 4      |
+| **Backend**         | FastAPI, Uvicorn, Peewee ORM, Pydantic v2                 |
+| **AI/Agents**       | LangGraph, LangChain, FlagEmbedding                       |
+| **Search**          | Elasticsearch 8.13 (hybrid keyword + KNN)                 |
+| **Embedding**       | AITeamVN/Vietnamese_Embedding_v2 (1024 dims)              |
+| **Reranking**       | BAAI/bge-reranker-v2-m3                                   |
+| **LLM**             | OpenAI-compatible API                                     |
+| **Xử lý tài liệu**  | Docling, PyMuPDF, python-docx                             |
+| **Lưu trữ**         | PostgreSQL, MinIO, Redis                                  |
 | **Quản lý package** | [uv](https://docs.astral.sh/uv/) (Python), npm (Frontend) |
 
 ---
@@ -119,12 +119,12 @@ Xem [docs/ARCHITECTURE.vi.md](docs/ARCHITECTURE.vi.md) để biết sơ đồ đ
 
 ### Yêu cầu
 
-| Thành phần | Phiên bản |
-| ---------- | --------- |
-| Python | 3.12+ |
-| [uv](https://docs.astral.sh/uv/getting-started/installation/) | Mới nhất |
-| Docker | Cho các dịch vụ hạ tầng |
-| Node.js | 20+ (cho frontend) |
+| Thành phần                                                    | Phiên bản               |
+| ------------------------------------------------------------- | ----------------------- |
+| Python                                                        | 3.12+                   |
+| [uv](https://docs.astral.sh/uv/getting-started/installation/) | Mới nhất                |
+| Docker                                                        | Cho các dịch vụ hạ tầng |
+| Node.js                                                       | 20+ (cho frontend)      |
 
 ### 1. Clone và cấu hình
 
@@ -144,12 +144,12 @@ sudo sysctl -w vm.max_map_count=262144
 docker compose -f docker/docker-compose.yml up -d --build
 ```
 
-| Dịch vụ | URL |
-| ------- | --- |
-| Web UI | http://localhost:3005 |
-| API | http://localhost:6000 |
+| Dịch vụ  | URL                        |
+| -------- | -------------------------- |
+| Web UI   | http://localhost:3005      |
+| API      | http://localhost:6000      |
 | API Docs | http://localhost:6000/docs |
-| Kibana | http://localhost:5602 |
+| Kibana   | http://localhost:5602      |
 
 ### 3. Hoặc chạy local (phát triển)
 
@@ -367,16 +367,16 @@ docker compose -f docker/docker-compose.yml up -d --build
 
 Dịch vụ và cổng:
 
-| Dịch vụ | Cổng host | Mục đích |
-| ------- | --------- | -------- |
-| PostgreSQL | 5445 | Cơ sở dữ liệu quan hệ |
-| MinIO | 6503/6504 | Object storage |
-| Redis | 6376 | Hàng đợi task |
-| Elasticsearch | 6505 | Search + vectors |
-| Kibana | 5602 | Giao diện quản lý ES |
-| Embedding | 6502 | Model embedding tiếng Việt |
-| API | 6000 | FastAPI backend |
-| Web | 3005 | Next.js frontend |
+| Dịch vụ       | Cổng host | Mục đích                   |
+| ------------- | --------- | -------------------------- |
+| PostgreSQL    | 5445      | Cơ sở dữ liệu quan hệ      |
+| MinIO         | 6503/6504 | Object storage             |
+| Redis         | 6376      | Hàng đợi task              |
+| Elasticsearch | 6505      | Search + vectors           |
+| Kibana        | 5602      | Giao diện quản lý ES       |
+| Embedding     | 6502      | Model embedding tiếng Việt |
+| API           | 6000      | FastAPI backend            |
+| Web           | 3005      | Next.js frontend           |
 
 ### Lưu ý production
 
@@ -384,7 +384,7 @@ Dịch vụ và cổng:
 - Cấu hình `RERANK_DEVICE=cuda:0` nếu có GPU
 - Triển khai checkpointer persistent (scaffold Redis/Postgres đã có) để HITL ổn định
 - Import corpus Pháp điển qua `POST /v1/admin/doc/upload` sau khi deploy
-- Chưa có pipeline CI/CD — cần tự thiết lập *(suy luận từ implementation)*
+- Chưa có pipeline CI/CD — cần tự thiết lập _(suy luận từ implementation)_
 
 Xem [docs/ARCHITECTURE.vi.md](docs/ARCHITECTURE.vi.md#kiến-trúc-triển-khai) để biết sơ đồ mạng và ghi chú triển khai chi tiết.
 
@@ -392,13 +392,13 @@ Xem [docs/ARCHITECTURE.vi.md](docs/ARCHITECTURE.vi.md#kiến-trúc-triển-khai)
 
 ## Tổng quan API
 
-| Domain | Prefix | Endpoint chính |
-| ------ | ------ | -------------- |
-| Auth | `/v1/user` | `POST /oAuth-login` |
-| Chat | `/v1/user` | `POST /user_chat`, `GET /sessions`, `GET /session` |
-| Contract | `/v1/user` | `POST /contract/fill`, `GET /contract/draft/*` |
-| Documents | `/v1` | `POST /doc/upload`, `GET /docs`, `POST /doc/run` |
-| Admin | `/v1/admin` | `POST /doc/retrieval`, `POST /doc/upload`, `GET /doc/topic` |
+| Domain    | Prefix      | Endpoint chính                                              |
+| --------- | ----------- | ----------------------------------------------------------- |
+| Auth      | `/v1/user`  | `POST /oAuth-login`                                         |
+| Chat      | `/v1/user`  | `POST /user_chat`, `GET /sessions`, `GET /session`          |
+| Contract  | `/v1/user`  | `POST /contract/fill`, `GET /contract/draft/*`              |
+| Documents | `/v1`       | `POST /doc/upload`, `GET /docs`, `POST /doc/run`            |
+| Admin     | `/v1/admin` | `POST /doc/retrieval`, `POST /doc/upload`, `GET /doc/topic` |
 
 Tài liệu API đầy đủ (input/output): [docs/ARCHITECTURE.vi.md](docs/ARCHITECTURE.vi.md#tài-liệu-api)
 
@@ -435,13 +435,13 @@ Tài liệu tương tác tại `/docs` khi API đang chạy.
 
 ## Tài liệu
 
-| Tài liệu | Mô tả |
-| -------- | ----- |
-| [docs/ARCHITECTURE.vi.md](docs/ARCHITECTURE.vi.md) | Kiến trúc kỹ thuật đầy đủ (tiếng Việt) |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Kiến trúc kỹ thuật (English) |
-| [api/deployment.readme.md](api/deployment.readme.md) | Docker thủ công cho Postgres/MinIO/Redis |
-| [api_creating_instruction.md](api_creating_instruction.md) | Quy ước phát triển API |
-| [model_serving/retrievers/elastic_search/deployment.readme.md](model_serving/retrievers/elastic_search/deployment.readme.md) | Thiết lập Elasticsearch |
+| Tài liệu                                                                                                                     | Mô tả                                    |
+| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| [docs/ARCHITECTURE.vi.md](docs/ARCHITECTURE.vi.md)                                                                           | Kiến trúc kỹ thuật đầy đủ (tiếng Việt)   |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)                                                                                 | Kiến trúc kỹ thuật (English)             |
+| [api/deployment.readme.md](api/deployment.readme.md)                                                                         | Docker thủ công cho Postgres/MinIO/Redis |
+| [api_creating_instruction.md](api_creating_instruction.md)                                                                   | Quy ước phát triển API                   |
+| [model_serving/retrievers/elastic_search/deployment.readme.md](model_serving/retrievers/elastic_search/deployment.readme.md) | Thiết lập Elasticsearch                  |
 
 ---
 
@@ -461,10 +461,10 @@ Lex Companion đang phát triển hướng tới **trợ lý pháp lý agentic �
 
 ### Hoàn thiện agent
 
-| Agent | Đường dẫn | Trạng thái hiện tại | Mục tiêu |
-| ----- | --------- | ------------------- | -------- |
-| **Decision** | `deepagent/multiagent/legal_assistant/decision/` | Luồng single-node: retrieval + options/estimate placeholder | Suy luận quyết định đa bước — phân tích rủi ro, so sánh phương án, ánh xạ hậu quả và khuyến nghị có cấu trúc dựa trên luật truy xuất |
-| **Problem solving** | `deepagent/multiagent/legal_assistant/problem_solving/` | Luồng single-node: retrieval + template chiến lược tĩnh | Phân rã vấn đề pháp lý động — kế hoạch hành động từng bước, theo dõi milestone và làm rõ lặp lại khi thiếu sự kiện |
+| Agent               | Đường dẫn                                               | Trạng thái hiện tại                                         | Mục tiêu                                                                                                                             |
+| ------------------- | ------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Decision**        | `deepagent/multiagent/legal_assistant/decision/`        | Luồng single-node: retrieval + options/estimate placeholder | Suy luận quyết định đa bước — phân tích rủi ro, so sánh phương án, ánh xạ hậu quả và khuyến nghị có cấu trúc dựa trên luật truy xuất |
+| **Problem solving** | `deepagent/multiagent/legal_assistant/problem_solving/` | Luồng single-node: retrieval + template chiến lược tĩnh     | Phân rã vấn đề pháp lý động — kế hoạch hành động từng bước, theo dõi milestone và làm rõ lặp lại khi thiếu sự kiện                   |
 
 Các hạng mục khác trên lộ trình:
 
