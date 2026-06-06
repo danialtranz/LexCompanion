@@ -31,3 +31,6 @@ model_serving/llms/phi3/.ollama-runtime/
 deepagent/core/rerank/model_cache/
 ### loai bo data 
 data/
+
+### deployment docs (local)
+api/deployment.readme.md
