@@ -8,7 +8,10 @@ import {
   useState,
 } from "react";
 import type { ApiEnvelope } from "@/hooks/useDocumentHook";
-import type { UserConversationData } from "@/hooks/useUserConversation";
+import type {
+  UserConversationData,
+  UserConversationRequest,
+} from "@/hooks/useUserConversation";
 import type { UploadUserDocumentData } from "@/hooks/useDocumentHook";
 import { fetchChatSessionDetail } from "@/hooks/useChatHook";
 import {
@@ -50,7 +53,12 @@ import {
   getFieldsToFill,
 } from "./utils/formFillHitl";
 import { MOCK_CONVERSATION } from "./constants/mockConversation";
-import type { BotMessage, ChatCitation, ChatMessage, UserMessage } from "./types";
+import type {
+  BotMessage,
+  ChatCitation,
+  ChatMessage,
+  UserMessage,
+} from "./types";
 import { formatChatTime } from "./utils/formatChatTime";
 import { mapSessionMessagesToChatMessages } from "./utils/mapSessionMessages";
 import {
@@ -62,7 +70,10 @@ import {
 type RightPanelMode = "closed" | "citation" | "knowledge" | "document";
 
 function createChatSessionId(): string {
-  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+  if (
+    typeof crypto !== "undefined" &&
+    typeof crypto.randomUUID === "function"
+  ) {
     return crypto.randomUUID().replace(/-/g, "");
   }
   return `${Date.now()}${Math.random().toString(16).slice(2)}`.slice(0, 32);
@@ -321,8 +332,7 @@ export const ChatView = () => {
           versionHint ?? undefined,
           tpl ?? undefined,
         ),
-        queryFn: () =>
-          fetchDocumentPreviewBlob(sid, versionHint ?? null, tpl),
+        queryFn: () => fetchDocumentPreviewBlob(sid, versionHint ?? null, tpl),
       });
     },
     [queryClient, templateDocumentId, documentPanel.templateDocumentId],
@@ -363,9 +373,7 @@ export const ChatView = () => {
   ]);
 
   const applyDraftPanel = useCallback(
-    (
-      draftUpdate: ReturnType<typeof documentDraftFromResponse>,
-    ) => {
+    (draftUpdate: ReturnType<typeof documentDraftFromResponse>) => {
       if (!draftUpdate.openDocumentPanel) return;
       setDocumentPanel(draftUpdate.panel);
       if (draftUpdate.panel.templateDocumentId) {
@@ -384,7 +392,7 @@ export const ChatView = () => {
 
   /** Gửi ui_template khi live; tắt live thì không gửi (BE sẽ route intent lại). */
   const withTaskExecutionPayload = useCallback(
-    <T extends { ui_template?: string }>(payload: T): T =>
+    (payload: UserConversationRequest): UserConversationRequest =>
       taskExecutionLive
         ? { ...payload, ui_template: "task_execution" }
         : payload,
@@ -408,7 +416,9 @@ export const ChatView = () => {
         const nextVer = draftUpdate.panel.draftVersion;
         if (nextVer != null) {
           setSelectedDraftVersion((prev) =>
-            prev == null || prev === documentPanel.draftVersion ? nextVer : prev,
+            prev == null || prev === documentPanel.draftVersion
+              ? nextVer
+              : prev,
           );
         }
         const tplId =
@@ -621,7 +631,14 @@ export const ChatView = () => {
         ]);
       }
     },
-    [messages, loading, chatSessionId, converse, applyApiResponse, withTaskExecutionPayload],
+    [
+      messages,
+      loading,
+      chatSessionId,
+      converse,
+      applyApiResponse,
+      withTaskExecutionPayload,
+    ],
   );
 
   const handleFormFillReject = useCallback(
@@ -661,7 +678,14 @@ export const ChatView = () => {
         ]);
       }
     },
-    [messages, loading, chatSessionId, converse, applyApiResponse, withTaskExecutionPayload],
+    [
+      messages,
+      loading,
+      chatSessionId,
+      converse,
+      applyApiResponse,
+      withTaskExecutionPayload,
+    ],
   );
 
   const hasMessages = messages.length > 0;

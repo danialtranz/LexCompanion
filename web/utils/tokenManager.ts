@@ -355,3 +355,31 @@ export const getUserIdFromCookie = (): string | undefined => {
   //console.log("[getUserIdFromCookie] userId:", userId);
   return userId || undefined;
 };
+
+/** Xóa token (localStorage + cookie) và chuyển về trang đăng nhập. */
+export const logout = (): void => {
+  removeToken();
+  removeUserId();
+  removeUserInfo();
+
+  if (!isBrowser) return;
+
+  localStorage.removeItem("Authorization");
+  localStorage.removeItem("userInfo");
+
+  const allCookies = Cookies.get();
+  const hostname = window.location.hostname;
+  Object.keys(allCookies).forEach((name) => {
+    Cookies.remove(name, { path: "/" });
+    if (
+      hostname &&
+      !hostname.startsWith("localhost") &&
+      !hostname.startsWith("127.0.0.1")
+    ) {
+      Cookies.remove(name, { path: "/", domain: hostname });
+      Cookies.remove(name, { path: "/", domain: `.${hostname}` });
+    }
+  });
+
+  window.location.href = "/sign-in";
+};

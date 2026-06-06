@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { getToken } from "@/utils/tokenManager";
+import { useCallback, useEffect, useState } from "react";
+import { LogOut } from "lucide-react";
+import { getToken, logout } from "@/utils/tokenManager";
 
 type StoredUserInfo = {
   name?: string;
@@ -52,6 +53,10 @@ export const SidebarUser = () => {
     setUser(readStoredUser());
   }, []);
 
+  const handleLogout = useCallback(() => {
+    logout();
+  }, []);
+
   const showAvatarImage = Boolean(user?.picture) && !avatarError;
   const displayLabel = user?.name?.trim() || user?.email?.trim() || "Người dùng";
   const email = user?.email?.trim() ?? "";
@@ -74,7 +79,7 @@ export const SidebarUser = () => {
           {user ? avatarInitial(user) : "?"}
         </div>
       )}
-      <div className="min-w-0 flex-1 text-left">
+      <div className="min-w-0 flex-1 overflow-hidden text-left">
         <b
           className="block truncate text-xs font-semibold text-[#2c2620]"
           title={user ? displayLabel : undefined}
@@ -88,6 +93,15 @@ export const SidebarUser = () => {
           {user ? email || "—" : "Chưa đăng nhập"}
         </span>
       </div>
+      <button
+        type="button"
+        onClick={handleLogout}
+        aria-label="Đăng xuất"
+        title="Đăng xuất"
+        className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border-0 bg-transparent text-[#8a8178] transition-colors hover:bg-[#faf5ec] hover:text-[#9a6c2b] cursor-pointer"
+      >
+        <LogOut className="h-4 w-4" strokeWidth={2} />
+      </button>
     </div>
   );
 };

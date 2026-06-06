@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "lex-companion",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,6 +15,7 @@
     "axios": "^1.15.0",
     "class-variance-authority": "^0.7.1",
     "docx-preview": "^0.3.7",
+    "i18next": "^26.3.1",
     "js-cookie": "^3.0.5",
     "lodash": "^4.18.1",
     "lucide-react": "^1.8.0",
@@ -22,6 +23,7 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-hot-toast": "^2.6.0",
+    "react-i18next": "^17.0.8",
     "reagraph": "^4.30.8",
     "tailwind-merge": "^3.5.0",
     "umi-request": "^1.4.0"

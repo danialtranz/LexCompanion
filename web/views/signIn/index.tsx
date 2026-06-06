@@ -6,7 +6,7 @@ import { LoadingOverlay } from "./LoadingOverlay";
 
 type AuthTab = "login" | "signup";
 
-const LAWBOT_LOGO = "/images/icons/lawbot-logo.png";
+const LEX_COMPANION_LOGO = "/images/icons/lex-companion-logo.png";
 
 const FieldIcon = ({ children }: { children: ReactNode }) => (
   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#fff5e3] text-[#b77519]">
@@ -169,7 +169,10 @@ export const SiginInView = () => {
   };
 
   useLayoutEffect(() => {
-    const measure = (element: HTMLDivElement | null, setter: (h: number) => void) => {
+    const measure = (
+      element: HTMLDivElement | null,
+      setter: (h: number) => void,
+    ) => {
       if (!element) return;
       setter(element.getBoundingClientRect().height);
     };
@@ -216,21 +219,31 @@ export const SiginInView = () => {
       <div className="relative z-10 w-full max-w-[460px]">
         <div className="rounded-[14px] border border-[#eee4d7] bg-[rgba(255,255,255,0.92)] px-5 py-7 text-center shadow-[0_18px_45px_rgba(84,59,28,0.12)] sm:px-9 sm:py-10">
           <div className="mx-auto mb-4 flex justify-center sm:mb-[18px]">
-            <Image
-              src={LAWBOT_LOGO}
-              alt="LawBot Logo"
-              width={120}
-              height={120}
-              priority
-              className="h-[88px] w-[88px] object-contain drop-shadow-[0_8px_18px_rgba(184,122,29,0.18)] sm:h-[120px] sm:w-[120px]"
-            />
+            <div className="relative">
+              <div
+                aria-hidden
+                className="absolute -inset-3 rounded-full bg-[radial-gradient(circle,rgba(231,189,103,0.28)_0%,rgba(250,243,230,0.45)_42%,transparent_72%)] blur-[2px] sm:-inset-4"
+              />
+              <div className="relative grid h-[92px] w-[92px] place-items-center overflow-hidden rounded-full bg-gradient-to-br from-[#fffaf2] via-[#faf3e6] to-[#f0e4d0] p-[3px] shadow-[inset_0_0_0_1px_#eee4d7,0_10px_28px_rgba(184,122,29,0.14)] sm:h-[120px] sm:w-[120px] sm:p-1">
+                <div className="grid h-full w-full place-items-center overflow-hidden rounded-full bg-[#faf3e6]">
+                  <Image
+                    src={LEX_COMPANION_LOGO}
+                    alt="Lex Companion Logo"
+                    width={120}
+                    height={120}
+                    priority
+                    className="h-[112%] w-[112%] max-w-none rounded-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
 
           <h1 className="m-0 font-serif text-4xl tracking-[0.08em] text-[#8b5517] sm:text-[50px]">
-            LAWBOT
+            LEX COMPANION
           </h1>
           <p className="mb-5 mt-2 text-xs tracking-[0.12em] text-[#4c4740] sm:mb-6 sm:mt-[10px] sm:text-base">
-            TRỢ LÝ PHÁP LÝ AI
+            TRỢ LÝ PHÁP LÝ AI VỚI KIẾN THỨC CỦA BẠN
           </p>
 
           <AuthTabs activeTab={activeTab} onChange={handleTabChange} />
@@ -256,10 +269,6 @@ export const SiginInView = () => {
                 }}
               >
                 <form onSubmit={(event) => event.preventDefault()}>
-                  <p className="mb-5 text-center text-sm text-[#6f665c] sm:mb-[30px]">
-                    Đăng nhập để tiếp tục sử dụng LawBot
-                  </p>
-
                   <EmailField value={loginEmail} onChange={setLoginEmail} />
 
                   <PasswordField
@@ -313,10 +322,6 @@ export const SiginInView = () => {
                 }}
               >
                 <form onSubmit={(event) => event.preventDefault()}>
-                  <p className="mb-5 text-center text-sm text-[#6f665c] sm:mb-[30px]">
-                    Tạo tài khoản mới để bắt đầu với LawBot
-                  </p>
-
                   <label className="mb-2 mt-4 block text-sm font-medium text-[#2f2923] sm:mb-[9px] sm:mt-[22px]">
                     Họ và tên
                   </label>

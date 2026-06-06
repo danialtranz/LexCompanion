@@ -4,7 +4,7 @@ export function LegendCard({ isDark }: { isDark: boolean }) {
   const items = [
     { label: "Topic", color: NODE_COLOR.topic },
     { label: "Subject", color: NODE_COLOR.subject },
-    { label: "Điều (panel)", color: NODE_COLOR.article },
+    { label: "Điều -->", color: NODE_COLOR.article },
     { label: "Selected", color: SELECTED_TOPIC_COLOR, ring: true },
   ];
 

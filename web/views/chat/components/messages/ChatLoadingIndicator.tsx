@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Loader2 } from "lucide-react";
 
-const LAWBOT_LOGO = "/images/icons/lawbot-logo.png";
+const LAWBOT_LOGO = "/images/icons/lex-companion-logo.png";
 
 type ChatLoadingIndicatorProps = {
   variant?: "default" | "live";

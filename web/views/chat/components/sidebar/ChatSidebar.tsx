@@ -39,7 +39,7 @@ export const ChatSidebar = ({
     />
 
     <div className="mt-auto flex flex-col gap-4 pt-6">
-      <SidebarUpgrade />
+      {/* <SidebarUpgrade /> */}
       <SidebarUser />
     </div>
   </aside>

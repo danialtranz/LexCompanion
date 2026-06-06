@@ -1,10 +1,10 @@
 import { Authorization } from "@/constants/authoriztions";
 import authorizationUtil, { redirectToLogin } from "@/utils/authorizationUtil";
 import axios, { AxiosError, AxiosResponse } from "axios";
+import Cookies from "js-cookie";
 import { convertTheKeysOfTheObjectToSnake } from "./commonUtils";
 import { getToken, removeToken } from "../utils/tokenManager";
 import { toast } from "../hooks/useToast";
-import Cookies from "js-cookie";
 
 const MESSAGE_BY_CODE = {
   200: "Success",
@@ -57,6 +57,7 @@ export const RetcodeMessage = {
   503: MESSAGE_BY_CODE[503],
   504: MESSAGE_BY_CODE[504],
 };
+
 export type ResultCode =
   | 200
   | 201
@@ -75,15 +76,9 @@ export type ResultCode =
   | 503
   | 504;
 
-/**
- * Kiểm tra xem có phải lỗi nghiêm trọng (network/server) không
- * Các lỗi nghiêm trọng cần được handle ở đây với Radix toast
- */
 const isCriticalError = (error: AxiosError | Error): boolean => {
-  // Axios error có code
   if ("code" in error) {
     const code = (error as AxiosError).code;
-    // Network errors
     if (
       code === "ERR_NETWORK" ||
       code === "ECONNREFUSED" ||
@@ -95,9 +90,7 @@ const isCriticalError = (error: AxiosError | Error): boolean => {
     }
   }
 
-  // Kiểm tra message
   const message = error.message || "";
-  //console.log(">>>>>> message: ", message);
   if (
     message.includes("Network Error") ||
     message.includes("Failed to fetch") ||
@@ -108,13 +101,11 @@ const isCriticalError = (error: AxiosError | Error): boolean => {
     return true;
   }
 
-  // Axios error: có request nhưng không có response = server không phản hồi
   const axiosError = error as AxiosError;
   if (axiosError.request && !axiosError.response) {
     return true;
   }
 
-  // Server errors (5xx) - nghiêm trọng
   if (axiosError.response) {
     const status = axiosError.response.status;
     if (status >= 500 && status < 600) {
@@ -126,15 +117,11 @@ const isCriticalError = (error: AxiosError | Error): boolean => {
 };
 
 const clearAllAuthData = (): void => {
-  // 1. Xóa token sử dụng hàm removeToken() đã được cải thiện
   removeToken();
-
-  // 2. Xóa các key authorization khác
   authorizationUtil.removeAll();
 
-  // 3. Xóa tất cả localStorage (trừ userLanguage)
   if (typeof window !== "undefined") {
-    const keysToKeep = ["userLanguage", "lng"]; // Giữ lại các key cần thiết
+    const keysToKeep = ["userLanguage", "lng"];
     Object.keys(localStorage).forEach((key) => {
       if (!keysToKeep.includes(key)) {
         localStorage.removeItem(key);
@@ -142,16 +129,13 @@ const clearAllAuthData = (): void => {
     });
   }
 
-  // 4. Xóa tất cả cookies với tất cả các options
   if (typeof window !== "undefined") {
     const allCookies = Cookies.get();
     const hostname = window.location.hostname;
 
     Object.keys(allCookies).forEach((cookieName) => {
-      // Xóa với path: "/"
       Cookies.remove(cookieName, { path: "/" });
 
-      // Xóa với domain nếu không phải localhost
       if (
         hostname &&
         !hostname.startsWith("localhost") &&
@@ -163,12 +147,10 @@ const clearAllAuthData = (): void => {
     });
   }
 };
-/**
- * Error handler cho các lỗi nghiêm trọng (network/server)
- * Chỉ handle các lỗi nghiêm trọng ở đây, các lỗi đơn giản (400, 422) để hook handle
- */
+
 const errorHandler = (error: AxiosError | Error): AxiosResponse | undefined => {
   const axiosError = error as AxiosError;
+
   if (axiosError.response) {
     const status = axiosError.response.status;
     if (status === 401 || status === 403) {
@@ -183,10 +165,8 @@ const errorHandler = (error: AxiosError | Error): AxiosResponse | undefined => {
         variant: "destructive",
       });
 
-      // Xóa tất cả auth data ngay lập tức
       clearAllAuthData();
 
-      // Tự động redirect sau 2 giây
       setTimeout(() => {
         redirectToLogin();
       }, 2000);
@@ -194,15 +174,11 @@ const errorHandler = (error: AxiosError | Error): AxiosResponse | undefined => {
       return axiosError.response;
     }
   }
-  // Chỉ handle các lỗi nghiêm trọng ở đây
+
   if (!isCriticalError(error)) {
-    // Không phải lỗi nghiêm trọng -> để hook handle
     return axiosError.response;
   }
 
-  // ========== XỬ LÝ CÁC LỖI NGHIÊM TRỌNG ==========
-
-  // 1. Network Error - Server chưa bật, mất mạng, không kết nối được
   if (
     axiosError.code === "ERR_NETWORK" ||
     axiosError.code === "ECONNREFUSED" ||
@@ -219,7 +195,6 @@ const errorHandler = (error: AxiosError | Error): AxiosResponse | undefined => {
     return undefined;
   }
 
-  // 2. Timeout Error
   if (
     axiosError.code === "ETIMEDOUT" ||
     axiosError.code === "ECONNABORTED" ||
@@ -233,7 +208,6 @@ const errorHandler = (error: AxiosError | Error): AxiosResponse | undefined => {
     return undefined;
   }
 
-  // 3. Server Errors (5xx) - Server bị lỗi
   if (axiosError.response) {
     const status = axiosError.response.status;
     if (status >= 500 && status < 600) {
@@ -250,7 +224,6 @@ const errorHandler = (error: AxiosError | Error): AxiosResponse | undefined => {
       return axiosError.response;
     }
 
-    // 4. Authentication/Authorization Errors (401, 403) - Nghiêm trọng, cần redirect
     if (status === 401 || status === 403) {
       const errorText =
         RetcodeMessage[status as ResultCode] ||
@@ -263,7 +236,6 @@ const errorHandler = (error: AxiosError | Error): AxiosResponse | undefined => {
         variant: "destructive",
       });
 
-      // Tự động redirect sau 2 giây
       clearAllAuthData();
       setTimeout(() => {
         redirectToLogin();
@@ -273,11 +245,9 @@ const errorHandler = (error: AxiosError | Error): AxiosResponse | undefined => {
     }
   }
 
-  // Fallback cho các lỗi nghiêm trọng khác
   toast({
     title: STATIC_MESSAGES.criticalError,
-    description:
-      error.message || STATIC_MESSAGES.unknownCriticalError,
+    description: error.message || STATIC_MESSAGES.unknownCriticalError,
     variant: "destructive",
   });
 
@@ -285,20 +255,14 @@ const errorHandler = (error: AxiosError | Error): AxiosResponse | undefined => {
 };
 
 const request = axios.create({
-  //   errorHandler,
   timeout: 300000,
-  //   getResponse: true,
 });
 
 request.interceptors.request.use(
   (config) => {
-    // Skip conversion for FormData - giữ nguyên FormData để gửi file
     const isFormData = config.data instanceof FormData;
-    //console.log(">>>>>> isFormData123: ", config.data);
-    // Nếu là FormData, không xử lý gì cả - giữ nguyên config và chỉ thêm token
+
     if (isFormData) {
-      //console.log(">>>>>> isFormData: ", config);
-      // Chỉ modify headers để thêm token, giữ nguyên data (FormData)
       const skipToken = (config as { skipToken?: boolean }).skipToken;
       if (!skipToken) {
         const token = getToken();
@@ -311,11 +275,9 @@ request.interceptors.request.use(
         }
       }
 
-      // Return config gốc, chỉ modify headers
       return config;
     }
 
-    // Xử lý bình thường cho các request không phải FormData
     const data = convertTheKeysOfTheObjectToSnake(config.data);
     const params = convertTheKeysOfTheObjectToSnake(config.params);
     const newConfig = { ...config, data, params };
@@ -331,8 +293,7 @@ request.interceptors.request.use(
           `Bearer ${token}`;
       }
     }
-    // in ra config.headers
-    //console.log(">>>>>> config.headers:", newConfig.headers);
+
     return newConfig;
   },
   function (error) {
@@ -342,10 +303,6 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   async (response) => {
-    // Chỉ handle các lỗi nghiêm trọng ở đây
-    // Các lỗi đơn giản (400, 422, data.code !== 0) để hook handle
-
-    // 1. Lỗi nghiêm trọng về kích thước/timeout (413, 504)
     if (response?.status === 413 || response?.status === 504) {
       toast({
         title: RetcodeMessage[response?.status as ResultCode] || "Error",
@@ -359,7 +316,6 @@ request.interceptors.response.use(
 
     const data = response?.data;
 
-    // 2. Authentication error từ response data (nghiêm trọng - cần redirect)
     if (data && (data.code === 401 || data.code === 403)) {
       const status = data.code as 401 | 403;
       const errorText =
@@ -371,25 +327,18 @@ request.interceptors.response.use(
         variant: "destructive",
       });
 
-      // Xóa toàn bộ dữ liệu auth và redirect về login
       clearAllAuthData();
       setTimeout(() => {
         redirectToLogin();
       }, 2000);
 
-      // Reject để các hook phía trên có thể handle nếu cần
       return Promise.reject(response);
     }
-    // Các lỗi khác (data.code === 100, data.code !== 0) là lỗi đơn giản
-    // -> Để hook handle, không show toast ở đây
 
     return response;
   },
   function (error: AxiosError | Error) {
-    //console.log("🚀 ~ error:", error);
-    // Handle critical errors (network, server errors)
     errorHandler(error);
-    // Luôn reject để hook có thể handle thêm nếu cần
     return Promise.reject(error);
   },
 );

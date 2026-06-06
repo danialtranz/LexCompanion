@@ -11,25 +11,6 @@ const SiginIn = () => {
   const router = useRouter();
   const [isChecking, setIsChecking] = useState<boolean>(true);
 
-  //   useEffect(() => {
-  //     // Check token synchronously from localStorage/cookie first (fast)
-  //     const token = getToken();
-
-  //     if (token) {
-  //       // If token exists, redirect immediately without waiting
-  //       router.push("/");
-  //       return;
-  //     }
-
-  //     // Nếu không có token, cho phép render trang login
-  //     setIsChecking(false);
-  //   }, [router]);
-
-  //   // Chờ check token xong mới render (tránh flash trang login)
-  //   if (isChecking) {
-  //     return <LoadingOverlay isLoading={true} />;
-  //   }
-
   return <SiginInView />;
 };
 

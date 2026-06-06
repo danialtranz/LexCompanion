@@ -366,7 +366,7 @@ export function FileTable({
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-stone-100">
+                {/* <tbody className="divide-y divide-stone-100">
                   {items.map((row) => (
                     <DocumentTableRow
                       key={row.id}
@@ -384,7 +384,7 @@ export function FileTable({
                       onDelete={() => void handleDelete(row.id, row.name)}
                     />
                   ))}
-                </tbody>
+                </tbody> */}
               </table>
             </div>
 

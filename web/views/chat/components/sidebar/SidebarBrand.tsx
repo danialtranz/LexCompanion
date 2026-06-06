@@ -1,23 +1,26 @@
 import Image from "next/image";
 
-const LAWBOT_LOGO = "/images/icons/lawbot-logo.png";
+const LAWBOT_LOGO = "/images/icons/lex-companion-logo.png";
 
 export const SidebarBrand = () => (
   <div className="mb-5 flex items-center gap-3 px-1">
-    <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#faf3e6] ring-1 ring-[#ebe3d6]">
-      <Image
-        src={LAWBOT_LOGO}
-        alt="LawBot"
-        width={28}
-        height={28}
-        className="h-7 w-7 object-contain"
-      />
+    <div className="relative shrink-0">
+      <div className="relative grid h-11 w-11 place-items-center overflow-hidden rounded-full bg-gradient-to-br from-[#fffaf2] via-[#faf3e6] to-[#f0e4d0] p-[2px] shadow-[inset_0_0_0_1px_#ebe3d6,0_2px_8px_rgba(184,122,29,0.1)]">
+        <div className="grid h-full w-full place-items-center overflow-hidden rounded-full bg-[#faf3e6]">
+          <Image
+            src={LAWBOT_LOGO}
+            alt="Lex Companion"
+            width={28}
+            height={28}
+            className="h-[112%] w-[112%] max-w-none rounded-full object-cover"
+          />
+        </div>
+      </div>
     </div>
     <div className="min-w-0 text-left">
       <h1 className="m-0 font-serif text-[17px] font-bold tracking-wide text-[#9a6c2b]">
-        LAW BOT
+        Lex Companion
       </h1>
-      <p className="m-0 text-[11px] text-[#8a8178]">Trợ lý pháp lý AI</p>
     </div>
   </div>
 );

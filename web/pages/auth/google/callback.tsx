@@ -25,48 +25,25 @@ export default function GoogleCallback() {
         ? router.query.code[0]
         : router.query.code || "";
 
-      // console.log("[Google Callback] Bắt đầu xử lý login:", {
-      //   code: code ? `${code.substring(0, 20)}...` : "empty",
-      //   google_redirect_uri,
-      //   routerReady: router.isReady,
-      // });
-
       if (code) {
         hasProcessed.current = true; // Mark as processed
         try {
-          // console.log("[Google Callback] Gọi hàm login với params:", {
-          //   code: `${code.substring(0, 20)}...`,
-          //   google_redirect_uri,
-          // });
-
           const errCode = await login({ code, google_redirect_uri });
           console.log("[Google Callback] Kết quả từ login:", errCode);
-          // console.log("[Google Callback] Kết quả từ login:", {
-          //   errCode,
-          //   success: errCode === 0,
-          // });
 
           if (errCode === 0) {
-            // console.log("[Google Callback] Login thành công, redirect về /");
             router.push("/chat");
           } else {
-            // console.log(
-            //   "[Google Callback] Login thất bại với errCode:",
-            //   errCode
-            // );
             toast.error(errorOccurredMessage);
             router.push("/sign-in");
           }
         } catch {
-          //console.error("[Google Callback] Lỗi khi gọi login:", error);
           toast.error(errorOccurredMessage);
           router.push(PAGES_ID.sign_in);
         }
       } else {
         hasProcessed.current = true; // Mark as processed
-        // console.log(
-        //   "[Google Callback] Không có code, clear localStorage và redirect"
-        // );
+
         localStorage.clear(); // Clear all stored data
         toast.error(errorOccurredMessage);
         router.push(PAGES_ID.sign_in);

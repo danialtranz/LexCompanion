@@ -2,7 +2,7 @@ import React from "react";
 import { createCache, extractStyle, StyleProvider } from "@ant-design/cssinjs";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import type { DocumentContext } from "next/document";
-
+import { IMAGES } from "../configs/images";
 const MyDocument = () => (
   <Html lang="en">
     <Head>
@@ -11,6 +11,13 @@ const MyDocument = () => (
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
       />
+      <link
+        rel="icon"
+        href={IMAGES.lexCompanion.favicon}
+        type="image/png"
+        sizes="64x64"
+      />
+      <link rel="apple-touch-icon" href={IMAGES.lexCompanion.favicon} />
     </Head>
     <body>
       <Main />

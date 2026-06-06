@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
+  BarChart3,
   Clock3,
   FileText,
   MessageCircle,
@@ -13,6 +14,7 @@ const NAV_ICONS: Record<string, LucideIcon> = {
   chat: MessageCircle,
   "legal-docs": FileText,
   history: Clock3,
+  "data-visualize": BarChart3,
   settings: Settings,
 };
 
