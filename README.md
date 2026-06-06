@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="web/public/images/icons/readmeavatar.png" alt="Lex Companion Logo" width="220" />
+  <img src="web/public/images/icons/readmeavatar.png" alt="Lex Companion Logo" width="500" />
 </p>
 
 <h1 align="center">Lex Companion</h1>
@@ -435,13 +435,13 @@ Maintained by project contributors.
 
 ## Documentation
 
-| Document                                                                                                                     | Description                                                     |
-| ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)                                                                                 | Full technical architecture (English)                           |
-| [docs/ARCHITECTURE.vi.md](docs/ARCHITECTURE.vi.md)                                                                           | Kiến trúc kỹ thuật (Tiếng Việt)                                |
-| [api/deployment.readme.md](api/deployment.readme.md)                                                                         | Manual Docker run for Postgres/MinIO/Redis                      |
-| [api_creating_instruction.md](api_creating_instruction.md)                                                                   | API development conventions                                     |
-| [model_serving/retrievers/elastic_search/deployment.readme.md](model_serving/retrievers/elastic_search/deployment.readme.md) | Elasticsearch setup                                             |
+| Document                                                                                                                     | Description                                |
+| ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)                                                                                 | Full technical architecture (English)      |
+| [docs/ARCHITECTURE.vi.md](docs/ARCHITECTURE.vi.md)                                                                           | Kiến trúc kỹ thuật (Tiếng Việt)            |
+| [api/deployment.readme.md](api/deployment.readme.md)                                                                         | Manual Docker run for Postgres/MinIO/Redis |
+| [api_creating_instruction.md](api_creating_instruction.md)                                                                   | API development conventions                |
+| [model_serving/retrievers/elastic_search/deployment.readme.md](model_serving/retrievers/elastic_search/deployment.readme.md) | Elasticsearch setup                        |
 
 ---
 
